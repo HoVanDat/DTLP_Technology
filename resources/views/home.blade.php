@@ -461,25 +461,25 @@ body {
             <div class="col-md-3 col-sm-6">
                 <div class="single-promo promo1">
                     <i class="fa fa-refresh"></i>
-                    <p>30 Days return</p>
+                    <p>ĐỔI TRONG 7 NGÀY</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="single-promo promo2">
                     <i class="fa fa-truck"></i>
-                    <p>Free shipping</p>
+                    <p>MIỄN PHÍ GIAO HÀNG</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="single-promo promo3">
                     <i class="fa fa-lock"></i>
-                    <p>Secure payments</p>
+                    <p>THANH TOÁN AN TOÀN</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="single-promo promo4">
                     <i class="fa fa-gift"></i>
-                    <p>New products</p>
+                    <p>SẢN PHẨM MỚI NHẤT</p>
                 </div>
             </div>
         </div>
@@ -514,7 +514,8 @@ body {
                             <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
-                                <ins>{{$s->gia}}</ins> <del>{{$s->gia_khuyen_mai}}</del>
+                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
+                                <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
                             </div>
                         </div>
                         @endforeach
@@ -554,7 +555,7 @@ body {
         <div class="row">
             <div class="col-md-12">
                 <div class="latest-product">
-                    <h2 class="section-title">Latest Products</h2>
+                    <h2 class="section-title">Sản phẩm mới</h2>
                     <div class="product-carousel">
                         @foreach($sp2 as $s)
                         <div class="single-product">
@@ -571,7 +572,8 @@ body {
                             <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
-                                <ins>{{$s->gia}}</ins> <del>{{$s->gia_khuyen_mai}}</del>
+                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
+                                <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
                             </div>
                         </div>
                         @endforeach
@@ -593,7 +595,8 @@ body {
                             <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
-                                <ins>{{$s->gia}}</ins> <del>{{$s->gia_khuyen_mai}}</del>
+                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
+                                <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
                             </div>
                         </div>
                         @endforeach
@@ -615,7 +618,7 @@ body {
         <div class="row">
             <div class="col-md-12">
                 <div class="latest-product">
-                    <h2 class="section-title">Latest Products</h2>
+                    <h2 class="section-title">Sản phẩm bán chạy</h2>
                     <div class="product-carousel">
                         @foreach($sp as $s)
                         <div class="single-product">
@@ -632,7 +635,8 @@ body {
                             <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
-                                <ins>{{$s->gia}}</ins> <del>{{$s->gia_khuyen_mai}}</del>
+                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
+                                <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
                             </div>
                         </div>
                         @endforeach
@@ -653,7 +657,7 @@ body {
                             <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
-                                <ins>{{$s->gia}}</ins> <del>{{$s->gia_khuyen_mai}}</del>
+                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br> <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
                             </div>
                         </div>
                         @endforeach
@@ -677,7 +681,7 @@ body {
             <div class="col-md-4">
                 <div class="single-product-widget">
                     <h2 class="product-wid-title">Top Sellers</h2>
-                    <a href="" class="wid-view-more">View All</a>
+                    <a href="" class="wid-view-more">Xem tất cả</a>
                     <div class="single-wid-product">
                         <a href="/chitiet"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="/chitiet">Sony Smart TV - 2015</a></h2>
@@ -724,8 +728,8 @@ body {
             </div>
             <div class="col-md-4">
                 <div class="single-product-widget">
-                    <h2 class="product-wid-title">Recently Viewed</h2>
-                    <a href="#" class="wid-view-more">View All</a>
+                    <h2 class="product-wid-title">Top lượt xem</h2>
+                    <a href="#" class="wid-view-more">Xem tất cả</a>
                     <div class="single-wid-product">
                         <a href="/chitiet"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="/chitiet">Sony playstation microsoft</a></h2>
@@ -773,7 +777,7 @@ body {
             <div class="col-md-4">
                 <div class="single-product-widget">
                     <h2 class="product-wid-title">Top New</h2>
-                    <a href="#" class="wid-view-more">View All</a>
+                    <a href="#" class="wid-view-more">Xem tất cả</a>
                     <div class="single-wid-product">
                         <a href="/chitiet"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="/chitiet">Apple new i phone 6</a></h2>
