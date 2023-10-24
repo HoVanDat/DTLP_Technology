@@ -23,9 +23,24 @@ class AuthController extends Controller
     $email=$request->email;
     $password=$request->password;
     if (Auth::attempt(['email' => $email, 'password' => $password])){
-        session(['email' => $email]);
-        session(['password' => $password]);
-        return redirect()->intended(route('home'));
+        $user = Auth()->user();
+        $userInfo = [
+            'ho' => $user->ho,
+            'ten' => $user->ten,
+            'email' => $user->email,
+            'dia_chi' => $user->dia_chi,
+            'so_dien_thoai' => $user->so_dien_thoai,
+            'hinh' => $user->hinh,
+            'vai_tro' => $user->vai_tro,
+        ];
+        session(['userInfo' => $userInfo]);
+        // nếu vai trò là 0 thì là user
+        //nếu vai trò lớn hơn 1 thì là admin
+        if($user->vai_tro > 0){
+            return redirect()->intended(route('admin-trang-chu'));
+        }else{
+            return redirect()->intended(route('home'));
+        }
     }
     return redirect(route('login'))->with('error','Email hoặc password sai');
 }
@@ -58,7 +73,7 @@ return redirect(route('login'))->with('success','Đăng ký thành công');
 function logout(){
     Session::flush();
     Auth::logout();
-    return redirect(route('login'));
+    return redirect(route('home'));
 }
 
 // public function forgetPassword(){

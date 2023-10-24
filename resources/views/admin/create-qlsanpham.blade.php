@@ -144,52 +144,28 @@
                                 <label class="control-label">Tên sản phẩm</label>
                                 <input class="form-control" type="text">
                             </div>
-
-
-                            <div class="form-group  col-md-3">
-                                <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number">
-                            </div>
                             <div class="form-group col-md-3 ">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn tình trạng --</option>
-                  <option>Còn hàng</option>
-                  <option>Hết hàng</option>
-                </select>
+                                    <option>-- Chọn tình trạng --</option>
+                                    <option>Còn hàng</option>
+                                    <option>Hết hàng</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="exampleSelect1" class="control-label">Danh mục</label>
                                 <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn danh mục --</option>
-                  <option>Bàn ăn</option>
-                  <option>Bàn thông minh</option>
-                  <option>Tủ</option>
-                  <option>Ghế gỗ</option>
-                  <option>Ghế sắt</option>
-                  <option>Giường người lớn</option>
-                  <option>Giường trẻ em</option>
-                  <option>Bàn trang điểm</option>
-                  <option>Giá đỡ</option>
-                </select>
-                            </div>
-                            <div class="form-group col-md-3 ">
-                                <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
-                                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn nhà cung cấp --</option>
-                  <option>Phong vũ</option>
-                  <option>Thế giới di động</option>
-                  <option>FPT</option>
-                  <option>Võ Trường</option>
-                </select>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Giá bán</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Giá vốn</label>
-                                <input class="form-control" type="text">
+                                    <option>-- Chọn danh mục --</option>
+                                    <option>Bàn ăn</option>
+                                    <option>Bàn thông minh</option>
+                                    <option>Tủ</option>
+                                    <option>Ghế gỗ</option>
+                                    <option>Ghế sắt</option>
+                                    <option>Giường người lớn</option>
+                                    <option>Giường trẻ em</option>
+                                    <option>Bàn trang điểm</option>
+                                    <option>Giá đỡ</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Ảnh sản phẩm</label>

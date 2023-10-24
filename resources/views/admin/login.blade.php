@@ -29,15 +29,16 @@
                     <img src="images/team.jpg" alt="IMG">
                 </div>
                 <!--=====TIÊU ĐỀ======-->
-                <form class="login100-form validate-form">
+                <form class="login100-form validate-form" action="{{route('login.post')}}" method="POST">
+                    @csrf
                     <span class="login100-form-title">
-                        <b>ĐĂNG NHẬP HỆ THỐNG POS</b>
+                        <b>ĐĂNG NHẬP HỆ THỐNG<br>DTPL TECHNOLOGY</b>
                     </span>
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
                     <form action="">
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Tài khoản quản trị" name="username"
-                                id="username">
+                            <input class="input100 form-control form-control-lg" type="email" placeholder="Tài khoản quản trị" name="email"
+                            id="form1Example13">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
@@ -45,7 +46,7 @@
                         </div>
                         <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
-                                name="current-password" id="password-field">
+                                name="password" id="form1Example23">
                             <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
@@ -55,7 +56,7 @@
 
                         <!--=====ĐĂNG NHẬP======-->
                         <div class="container-login100-form-btn">
-                            <input type="button" value="Đăng nhập" id="submit" onclick="validate()" />
+                            <button type="submit" value="Đăng nhập" id="submit" onclick="validate()" class=" btn-danger btn-lg btn-block">Đăng nhập</button>
                         </div>
                         <!--=====LINK TÌM MẬT KHẨU======-->
                         <div class="text-right p-t-12">

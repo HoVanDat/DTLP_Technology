@@ -30,7 +30,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="/dangxuat"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -38,22 +38,33 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
+    @if(session('userInfo'))
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://i.pinimg.com/564x/f9/c3/70/f9c370effa76f6de607e0cfcf9209283.jpg" height="75px"
         alt="User Image">
       <div>
-        <p class="app-sidebar__user-name"><b>Võ Trường</b></p>
-        <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+        <p class="app-sidebar__user-name"><b>{{session('userInfo')['ten']}}</b></p>
+        <p class="app-sidebar__user-designation">{{session('userInfo')['email']}}</p>
+        @if(session('userInfo')['vai_tro'] == 4)
+        <span class="badge badge-success">Quản Trị Viên</span>
+        @elseif(session('userInfo')['vai_tro'] == 3)
+        <span class="badge badge-success">Quản Lý Đơn Hàng</span>
+        @elseif(session('userInfo')['vai_tro'] == 2)
+        <span class="badge badge-success">Quản Lý Sản Phẩm</span>
+        @elseif(session('userInfo')['vai_tro'] == 1)
+        <span class="badge badge-success">Quản Lý Tin Tức</span>
+        @endif
       </div>
     </div>
+    @endif
     <hr>
     <ul class="app-menu">
       <li><a class="app-menu__item haha" href="posbanhang"><i class='app-menu__icon bx bx-cart-alt'></i>
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item active" href="trangchu"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item" href="trangchu"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
       <li><a class="app-menu__item " href="qlnhanvien"><i class='app-menu__icon bx bx-id-card'></i> <span
             class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item" href="qlkhachhang"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
       <li><a class="app-menu__item" href="qlsanpham"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>

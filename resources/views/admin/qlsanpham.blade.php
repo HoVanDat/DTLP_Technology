@@ -52,7 +52,6 @@
                                     <th>Ảnh</th>
                                     <th>Số lượng</th>
                                     <th>Tình trạng</th>
-                                    <th>Giá tiền</th>
                                     <th>Danh mục</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -65,12 +64,12 @@
                                     <td><img src="/img-sanpham/theresa.jpg" alt="" width="100px;"></td>
                                     <td>40</td>
                                     <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>5.600.000 đ</td>
                                     <td>Bàn ăn</td>
                                     <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
                                         </button>
                                         <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></button>
-
+                                        <!-- eye can get link -->
+                                        <a class="btn btn-primary btn-sm" href="qlchitietsanpham" title="Xem"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
 

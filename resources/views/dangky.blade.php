@@ -147,19 +147,17 @@ button[type=submit] {
                     </div>
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Đăng ký</button>
+                    <button type="submit" class="btn-primary btn-lg btn-block">Đăng ký</button>
 
                     <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                        <p class="text-center fw-bold mx-3 mb-0 text-muted">Hoặc</p>
                     </div>
 
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
-                        role="button">
-                        <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
-                    </a>
-                    <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
-                        role="button">
-                        Continue with Twitter</a>
+                    <button class="btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!">
+                  <i class="fab fa-facebook-f me-2"></i> Tiếp tục với Facebook
+                </button>
+                <button class="btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!" role="button"><i class="fab fa-twitter me-2"></i>
+                  Tiếp tục với Twitter</button>
 
                 </form>
             </div>

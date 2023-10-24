@@ -109,7 +109,7 @@
 
                     <ul id="right" class="nav navbar-nav navbar-right">
 
-                        @if (session('email'))
+                        @if (session('userInfo'))
       <!-- Avatar -->
       <li class="nav-item dropdown">
         <a

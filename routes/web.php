@@ -51,9 +51,9 @@ Route::get('/thanhtoan',function(){
 });
 // route admin
 Route::group(['prefix'=>'admin'],function(){
-    Route::get('custommer',function(){
-        return view('admin/custommer');
-    });  
+    // Route::get('custommer',function(){
+    //     return view('admin/custommer');
+    // });  
     Route::get('login',function(){
         return view('admin/login');
     });  
@@ -62,7 +62,7 @@ Route::group(['prefix'=>'admin'],function(){
     });  
     Route::get('trangchu',function(){
         return view('admin/home');
-    });  
+    })->name('admin-trang-chu');
     Route::get('bangkeluong',function(){
         return view('admin/bangkeluong');
     });  
@@ -77,7 +77,10 @@ Route::group(['prefix'=>'admin'],function(){
     });  
     Route::get('create-qlnhanvien',function(){
         return view('admin/create-qlnhanvien');
-    });  
+    });
+    Route::get('create-qlkhachhang',function(){
+        return view('admin/create-qlkhachhang');
+    }); 
     Route::get('create-qlnoibo',function(){
         return view('admin/create-qlnoibo');
     });  
@@ -92,6 +95,9 @@ Route::group(['prefix'=>'admin'],function(){
     });  
     Route::get('qlnhanvien',function(){
         return view('admin/qlnhanvien');
+    });
+    Route::get('qlkhachhang',function(){
+        return view('admin/qlkhachhang');
     });  
     Route::get('qlnoibo',function(){
         return view('admin/qlnoibo');
@@ -101,5 +107,14 @@ Route::group(['prefix'=>'admin'],function(){
     });  
     Route::get('posbanhang',function(){
         return view('admin/posbanhang');
-    });  
+    });
+    Route::get('edit-qlkhachhang',function(){
+        return view('admin/edit-qlkhachhang');
+    });
+    Route::get('edit-qlnhanvien',function(){
+        return view('admin/edit-qlnhanvien');
+    });
+    Route::get('edit-qlsanpham',function(){
+        return view('admin/edit-qlsanpham');
+    });
 });
