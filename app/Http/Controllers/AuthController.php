@@ -13,6 +13,7 @@ class AuthController extends Controller
 {
    public function login(){
     return view('dangnhap');
+    // jfkdjfdk
    }
 
    public function loginPost(Request $request){
