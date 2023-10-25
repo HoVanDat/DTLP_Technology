@@ -116,20 +116,16 @@
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách sản phẩm</li>
-                <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
+                <li class="breadcrumb-item">Danh sách chi tiết sản phẩm</li>
+                <li class="breadcrumb-item"><a href="#">Sửa chi tiết sản phẩm</a></li>
             </ul>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Tạo mới sản phẩm</h3>
+                    <h3 class="tile-title">Sửa mới chi tiết sản phẩm</h3>
                     <div class="tile-body">
                         <div class="row element-button">
-
-                            <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
-                            </div>
                             <div class="col-sm-2">
                                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
@@ -137,26 +133,19 @@
                         </div>
                         <form class="row">
                             <div class="form-group col-md-3">
-                                <label class="control-label">Mã sản phẩm </label>
+                                <label class="control-label">Mã chi tiết sản phẩm </label>
                                 <input class="form-control" type="number" placeholder="">
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Tên sản phẩm</label>
+                                <label class="control-label">Tên chi tiết sản phẩm</label>
                                 <input class="form-control" type="text">
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="exampleSelect1" class="control-label">Danh mục</label>
+                            <div class="form-group col-md-3 ">
+                                <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1">
-                                    <option>-- Chọn danh mục --</option>
-                                    <option>Bàn ăn</option>
-                                    <option>Bàn thông minh</option>
-                                    <option>Tủ</option>
-                                    <option>Ghế gỗ</option>
-                                    <option>Ghế sắt</option>
-                                    <option>Giường người lớn</option>
-                                    <option>Giường trẻ em</option>
-                                    <option>Bàn trang điểm</option>
-                                    <option>Giá đỡ</option>
+                                    <option>-- Chọn tình trạng --</option>
+                                    <option>Còn hàng</option>
+                                    <option>Hết hàng</option>
                                 </select>
                             </div>
                             <!-- option ẩn hiện -->
@@ -169,14 +158,134 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Giá Tiền </label>
-                                <input class="form-control" type="number" placeholder="Nhập giá tiền">
+                                <label class="control-label">Số lượng</label>
+                                <input class="form-control" type="number" placeholder="">
+                            </div>
+                            <!-- ram -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">RAM</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- rom -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">ROM</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- màu sắc -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Màu sắc</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- cân nặng -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Cân nặng</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- GPU -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">GPU</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- màn hình -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Màn hình</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- kích thước -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Kích thước</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- xuất xứ -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Xuất xứ</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- thời điểm ra mắt -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thời điểm ra mắt</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- hệ điều hành -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Hệ điều hành</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- camera trước -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Camera trước</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- camera sau -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Camera sau</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- dung lượng pin -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Dung lượng pin</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- sim -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Sim</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- tính năng -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Tính năng</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- bảo hành -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Bảo hành</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- cổng giao tiếp -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Cổng giao tiếp</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- thương hiệu -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thương hiệu</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- độ dài dây -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Độ dài dây</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- loại tai nghe -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Loại tai nghe</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- chất liệu -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Chất liệu</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- thời gian sạc dây -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thời gian sạc dây</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Thời gian sử dụng</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- dải tần số -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Dải tần số</label>
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <!-- giá bán -->
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Giá bán</label>
+                                <input class="form-control" type="text" placeholder="">
                             </div>
                             <!-- giá khuyến mãi -->
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Giá khuyến mãi </label>
-                                <input class="form-control" type="number" placeholder="Nhập giá khuyến mãi">
-                            </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Ảnh sản phẩm</label>
                                 <div id="myfileupload">

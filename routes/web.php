@@ -117,4 +117,13 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('edit-qlsanpham',function(){
         return view('admin/edit-qlsanpham');
     });
+    Route::get('qlchitietsanpham',function(){
+        return view('admin/qlchitietsanpham');
+    });
+    Route::get('create-qlchitietsanpham',function(){
+        return view('admin/create-qlchitietsanpham');
+    });
+    Route::get('edit-qlchitietsanpham',function(){
+        return view('admin/edit-qlchitietsanpham');
+    });
 });

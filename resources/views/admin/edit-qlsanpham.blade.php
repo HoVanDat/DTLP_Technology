@@ -116,13 +116,13 @@
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item">Danh sách sản phẩm</li>
-                <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
+                <li class="breadcrumb-item"><a href="#">Sửa sản phẩm</a></li>
             </ul>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Tạo mới sản phẩm</h3>
+                    <h3 class="tile-title">Sửa sản phẩm</h3>
                     <div class="tile-body">
                         <div class="row element-button">
 
@@ -143,6 +143,14 @@
                             <div class="form-group col-md-3">
                                 <label class="control-label">Tên sản phẩm</label>
                                 <input class="form-control" type="text">
+                            </div>
+                            <div class="form-group col-md-3 ">
+                                <label for="exampleSelect1" class="control-label">Tình trạng</label>
+                                <select class="form-control" id="exampleSelect1">
+                                    <option>-- Chọn tình trạng --</option>
+                                    <option>Còn hàng</option>
+                                    <option>Hết hàng</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="exampleSelect1" class="control-label">Danh mục</label>
