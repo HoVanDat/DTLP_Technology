@@ -67,7 +67,6 @@ public function register(){
     return redirect(route('register'))->with('error','Email hoặc password sai'); 
 }
 return redirect(route('login'))->with('success','Đăng ký thành công'); 
-
 }
 
 function logout(){

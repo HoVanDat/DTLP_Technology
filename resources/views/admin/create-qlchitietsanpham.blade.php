@@ -1,7 +1,8 @@
 @extends('admin/layout')
 @section('noidung')
 <head>
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script>
@@ -131,159 +132,143 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                             </div>
                         </div>
-                        <form class="row">
+                        <form class="row" action="{{ route('admin-store-qlchitietsanpham') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group col-md-3">
-                                <label class="control-label">Mã chi tiết sản phẩm </label>
-                                <input class="form-control" type="number" placeholder="">
+                                <label class="control-label">Mã sản phẩm </label>
+                                <input class="form-control" type="number" placeholder="" name="masanpham" value="{{ $sanpham->id_san_pham }}" readonly>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Tên chi tiết sản phẩm</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="form-group col-md-3 ">
-                                <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>-- Chọn tình trạng --</option>
-                                    <option>Còn hàng</option>
-                                    <option>Hết hàng</option>
-                                </select>
-                            </div>
-                            <!-- option ẩn hiện -->
-                            <div class="form-group col-md-3">
-                                <label for="exampleSelect1" class="control-label">Ẩn/Hiện</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>-- Chọn danh mục --</option>
-                                    <option>Ẩn</option>
-                                    <option>Hiện</option>
-                                </select>
+                                <label class="control-label">Tên sản phẩm</label>
+                                <input class="form-control" type="text" placeholder="" name="tensanpham" value="{{ $sanpham->ten_san_pham }}" readonly>
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" placeholder="">
+                                <input class="form-control" type="number" placeholder="" name="soluong">
                             </div>
                             <!-- ram -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">RAM</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="ram">
                             </div>
                             <!-- rom -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">ROM</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="rom">
                             </div>
                             <!-- màu sắc -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Màu sắc</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="mausac">
                             </div>
                             <!-- cân nặng -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Cân nặng</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="cannang">
                             </div>
                             <!-- GPU -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">GPU</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="gpu">
                             </div>
                             <!-- màn hình -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Màn hình</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="manhinh">
                             </div>
                             <!-- kích thước -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Kích thước</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="kichthuoc">
                             </div>
                             <!-- xuất xứ -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Xuất xứ</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="xuatxu">
                             </div>
                             <!-- thời điểm ra mắt -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thời điểm ra mắt</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thoidiemramat">
                             </div>
                             <!-- hệ điều hành -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Hệ điều hành</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="hedieuhanh">
                             </div>
                             <!-- camera trước -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Camera trước</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="cameratruoc">
                             </div>
                             <!-- camera sau -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Camera sau</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="camerasau">
                             </div>
                             <!-- dung lượng pin -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Dung lượng pin</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="dungluongpin">
                             </div>
                             <!-- sim -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Sim</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="sim">
                             </div>
                             <!-- tính năng -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Tính năng</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="tinhnang">
                             </div>
                             <!-- bảo hành -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Bảo hành</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="baohanh">
                             </div>
                             <!-- cổng giao tiếp -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Cổng giao tiếp</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="conggiaotiep">
                             </div>
                             <!-- thương hiệu -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thương hiệu</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thuonghieu">
                             </div>
                             <!-- độ dài dây -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Độ dài dây</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="dodaiday">
                             </div>
                             <!-- loại tai nghe -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Loại tai nghe</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="loaitainghe">
                             </div>
                             <!-- chất liệu -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Chất liệu</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="chatlieu">
                             </div>
                             <!-- thời gian sạc dây -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thời gian sạc dây</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thoigiansacdau">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thời gian sử dụng</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thoigiansudung">
                             </div>
                             <!-- dải tần số -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Dải tần số</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="daitanso">
                             </div>
                             <!-- giá bán -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Giá bán</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="giaban" required>
                             </div>
                             <!-- giá khuyến mãi -->
                             <div class="form-group col-md-12">
@@ -301,18 +286,11 @@
                                 </div>
 
                             </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Mô tả sản phẩm</label>
-                                <textarea class="form-control" name="mota" id="mota"></textarea>
-                                <script>
-                                    CKEDITOR.replace('mota');
-                                </script>
-                            </div>
-
                     </div>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+                    <button class="btn btn-save" type="submit">Lưu lại</button>
+                    <a class="btn btn-cancel" href="#">Hủy bỏ</a>
                 </div>
+                </form>
     </main>
 
 

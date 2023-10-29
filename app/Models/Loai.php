@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Loai extends Model
 {
     use HasFactory;
+    protected $table = 'loai';
+    protected $fillable = [
+        'id_loai',
+        'ten_loai',
+        'thu_tu',
+        'an_hien',
+        'created_at',
+        'updated_at',
+    ];
 }

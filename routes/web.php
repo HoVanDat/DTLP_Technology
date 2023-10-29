@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,15 +79,13 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('create-qlnhanvien',function(){
         return view('admin/create-qlnhanvien');
     });
-    Route::get('create-qlkhachhang',function(){
-        return view('admin/create-qlkhachhang');
-    }); 
+    Route::get('edit-qlkhachhang{id}',[UserAdminController::class,'edit'])->name('admin-edit-qlkhachhang');
+    Route::post('edit-qlkhachhang',[UserAdminController::class,'update'])->name('admin-update-qlkhachhang');
     Route::get('create-qlnoibo',function(){
         return view('admin/create-qlnoibo');
     });  
-    Route::get('create-qlsanpham',function(){
-        return view('admin/create-qlsanpham');
-    });  
+    Route::get('create-qlsanpham',[SanphamController::class,'create'])->name('admin-create-qlsanpham');
+    Route::post('create-qlsanpham',[SanphamController::class,'store'])->name('admin-store-qlsanpham');
     Route::get('lichcongtac',function(){
         return view('admin/lichcongtac');
     });  
@@ -96,34 +95,29 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('qlnhanvien',function(){
         return view('admin/qlnhanvien');
     });
-    Route::get('qlkhachhang',function(){
-        return view('admin/qlkhachhang');
-    });  
     Route::get('qlnoibo',function(){
         return view('admin/qlnoibo');
     });  
-    Route::get('qlsanpham',function(){
-        return view('admin/qlsanpham');
-    });  
+    Route::get('qlsanpham',[SanphamController::class,'qlsanpham'])->name('admin-qlsanpham');
     Route::get('posbanhang',function(){
         return view('admin/posbanhang');
     });
-    Route::get('edit-qlkhachhang',function(){
-        return view('admin/edit-qlkhachhang');
+    Route::get('qlkhachhang',[UserAdminController::class,'index'])->name('admin-qlkhachhang');
+    Route::get('create-qlkhachhang',function(){
+        return view('admin/create-qlkhachhang');
     });
+    Route::post('create-qlkhachhang',[UserAdminController::class,'store'])->name('admin-store-qlkhachhang');
     Route::get('edit-qlnhanvien',function(){
         return view('admin/edit-qlnhanvien');
     });
-    Route::get('edit-qlsanpham',function(){
-        return view('admin/edit-qlsanpham');
-    });
-    Route::get('qlchitietsanpham',function(){
-        return view('admin/qlchitietsanpham');
-    });
-    Route::get('create-qlchitietsanpham',function(){
-        return view('admin/create-qlchitietsanpham');
-    });
-    Route::get('edit-qlchitietsanpham',function(){
-        return view('admin/edit-qlchitietsanpham');
-    });
+    Route::get('edit-qlsanpham{id}',[SanphamController::class,'edit'])->name('admin-edit-qlsanpham');
+    Route::post('edit-qlsanpham',[SanphamController::class,'update'])->name('admin-update-qlsanpham');
+    Route::get('delete-qlsanpham{id}',[SanphamController::class,'destroy'])->name('admin-delete-qlsanpham');
+    Route::get('qlchitietsanpham{id}',[SanphamController::class,'qlchitietsanpham'])->name('admin-qlchitietsanpham');
+    Route::get('create-qlchitietsanpham{id}',[SanphamController::class,'createchitietsanpham'])->name('admin-create-qlchitietsanpham');
+    Route::post('create-qlchitietsanpham',[SanphamController::class,'storechitietsanpham'])->name('admin-store-qlchitietsanpham');
+    Route::get('edit-qlchitietsanpham',[SanphamController::class,'editchitietsanpham'])->name('admin-edit-qlchitietsanpham');
+    Route::post('edit-qlchitietsanpham',[SanphamController::class,'updatechitietsanpham'])->name('admin-update-qlchitietsanpham');
+    Route::get('delete-qlkhachhang{id}',[UserAdminController::class,'destroy'])->name('admin-delete-qlkhachhang');
 });
+Route::get('/get-customer-data/{id}', 'CustomerController@getCustomerData');

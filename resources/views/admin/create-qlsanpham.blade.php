@@ -1,7 +1,9 @@
 @extends('admin/layout')
 @section('noidung')
 <head>
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script>
@@ -125,7 +127,6 @@
                     <h3 class="tile-title">Tạo mới sản phẩm</h3>
                     <div class="tile-body">
                         <div class="row element-button">
-
                             <div class="col-sm-2">
                                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
                     class="fas fa-folder-plus"></i> Thêm danh mục</a>
@@ -135,47 +136,38 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                             </div>
                         </div>
-                        <form class="row">
-                            <div class="form-group col-md-3">
-                                <label class="control-label">Mã sản phẩm </label>
-                                <input class="form-control" type="number" placeholder="">
-                            </div>
+                        <form class="row" method="POST" action="{{route('admin-store-qlsanpham')}}" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group col-md-3">
                                 <label class="control-label">Tên sản phẩm</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" name="tensanpham">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="exampleSelect1" class="control-label">Danh mục</label>
-                                <select class="form-control" id="exampleSelect1">
+                                <select class="form-control" id="exampleSelect1" name="danhmuc">
                                     <option>-- Chọn danh mục --</option>
-                                    <option>Bàn ăn</option>
-                                    <option>Bàn thông minh</option>
-                                    <option>Tủ</option>
-                                    <option>Ghế gỗ</option>
-                                    <option>Ghế sắt</option>
-                                    <option>Giường người lớn</option>
-                                    <option>Giường trẻ em</option>
-                                    <option>Bàn trang điểm</option>
-                                    <option>Giá đỡ</option>
+                                    @foreach($danhmuc as $dm)
+                                    <option value="{{$dm->id_loai}}">{{$dm->ten_loai}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!-- option ẩn hiện -->
                             <div class="form-group col-md-3">
                                 <label for="exampleSelect1" class="control-label">Ẩn/Hiện</label>
-                                <select class="form-control" id="exampleSelect1">
+                                <select class="form-control" id="exampleSelect1" name="anhien">
                                     <option>-- Chọn danh mục --</option>
-                                    <option>Ẩn</option>
-                                    <option>Hiện</option>
+                                    <option value="1">Hiện</option>
+                                    <option value="0">Ẩn</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Giá Tiền </label>
-                                <input class="form-control" type="number" placeholder="Nhập giá tiền">
+                                <input class="form-control" type="number" placeholder="Nhập giá tiền" id="example-text-input" name="giatien">
                             </div>
                             <!-- giá khuyến mãi -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Giá khuyến mãi </label>
-                                <input class="form-control" type="number" placeholder="Nhập giá khuyến mãi">
+                                <input class="form-control" type="number" placeholder="Nhập giá khuyến mãi" id="example-text-input" name="giakhuyenmai">
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Ảnh sản phẩm</label>
@@ -193,17 +185,15 @@
 
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label">Mô tả sản phẩm</label>
-                                <textarea class="form-control" name="mota" id="mota"></textarea>
-                                <script>
-                                    CKEDITOR.replace('mota');
-                                </script>
+                            <label class="control-label">Mô tả sản phẩm</label>
+                            <input id="content"  type="hidden" name="content" value="">
+                            <trix-editor class="form-control" input="content"></trix-editor>
                             </div>
-
                     </div>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+                    <button class="btn btn-save" type="submit">Lưu lại</button>
+                    <a class="btn btn-cancel" href="/admin/create-qlsanpham">Hủy bỏ</a>
                 </div>
+                </form>
     </main>
 
 
