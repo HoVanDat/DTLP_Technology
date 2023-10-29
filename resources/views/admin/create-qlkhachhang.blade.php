@@ -17,7 +17,7 @@ function readURL(input, thumbimage) {
 
   }
   $("#thumbimage").show();
-  $('.filename').text($("#uploadfile").val());
+  $('.filename').text($("#ImageUpload").val());
   $('.Choicefile').css('background', '#14142B');
   $('.Choicefile').css('cursor', 'default');
   $(".removeimg").show();
@@ -26,15 +26,15 @@ function readURL(input, thumbimage) {
 }
 $(document).ready(function () {
   $(".Choicefile").bind('click', function () {
-    $("#uploadfile").click();
+    $("#ImageUpload").click();
 
   });
   $(".removeimg").click(function () {
     $("#thumbimage").attr('src', '').hide();
-    $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+    $("#myfileupload").html('<input type="file" id="ImageUpload"  onchange="readURL(this);" />');
     $(".removeimg").hide();
     $(".Choicefile").bind('click', function () {
-      $("#uploadfile").click();
+      $("#ImageUpload").click();
     });
     $('.Choicefile').css('background', '#14142B');
     $('.Choicefile').css('cursor', 'pointer');
@@ -64,7 +64,7 @@ $(document).ready(function () {
       color: white;
     }
 
-    #uploadfile,
+    #ImageUpload,
     .removeimg {
       display: none;
     }
@@ -122,9 +122,7 @@ $(document).ready(function () {
     </div>
     <div class="row">
       <div class="col-md-12">
-
         <div class="tile">
-
           <h3 class="tile-title">Tạo mới khách hàng</h3>
           <div class="tile-body">
             <div class="row element-button">
@@ -132,66 +130,60 @@ $(document).ready(function () {
               </div>
 
             </div>
-            <form class="row">
-              <div class="form-group col-md-4">
-                <label class="control-label">ID khách hàng</label>
-                <input class="form-control" type="text">
-              </div>
+            <form class="row" action="{{route('admin-store-qlkhachhang')}}" method="POST" enctype="multipart/form-data">
+              @csrf
               <div class="form-group col-md-4">
                 <label class="control-label">Họ và tên</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text" required name="name">
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Địa chỉ email</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="email" required name="email">
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Mật khẩu</label>
+                <input class="form-control" type="password" required name="password">
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Địa chỉ thường trú</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text"  name="address">
               </div>
               <div class="form-group  col-md-4">
                 <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" required>
+                <input class="form-control" type="number"  name="phone">
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Ngày sinh</label>
-                <input class="form-control" type="date">
-              </div>
-              <div class="form-group  col-md-3">
-                <label class="control-label">Nơi sinh</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="date"  name="birthday">
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giới tính</label>
-                <select class="form-control" id="exampleSelect2" required>
+                <select class="form-control" id="exampleSelect2"  name="exampleSelect2">
                   <option>-- Chọn giới tính --</option>
-                  <option>Nam</option>
-                  <option>Nữ</option>
+                  <option value="1">Nam</option>
+                  <option value="2">Nữ</option>
                 </select>
               </div>
               <div class="form-group col-md-12">
-                <label class="control-label">Ảnh 3x4 khách hàng</label>
+                <label for="ImageUpload" class="control-label">Ảnh 3x4 khách hàng</label>
                 <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+                <!-- uploadfile -->
+                    <input type="file" class="form-control-file" id="ImageUpload" name="ImageUpload" onchange="readURL(this);" /> 
                 </div>
                 <div id="thumbbox">
-                  <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
-                  <a class="removeimg" href="javascript:"></a>
+                    <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
+                    <a class="removeimg" href="javascript:"></a>
                 </div>
                 <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
-                  <p style="clear:both"></p>
+                    <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
+                    <p style="clear:both"></p>
                 </div>
-
-              </div>
-
-
-
+            </div>
           </div>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" href="/doc/table-data-table.html">Hủy bỏ</a>
+          <button class="btn btn-save" type="submit">Lưu lại</button>
+          <a class="btn btn-cancel" href="#">Hủy bỏ</a>
         </div>
-
+        </form>
   </main>
   
 

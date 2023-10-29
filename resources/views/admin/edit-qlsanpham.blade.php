@@ -1,7 +1,8 @@
 @extends('admin/layout')
 @section('noidung')
 <head>
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script>
@@ -125,7 +126,6 @@
                     <h3 class="tile-title">Sửa sản phẩm</h3>
                     <div class="tile-body">
                         <div class="row element-button">
-
                             <div class="col-sm-2">
                                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
                     class="fas fa-folder-plus"></i> Thêm danh mục</a>
@@ -135,36 +135,31 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                             </div>
                         </div>
-                        <form class="row">
+                        <form class="row" action="{{route('admin-update-qlsanpham')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group col-md-3">
                                 <label class="control-label">Mã sản phẩm </label>
-                                <input class="form-control" type="number" placeholder="">
+                                <input class="form-control" type="number" placeholder="" readonly value="{{$sanpham->id_san_pham}}" name="id_san_pham">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Tên sản phẩm</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{$sanpham->ten_san_pham}}" name="tensanpham">
                             </div>
                             <div class="form-group col-md-3 ">
                                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                                 <select class="form-control" id="exampleSelect1">
                                     <option>-- Chọn tình trạng --</option>
-                                    <option>Còn hàng</option>
-                                    <option>Hết hàng</option>
+                                    <option value="1" {{$sanpham->an_hien == 1 ? 'selected' : ''}}>Hiện</option>
+                                    <option value="0" {{$sanpham->an_hien == 0 ? 'selected' : ''}}>Ẩn</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="exampleSelect1" class="control-label">Danh mục</label>
                                 <select class="form-control" id="exampleSelect1">
                                     <option>-- Chọn danh mục --</option>
-                                    <option>Bàn ăn</option>
-                                    <option>Bàn thông minh</option>
-                                    <option>Tủ</option>
-                                    <option>Ghế gỗ</option>
-                                    <option>Ghế sắt</option>
-                                    <option>Giường người lớn</option>
-                                    <option>Giường trẻ em</option>
-                                    <option>Bàn trang điểm</option>
-                                    <option>Giá đỡ</option>
+                                    @foreach($danhmuc as $dm)
+                                    <option value="{{$dm->id_loai}}" {{$sanpham->id_loai == $dm->id_loai ? 'selected' : ''}}>{{$dm->ten_loai}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!-- option ẩn hiện -->
@@ -172,18 +167,18 @@
                                 <label for="exampleSelect1" class="control-label">Ẩn/Hiện</label>
                                 <select class="form-control" id="exampleSelect1">
                                     <option>-- Chọn danh mục --</option>
-                                    <option>Ẩn</option>
-                                    <option>Hiện</option>
+                                    <option value="1" {{$sanpham->an_hien == 1 ? 'selected' : ''}}>Hiện</option>
+                                    <option value="0" {{$sanpham->an_hien == 0 ? 'selected' : ''}}>Ẩn</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label">Giá Tiền </label>
-                                <input class="form-control" type="number" placeholder="Nhập giá tiền">
+                                <label class="control-label">Giá Tiền</label>
+                                <input class="form-control" type="number" placeholder="Nhập giá tiền" value="{{$sanpham->gia}}" name="giatien">
                             </div>
                             <!-- giá khuyến mãi -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Giá khuyến mãi </label>
-                                <input class="form-control" type="number" placeholder="Nhập giá khuyến mãi">
+                                <input class="form-control" type="number" placeholder="Nhập giá khuyến mãi" value="{{$sanpham->gia_khuyen_mai}}" name="giakhuyenmai">
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label">Ảnh sản phẩm</label>
@@ -201,17 +196,15 @@
 
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label">Mô tả sản phẩm</label>
-                                <textarea class="form-control" name="mota" id="mota"></textarea>
-                                <script>
-                                    CKEDITOR.replace('mota');
-                                </script>
+                            <label class="control-label">Mô tả sản phẩm</label>
+                            <input id="content"  type="hidden" name="content" value="{{$sanpham->mo_ta}}">
+                            <trix-editor class="form-control" input="content"></trix-editor>
                             </div>
-
                     </div>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
+                    <button class="btn btn-save" type="submit">Lưu lại</button>
                     <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
                 </div>
+                </form>
     </main>
 
 

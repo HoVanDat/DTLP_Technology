@@ -131,159 +131,145 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                             </div>
                         </div>
-                        <form class="row">
+                        <form class="row" method="POST" action="{{route('admin-update-qlchitietsanpham')}}" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group col-md-3">
                                 <label class="control-label">Mã chi tiết sản phẩm </label>
-                                <input class="form-control" type="number" placeholder="">
+                                <input class="form-control" type="number" placeholder="" name="idchitietsanpham" value="{{$chitietsanpham->id_chi_tiet}}" readonly>
+                                <input class="form-control" type="hidden" placeholder="" name="masanpham" value="{{$chitietsanpham->id_san_pham}}" readonly>
                             </div>
+                                
                             <div class="form-group col-md-3">
-                                <label class="control-label">Tên chi tiết sản phẩm</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="form-group col-md-3 ">
-                                <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>-- Chọn tình trạng --</option>
-                                    <option>Còn hàng</option>
-                                    <option>Hết hàng</option>
-                                </select>
-                            </div>
-                            <!-- option ẩn hiện -->
-                            <div class="form-group col-md-3">
-                                <label for="exampleSelect1" class="control-label">Ẩn/Hiện</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>-- Chọn danh mục --</option>
-                                    <option>Ẩn</option>
-                                    <option>Hiện</option>
-                                </select>
+                                <label class="control-label">Tên sản phẩm</label>
+                                <input class="form-control" type="text" placeholder="" name="tensanpham" value="{{$sanpham->ten_san_pham}}" readonly>
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Số lượng</label>
-                                <input class="form-control" type="number" placeholder="">
+                                <input class="form-control" type="number" placeholder="" name="soluong" value="{{$chitietsanpham->so_luong}}" required>
                             </div>
                             <!-- ram -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">RAM</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="ram" value="{{$chitietsanpham->RAM}}">
                             </div>
                             <!-- rom -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">ROM</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="rom" value="{{$chitietsanpham->ROM}}">
                             </div>
                             <!-- màu sắc -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Màu sắc</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="mausac" value="{{$chitietsanpham->mau_sac}}">
                             </div>
                             <!-- cân nặng -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Cân nặng</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="cannang" value="{{$chitietsanpham->can_nang}}">
                             </div>
                             <!-- GPU -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">GPU</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="gpu" value="{{$chitietsanpham->GPU}}">
                             </div>
                             <!-- màn hình -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Màn hình</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="manhinh" value="{{$chitietsanpham->man_hinh}}">
                             </div>
                             <!-- kích thước -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Kích thước</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="kichthuoc" value="{{$chitietsanpham->kich_thuoc}}">
                             </div>
                             <!-- xuất xứ -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Xuất xứ</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="xuatxu" value="{{$chitietsanpham->xuat_xu}}">
                             </div>
                             <!-- thời điểm ra mắt -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thời điểm ra mắt</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thoidiemramat" value="{{$chitietsanpham->thoi_diem_ra_mat}}">
                             </div>
                             <!-- hệ điều hành -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Hệ điều hành</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="hedieuhanh" value="{{$chitietsanpham->he_dieu_hanh}}">
                             </div>
                             <!-- camera trước -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Camera trước</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="cameratruoc" value="{{$chitietsanpham->camera_truoc}}">
                             </div>
                             <!-- camera sau -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Camera sau</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="camerasau" value="{{$chitietsanpham->camera_sau}}">
                             </div>
                             <!-- dung lượng pin -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Dung lượng pin</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="dungluongpin" value="{{$chitietsanpham->dung_luong_pin}}">
                             </div>
                             <!-- sim -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Sim</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="sim" value="{{$chitietsanpham->sim}}">
                             </div>
                             <!-- tính năng -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Tính năng</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="tinhnang" value="{{$chitietsanpham->tinh_nang}}">
                             </div>
                             <!-- bảo hành -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Bảo hành</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="baohanh" value="{{$chitietsanpham->bao_hanh}}">
                             </div>
                             <!-- cổng giao tiếp -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Cổng giao tiếp</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="conggiaotiep" value="{{$chitietsanpham->cong_giao_tiep}}">
                             </div>
                             <!-- thương hiệu -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thương hiệu</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thuonghieu" value="{{$sanpham->thuong_hieu}}">
                             </div>
                             <!-- độ dài dây -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Độ dài dây</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="dodaiday" value="{{$chitietsanpham->do_dai_day}}">
                             </div>
                             <!-- loại tai nghe -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Loại tai nghe</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="loaitainghe" value="{{$chitietsanpham->loai_tai_nghe}}">
                             </div>
                             <!-- chất liệu -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Chất liệu</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="chatlieu" value="{{$chitietsanpham->chat_lieu}}">
                             </div>
                             <!-- thời gian sạc dây -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thời gian sạc dây</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thoigiansacday" value="{{$chitietsanpham->thoi_gian_sac_day}}">
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label">Thời gian sử dụng</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="thoigiansudung" value="{{$chitietsanpham->thoi_gian_su_dung}}">
                             </div>
                             <!-- dải tần số -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Dải tần số</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="daitanso" value="{{$chitietsanpham->dai_tan_so}}">
                             </div>
                             <!-- giá bán -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Giá bán</label>
-                                <input class="form-control" type="text" placeholder="">
+                                <input class="form-control" type="text" placeholder="" name="giaban" value="{{$chitietsanpham->gia}}">
                             </div>
                             <!-- giá khuyến mãi -->
                             <div class="form-group col-md-12">
@@ -301,18 +287,11 @@
                                 </div>
 
                             </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label">Mô tả sản phẩm</label>
-                                <textarea class="form-control" name="mota" id="mota"></textarea>
-                                <script>
-                                    CKEDITOR.replace('mota');
-                                </script>
-                            </div>
-
                     </div>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
+                    <button class="btn btn-save" type="submit">Lưu lại</button>
                     <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
                 </div>
+                </form>
     </main>
 
 
@@ -336,7 +315,7 @@
                         </div>
                     </div>
                     <BR>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
+                    <button class="btn btn-save" type="submit">Lưu lại</button>
                     <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
                     <BR>
                 </div>

@@ -58,25 +58,46 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($sanpham as $sp)
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>71309005</td>
-                                    <td>Bàn ăn gỗ Theresa</td>
-                                    <td><img src="https://gaixinhbikini.com/wp-content/uploads/2022/08/885401fdf0a9a442fc983005ac42b97e.jpg" alt="" height="40px" width="40px"></td>
-                                    <td>40</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>Bàn ăn</td>
-                                    <td>5.600.000</td>
-                                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                                        </button>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+                                    <td>{{ $sp->id_san_pham }}</td>
+                                    <td>{{ $sp->ten_san_pham }}</td>
+                                    <td><img src="/img/{{ $sp->hinh }}" alt="" height="40px" width="40px"></td>
+                                    <td>
+                                        @php
+                                        $ctsp = \DB::table('chitietsanpham')->where('id_san_pham',$sp->id_san_pham)->get();
+                                        $sl = 0;
+                                        foreach($ctsp as $ct){
+                                        $sl += $ct->so_luong;
+                                        }
+                                        echo $sl;
+                                        @endphp
+                                    </td>
+                                    <td>
+                                        @if($sl > 0)
+                                        <span class="badge badge-success">Còn hàng</span>
+                                        @else
+                                        <span class="badge badge-danger">Hết</span>
+                                        @endif
+                                    <td>
+                                        @php
+                                        $loai = \DB::table('loai')->where('id_loai',$sp->id_loai)->first();
+                                        @endphp
+                                        {{ $loai->ten_loai }}
+                                    </td>
+                                    <td>{{ number_format($sp->gia, 2, ',', '.')}} VNĐ</td>
+                                    <td>
+                                        <!-- <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
+                                        </button> -->
+                                        <a href="delete-qlsanpham{{$sp->id_san_pham}}" class="btn btn-primary btn-sm trash"><i class="fas fa-trash-alt"></i></a>
+                                        <!-- <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></button> -->
+                                        <a href="edit-qlsanpham{{$sp->id_san_pham}}" class="btn btn-primary btn-sm edit" title="Sửa" ><i class="fas fa-edit"></i></a>
                                         <!-- eye can get link -->
-                                        <a class="btn btn-primary btn-sm" href="qlchitietsanpham" title="Xem"><i class="fas fa-eye"></i></a>
+                                        <a class="btn btn-primary btn-sm" href="qlchitietsanpham{{$sp->id_san_pham}}" title="Xem"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
-
-
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

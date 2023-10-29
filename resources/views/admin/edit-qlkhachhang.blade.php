@@ -3,7 +3,6 @@
 <head> 
 <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
   <script>
-
 function readURL(input, thumbimage) {
   if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
     var reader = new FileReader();
@@ -131,41 +130,42 @@ $(document).ready(function () {
               <div class="col-sm-2">
               </div>
             </div>
-            <form class="row">
+            <form class="row" action="{{ route('admin-update-qlkhachhang') }}" method="POST" enctype="multipart/form-data">
+              @csrf
               <div class="form-group col-md-4">
-                <label class="control-label">ID khách hàng</label>
-                <input class="form-control" type="text">
+                <label class="control-label">Mã khách hàng</label>
+                <input class="form-control" type="text" name="id" value="{{$user->id_nguoi_dung}}" readonly>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Họ và tên</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text" required name="name" value="{{$user->ten}}">
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Địa chỉ email</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="email" required name="email" value="{{$user->email}}">
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Mật khẩu</label>
+                <input class="form-control" type="password" name="password">
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Địa chỉ thường trú</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="text" name="address" value="{{$user->dia_chi}}">
               </div>
               <div class="form-group  col-md-4">
                 <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" required>
+                <input class="form-control" type="number" name="phone" value="{{$user->so_dien_thoai}}">
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Ngày sinh</label>
-                <input class="form-control" type="date">
-              </div>
-              <div class="form-group  col-md-3">
-                <label class="control-label">Nơi sinh</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" type="date" name="birthdate" value="{{$user->ngay_sinh}}">
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giới tính</label>
-                <select class="form-control" id="exampleSelect2" required>
+                <select class="form-control" id="exampleSelect2" name="exampleSelect2">
                   <option>-- Chọn giới tính --</option>
-                  <option>Nam</option>
-                  <option>Nữ</option>
+                  <option value="1" {{ $user->gioi_tinh === 1 ? 'selected' : '' }}>Nam</option>
+                  <option value="2" {{ $user->gioi_tinh === 2 ? 'selected' : '' }}>Nữ</option>
                 </select>
               </div>
               <div class="form-group col-md-12">
@@ -181,16 +181,12 @@ $(document).ready(function () {
                   <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
                   <p style="clear:both"></p>
                 </div>
-
               </div>
-
-
-
           </div>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" href="/doc/table-data-table.html">Hủy bỏ</a>
+          <button class="btn btn-save" type="submit">Lưu lại</button>
+          <a class="btn btn-cancel" href="/admin/qlkhachhang">Hủy bỏ</a>
         </div>
-
+        </form>
   </main>
   
 
