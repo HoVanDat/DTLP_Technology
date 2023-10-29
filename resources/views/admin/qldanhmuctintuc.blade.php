@@ -4,7 +4,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Danh sách danh mục tin tức</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -15,9 +15,9 @@
                 <div class="tile-body">
                     <div class="row element-button">
                         <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" href="{{route('create.qlnhanvien')}}" title="Thêm"><i
+                            <a class="btn btn-add btn-sm" href="{{route('create.qldanhmuctintuc')}}" title="Thêm"><i
                                     class="fas fa-plus"></i>
-                                Tạo mới nhân viên</a>
+                                Tạo mới danh mục tin tức</a>
                         </div>
                         <div class="col-sm-2">
                             <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
@@ -50,43 +50,29 @@
                         border="0" id="sampleTable">
                         <thead>
                             <tr>
-                                <th width="10"><input type="checkbox" id="all"></th>
-                                <th>ID nhân viên</th>
-                                <th width="150">Họ và tên</th>
-                                <th width="20">Ảnh thẻ</th>
-                                <th width="300">Địa chỉ</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới tính</th>
-                                <th>SĐT</th>
-                                <th>Chức vụ</th>
-                                <th width="100">Tính năng</th>
+                                <th ><input type="checkbox" id="all"></th>
+                                <th width="200">ID danh mục tin tức</th>
+                                <th >Tên danh mục tin tức</th>
+                               
+                                <th width="200">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dsnhanvien as $ds)
+                            
+                        @foreach($danhmuctin as $dm)
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ds->id_nguoi_dung}}</td>
-                                <td>{{$ds->ten}}</td>
-                                <td><img class="img-card-person" src="img-anhthe/{{$ds->hinh}}" alt=""></td>
-                                <td>{{$ds->dia_chi}}</td>
-                                <td>{{$ds->ngay_sinh}}</td>
-                                <td>
-                                    @if ($ds->gioi_tinh == 1) Nam
-                                    @elseif ($ds->gioi_tinh == 2) Nữ
-                                    @else Trống
-                                    @endif
-                                </td>
-                                <td>{{$ds->so_dien_thoai}}</td>
-                                <td>{{$ds->chuc_vu}}</td>
+                                
+                                <td>{{$dm->id_danh_muc_tin}}</td>
+                                <td>{{$dm->ten_danh_muc}}</td>
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"
-                                        onclick="showDeleteConfirmation('{{ $ds->id_nguoi_dung }}', 'delete-qlnhanvien/{{ $ds->id_nguoi_dung }}')"
+                                        onclick="showDeleteConfirmation('{{$dm->id_danh_muc_tin}}', 'delete-qldanhmuctintuc/{{$dm->id_danh_muc_tin}}')"
                                         href="#" title="Xóa" type="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <a class="btn btn-primary btn-sm edit" href="edit-qlnhanvien{{$ds->id_nguoi_dung}}"
+                                    <a class="btn btn-primary btn-sm edit" href="edit-qldanhmuctintuc{{$dm->id_danh_muc_tin}}"
                                         title="Sửa" type="button"><i class="fas fa-edit"></i></a>
 
                                 </td>
@@ -94,7 +80,6 @@
 
 
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
@@ -160,7 +145,7 @@ jQuery(function() {
     //     swal({
     //             title: "Cảnh báo",
 
-    //             text: "Bạn có chắc chắn là muốn xóa nhân viên này?",
+    //             text: "Bạn có chắc chắn là muốn xóa danh mục tin tức này?",
     //             buttons: ["Hủy bỏ", "Đồng ý"],
     //         })
     //         .then((willDelete) => {
