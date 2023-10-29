@@ -1,8 +1,8 @@
 @extends('admin/layout')
 @section('noidung')
 <head>
-
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script>
         function readURL(input, thumbimage) {
@@ -281,6 +281,7 @@ MODAL
                     <BR>
                 </div>
                 <div class="modal-footer">
+                <textarea id="content" name="content"></textarea>
                 </div>
             </div>
         </div>

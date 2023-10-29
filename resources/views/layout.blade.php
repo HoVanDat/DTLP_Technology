@@ -121,7 +121,7 @@
           aria-expanded="false"
         >
           <img width= 22px;
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+            src="img/{{session('userInfo.hinh')}}"
             class="rounded-circle"
             height="22"
             alt="Portrait of a Woman"
@@ -130,10 +130,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <li>
-            <a class="dropdown-item" href="#">Thông tin của tôi</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Cài đặt</a>
+            <a class="dropdown-item" href="/thongtin">Thông tin của tôi</a>
           </li>
           <li>
             <a class="dropdown-item" href="/dangxuat">Đăng xuất</a>
