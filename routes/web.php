@@ -5,6 +5,7 @@ use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserAdminController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,10 +38,12 @@ Route::post('/dangnhap',[AuthController::class,'loginPost'])->name('login.post')
 Route::get('/dangky',[AuthController::class,'register'])->name('register');
 Route::post('/dangky',[AuthController::class,'registerPost'])->name('register.post');
 Route::get('/dangxuat',[AuthController::class,'logout'])->name('logout');
-// Route::get('/forget-password',[AuthController::class,'forgetPassword'])->name('forget.password');
-// Route::post('/forget-password',[AuthController::class,'forgetPasswordPost'])->name('forget.password.post');
-// Route::get('/reset-password/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
-// Route::post('/reset-password',[AuthController::class,'resetPasswordPost'])->name('reset.password.post');
+Route::get('/forgot-password', function(){
+    return view('forget-password');
+})->name('forget.password.get');
+Route::post('/forget-password',[AuthController::class,'forgetPasswordPost'])->name('forget.password.post');
+Route::get('/reset-password/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
+Route::post('/reset-password',[AuthController::class,'resetPasswordPost'])->name('reset.password.post');
 Route::get('/chitiet',function(){
     return view('chitiet');
 });
@@ -121,3 +124,4 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('delete-qlkhachhang{id}',[UserAdminController::class,'destroy'])->name('admin-delete-qlkhachhang');
 });
 Route::get('/get-customer-data/{id}', 'CustomerController@getCustomerData');
+

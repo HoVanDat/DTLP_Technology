@@ -24,7 +24,6 @@ class SanphamController extends Controller
     }
     public function qlsanpham(){
         $sanpham = SanPham::all();
-        
         return view('admin/qlsanpham',compact('sanpham'));
     }
     public function create(){
