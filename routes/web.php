@@ -1,21 +1,26 @@
-<?php
+    <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SanphamController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserAdminController;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\SanphamController;
+    use App\Http\Controllers\AuthController;
+    use App\Http\Controllers\EmployeeAdminController;
+    use App\Http\Controllers\NewsAdminController;
+    use App\Http\Controllers\CategoryAdminController;
+    use App\Http\Controllers\UserAdminController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+ // tài khoản
+ Route::get('thongtin',[AuthController::class,'thongtin']);
+ Route::post('thongtin',[AuthController::class,'thongtinpost'])->name('thongtin.post');
+ Route::get('/dangnhap',[AuthController::class,'login'])->name('login');
+ Route::post('/dangnhap',[AuthController::class,'loginPost'])->name('login.post');
+ Route::get('/dangky',[AuthController::class,'register'])->name('register');
+ Route::post('/dangky',[AuthController::class,'registerPost'])->name('register.post');
+ Route::get('/dangxuat',[AuthController::class,'logout'])->name('logout');
+ // Route::get('/forget-password',[AuthController::class,'forgetPassword'])->name('forget.password');
+ // Route::post('/forget-password',[AuthController::class,'forgetPasswordPost'])->name('forget.password.post');
+ // Route::get('/reset-password/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
+ // Route::post('/reset-password',[AuthController::class,'resetPasswordPost'])->name('reset.password.post');
+    Route::get('/', [SanphamController::class, 'index'])->name('home');
 
 
 Route::get('/', [SanphamController::class, 'index'])->name('home');
@@ -24,9 +29,11 @@ Route::get('/layout',function(){
     return view('layout');
 });
 Route::get('/shop',[SanphamController::class, 'dt']);
+
 Route::get('/tintuc',function(){
     return view('tintuc');
 });
+
 Route::get('/khuyenmai',function(){
     return view('khuyenmai');
 });
@@ -55,9 +62,6 @@ Route::get('/thanhtoan',function(){
 });
 // route admin
 Route::group(['prefix'=>'admin'],function(){
-    // Route::get('custommer',function(){
-    //     return view('admin/custommer');
-    // });  
     Route::get('login',function(){
         return view('admin/login');
     });  
@@ -79,9 +83,8 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('create-qldonhang',function(){
         return view('admin/create-qldonhang');
     });  
-    Route::get('create-qlnhanvien',function(){
-        return view('admin/create-qlnhanvien');
-    });
+    Route::get('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvien'])->name('create.qlnhanvien');
+    Route::post('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvienpost'])->name('create.qlnhanvien.post');
     Route::get('edit-qlkhachhang{id}',[UserAdminController::class,'edit'])->name('admin-edit-qlkhachhang');
     Route::post('edit-qlkhachhang',[UserAdminController::class,'update'])->name('admin-update-qlkhachhang');
     Route::get('create-qlnoibo',function(){
@@ -95,9 +98,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('qldonhang',function(){
         return view('admin/qldonhang');
     });  
-    Route::get('qlnhanvien',function(){
-        return view('admin/qlnhanvien');
-    });
+    Route::get('qlnhanvien',[EmployeeAdminController::class,'index'])->name('qlnhanvien');
     Route::get('qlnoibo',function(){
         return view('admin/qlnoibo');
     });  
@@ -110,9 +111,9 @@ Route::group(['prefix'=>'admin'],function(){
         return view('admin/create-qlkhachhang');
     });
     Route::post('create-qlkhachhang',[UserAdminController::class,'store'])->name('admin-store-qlkhachhang');
-    Route::get('edit-qlnhanvien',function(){
-        return view('admin/edit-qlnhanvien');
-    });
+    Route::get('edit-qlnhanvien{id}',[EmployeeAdminController::class,'editqlnhanvien'])->name('edit.qlnhanvien');
+    Route::post('edit-qlnhanvien',[EmployeeAdminController::class,'editqlnhanvienpost'])->name('edit.qlnhanvien.post');
+    Route::get('delete-qlnhanvien/{id}',[EmployeeAdminController::class,'deleteqlnhanvien'])->name('delete.qlnhanvien');
     Route::get('edit-qlsanpham{id}',[SanphamController::class,'edit'])->name('admin-edit-qlsanpham');
     Route::post('edit-qlsanpham',[SanphamController::class,'update'])->name('admin-update-qlsanpham');
     Route::get('delete-qlsanpham{id}',[SanphamController::class,'destroy'])->name('admin-delete-qlsanpham');
@@ -122,6 +123,23 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('edit-qlchitietsanpham',[SanphamController::class,'editchitietsanpham'])->name('admin-edit-qlchitietsanpham');
     Route::post('edit-qlchitietsanpham',[SanphamController::class,'updatechitietsanpham'])->name('admin-update-qlchitietsanpham');
     Route::get('delete-qlkhachhang{id}',[UserAdminController::class,'destroy'])->name('admin-delete-qlkhachhang');
+    Route::get('qldanhmuctintuc',[CategoryAdminController::class,'qldanhmuctintuc'])->name('ql.danhmuc.tintuc');
+    Route::get('create-qldanhmuctintuc',[CategoryAdminController::class,'createqldanhmuctintuc'])->name('create.qldanhmuctintuc');
+    Route::post('create-qldanhmuctintuc',[CategoryAdminController::class,'createqldanhmuctintucpost'])->name('create.qldanhmuctintuc.post');
+    Route::get('edit-qldanhmuctintuc{id}',[CategoryAdminController::class,'editqldanhmuctintuc'])->name('edit.qldanhmuctintuc');
+    Route::post('edit-qldanhmuctintuc',[CategoryAdminController::class,'editqldanhmuctintucpost'])->name('edit.qldanhmuctintuc.post');
+    Route::get('delete-qldanhmuctintuc/{id}',[CategoryAdminController::class,'deleteqldanhmuctintuc'])->name('delete.qldanhmuctintuc');
+    //    route trang danh mục sản phẩm
+Route::get('qldanhmucsanpham',[CategoryAdminController::class,'qldanhmucsanpham'])->name('qlqldanhmucsanpham');
+Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqldanhmucsanpham'])->name('create.qldanhmucsanpham');
+    Route::post('create-qldanhmucsanpham',[CategoryAdminController::class,'createqldanhmucsanphampost'])->name('create.qldanhmucsanpham.post');
+    Route::get('edit-qldanhmucsanpham{id}',[CategoryAdminController::class,'editqldanhmucsanpham'])->name('edit.qldanhmucsanpham');
+    Route::post('edit-qldanhmucsanpham',[CategoryAdminController::class,'editqldanhmucsanphampost'])->name('edit.qldanhmucsanpham.post');
+    Route::get('delete-qldanhmucsanpham/{id}',[CategoryAdminController::class,'deleteqldanhmucsanpham'])->name('delete.qldanhmucsanpham');
+    Route::get('qltintuc',[NewsAdminController::class,'index'])->name('qltintuc');
+    Route::get('create-qltintuc',[NewsAdminController::class,'createqltintuc'])->name('create.qltintuc');
+    Route::post('create-qltintuc',[NewsAdminController::class,'createqltintucpost'])->name('create.qltintuc.post');
+    Route::get('edit-qltintuc{id}',[NewsAdminController::class,'editqltintuc'])->name('edit.qltintuc');
+    Route::post('edit-qltintuc',[NewsAdminController::class,'editqltintucpost'])->name('edit.qltintuc.post');
+    Route::get('delete-qltintuc/{id}',[NewsAdminController::class,'deleteqltintuc'])->name('delete.qltintuc');
 });
-Route::get('/get-customer-data/{id}', 'CustomerController@getCustomerData');
-

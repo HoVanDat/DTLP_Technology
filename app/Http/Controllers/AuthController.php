@@ -3,14 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\NguoiDung;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
 
 class AuthController extends Controller
-{
+{   
+
+    public function thongtin(Request $request){
+        // dd(session('userInfo'));
+ return view('thongtin');
+    }
+    public function thongtinpost(Request $request){
+        $ten = $request->ten;
+        session(['userInfo.ten' => $ten]);
+        $dia_chi = $request->dia_chi;
+        session(['userInfo.dia_chi' => $dia_chi]);
+        $so_dien_thoai = $request->so_dien_thoai;
+        session(['userInfo.so_dien_thoai' => $so_dien_thoai]);
+        $hinh = $request->hinh;
+        session(['userInfo.hinh' => $hinh]);
+            NguoiDung::where('id_nguoi_dung', session('userInfo.id_nguoi_dung'))
+            ->update([
+                'ten' => $ten,
+                'dia_chi' => $dia_chi,
+                'so_dien_thoai' => $so_dien_thoai,
+                'hinh' => $hinh,
+            ]);
+        return view('thongtin');
+    }
+
    public function login(){
     return view('dangnhap');
    }
@@ -25,7 +49,7 @@ class AuthController extends Controller
     if (Auth::attempt(['email' => $email, 'password' => $password])){
         $user = Auth()->user();
         $userInfo = [
-            'ho' => $user->ho,
+            'id_nguoi_dung' => $user->id_nguoi_dung,
             'ten' => $user->ten,
             'email' => $user->email,
             'dia_chi' => $user->dia_chi,

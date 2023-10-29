@@ -1,10 +1,12 @@
 @extends('admin/layout')
 @section('noidung')
 <head>
+
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script>
         function readURL(input, thumbimage) {
@@ -271,6 +273,7 @@ MODAL
                     <BR>
                 </div>
                 <div class="modal-footer">
+                <textarea id="content" name="content"></textarea>
                 </div>
             </div>
         </div>

@@ -134,97 +134,99 @@ $(document).ready(function () {
               </div>
 
             </div>
-            <form class="row">
-              <div class="form-group col-md-4">
-                <label class="control-label">ID nhân viên</label>
-                <input class="form-control" type="text">
-              </div>
+            <form class="row" action="#" method='POST'>
+               @csrf  
+            
               <div class="form-group col-md-4">
                 <label class="control-label">Họ và tên</label>
-                <input class="form-control" type="text" required>
+                <input name="hoten" class="form-control" type="text" required>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Địa chỉ email</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" name="email" type="email" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Mật khẩu</label>
+                <input class="form-control" name="password" type="password" required>
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Địa chỉ thường trú</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" name="dc_tt" type="text" >
               </div>
               <div class="form-group  col-md-4">
                 <label class="control-label">Số điện thoại</label>
-                <input class="form-control" type="number" required>
+                <input class="form-control" name="sdt" type="number" >
               </div>
               <div class="form-group col-md-4">
                 <label class="control-label">Ngày sinh</label>
-                <input class="form-control" type="date">
+                <input class="form-control" name="ngaysinh" type="date">
               </div>
               <div class="form-group  col-md-3">
                 <label class="control-label">Nơi sinh</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" name="noisinh" type="text" >
               </div>
               <div class="form-group col-md-3">
-                <label class="control-label">Số CMND</label>
-                <input class="form-control" type="number" required>
+                <label class="control-label">Số CCCD</label>
+                <input class="form-control" name="cccd" type="number" >
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Ngày cấp</label>
-                <input class="form-control" type="date" required>
+                <input class="form-control" name="ngaycap" type="date" >
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Nơi cấp</label>
-                <input class="form-control" type="text" required>
+                <input class="form-control" name="noicap" type="text" >
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giới tính</label>
-                <select class="form-control" id="exampleSelect2" required>
-                  <option>-- Chọn giới tính --</option>
-                  <option>Nam</option>
-                  <option>Nữ</option>
+                <select class="form-control" name="gioitinh" id="exampleSelect2" >
+                  <option value="">-- Chọn giới tính --</option>
+                  <option value="1">Nam</option>
+                  <option value="2">Nữ</option>
                 </select>
               </div>
 
               <div class="form-group  col-md-3">
                 <label for="exampleSelect1" class="control-label">Chức vụ</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn chức vụ --</option>
-                  <option>Bán hàng</option>
-                  <option>Tư vấn</option>
-                  <option>Dịch vụ</option>
-                  <option>Thu Ngân</option>
-                  <option>Quản kho</option>
-                  <option>Bảo trì</option>
-                  <option>Kiểm hàng</option>
-                  <option>Bảo vệ</option>
-                  <option>Tạp vụ</option>
+                <select class="form-control" name="chucvu" id="exampleSelect1">
+                  <option value="">-- Chọn chức vụ --</option>
+                  <option value="1">Bán hàng</option>
+                  <option value="2">Tư vấn</option>
+                  <option value="3">Dịch vụ</option>
+                  <option value="4">Thu Ngân</option>
+                  <option value="5">Quản kho</option>
+                  <option value="6">Bảo trì</option>
+                  <option value="7">Kiểm hàng</option>
+                  <option value="8">Bảo vệ</option>
+                  <option value="9">Tạp vụ</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Bằng cấp</label>
-                <select class="form-control" id="exampleSelect3">
-                  <option>-- Chọn bằng cấp --</option>
-                  <option>Tốt nghiệp Đại Học</option>
-                  <option>Tốt nghiệp Cao Đẳng</option>
-                  <option>Tốt nghiệp Phổ Thông</option>
-                  <option>Chưa tốt nghiệp</option>
-                  <option>Không bằng cấp</option>
+                <select class="form-control" name="bangcap" id="exampleSelect3">
+                  <option value="">-- Chọn bằng cấp --</option>
+                  <option value="1">Tốt nghiệp Đại Học</option>
+                  <option value="2">Tốt nghiệp Cao Đẳng</option>
+                  <option value="3">Tốt nghiệp Phổ Thông</option>
+                  <option value="4">Chưa tốt nghiệp</option>
+                  <option value="5">Không bằng cấp</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Tình trạng hôn nhân</label>
-                <select class="form-control" id="exampleSelect2">
-                  <option>-- Chọn tình trạng hôn nhân --</option>
-                  <option>Độc thân</option>
-                  <option>Đã kết hôn</option>
-                  <option>Góa</option>
-                  <option>Khác</option>
+                <select class="form-control" name="tthonnhan" id="exampleSelect2">
+                  <option value="">-- Chọn tình trạng hôn nhân --</option>
+                  <option value="1">Độc thân</option>
+                  <option value="2">Đã kết hôn</option>
+                  <option value="3">Góa</option>
+                  <option value="4">Khác</option>
                 </select>
               </div>
 
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh 3x4 nhân viên</label>
                 <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+                  <input type="file" id="uploadfile" name="hinh" onchange="readURL(this);" />
                 </div>
                 <div id="thumbbox">
                   <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -240,10 +242,11 @@ $(document).ready(function () {
 
 
           </div>
-          <button class="btn btn-save" type="button">Lưu lại</button>
+          <button class="btn btn-save" type="submit">Lưu lại</button>
           <a class="btn btn-cancel" href="/doc/table-data-table.html">Hủy bỏ</a>
+         <form>
         </div>
-
+      
   </main>
   
 
