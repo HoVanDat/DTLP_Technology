@@ -98,84 +98,61 @@ body {
     <div class="container">
         <div class="row">
             <div class="title-block-common mb-2">
-                <h1>Shop Page</h1>
+                <h1>Sản phẩm</h1>
+
             </div>
+            <h2 class="left">Có {{$count}} sản phẩm với từ khóa " {{$keyword}} "</h2>
+
             <div class="space2"></div>
             <div class="col-md-4">
                 <div class="col-md-12">
 
+
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Products</h2>
-                        <form class="filter-form">
-    <label>
-        <input type="checkbox" name="price" value="under-2m"> Dưới 2 triệu
-    </label>
-    <label>
-        <input type="checkbox" name="price" value="2m-to-5m"> Từ 2 - 5 triệu
-    </label>
-    <label>
-        <input type="checkbox" name="price" value="above-5m"> Trên 5 triệu
-    </label>
-</form>
+                        <h2 class="sidebar-title mt04">Sản phẩm mới nhất</h2>
+                        @foreach($product as $dt)
+                        <div class="thubmnail-recent">
+                            <img src="{{ asset('img/' . $dt->hinh) }}" class="recent-thumb" alt="">
+                            <h2><a href="">{{$dt->ten_san_pham}}</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins>{{ number_format($dt->gia_khuyen_mai, 0, ',', '.') }}</ins> <del>{{ number_format($dt->gia, 0, ',', '.') }}</del>
+                            </div>
+                        </div>
+                        @endforeach
 
-<div id="products-list">
-    <!-- Hiển thị danh sách sản phẩm ở đây -->
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('input[name="price"]').change(function() {
-            filterProducts();
-        });
-
-        function filterProducts() {
-            var selectedPrices = [];
-            $('input[name="price"]:checked').each(function() {
-                selectedPrices.push($(this).val());
-            });
-
-            $.ajax({
-                url: "{{ route('filterProducts') }}",
-                method: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    price: selectedPrices
-                },
-                success: function(data) {
-                    $('#products-list').html(data);
-                }
-            });
-        }
-    });
-</script>
-</form>
                     </div>
+
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Recent Posts</h2>
-
+                        <ul>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                            <li><a href="">Sony Smart TV - 2015</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <div class="col-md-8" id="col-md-8">
 
-                @foreach($dt as $d)
-                <div class="col-md-4 col-sm-6 h-380">
+                @foreach($listtin as $d)
+                <div class="col-md-4 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
-                            <img src="img/{{$d->hinh}}" alt="">
+                            <img src="{{ asset('img/' . $d->hinh) }}" alt="">
                         </div>
 
-                        <h2><a href="{{ url('/chitietsp',[$d->id_san_pham]) }}">{{$d->ten_san_pham}}</a></h2>
-<div class="product-bottom">
-                        <div class="product-carousel-price" style="margin-top:10px">
-                            <ins>{{number_format($d->gia, 2, ',', '.')}} VND</ins><br> <del>{{number_format($d->gia_khuyen_mai, 2, ',', '.')}} VND</del>
+                        <h2><a href="/chitiet">{{$d->ten_san_pham}}</a></h2>
+
+                        <div class="product-carousel-price">
+                            <ins>{{$d->gia}}</ins> <del>{{$d->gia_khuyen_mai}}</del>
                         </div>
                         <div class="product-option-shop">
                             <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70"
                                 rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
                         </div>
-                    </div></div>
+                    </div>
                 </div>
                 @endforeach
 
@@ -360,41 +337,44 @@ body {
                         </div>
                     </div> -->
             </div>
-</div>
 
 
         </div>
 
-
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-pagination text-center">
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <style>
-    .pagination{
-        background-color:red;
+    .left{
+        margin-left:35px;
     }
-    .filter-form {
-            background-color: #f2f2f2;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .filter-form label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .filter-form input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        .filter-form label, .filter-form input[type="checkbox"] {
-            cursor: pointer;
-        }
-
-        .filter-form input[type="checkbox"]:checked + label {
-            font-weight: bold;
-        }
+    .single-sidebar{
+        margin-top:70px;
+    }
 </style>
 
 @endsection

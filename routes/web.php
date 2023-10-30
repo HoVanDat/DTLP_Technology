@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +28,30 @@ Route::get('/shop',[SanphamController::class, 'dt']);
 Route::get('/tintuc',function(){
     return view('tintuc');
 });
+
+Route::get('/products/search', [SanphamController::class, 'search'])->name('products.search');
+
+route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('profile');
+
+
+Route::post('/filter-products', 'SanphamController@filter')->name('filterProducts');
+
 Route::get('/khuyenmai',function(){
     return view('khuyenmai');
 });
 Route::get('/lienhe',function(){
     return view('lienhe');
 });
+
+
+Route::get('/muahang/{id}',[OrderController::class, 'muahang'])->name('muahang');
+Route::post('/forget-password',[AuthController::class, 'postforgetpassword']);
+
+Route::get('/forget-password',[AuthController::class, 'forgetpassword'])->name('customer.forgetpass');
+
+
+Route::get('/get-password/{id}', [AuthController::class, 'getpassword'])->name('customer.getpa');
+
 Route::get('/dangnhap',[AuthController::class,'login'])->name('login');
 Route::post('/dangnhap',[AuthController::class,'loginPost'])->name('login.post');
 Route::get('/dangky',[AuthController::class,'register'])->name('register');
@@ -49,62 +70,81 @@ Route::get('/giohang',function(){
 Route::get('/thanhtoan',function(){
     return view('thanhtoan');
 });
+
+Route::post('/luu-don-hang', [OrderController::class, 'store'])->name('luu_don_hang');
+
+
+
+
+Route::get('/shoplaptop',[SanphamController::class, 'lt']);
+Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
+
+Route::get('/tintuc',[SanphamController::class, 'tintuc']);
+
+Route::get('/shopmaytinhbang',[SanphamController::class, 'mtb']);
+
+Route::post('/comments', [CommentController::class, 'store']);
+
+
+Route::get('/chitietsp/{id}',[SanphamController::class, 'chitietsp'])->name('chitietsp');
+
+
 // route admin
 Route::group(['prefix'=>'admin'],function(){
     // Route::get('custommer',function(){
     //     return view('admin/custommer');
-    // });  
+    // });
     Route::get('login',function(){
         return view('admin/login');
-    });  
+    });
     Route::get('forgot',function(){
         return view('admin/forgot');
-    });  
+    });
     Route::get('trangchu',function(){
         return view('admin/home');
     })->name('admin-trang-chu');
     Route::get('bangkeluong',function(){
         return view('admin/bangkeluong');
-    });  
+    });
     Route::get('bcdoanhthu',function(){
         return view('admin/bcdoanhthu');
-    });  
+    });
     Route::get('create-bangkeluong',function(){
         return view('admin/create-bangkeluong');
-    });  
+    });
     Route::get('create-qldonhang',function(){
         return view('admin/create-qldonhang');
-    });  
+    });
     Route::get('create-qlnhanvien',function(){
         return view('admin/create-qlnhanvien');
     });
     Route::get('create-qlkhachhang',function(){
         return view('admin/create-qlkhachhang');
-    }); 
+    });
     Route::get('create-qlnoibo',function(){
         return view('admin/create-qlnoibo');
-    });  
+    });
     Route::get('create-qlsanpham',function(){
         return view('admin/create-qlsanpham');
-    });  
+    });
     Route::get('lichcongtac',function(){
         return view('admin/lichcongtac');
-    });  
+    });
     Route::get('qldonhang',function(){
         return view('admin/qldonhang');
-    });  
+    });
     Route::get('qlnhanvien',function(){
         return view('admin/qlnhanvien');
     });
     Route::get('qlkhachhang',function(){
         return view('admin/qlkhachhang');
-    });  
+    });
     Route::get('qlnoibo',function(){
         return view('admin/qlnoibo');
-    });  
+    });
     Route::get('qlsanpham',function(){
         return view('admin/qlsanpham');
-    });  
+    });
     Route::get('posbanhang',function(){
         return view('admin/posbanhang');
     });

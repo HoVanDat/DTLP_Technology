@@ -20,8 +20,6 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
     <!-- Bootstrap -->
@@ -83,93 +81,20 @@
                 </div>
             </div>
         </div>
-    </div> <!-- End site branding area -->
-
-    <div class="mainmenu-area">
-        <div class="container">
-            <div class="row">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Trang chủ</a></li>
-                        <li><a href="/shoplaptop">Laptop</a></li>
-                        <li><a href="/shopdienthoai">Điện thoại</a></li>
-                        <li><a href="/shopmaytinhbang">Máy tính bảng</a></li>
-                        <li><a href="/tintuc">Tin tức</a></li>
-                        <li><a href="/khuyenmai">Khuyến mãi</a></li>
-                        <li><a href="/lienhe">Liên hệ</a></li>
-                    </ul>
-
-                    <ul id="right" class="nav navbar-nav navbar-right">
-
-                        @if (session('userInfo'))
-      <!-- Avatar -->
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle d-flex align-items-center"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img width= 22px;
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
-            class="rounded-circle"
-            height="22"
-            alt="Portrait of a Woman"
-            loading="lazy"
-          />
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li>
-            <a class="dropdown-item" href="{{ url('/profile', ['id' => session('userInfo.iduser')]) }}">Thông tin của tôi</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Cài đặt</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="/dangxuat">Đăng xuất</a>
-          </li>
+    </div>
+<div class="sidebar">
+        <h2>Sidebar</h2>
+        <ul>
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#">Danh mục 1</a></li>
+            <li><a href="#">Danh mục 2</a></li>
+            <li><a href="#">Danh mục 3</a></li>
         </ul>
-      </li>
-
-
-
-                        @else
-                        <li><a href="/dangnhap"><i class="fa-regular fa-user"></i> Đăng nhập </a></li>
-                        <li><a href="/dangky"><i class="fa-regular fa-user"></i> Đăng ký</a></li>
-                        @endif
-
-<script>
-    // Sử dụng jQuery để hiển thị dropdown-menu khi hover vào thẻ a
-$(document).ready(function() {
-    $('.nav-item.dropdown').hover(
-        function() {
-            $(this).find('.dropdown-menu').stop(true, true).slideDown(200);
-        },
-        function() {
-            $(this).find('.dropdown-menu').stop(true, true).slideUp(200);
-        }
-    );
-});
-
-</script>
-                </div>
-            </div>
-        </div>
-    </div> <!-- End mainmenu area -->
-
+    </div>
+    <div class="content">
     @yield('noidung')
 
-
+    </div>
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -270,3 +195,45 @@ $(document).ready(function() {
     /*Thêm các thuộc tính CSS tùy ý khác */
 }
 </style>
+
+    <style>
+        /* Thiết lập kiểu cho sidebar */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    padding-top: 20px;
+}
+
+/* Thiết lập kiểu cho các mục danh sách trong sidebar */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    color: #00ff00;
+}
+
+/* Thiết lập kiểu cho nội dung chính */
+.content {
+    margin-left: 270px;
+    padding: 20px;
+}
+    </style>
+
+
+

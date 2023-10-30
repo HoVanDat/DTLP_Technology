@@ -1,7 +1,7 @@
 @extends('layout')
 @section('noidung')
 <!-- css tin tức -->
-   
+
 <style>
     .blog-content .row {
     margin-right: -15px;
@@ -86,7 +86,7 @@ hr {
     color:white;
     padding: 6px 20px;
     font-weight: bolder;
-} 
+}
 .title-article a{
     font-size: 20px;
     font-weight: bold;
@@ -196,6 +196,7 @@ div.group_sidebar{
                                     <h3 class="sb-title">
                                         Bài viết mới nhất
                                     </h3>
+@foreach($dt1 as $tt)
                                     <div class="news-content row">
 
                                         <div class="col-md-5 col-xs-12 col-sm-12 img-article">
@@ -209,98 +210,27 @@ div.group_sidebar{
                                         <div class=" col-md-7 col-sm-12  col-xs-12">
                                             <!-- Begin: Nội dung bài viết -->
                                             <a
-                                                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                                                    VÀ BẢO DƯỠNG Laptop</a>
+                                                    href="/blogs/news/goi-y-su-dung-dong-ho">{{$tt->tieu_de}}</a>
                                             <div class="body-content">
                                                     <i class="fa fa-calendar-o"></i><time pubdate
                                                             datetime="2017-03-26"> 26/03/2017</time>
 
                                             </div>
-                                        
+
                                         </div>
 
 
                                     </div>
-                                    <div class="news-content row">
-
-                                        <div class="col-md-5 col-xs-12 col-sm-12 img-article">
-                                            <div class="art-img">
-                                                <img src="img/product-2.jpg"
-                                                    alt="">
-                                            </div>
-                                        </div>
+                                    @endforeach
 
 
-                                        <div class=" col-md-7 col-sm-12  col-xs-12">
-                                            <!-- Begin: Nội dung bài viết -->
-                                            <a
-                                                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                                                    VÀ BẢO DƯỠNG Laptop</a>
-                                            <div class="body-content">
-                                                    <i class="fa fa-calendar-o"></i><time pubdate
-                                                            datetime="2017-03-26"> 26/03/2017</time>
 
-                                            </div>
-                                        
-                                        </div>
-
-
-                                    </div>
-                                    <div class="news-content row">
-
-                                        <div class="col-md-5 col-xs-12 col-sm-12 img-article">
-                                            <div class="art-img">
-                                                <img src="img/product-2.jpg"
-                                                    alt="">
-                                            </div>
-                                        </div>
-
-
-                                        <div class=" col-md-7 col-sm-12  col-xs-12">
-                                            <!-- Begin: Nội dung bài viết -->
-                                            <a
-                                                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                                                    VÀ BẢO DƯỠNG Laptop</a>
-                                            <div class="body-content">
-                                                    <i class="fa fa-calendar-o"></i><time pubdate
-                                                            datetime="2017-03-26"> 26/03/2017</time>
-
-                                            </div>
-                                        
-                                        </div>
-
-
-                                    </div>
-                                    <div class="news-content row">
-
-                                        <div class="col-md-5 col-xs-12 col-sm-12 img-article">
-                                            <div class="art-img">
-                                                <img src="img/product-2.jpg"
-                                                    alt="">
-                                            </div>
-                                        </div>
-
-
-                                        <div class=" col-md-7 col-sm-12  col-xs-12">
-                                            <!-- Begin: Nội dung bài viết -->
-                                            <a
-                                                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                                                    VÀ BẢO DƯỠNG Laptop</a>
-                                            <div class="body-content">
-                                                    <i class="fa fa-calendar-o"></i><time pubdate
-                                                            datetime="2017-03-26"> 26/03/2017</time>
-
-                                            </div>
-                                        
-                                        </div>
-
-
-                                    </div>
 
 
 
 
                                 </div>
+
                                 <!--End: Bài viết mới nhất-->
 
 
@@ -313,7 +243,7 @@ div.group_sidebar{
                         <div class="col-md-9 col-sm-12 col-xs-12 " id="blog-container" data-sticky_column>
                             <div class="row">
                                 <div class="articles clearfix" id="layout-page">
-                                    
+
                                     <!-- Begin: Nội dung blog -->
                                     <div class="title-block-common mb-2">
                                         <h1>News</h1>
@@ -323,34 +253,23 @@ div.group_sidebar{
 
 
 <div class="nen">
+
+@foreach($dt as $dt)
     <div class="news-content row">
 
         <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
             <div class="art-img">
-                <img src="./img/download.jpg"
+                <img src="{{ asset('img/' . $dt->img) }}"
                     alt="">
             </div>
         </div>
 
 
         <div class=" col-md-7 col-sm-12  col-xs-12">
-            <!-- Begin: Nội dung bài viết -->
-           
             <h2 class="title-article"><a
-                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                    VÀ BẢO DƯỠNG Laptop</a></h2>
+                    href="/blogs/news/goi-y-su-dung-dong-ho">{{$dt->tieu_de}}</a></h2>
             <div class="body-content">
-                <ul class="info-more">
-                    <li><i class="fa fa-calendar-o"></i><time pubdate
-                            datetime="2017-03-26">26/03/2017</time></li>
-                    <li><i class="fa fa-file-text-o"></i><a href="#"> Tin
-                            tức </a> </li>
-
-                </ul>
-                <p>GỢI Ý SỬ DỤNG VÀ BẢO DƯỠNG Nên tránh: - Va chạm và tiếp
-                    xúc với chất ăn mòn, nhiệt độ cao hoặc từ trường mạnh. -
-                    Sử dụng bất kì dung môi, chất làm sạch, chất tẩy công
-                    nghiệp,...</p>
+                <p>{{$dt->tom_tat}}</p>
             </div>
             <!-- End: Nội dung bài viết -->
             <a class="readmore btn-rb clear-fix"
@@ -361,154 +280,7 @@ div.group_sidebar{
 
     </div>
     <hr class="line-blog" />
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="./img/download.jpg"
-                alt="">
-            </div>
-        </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <!-- Begin: Nội dung bài viết -->
-            <h2 class="title-article"><a
-                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                    VÀ BẢO DƯỠNG Laptop</a></h2>
-            <div class="body-content">
-                <ul class="info-more">
-                    <li><i class="fa fa-calendar-o"></i><time pubdate
-                            datetime="2017-03-26">26/03/2017</time></li>
-                    <li><i class="fa fa-file-text-o"></i><a href="#"> Tin
-                            tức </a> </li>
-
-                </ul>
-                <p>GỢI Ý SỬ DỤNG VÀ BẢO DƯỠNG Nên tránh: - Va chạm và tiếp
-                    xúc với chất ăn mòn, nhiệt độ cao hoặc từ trường mạnh. -
-                    Sử dụng bất kì dung môi, chất làm sạch, chất tẩy công
-                    nghiệp,...</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="/blogs/news/goi-y-su-dung-dong-ho" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="./img/download.jpg"
-                    alt="">
-            </div>
-        </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <!-- Begin: Nội dung bài viết -->
-            <h2 class="title-article"><a
-                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                    VÀ BẢO DƯỠNG Laptop</a></h2>
-            <div class="body-content">
-                <ul class="info-more">
-                    <li><i class="fa fa-calendar-o"></i><time pubdate
-                            datetime="2017-03-26">26/03/2017</time></li>
-                    <li><i class="fa fa-file-text-o"></i><a href="#"> Tin
-                            tức </a> </li>
-
-                </ul>
-                <p>GỢI Ý SỬ DỤNG VÀ BẢO DƯỠNG Nên tránh: - Va chạm và tiếp
-                    xúc với chất ăn mòn, nhiệt độ cao hoặc từ trường mạnh. -
-                    Sử dụng bất kì dung môi, chất làm sạch, chất tẩy công
-                    nghiệp,...</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="/blogs/news/goi-y-su-dung-dong-ho" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="./img/download.jpg"
-                    alt="">
-            </div>
-        </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <!-- Begin: Nội dung bài viết -->
-            <h2 class="title-article"><a
-                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                    VÀ BẢO DƯỠNG Laptop</a></h2>
-            <div class="body-content">
-                <ul class="info-more">
-                    <li><i class="fa fa-calendar-o"></i><time pubdate
-                            datetime="2017-03-26">26/03/2017</time></li>
-                    <li><i class="fa fa-file-text-o"></i><a href="#"> Tin
-                            tức </a> </li>
-
-                </ul>
-                <p>GỢI Ý SỬ DỤNG VÀ BẢO DƯỠNG Nên tránh: - Va chạm và tiếp
-                    xúc với chất ăn mòn, nhiệt độ cao hoặc từ trường mạnh. -
-                    Sử dụng bất kì dung môi, chất làm sạch, chất tẩy công
-                    nghiệp,...</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="/blogs/news/goi-y-su-dung-dong-ho" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="./img/download.jpg"
-                alt="">
-            </div>
-        </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <!-- Begin: Nội dung bài viết -->
-            <h2 class="title-article"><a
-                    href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
-                    VÀ BẢO DƯỠNG Laptop</a></h2>
-            <div class="body-content">
-                <ul class="info-more">
-                    <li><i class="fa fa-calendar-o"></i><time pubdate
-                            datetime="2017-03-26">26/03/2017</time></li>
-                    <li><i class="fa fa-file-text-o"></i><a href="#"> Tin
-                            tức </a> </li>
-
-                </ul>
-                <p>GỢI Ý SỬ DỤNG VÀ BẢO DƯỠNG Nên tránh: - Va chạm và tiếp
-                    xúc với chất ăn mòn, nhiệt độ cao hoặc từ trường mạnh. -
-                    Sử dụng bất kì dung môi, chất làm sạch, chất tẩy công
-                    nghiệp,...</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="/blogs/news/goi-y-su-dung-dong-ho" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
+    @endforeach
 
 
     <!-- End: Nội dung blog -->
@@ -516,7 +288,7 @@ div.group_sidebar{
 </div>
 </div>
 
-                                    
+
                                 <div class="col-md-12">
                                     <!-- Begin: Phân trang blog -->
                                     <div id="pagination" class="">
