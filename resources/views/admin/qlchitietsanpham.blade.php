@@ -14,7 +14,7 @@
                     <div class="tile-body">
                         <div class="row element-button">
                             <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" href="create-qlchitietsanpham" title="Thêm"><i class="fas fa-plus"></i>
+                                <a class="btn btn-add btn-sm" href="create-qlchitietsanpham{{$sanpham->id_san_pham}}" title="Thêm"><i class="fas fa-plus"></i>
                                 Tạo mới chi tiết sản phẩm</a>
                             </div>
                             <div class="col-sm-2">
@@ -48,7 +48,7 @@
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
                                     <th>Mã chi tiết sản phẩm</th>
-                                    <th>Tên chi tiết sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
                                     <th>Ảnh</th>
                                     <th>Số lượng</th>
                                     <th>Tình trạng</th>
@@ -59,24 +59,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach($chitietsanpham as $ctsp)
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>71309005</td>
-                                    <td>Bàn ăn gỗ Theresa</td>
-                                    <td><img src="https://danviet.mediacdn.vn/upload/2-2019/images/2019-04-10/Ru-bo-ngay-tho-hot-girl-Link-Ka-tao-bao-khoe-co-the-goi-cam-trong-MV-nhac-moi-lin1498190438_6958-1554886233-width804height804.jpg" alt="" width="40px" height="40px"></td>
-                                    <td>40</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>Đỏ</td>
-                                    <td>4GB</td>
-                                    <td>1.000.000</td>
-                                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                                        </button>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></button>
+                                    <td>{{$ctsp->id_chi_tiet}}</td>
+                                    <td>{{$sanpham->ten_san_pham}}</td>
+                                    <td><img src="{{$ctsp->hinh}}" alt="" width="40px" height="40px"></td>
+                                    <td>{{$ctsp->so_luong}}</td>
+                                    <td>@if ($ctsp->so_luong > 0)
+                                        <span class="badge bg-success">Còn hàng</span>
+                                        @else
+                                        <span class="badge bg-danger">Hết hàng</span>
+                                        @endif
+                                    </td>
+                                    <td>{{$ctsp->mau_sac}}</td>
+                                    <td>{{$ctsp->RAM}}</td>
+                                    <td>{{number_format($ctsp->gia)}} VNĐ</td>
+                                    <td>
+                                        <!-- <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i></button>  -->
+                                        <a href="#" class="btn btn-primary btn-sm trash"><i class="fas fa-trash-alt"></i></a>
+                                        <!-- <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></button> -->
+                                        <a href="edit-qlchitietsanpham?id_chi_tiet={{ $ctsp->id_chi_tiet }}&id_sanpham={{ $sanpham->id_san_pham }}" class="btn btn-primary btn-sm edit"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
-
-
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

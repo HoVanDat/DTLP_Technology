@@ -8,20 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class SanPham extends Model
 {
     use HasFactory;
+
+    protected $table = 'sanpham';
     protected $primaryKey = 'id_san_pham';
-    public $timestamps = false;
-    protected $table = "sanpham";
     protected $fillable = [
-        'id_nguoi_dung',
+        'id_san_pham',
+        'ten_san_pham',
         'gia',
-        'thoi_diem_mua_hang',
-        'ten_nguoi_nhan',
-        'so_dien_thoai',
-        'dia_chi',
-        'trang_thai',
-        'email',
-        'pttt',
+        'hinh',
+        'mo_ta',
+        'hot',
+        'so_luot_xem',
+        'an_hien',
+        'id_loai',
+        'gia_khuyen_mai',
         'created_at',
-        'ngay_dang',
+        'updated_at',
+
     ];
 }
