@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SanPham extends Model
 {
     use HasFactory;
+
     protected $table = 'sanpham';
     protected $primaryKey = 'id_san_pham';
     protected $fillable = [
@@ -23,5 +24,6 @@ class SanPham extends Model
         'gia_khuyen_mai',
         'created_at',
         'updated_at',
+
     ];
 }

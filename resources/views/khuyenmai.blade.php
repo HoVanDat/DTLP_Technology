@@ -2,7 +2,7 @@
 @section('noidung')
  <!-- css khuyen mai -->
  <style>
-  
+
   .mainmenu-area {
       background: none repeat scroll 0 0 #333;
       font-family: "Roboto Condensed",sans-serif;
@@ -12,7 +12,7 @@
   }
   .mainmenu-area ul.navbar-nav li a {
       color: white;
-      font-size: 14px;
+      font-size: 14px;php
       padding: 20px;
   }
   .product-big-title-area {
@@ -33,7 +33,7 @@
       margin-left: -15px;
       margin-top: 20px;
   }
-  
+
   hr {
       margin-top: 20px;
       margin-bottom: 20px;
@@ -81,12 +81,12 @@
       color:white;
       padding: 6px 20px;
       font-weight: bolder;
-  } 
+  }
   .title-article a{
       font-size: 20px;
       font-weight: bold;
   }
-  
+
   </style>
     <section id="content" class="clearfix container">
         <div class="row">
@@ -187,7 +187,7 @@
                                                             datetime="2017-03-26"> 26/03/2017</time>
 
                                             </div>
-                                        
+
                                         </div>
 
 
@@ -212,7 +212,7 @@
                                                             datetime="2017-03-26"> 26/03/2017</time>
 
                                             </div>
-                                        
+
                                         </div>
 
 
@@ -237,7 +237,7 @@
                                                             datetime="2017-03-26"> 26/03/2017</time>
 
                                             </div>
-                                        
+
                                         </div>
 
 
@@ -262,7 +262,7 @@
                                                             datetime="2017-03-26"> 26/03/2017</time>
 
                                             </div>
-                                        
+
                                         </div>
 
 
@@ -284,7 +284,7 @@
                         <div class="col-md-9 col-sm-12 col-xs-12 " id="blog-container" data-sticky_column>
                             <div class="row">
                                 <div class="articles clearfix" id="layout-page">
-                                    
+
                                     <!-- Begin: Nội dung blog -->
                                     <div class="title-block-common mb-2">
                                         <h1>Tin khuyến mãi</h1>
@@ -307,7 +307,7 @@
 
                                         <div class=" col-md-7 col-sm-12  col-xs-12">
                                             <!-- Begin: Nội dung bài viết -->
-                                           
+
                                             <h2 class="title-article"><a
                                                     href="/blogs/news/goi-y-su-dung-dong-ho">GỢI Ý SỬ DỤNG
                                                     VÀ BẢO DƯỠNG Laptop</a></h2>
@@ -694,5 +694,5 @@
 
 
 
-  
+
 @endsection

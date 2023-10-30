@@ -408,6 +408,9 @@ body {
                     alt="event"></a></div>
     </div>
 </div>
+<script>
+    @include('sweetalert::alert')
+</script>
 <div class="slider-area">
     <!-- Slider -->
     <div class="block-slider block-slider4">
