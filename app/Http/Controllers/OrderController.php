@@ -55,7 +55,7 @@ class OrderController extends Controller
             return redirect()->route('login');
         }else{
             if (session()->has('userInfo')) {
-                $iduser = session('userInfo.iduser');
+                $iduser = session('userInfo.id_nguoi_dung');
             } else {
                 $iduser = 0;
             }

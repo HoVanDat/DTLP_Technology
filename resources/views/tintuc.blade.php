@@ -259,7 +259,7 @@ div.group_sidebar{
 
         <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
             <div class="art-img">
-                <img src="{{ asset('img/' . $dt->img) }}"
+                <img src="{{ asset('img/' . $dt->hinh) }}"
                     alt="">
             </div>
         </div>

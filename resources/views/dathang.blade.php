@@ -3,7 +3,7 @@
 $thanhtien = $tin->gia * $soluong;
 
 if (session()->has('userInfo')) {
-    $iduser = session('userInfo.iduser');
+    $iduser = session('userInfo.id_nguoi_dung');
 } else {
     $iduser = 0;
 }

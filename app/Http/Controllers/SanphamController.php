@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\BinhLuan;
-use App\Models\SanPham;
+
 
 use Illuminate\Http\Request;
 
@@ -257,7 +257,7 @@ class SanphamController extends Controller
             $listtin = DB::table("sanpham")
             ->where('ten_san_pham','LIKE',"%$keyword%")
             ->get();
-            $products = SanPham::orderBy('ngay_dang', 'desc')->limit(4)->get();
+            $products = SanPham::orderBy('created_at', 'desc')->limit(4)->get();
             $count = count($listtin);
             return view('shopsearch', ['listtin'=>$listtin,'keyword'=>$keyword,'count'=>$count,'product'=>$products]);
 

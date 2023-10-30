@@ -8,9 +8,9 @@
     use App\Http\Controllers\NewsAdminController;
     use App\Http\Controllers\CategoryAdminController;
     use App\Http\Controllers\UserAdminController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProfileController;
+    use App\Http\Controllers\CommentController;
+    use App\Http\Controllers\OrderController;
+    use App\Http\Controllers\ProfileController;
 
 
  // tài khoản
