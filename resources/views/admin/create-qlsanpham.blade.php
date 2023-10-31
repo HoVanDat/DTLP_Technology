@@ -130,12 +130,8 @@
                     <div class="tile-body">
                         <div class="row element-button">
                             <div class="col-sm-2">
-                                <a  class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
+                                <a href="/admin/create-qldanhmucsanpham" class="btn btn-add btn-sm"><i
                     class="fas fa-folder-plus"></i> Thêm danh mục</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                             </div>
                         </div>
                         <form class="row" method="POST" action="{{route('admin-store-qlsanpham')}}" enctype="multipart/form-data">
@@ -193,7 +189,7 @@
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>
-                    <a class="btn btn-cancel" href="/admin/create-qlsanpham">Hủy bỏ</a>
+                    <a class="btn btn-cancel" href="/admin/qlsanpham">Hủy bỏ</a>
                 </div>
                 </form>
     </main>
@@ -306,7 +302,7 @@ MODAL
                     </div>
                     <BR>
                     <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="/admin/qlsanpham">Hủy bỏ</a>
                     <BR>
                 </div>
                 <div class="modal-footer">

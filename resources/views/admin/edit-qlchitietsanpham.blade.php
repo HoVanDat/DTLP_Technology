@@ -125,12 +125,6 @@
                 <div class="tile">
                     <h3 class="tile-title">Sửa mới chi tiết sản phẩm</h3>
                     <div class="tile-body">
-                        <div class="row element-button">
-                            <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
-                            </div>
-                        </div>
                         <form class="row" method="POST" action="{{route('admin-update-qlchitietsanpham')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group col-md-3">
@@ -289,7 +283,7 @@
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>
-                    <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+                    <a class="btn btn-cancel" href="qlchitietsanpham{{$chitietsanpham->id_san_pham}}">Hủy bỏ</a>
                 </div>
                 </form>
     </main>

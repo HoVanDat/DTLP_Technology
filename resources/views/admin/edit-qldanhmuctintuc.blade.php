@@ -131,13 +131,6 @@
 
                 <h3 class="tile-title">Sửa nhân viên</h3>
                 <div class="tile-body">
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
-                                        class="fas fa-folder-plus"></i> Tạo chức vụ mới</b></a>
-                        </div>
-
-                    </div>
                     <form class="row" action="{{route('edit.qldanhmuctintuc.post')}}" method='POST'>
                         @csrf
 
@@ -154,7 +147,7 @@
 
                 </div>
                 <button class="btn btn-save" type="submit" onclick="editSuccess()">Lưu lại</button>
-                </form> <a class="btn btn-cancel" href="{{route('qlnhanvien')}}">Hủy bỏ</a>
+                </form> <a class="btn btn-cancel" href="/admin/qldanhmuctintuc">Hủy bỏ</a>
             </div>
 </main>
 @endsection

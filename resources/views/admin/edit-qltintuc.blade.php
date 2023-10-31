@@ -147,7 +147,7 @@
                     <div class="row element-button">
                         <div class="col-sm-2">
                             <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
-                                        class="fas fa-folder-plus"></i> Tạo chức vụ mới</b></a>
+                                        class="fas fa-folder-plus"></i> Tạo danh mục</b></a>
                         </div>
 
                     </div>
@@ -197,7 +197,7 @@
                         </div>
                         <!-- end mô tả -->
                         <div class="form-group col-md-12">
-                            <label class="control-label">Ảnh 3x4 nhân viên</label>
+                            <label class="control-label">Ảnh</label>
                             <div id="myfileupload">
                                 <input type="file" id="uploadfile" name="hinh" onchange="readURL(this);" />
                             </div>
