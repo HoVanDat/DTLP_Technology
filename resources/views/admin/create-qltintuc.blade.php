@@ -142,7 +142,7 @@
                 <div class="tile-body">
                     <div class="row element-button">
                         <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
+                            <a href="/admin/create-qldanhmuctintuc" class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
                                         class="fas fa-folder-plus"></i> Tạo danh mục</b></a>
                         </div>
 
@@ -175,7 +175,7 @@
                         </div>
                         <!-- end mô tả -->
                         <div class="form-group col-md-12">
-                            <label class="control-label">Ảnh 3x4 nhân viên</label>
+                            <label class="control-label">Ảnh</label>
                             <div id="myfileupload">
                                 <input type="file" id="uploadfile" name="hinh" onchange="readURL(this);" />
                             </div>
@@ -190,7 +190,7 @@
                         </div>
                 </div>
                 <button class="btn btn-save" type="submit">Lưu lại</button>
-                <a class="btn btn-cancel" href="/doc/table-data-table.html">Hủy bỏ</a>
+                <a class="btn btn-cancel" href="/admin/qltintuc">Hủy bỏ</a>
                 <form>
             </div>
 

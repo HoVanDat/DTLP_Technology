@@ -127,12 +127,8 @@
                     <div class="tile-body">
                         <div class="row element-button">
                             <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
+                                <a href="/admin/create-qldanhmucsanpham" class="btn btn-add btn-sm"><i
                     class="fas fa-folder-plus"></i> Thêm danh mục</a>
-                            </div>
-                            <div class="col-sm-2">
-                                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                             </div>
                         </div>
                         <form class="row" action="{{route('admin-update-qlsanpham')}}" method="POST" enctype="multipart/form-data">
@@ -144,14 +140,6 @@
                             <div class="form-group col-md-3">
                                 <label class="control-label">Tên sản phẩm</label>
                                 <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" value="{{$sanpham->ten_san_pham}}" name="tensanpham">
-                            </div>
-                            <div class="form-group col-md-3 ">
-                                <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                                <select class="form-control" id="exampleSelect1">
-                                    <option>-- Chọn tình trạng --</option>
-                                    <option value="1" {{$sanpham->an_hien == 1 ? 'selected' : ''}}>Hiện</option>
-                                    <option value="0" {{$sanpham->an_hien == 0 ? 'selected' : ''}}>Ẩn</option>
-                                </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="exampleSelect1" class="control-label">Danh mục</label>
@@ -202,7 +190,7 @@
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>
-                    <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+                    <a class="btn btn-cancel" href="/admin/qlsanpham">Hủy bỏ</a>
                 </div>
                 </form>
     </main>
@@ -314,7 +302,7 @@ MODAL
                     </div>
                     <BR>
                     <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="/admin/qlsanpham">Hủy bỏ</a>
                     <BR>
                 </div>
                 <div class="modal-footer">

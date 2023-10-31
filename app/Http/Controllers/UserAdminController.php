@@ -21,16 +21,22 @@ class UserAdminController extends Controller
     public function update(Request $request){
         $id = $request->id;
         $user = User::where('id_nguoi_dung', $id)->first();
-        $user->ten = $request->name;
-        $user->email = $request->email;
+        if ($request->filled('name')) {
+            $user->ten = $request->name;
+        }
+        if ($request->filled('email')) {
+            $user->email = $request->email;
+        }
         if ($request->filled('password')) {
             $user->password = $request->password;
         }
-        $user->dia_chi = $request->address;
-        $user->so_dien_thoai = $request->phone;
-        if ($request->filled('birthdate')) {
-            $user->ngay_sinh = $request->birthdate;
+        if ($request->filled('address')) {
+            $user->dia_chi = $request->address;
         }
+        if ($request->filled('phone')) {
+            $user->so_dien_thoai = $request->phone;
+        }
+        $user->ngay_sinh = $request->birthdate;
         $user->gioi_tinh = $request->exampleSelect2;
         if($request->hasFile('ImageUpload')){
             $file = $request->file('ImageUpload');
@@ -48,8 +54,14 @@ class UserAdminController extends Controller
         $user->ten = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->dia_chi = $request->address;
-        $user->so_dien_thoai = $request->phone;
+        // $user->dia_chi = $request->address;
+        if ($request->filled('address')) {
+            $user->dia_chi = $request->address;
+        }
+        // $user->so_dien_thoai = $request->phone;
+        if ($request->filled('phone')) {
+            $user->so_dien_thoai = $request->phone;
+        }
         $user->ngay_sinh = $request->birthday;
         $user->gioi_tinh = $request->exampleSelect2;
         if($request->hasFile('ImageUpload')){

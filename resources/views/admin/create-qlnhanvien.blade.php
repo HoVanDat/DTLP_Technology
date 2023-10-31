@@ -127,13 +127,6 @@ $(document).ready(function () {
 
           <h3 class="tile-title">Tạo mới nhân viên</h3>
           <div class="tile-body">
-            <div class="row element-button">
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
-                      class="fas fa-folder-plus"></i> Tạo chức vụ mới</b></a>
-              </div>
-
-            </div>
             <form class="row" action="#" method='POST'>
                @csrf  
             
@@ -196,9 +189,6 @@ $(document).ready(function () {
                   <option value="4">Thu Ngân</option>
                   <option value="5">Quản kho</option>
                   <option value="6">Bảo trì</option>
-                  <option value="7">Kiểm hàng</option>
-                  <option value="8">Bảo vệ</option>
-                  <option value="9">Tạp vụ</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
@@ -243,7 +233,7 @@ $(document).ready(function () {
 
           </div>
           <button class="btn btn-save" type="submit">Lưu lại</button>
-          <a class="btn btn-cancel" href="/doc/table-data-table.html">Hủy bỏ</a>
+          <a class="btn btn-cancel" href="/admin/qlnhanvien">Hủy bỏ</a>
          <form>
         </div>
       

@@ -50,13 +50,13 @@
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>ID tin</th>
-                                <th>Người đăng</th>
+                                <th>ID</th>
+                                <th width="100">Người đăng</th>
                                 <th width="150">Tiêu đề</th>
                                 <th width="20">Hình ảnh</th>
                                 <th>Tóm tắt</th>
                                 <th width="300">Nội dung</th>
-                                <th width="100">Tính năng</th>
+                                <th width="70">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +68,9 @@
                                 <td>{{$ds->tieu_de}}</td>
                                 <td><img class="img-card-person" src="img-anhthe/{{$ds->hinh}}" alt=""></td>
                                 <td>{{$ds->tom_tat}}</td>
-                                <td>{{$ds->noi_dung}}</td>
+                                <!-- <td>{{$ds->noi_dung}}</td> xuất ra nội dung khoảng 50 chữ -->
+                                <td>{!!substr($ds->noi_dung,0,200)!!}...</td>
+                                
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"

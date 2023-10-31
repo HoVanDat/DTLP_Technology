@@ -52,9 +52,9 @@
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
                                 <th>ID nhân viên</th>
-                                <th width="150">Họ và tên</th>
+                                <th width="100">Họ và tên</th>
                                 <th width="20">Ảnh thẻ</th>
-                                <th width="300">Địa chỉ</th>
+                                <th width="200">Địa chỉ</th>
                                 <th>Ngày sinh</th>
                                 <th>Giới tính</th>
                                 <th>SĐT</th>
@@ -78,7 +78,15 @@
                                     @endif
                                 </td>
                                 <td>{{$ds->so_dien_thoai}}</td>
-                                <td>{{$ds->chuc_vu}}</td>
+                                <td>
+                                    @if($ds->id_chuc_vu == 1) Bán hàng
+                                    @elseif($ds->id_chuc_vu == 2) Tư vấn
+                                    @elseif($ds->id_chuc_vu == 3) Dịch vụ
+                                    @elseif($ds->id_chuc_vu == 4) Thu Ngân
+                                    @elseif($ds->id_chuc_vu == 5) Quản kho
+                                    @else Bảo trì
+                                    @endif    
+                                </td>
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"

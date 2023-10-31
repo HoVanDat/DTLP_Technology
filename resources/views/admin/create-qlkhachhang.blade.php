@@ -181,7 +181,7 @@ $(document).ready(function () {
             </div>
           </div>
           <button class="btn btn-save" type="submit">Lưu lại</button>
-          <a class="btn btn-cancel" href="#">Hủy bỏ</a>
+          <a class="btn btn-cancel" href="/admin/qlkhachhang">Hủy bỏ</a>
         </div>
         </form>
   </main>
