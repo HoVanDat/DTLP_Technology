@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\NguoiDung;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
+
 
 
 class AuthController extends Controller
@@ -116,4 +121,59 @@ function logout(){
 // \DB::table('password_resets')->where(["email"=>$request->email])->delete();
 // return redirect()->to(route("login"))->with("success","Dặt lại mật khẩu thành công");
 // }
+
+
+
+public function forgetPassword(){
+return view('forget-password');
+}
+
+public function forgetPasswordPost(Request $req) {
+    $this->validate(
+        $req,
+        [
+           'email' => 'required|exists:nguoidung',
+        ],
+        [
+           'email.required' => 'Bạn chưa nhập email',
+           'email.exists' => 'Email không tồn tại trong hệ thống',
+
+        ]
+     );
+
+     $nguoidung = NguoiDung::where('email', $req->email)->first();
+     $nguoidung->token = $req->token ?? Str::random(10);
+     $nguoidung->update(['token' => $nguoidung->token]);
+     Mail::send('emails.forget-password', compact('nguoidung'), function ($email) use ($nguoidung) {
+        $email->subject('DTLP - Lấy lại mật khẩu');
+        $email->to($nguoidung->email, $nguoidung->ten);
+     });
+     return redirect('dangnhap')->with('success', 'Vui lòng check email để thực hiện thay đổi mật khẩu');
+}
+
+public function resetPassword(NguoiDung $nguoidung, $token){
+    if($nguoidung->token == $token){
+       return view('change-password');
+    }
+    return abort(404);
+}
+
+public function resetPasswordPost(NguoiDung $nguoidung, Request $req){
+    $this->validate($req,[
+             'password'=>'required',
+             'confirmpassword'=>'required|same:password',
+      ],
+      [
+             'password.required'=>'Password chưa nhập',
+             'confirmpassword.required'=>'Nhập lại password không đúng',
+             'confirmpassword.same'=>'Không khớp',
+      ]);
+       
+     $nguoidung->password = bcrypt($req->password);
+     $nguoidung->update(['password'=>$nguoidung->password,'token'=>null]);
+     return redirect('dangnhap')->with('success','Đổi mật khẩu thành công.Bạn có thể đăng nhập với mật khẩu mới!');
+      
+}
+
+
 }
