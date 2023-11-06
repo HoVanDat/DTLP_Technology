@@ -103,7 +103,7 @@
                         <li><a href="/shop">Điện thoại</a></li>
                         <li><a href="/shop">Máy tính bảng</a></li>
                         <li><a href="/tintuc">Tin tức</a></li>
-                        <li><a href="/khuyenmai">Khuyến mãi</a></li>
+                        <li><a href="{{route('tinkhuyenmai')}}">Khuyến mãi</a></li>
                         <li><a href="/lienhe">Liên hệ</a></li>
                     </ul>
 

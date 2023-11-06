@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChiTietSanPhamController;
+use App\Http\Controllers\TinKhuyenMaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +27,8 @@ Route::get('/shop',[SanphamController::class, 'dt']);
 Route::get('/tintuc',function(){
     return view('tintuc');
 });
-Route::get('/khuyenmai',function(){
-    return view('khuyenmai');
-});
+Route::get('/khuyenmai',[TinKhuyenMaiController::class,'tinkhuyenmai'])->name('tinkhuyenmai');
+
 Route::get('/lienhe',function(){
     return view('lienhe');
 });
@@ -45,9 +46,9 @@ Route::get('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPa
 Route::post('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPasswordPost']);
 
 
-Route::get('/chitiet',function(){
-    return view('chitiet');
-});
+Route::get('/chi-tiet-san-pham/{id}',[ChiTietSanPhamController::class,'chitiet'])->name('chitietsanpham');
+
+
 Route::get('/giohang',function(){
     return view('giohang');
 });
