@@ -49,7 +49,12 @@ class AuthController extends Controller
     
         $email = $request->email;
         $password = $request->password;
-    
+        // nếu tài khoản có lock = 1 sẽ khóa ngay lập tức
+        $lock = \DB::table('nguoidung')->where('email', $email)->first();
+        if ($lock->lock == 1) {
+            Alert::error('Lỗi', 'Tài khoản đã bị khóa')->persistent("OK");
+            return redirect('/dangnhap');
+        }
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $user = Auth()->user();
             $userInfo = [

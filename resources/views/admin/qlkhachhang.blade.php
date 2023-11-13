@@ -78,7 +78,7 @@
                   <td>@if($user->gioi_tinh == 1) Nam @else Nữ @endif
                   </td>
                   <td>{{$user->so_dien_thoai}}</td>
-                  <td class="table-td-center">
+                  <td width="120" class="table-td-center">
                     <!-- <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                       onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
                     </button> -->
@@ -92,6 +92,15 @@
                         class="fas fa-trash-alt"></i></a>
                     <a class="btn btn-primary btn-sm edit" type="button" title="Sửa" href="edit-qlkhachhang{{$user->id_nguoi_dung}}"><i
                         class="fas fa-edit"></i></a>
+                        <!-- block -->
+                        @if($user->lock == 0)
+                    <a class="btn btn-danger btn-sm" type="button" title="Block" href="block-qlkhachhang{{$user->id_nguoi_dung}}"><i
+                        class="fas fa-ban"></i></a>
+                    <!-- unlock -->
+                    @else
+                    <a class="btn btn-success btn-sm" type="button" title="Unlock" href="unblock-qlkhachhang{{$user->id_nguoi_dung}}"><i
+                        class="fas fa-unlock"></i></a>
+                    @endif
                   </td>
                 </tr>
                 @endforeach
