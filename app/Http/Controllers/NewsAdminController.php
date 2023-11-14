@@ -23,7 +23,13 @@ class NewsAdminController extends Controller
        $tieu_de=$request['tieude'];
        $tom_tat=$request['tomtat'];
        $noi_dung=$request['noidung'];
-       $hinh=$request['hinh'];
+       if($request->hasFile('hinh')){
+        $file = $request->file('hinh');
+        $name = $file->getClientOriginalName();
+        $image = time()."_".$name;
+        $file->move(public_path().'/img/',$image);
+        $hinh = $image;
+    }
        $tennguoidang = session('userInfo')['ten'];
        TinTuc::create(['id_danh_muc_tin'=>$id_danh_muc_tin,'ten_nguoi_dang'=>$tennguoidang,'tieu_de'=>$tieu_de,'tom_tat'=>$tom_tat,'noi_dung'=>$noi_dung,'hinh'=>$hinh]);
       return redirect('admin/qltintuc');
@@ -39,7 +45,13 @@ class NewsAdminController extends Controller
     $tieu_de=$request['tieude'];
     $tom_tat=$request['tomtat'];
     $noi_dung=$request['noidung'];
-    $hinh=$request['hinh'];
+    if($request->hasFile('hinh')){
+        $file = $request->file('hinh');
+        $name = $file->getClientOriginalName();
+        $image = time()."_".$name;
+        $file->move(public_path().'/img/',$image);
+        $hinh = $image;
+    }
    TinTuc::where('id_tin',$id_tin)->update(['id_danh_muc_tin'=>$id_danh_muc_tin,'tieu_de'=>$tieu_de,'tom_tat'=>$tom_tat,'noi_dung'=>$noi_dung,'hinh'=>$hinh]);
    session()->flash('success', 'Sửa thành công');
    return redirect('admin/qltintuc');
