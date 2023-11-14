@@ -1,9 +1,16 @@
 @extends('admin/layout')
 @section('noidung')
+
+<head>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script>
+
+    </script>
+</head>
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách tin tức</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Quản lý banner</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -12,11 +19,13 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
+
                     <div class="row element-button">
                         <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" href="{{route('create.qltintuc')}}" title="Thêm"><i
+
+                            <a class="btn btn-add btn-sm" href="create-qlbanner" title="Thêm"><i
                                     class="fas fa-plus"></i>
-                                Tạo mới tin tức</a>
+                                Tạo mới banner</a>
                         </div>
                         <div class="col-sm-2">
                             <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
@@ -50,63 +59,34 @@
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>ID</th>
-                                <th width="150">Tiêu đề</th>
-                                <th width="100">Người đăng</th>
-
+                                <th>STT</th>
+                                <th width="150">Tên banner</th>
                                 <th width="20">Hình ảnh</th>
-                                <th>Tóm tắt</th>
-                                <th>Loại tin</th>
-                                <th width="300">Ngày đăng</th>
-                                <th width="70">Tính năng</th>
+                                <th width="250">Ngày tạo</th>
+                                <th width="100">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dstin as $ds)
+                            @if(isset($banner) && !empty($banner))
+                            @foreach($banner as $b)
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ds->id_tin}}</td>
-                                <td>{{$ds->tieu_de}}</td>
-                                <td>{{$ds->ten_nguoi_dang}}</td>
-
-                                <td><img class="img-card-person" src="img-anhthe/{{$ds->hinh}}" alt=""></td>
-                                <td>{{$ds->tom_tat}}</td>
-                                <td>
-                                    @if($ds->id_danh_muc_tin == 1)
-                                    Công nghệ
-                                    @elseif($ds->id_danh_muc_tin == 2)
-                                    Giải trí
-                                    @elseif($ds->id_danh_muc_tin == 3)
-                                    Giáo dục
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Du lịch
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Thể thao
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Khoa học
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Sáng tạo
-                                    @endif
-                                </td>
-                                <!-- <td>{{$ds->noi_dung}}</td> xuất ra nội dung khoảng 50 chữ -->
-                                <td>{{$ds->created_at}}</td>
-
+                                <td width="5"><input type="checkbox" name="check1" value="1"></td>
+                                <td width="5">{{ $loop->iteration }}</td>
+                                <td width="100">{{$b->ten}}</td>
+                                <td><img class="img-card-person" src="{{$b->hinh}}" alt=""></td>
+                                <td width="50">{{$b->created_at}}</td>
                                 <td class="table-td-center">
-
                                     <a class="btn btn-primary btn-sm trash"
-                                        onclick="showDeleteConfirmation('{{ $ds->id_tin }}', 'delete-qltintuc/{{ $ds->id_tin }}')"
+                                        onclick="showDeleteConfirmation('{{$b->id_banner}}', 'delete-qlbanner/{{$b->id_banner}}')"
                                         href="#" title="Xóa" type="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <a class="btn btn-primary btn-sm edit" href="edit-qltintuc{{$ds->id_tin}}"
-                                        title="Sửa" type="button"><i class="fas fa-edit"></i></a>
-
+                                    <a class="btn btn-primary btn-sm edit" type="button" title="Sửa"
+                                        href="edit-qlbanner{{$b->id_banner}}"><i class="fas fa-edit"></i></a>
                                 </td>
                             </tr>
-
-
                             @endforeach
-
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -118,13 +98,68 @@
 <!--
   MODAL
 -->
-<!--  -->
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+    data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group  col-md-12">
+                        <span class="thong-tin-thanh-toan">
+                            <h5>Chỉnh sửa thông tin banner cơ bản</h5>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">ID banner</label>
+                        <input class="form-control" type="text" required value="#CD2187" disabled id="customerID">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Họ và tên</label>
+                        <input class="form-control" type="text" required value="Võ Trường" name="" id="ten">
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <label class="control-label">Số điện thoại</label>
+                        <input class="form-control" type="number" required value="09267312388" name=""
+                            id="so_dien_thoai">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Địa chỉ email</label>
+                        <input class="form-control" type="text" required value="truong.vd2000@gmail.com" name=""
+                            id="email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Ngày sinh</label>
+                        <input class="form-control" type="date" value="15/03/2000" name="" id="ngay_sinh">
+                    </div>
+                    <div class="form-group  col-md-6">
+                        <label for="exampleSelect1" class="control-label">Giới tính</label>
+                        <select class="form-control" id="exampleSelect1">
+                            <option>Nam</option>
+                            <option>Nữ</option>
+                        </select>
+                    </div>
+                </div>
+                <BR>
+                <a href="edit-qlkhachhang" style="    float: right;
+        font-weight: 600;
+        color: #ea0000;">Chỉnh sửa nâng cao</a>
+                <BR>
+                <BR>
+                <button class="btn btn-save" type="button">Lưu lại</button>
+                <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                <BR>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
 <!--
   MODAL
 -->
-<script>
 
-</script>
 <!-- Essential javascripts for application to work-->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -140,12 +175,17 @@
 <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
-
+$('#sampleTable').DataTable();
 </script>
+<!-- Hiển thị thông báo và bấm ok mới đc xóa -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
-$('#sampleTable').DataTable();
 <script>
+function deleteRow(r) {
+    var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("myTable").deleteRow(i);
+}
+
 function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({
         title: 'Xác nhận xóa',
@@ -162,28 +202,6 @@ function showDeleteConfirmation(userId, deleteUrl) {
         }
     });
 }
-
-function deleteRow(r) {
-    var i = r.parentNode.parentNode.rowIndex;
-    document.getElementById("myTable").deleteRow(i);
-}
-jQuery(function() {
-    // jQuery(".trash").click(function() {
-    //     swal({
-    //             title: "Cảnh báo",
-
-    //             text: "Bạn có chắc chắn là muốn xóa tin tức này?",
-    //             buttons: ["Hủy bỏ", "Đồng ý"],
-    //         })
-    //         .then((willDelete) => {
-    //             if (willDelete) {
-    //                 swal("Đã xóa thành công.!", {
-
-    //                 });
-    //             }
-    //         });
-    // });
-});
 oTable = $('#sampleTable').dataTable();
 $('#all').click(function(e) {
     $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
@@ -277,5 +295,31 @@ $("#show-emp").on("click", function() {
         keyboard: false
     })
 });
+// Đoạn mã JavaScript/jQuery
+$('.edit').on('click', function() {
+    var userId = $(this).data('id');
+    loadDataFromDatabase(userId);
+});
+
+function loadDataFromDatabase(userId) {
+    // Giả sử có một đoạn mã AJAX để lấy dữ liệu từ cơ sở dữ liệu
+    $.ajax({
+        url: '/get-customer-data/' + userId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            // Điền dữ liệu vào các trường trong modal
+            $('#customerID').val(data.id);
+            $('#ten').val(data.ten);
+            $('#so_dien_thoai').val(data.so_dien_thoai);
+            $('#email').val(data.email);
+            $('#ngay_sinh').val(data.ngay_sinh);
+            $('#gioi_tinh').val(data.gioi_tinh);
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+}
 </script>
 @endsection

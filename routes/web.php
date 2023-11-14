@@ -11,6 +11,9 @@
     use App\Http\Controllers\CommentController;
     use App\Http\Controllers\OrderController;
     use App\Http\Controllers\ProfileController;
+    use App\Http\Controllers\ContactAdminController;
+    use App\Http\Controllers\BannerAdminController;
+  
 
 
  // tài khoản
@@ -95,7 +98,7 @@ Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
 Route::get('/tintuc',[SanphamController::class, 'tintuc']);
 
 Route::get('/shopmaytinhbang',[SanphamController::class, 'mtb']);
-
+// bình luận
 Route::post('/comments', [CommentController::class, 'store']);
 
 
@@ -170,7 +173,9 @@ Route::group(['prefix'=>'admin'],function(){
     Route::post('create-qlchitietsanpham',[SanphamController::class,'storechitietsanpham'])->name('admin-store-qlchitietsanpham');
     Route::get('edit-qlchitietsanpham',[SanphamController::class,'editchitietsanpham'])->name('admin-edit-qlchitietsanpham');
     Route::post('edit-qlchitietsanpham',[SanphamController::class,'updatechitietsanpham'])->name('admin-update-qlchitietsanpham');
+    Route::get('delete-qlchitietsanpham',[SanphamController::class,'deletechitietsanpham'])->name('delete-chitietsanpham');
     Route::get('delete-qlkhachhang{id}',[UserAdminController::class,'destroy'])->name('admin-delete-qlkhachhang');
+     //    route trang danh mục tin tức
     Route::get('qldanhmuctintuc',[CategoryAdminController::class,'qldanhmuctintuc'])->name('ql.danhmuc.tintuc');
     Route::get('create-qldanhmuctintuc',[CategoryAdminController::class,'createqldanhmuctintuc'])->name('create.qldanhmuctintuc');
     Route::post('create-qldanhmuctintuc',[CategoryAdminController::class,'createqldanhmuctintucpost'])->name('create.qldanhmuctintuc.post');
@@ -184,11 +189,26 @@ Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqlda
     Route::get('edit-qldanhmucsanpham{id}',[CategoryAdminController::class,'editqldanhmucsanpham'])->name('edit.qldanhmucsanpham');
     Route::post('edit-qldanhmucsanpham',[CategoryAdminController::class,'editqldanhmucsanphampost'])->name('edit.qldanhmucsanpham.post');
     Route::get('delete-qldanhmucsanpham/{id}',[CategoryAdminController::class,'deleteqldanhmucsanpham'])->name('delete.qldanhmucsanpham');
+      //    route trang tin tức
     Route::get('qltintuc',[NewsAdminController::class,'index'])->name('qltintuc');
     Route::get('create-qltintuc',[NewsAdminController::class,'createqltintuc'])->name('create.qltintuc');
     Route::post('create-qltintuc',[NewsAdminController::class,'createqltintucpost'])->name('create.qltintuc.post');
     Route::get('edit-qltintuc{id}',[NewsAdminController::class,'editqltintuc'])->name('edit.qltintuc');
     Route::post('edit-qltintuc',[NewsAdminController::class,'editqltintucpost'])->name('edit.qltintuc.post');
     Route::get('delete-qltintuc/{id}',[NewsAdminController::class,'deleteqltintuc'])->name('delete.qltintuc');
-
+    // route quản lý bình luận
+    Route::get('qlbinhluan',[CommentController::class,'index']);
+    Route::get('edit-qlbinhluan{id}',[CommentController::class,'editqlbinhluan'])->name('edit.qlbinhluan');
+    Route::post('edit-qlbinhluan',[CommentController::class,'editqlbinhluanpost'])->name('edit.qlbinhluan.post');
+    Route::get('delete-qlbinhluan/{id}',[CommentController::class,'deleteqlbinhluan'])->name('delete.qlbinhluan');
+    //Hòm thư góp ý
+    Route::get('homthugopy',[ContactAdminController::class,'homthugopy'])->name('hom.thu.gop.y');
+    Route::get('delete-homthugopy/{id}',[ContactAdminController::class,'deletehomthugopy'])->name('delete.hom.thu.gop.y');
+    // Quản lý banner
+    Route::get('qlbanner',[BannerAdminController::class,'index'])->name('qlbanner');
+    Route::get('create-qlbanner',[BannerAdminController::class,'createqlbanner'])->name('create.qlbanner');
+    Route::post('create-qlbanner',[BannerAdminController::class,'createqlbannerpost'])->name('create.qlbanner.post');
+    Route::get('edit-qlbanner{id}',[BannerAdminController::class,'editqlbanner'])->name('edit.qlbanner');
+    Route::post('edit-qlbanner',[BannerAdminController::class,'editqlbannerpost'])->name('edit.qlbanner.post');
+    Route::get('delete-qlbanner/{id}',[BannerAdminController::class,'deleteqlbanner'])->name('delete.qltintuc');
 });

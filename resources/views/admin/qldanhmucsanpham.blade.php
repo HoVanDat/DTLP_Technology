@@ -117,8 +117,8 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
-$('#sampleTable').DataTable();
-<script>
+
+<script>$('#sampleTable').DataTable();
 function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({
         title: 'Xác nhận xóa',
@@ -140,23 +140,7 @@ function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("myTable").deleteRow(i);
 }
-jQuery(function() {
-    // jQuery(".trash").click(function() {
-    //     swal({
-    //             title: "Cảnh báo",
 
-    //             text: "Bạn có chắc chắn là muốn xóa danh mục sản phẩm này?",
-    //             buttons: ["Hủy bỏ", "Đồng ý"],
-    //         })
-    //         .then((willDelete) => {
-    //             if (willDelete) {
-    //                 swal("Đã xóa thành công.!", {
-
-    //                 });
-    //             }
-    //         });
-    // });
-});
 oTable = $('#sampleTable').dataTable();
 $('#all').click(function(e) {
     $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));

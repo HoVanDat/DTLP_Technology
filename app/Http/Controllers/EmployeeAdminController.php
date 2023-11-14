@@ -31,11 +31,21 @@ class EmployeeAdminController extends Controller
         $chuc_vu=$request['chucvu'];
         $bang_cap=$request['bangcap'];
         $tinh_trang_hon_nhan=$request['tthonnhan'];
-        $hinh=$request['hinh'];
-        NguoiDung::create(['ten'=>$ten,'email'=>$email,'password'=>$password,'dia_chi'=>$dia_chi,'so_dien_thoai'=>$so_dien_thoai,
-        'ngay_sinh'=>$ngay_sinh,'noi_sinh'=>$noi_sinh,'CCCD'=>$CCCD,'ngay_cap'=>$ngay_cap,'noi_cap'=>$noi_cap,'gioi_tinh'=>$gioi_tinh,'chuc_vu'=>$chuc_vu,'bang_cap'=>$bang_cap,
-        'tinh_trang_hon_nhan'=>$tinh_trang_hon_nhan,'hinh'=>$hinh]);
-       return redirect('admin/qlnhanvien');
+        $hinh=$request['ImageUpload'];
+        if($request->hasFile('ImageUpload')){
+            // $file = $request->file('ImageUpload');
+            // $name = $file->getClientOriginalName();
+            // $image = time()."_".$name;
+            // $file->move(public_path().'/img/',$image);
+            // $hinh= '/img/'.$image;
+            echo $hinh;
+        }
+
+        echo 'sai';
+    //     NguoiDung::create(['ten'=>$ten,'email'=>$email,'password'=>$password,'dia_chi'=>$dia_chi,'so_dien_thoai'=>$so_dien_thoai,
+    //     'ngay_sinh'=>$ngay_sinh,'noi_sinh'=>$noi_sinh,'CCCD'=>$CCCD,'ngay_cap'=>$ngay_cap,'noi_cap'=>$noi_cap,'gioi_tinh'=>$gioi_tinh,'chuc_vu'=>$chuc_vu,'bang_cap'=>$bang_cap,
+    //     'tinh_trang_hon_nhan'=>$tinh_trang_hon_nhan,'hinh'=>$hinh]);
+    //    return redirect('admin/qlnhanvien');
     }
     public function editqlnhanvien(string $id){
         

@@ -1,13 +1,10 @@
+@extends('layout')
+@section('noidung')
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
- @extends('layout')
- @section('noidung')
- <style>
-    .mainmenu-area {
+<style>
+.mainmenu-area {
     background: none repeat scroll 0 0 #333;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     text-transform: uppercase;
     width: 100%;
     z-index: 999;
@@ -22,15 +19,19 @@
 .product-big-title-area {
     background: url(img/crossword.png) repeat scroll 0 0 #f17024;
 }
-.logo h1 a img{
+
+.logo h1 a img {
     width: 30%;
 }
-.header-area{
+
+.header-area {
     background-color: #f17024;
 }
+
 .header-area a {
     color: white;
 }
+
 /* end */
 .product-name {
     text-transform: uppercase;
@@ -44,303 +45,445 @@
     position: relative;
     margin-right: 20px;
 }
-input[type="submit"], button[type=submit] {
+
+input[type="submit"],
+button[type=submit] {
     background: none repeat scroll 0 0 #f17024;
     border: medium none;
     color: #fff;
     padding: 11px 20px;
     text-transform: uppercase;
 }
-.product-main-img img.hinh2{
+
+.product-main-img img.hinh2 {
     width: 400px;
 }
-.container .row{
-    display:flex;
+
+.container .row {
+    display: flex;
     width: 100%;
 }
-.container .row .col-8{
-    background-color:white;
+
+.container .row .col-8 {
+    background-color: white;
     padding: 30px;
     width: 70%;
-    margin-right:20px;
+    margin-right: 20px;
 
 }
-.container .row .col-4{
+
+.container .row .col-4 {
     width: 30%;
-    background-color:white;
+    background-color: white;
     padding: 30px;
 }
-.col-8 span{
-    font-weight:bolder;
-    font-size:20px;
+
+.col-8 span {
+    font-weight: bolder;
+    font-size: 20px;
 }
-.col-8 p{
-    font-size:17px;
+
+.col-8 p {
+    font-size: 17px;
 }
-.col-4 h4{
-    font-weight:bolder;
+
+.col-4 h4 {
+    font-weight: bolder;
 }
-.col-4 span{
-    font-weight:bolder;
+
+.col-4 span {
+    font-weight: bolder;
 }
-.bonho .tieude{
+
+.bonho .tieude {
     width: 100%;
-    background-color:#f17024;
-    padding:10px 0;
+    background-color: #f17024;
+    padding: 10px 0;
 }
-.bonho .tieude h4{
-    color:white;
-    text-align:center;
-    font-size:20px;
-    margin-top:10px;
+
+.bonho .tieude h4 {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
 }
-table tr td{
-    padding:10px 0;
+
+table tr td {
+    padding: 10px 0;
 
 }
-table tr td:first-child{
-    padding:10px 0;
-    font-weight:bolder;
+
+table tr td:first-child {
+    padding: 10px 0;
+    font-weight: bolder;
 }
+
 .grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  background-color: white;
-  width: 100%;
-  padding:10px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
 }
 
 .grid-item {
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  width: 30%;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    width: 30%;
 
-  font-size: 30px;
-  text-align: center;
+    font-size: 30px;
+    text-align: center;
 }
-.grid-item input{
+
+.grid-item input {
     width: 100%;
 }
-.grid-container .item1{
+
+.grid-container .item1 {
     width: 100%;
 
 }
-.grid-container .item1 input{
+
+.grid-container .item1 input {
     width: 80%;
 
 }
-.grid-container .item2{
+
+.grid-container .item2 {
     width: 100%;
 
 }
-.grid-container .item2 input{
+
+.grid-container .item2 input {
     width: 80%;
 
 }
-.grid-container .item3{
+
+.grid-container .item3 {
     width: 100%;
 
 }
-.grid-container .item3 input{
+
+.grid-container .item3 input {
     width: 80%;
 
 }
-#review{
+
+#review {
     width: 100%;
 }
+
+.bl img {
+    width: 70px;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+
+.bl {
+    display: flex;
+}
+
+.bl h5 {
+    font-weight: bolder;
+}
+
+.product-inner-price .gia {
+    font-size: 25px;
+}
+
+h5.mausac {
+    color: #f17024;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.but button {
+    width: 70px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+}
+
+/* bình luận */
+.star {
+    cursor: pointer;
+}
+
+.star:hover,
+.star.active {
+    color: gold;
+}
+.notification {
+      display: none;
+      padding: 10px;
+      background: #4CAF50;
+      color: #ffffff;
+      border-radius: 4px;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .notification.show {
+      display: block;
+    }
 </style>
-    <div class="single-product-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
 
 
-                <div class="col-md-12">
-                    <div class="product-content-right">
-                        <div class="product-breadcroumb">
-                            <a href="">Home</a>
-                            <a href="">Category Name</a>
-                            <a href="">{{$tin->ten_san_pham}}</a>
-                        </div>
+            <div class="col-md-12">
+                <div class="product-content-right">
+                    <div class="product-breadcroumb">
+                        <a href="">Home</a>
+                        <a href="">Category Name</a>
+                        <a href="">{{$tin->ten_san_pham}}</a>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="product-images">
-                                    <div class="product-main-img">
-                                        <img class="hinh2" src="{{ asset('img/' . $tin->hinh) }}" alt="">
-                                    </div>
-
-                                    <div class="product-gallery">
-                                        <img src="img/product-thumb-1.jpg" alt="">
-                                        <img src="img/product-thumb-2.jpg" alt="">
-                                        <img src="img/product-thumb-3.jpg" alt="">
-                                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="product-images">
+                                <div class="product-main-img">
+                                    <img class="hinh2" src="{{ asset('img/' . $tin->hinh) }}" alt="">
                                 </div>
-                            </div>
 
-                            <div class="col-sm-6">
-                                <div class="product-inner">
-                                    <h2 class="product-name">{{$tin->ten_san_pham}}</h2>
-                                    <div class="product-inner-price">
-                                    <ins class="gia">{{ number_format($tin->gia_khuyen_mai, 0, ',', '.') }} đ</ins> <del class="gia1">{{ number_format($tin->gia, 0, ',', '.') }} đ</del>
-                                    </div>
-                                    <h5 class="mausac">Màu sắc:</h5>
-                                    @foreach($tin1 as $t)
-                                    <div class="but">
-                                        <button>{{$t->mau_sac}}</button>
-                                    </div>
-                                    @endforeach
-                                    <form action="{{ url('/muahang', [$tin->id_san_pham]) }}" class="cart">
-    @csrf
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <div class="quantity">
-        <input type="number" id="soluong" size="4" class="input-text qty text" title="Qty" value="1" name="soluong" min="1" step="1">
-    </div>
-    <input type="hidden" id="tensp" value="{{$tin->ten_san_pham}}">
-    <button id="add-to-cart-button" class="add_to_cart_button" type="submit">Thêm vào giỏ hàng</button>
-    <button class="add_to_cart_button" type="submit">Mua ngay</button>
-</form>
-
-
-                                    </div>
-
+                                <div class="product-gallery">
+                                    <img src="img/product-thumb-1.jpg" alt="">
+                                    <img src="img/product-thumb-2.jpg" alt="">
+                                    <img src="img/product-thumb-3.jpg" alt="">
                                 </div>
                             </div>
                         </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-8">
-            <span>{{$tin->ten_san_pham}}</span><p>{{$tin->mo_ta}}</p>
-        </div>
-        <div class="col-4">
-            <h4>Thông số kỹ thuật của {{$tin->ten_san_pham}}</h4>
-            <img class="" src="{{ asset('img/' . $tin->hinh) }}" alt="">
-            <p><span>Số hiệu CPU :</span>{{$tin2->CPU}}</p>
-            <p><span>RAM :</span>{{$tin2->RAM}}</p>
-            <p><span>Độ phân giải :</span>{{$tin2->man_hinh}}</p>
-            <p><span>Hệ điều hành:</span>{{$tin2->he_dieu_hanh}}</p>
-            <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Xem chi tiết</button>
-            <div id="id01" class="w3-modal">
-    <div class="w3-modal-content">
-      <div class="w3-container">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-        <div class="bonho">
-            <div class="tieude">
-                <h4>Bộ xử lý</h4>
+                        <div class="col-sm-6">
+                            <div class="product-inner">
+                                <h2 class="product-name">{{$tin->ten_san_pham}}</h2>
+                                <div class="product-inner-price">
+                                    <ins class="gia">{{ number_format($tin->gia_khuyen_mai, 0, ',', '.') }} đ</ins> <del
+                                        class="gia1">{{ number_format($tin->gia, 0, ',', '.') }} đ</del>
+                                </div>
+                                <h5 class="mausac">Màu sắc:</h5>
+                                @foreach($tin1 as $t)
+                                <div class="but">
+                                    <button>{{$t->mau_sac}}</button>
+                                </div>
+                                @endforeach
+                                <form action="{{ url('/muahang', [$tin->id_san_pham]) }}" class="cart">
+                                    @csrf
+                                    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+                                    <div class="quantity">
+                                        <input type="number" id="soluong" size="4" class="input-text qty text"
+                                            title="Qty" value="1" name="soluong" min="1" step="1">
+                                    </div>
+                                    <input type="hidden" id="tensp" value="{{$tin->ten_san_pham}}">
+                                    <button id="add-to-cart-button" class="add_to_cart_button" type="submit">Thêm vào
+                                        giỏ hàng</button>
+                                    <button class="add_to_cart_button" type="submit">Mua ngay</button>
+                                </form>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-8">
+                            <span>{{$tin->ten_san_pham}}</span>
+                            <p>{{$tin->mo_ta}}</p>
+                        </div>
+                        <div class="col-4">
+                            <h4>Thông số kỹ thuật của {{$tin->ten_san_pham}}</h4>
+                            <img class="" src="{{ asset('img/' . $tin->hinh) }}" alt="">
+                            <p><span>Số hiệu CPU :</span>{{$tin2->CPU}}</p>
+                            <p><span>RAM :</span>{{$tin2->RAM}}</p>
+                            <p><span>Độ phân giải :</span>{{$tin2->man_hinh}}</p>
+                            <p><span>Hệ điều hành:</span>{{$tin2->he_dieu_hanh}}</p>
+                            <button onclick="document.getElementById('id01').style.display='block'"
+                                class="w3-button w3-black">Xem chi tiết</button>
+                            <div id="id01" class="w3-modal">
+                                <div class="w3-modal-content">
+                                    <div class="w3-container">
+                                        <span onclick="document.getElementById('id01').style.display='none'"
+                                            class="w3-button w3-display-topright">&times;</span>
+                                        <div class="bonho">
+                                            <div class="tieude">
+                                                <h4>Bộ xử lý</h4>
+                                            </div>
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td>RAM</td>
+                                                    <td>{{$tin2->RAM}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Tốc độ Bus</td>
+                                                    <td>{{$tin2->toc_do_bus}}
+                                                    </td>
+                                                <tr>
+                                                    <td>Khả năng nâng cấp</td>
+                                                    <td>{{$tin2->tinh_nang}}
+                                                    </td>
+                                                <tr>
+                                                    <td>Rom</td>
+                                                    <td>{{$tin2->ROM}}
+                                                    </td>
+
+                                                <tr>
+                                                    <td>CPU</td>
+                                                    <td>{{$tin2->CPU}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="bonho">
+                                            <div class="tieude">
+                                                <h4>Màn hình và Âm thanh</h4>
+                                            </div>
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td>Kích thước màn hình</td>
+                                                    <td>{{$tin2->kich_thuoc}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Độ phân giải</td>
+                                                    <td>{{$tin2->man_hinh}}
+                                                    </td>
+                                                <tr>
+                                                    <td>Tần số quét</td>
+                                                    <td>{{$tin2->tan_so_quet}}
+                                                    </td>
+                                                <tr>
+                                                    <td>Công nghệ âm thanh</td>
+                                                    <td>{{$tin2->loai_tai_nghe}}
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="bonho">
+                                            <div class="tieude">
+                                                <h4>Thông tin khác</h4>
+                                            </div>
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td>Trọng lượng</td>
+                                                    <td>{{$tin2->can_nang}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dung lượng pin</td>
+                                                    <td>{{$tin2->dung_luong_pin}}
+                                                    </td>
+                                                <tr>
+                                                    <td>Hệ điều hành</td>
+                                                    <td>{{$tin2->he_dieu_hanh}}
+                                                    </td>
+
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <p>Some text. Some text. Some text.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BÌNH LUẬN -->
+                <?php
+// Kiểm tra xem phiên đăng nhập đã tồn tại hay chưa
+if (session()->has('userInfo')) {
+    // Lấy thông tin người dùng từ phiên đăng nhập
+    $userInfo = session('userInfo');
+?>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                        @if (session('success'))
+  <div class="notification" id="successNotification">{{ session('success') }}</div>
+@endif
+                            
+                            
+                            <h3>BÌNH LUẬN</h3>
+                            <!-- HTML -->
+                            <div class="user-profile">
+                                <img src="path/to/user-avatar.png" alt="User Avatar" class="avatar">
+                                <span class="username">{{session('userInfo.ten')}}</span>
+                            </div>
+
+                            <!-- CSS -->
+                            <style>
+                            .user-profile {
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .avatar {
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 50%;
+                                margin-right: 10px;
+                            }
+                            </style>
+
+                            <form action="{{ url('/comments') }}" id="comment-form" method="POST">
+                                @csrf
+                                <div class="rating">
+                                    <input type="hidden" name="rating" id="ratingInput">
+                                    <span class="star" data-rating="1"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-rating="2"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-rating="3"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-rating="4"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-rating="5"><i class="fas fa-star"></i></span>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="ten" value="{{session('userInfo.ten')}}" name="ten"
+                                        type="hidden" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="email" value="{{$tin->ten_san_pham}}"
+                                        name="ten_san_pham" type="hidden" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment">Bình luận:</label>
+                                    <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
+                                </div>
+                                <button id="submit-comment" type="submit" class="btn btn-primary">Gửi</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <?php
+}
+?>
+
+
+
+                <script>
+                document.getElementById('submit-comment').addEventListener('click', function(event) {
+                    var nameInput = document.querySelector('input[name="name"]');
+                    var emailInput = document.querySelector('input[name="email"]');
+                    var contentTextarea = document.querySelector('textarea[name="comment"]');
+
+                    if (nameInput.value.trim() === '' || emailInput.value.trim() === '' || contentTextarea.value
+                        .trim() === '') {
+                        alert('Vui lòng điền đầy đủ thông tin và đánh giá trước khi gửi bình luận.');
+                        event.preventDefault(); // Ngăn chặn hành vi mặc định của nút
+                    }
+                });
+                </script>
+
             </div>
-            <table style="width:100%">
-  <tr>
-    <td>RAM</td>
-    <td>{{$tin2->RAM}}</td>
-  </tr>
-  <tr>
-    <td>Tốc độ Bus</td>
-    <td>{{$tin2->toc_do_bus}}
-</td>
-<tr>
-    <td>Khả năng nâng cấp</td>
-    <td>{{$tin2->tinh_nang}}
-</td>
-<tr>
-    <td>Rom</td>
-    <td>{{$tin2->ROM}}
-</td>
-
-<tr>
-    <td>CPU</td>
-    <td>{{$tin2->CPU}}
-</td>
-  </tr>
-</table>
-        </div>
-        <div class="bonho">
-            <div class="tieude">
-                <h4>Màn hình và Âm thanh</h4>
-            </div>
-            <table style="width:100%">
-  <tr>
-    <td>Kích thước màn hình</td>
-    <td>{{$tin2->kich_thuoc}}</td>
-  </tr>
-  <tr>
-    <td>Độ phân giải</td>
-    <td>{{$tin2->man_hinh}}
-</td>
-<tr>
-    <td>Tần số quét</td>
-    <td>{{$tin2->tan_so_quet}}
-</td>
-<tr>
-    <td>Công nghệ âm thanh</td>
-    <td>{{$tin2->loai_tai_nghe}}
-</td>
-
-  </tr>
-</table>
-        </div>
-        <div class="bonho">
-            <div class="tieude">
-                <h4>Thông tin khác</h4>
-            </div>
-            <table style="width:100%">
-  <tr>
-    <td>Trọng lượng</td>
-    <td>{{$tin2->can_nang}}</td>
-  </tr>
-  <tr>
-    <td>Dung lượng pin</td>
-    <td>{{$tin2->dung_luong_pin}}
-</td>
-<tr>
-    <td>Hệ điều hành</td>
-    <td>{{$tin2->he_dieu_hanh}}
-</td>
-
-
-  </tr>
-</table>
-        </div>
-        <p>Some text. Some text. Some text.</p>
-      </div>
-    </div>
-  </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    Hãy nêu nhận xét của bạn
-    <form action="{{ url('/comments') }}" id="comment-form" method="POST">
-@csrf
-    <div class="grid-container">
-  <div class="item1"><input value="{{session('userInfo.ten')}}" name="name" type="text" readonly></div>
-  <div class="item2"><input value="{{session('userInfo.so_dien_thoai')}}" name="sdt" type="text" readonly></div>
-  <div class="item3"><input value="{{session('userInfo.email')}}" name="email" type="text" readonly></div>
-  </div>
-  <div class=""> <textarea name="content" id="review" cols="30" rows="10"></textarea>
-  <input type="hidden" name="idsp" value="{{$tin->id_san_pham}}">
-
-
-    <button id="submit-comment" class="add_to_cart_button" type="submit">Gửi bình luận</button>
-
-</div>
-  </form>
-
-  <script>
-    document.getElementById('submit-comment').addEventListener('click', function (event) {
-        var nameInput = document.querySelector('input[name="name"]');
-        var emailInput = document.querySelector('input[name="email"]');
-        var contentTextarea = document.querySelector('textarea[name="content"]');
-
-        if (nameInput.value.trim() === '' || emailInput.value.trim() === '' || contentTextarea.value.trim() === '') {
-            alert('Vui lòng điền đầy đủ thông tin và đánh giá trước khi gửi bình luận.');
-            event.preventDefault(); // Ngăn chặn hành vi mặc định của nút
-        }
-    });
-</script>
-
-</div>
-                        <!-- <div class="related-products-wrapper">
+            <!-- <div class="related-products-wrapper">
                             <h2 class="related-products-title">Related Products</h2>
                             <div class="related-products-carousel">
                                 <div class="single-product">
@@ -434,17 +577,17 @@ table tr td:first-child{
                                 </div>
                             </div>
                         </div> -->
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 <div class="container">
     <h2>Thống kê bình luận</h2>
     <hr>
     @foreach($binhluan as $bl)
     <div class="bl">
-    <img src="{{ asset('img/avata.jpeg') }}" alt="">
+        <img src="{{ asset('img/avata.jpeg') }}" alt="">
         <div class="noidungbl">
             <h5>{{$bl->name}}</h5>
             <p>{{$bl->noi_dung}}</p>
@@ -452,39 +595,37 @@ table tr td:first-child{
     </div>
     @endforeach
 </div>
+<!-- JavaScript đánh giá-->
+<script>
+const stars = document.querySelectorAll('.star');
 
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const rating = star.dataset.rating;
+        ratingInput.value = rating;
+        highlightStars(index);
+    });
+});
 
-
-
+function highlightStars(index) {
+    stars.forEach((star, i) => {
+        if (i <= index) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+// thông báo 2s
+window.onload = function() {
+  var successNotification = document.getElementById('successNotification');
+  if (successNotification) {
+    successNotification.style.display = 'block';
+    setTimeout(function() {
+      successNotification.style.display = 'none';
+    }, 2000); // Thời gian hiển thị thông báo (2 giây)
+  }
+};
+</script>
 
 @endsection
-<style>
-    .bl img{
-        width: 70px;
-        border-radius:100%;
-        margin-right:20px;
-    }
-    .bl{
-        display:flex;
-    }
-    .bl h5{
-        font-weight:bolder;
-    }
-    .product-inner-price .gia{
-        font-size:25px;
-    }
-    h5.mausac{
-        color: #f17024;
-        font-weight:bolder;
-        font-size:20px;
-    }
-    .but button{
-        width: 70px;
-    height:40px;
-        background-color:white;
-        border:1px solid #cccccc;
-        margin-bottom:20px;
-    }
-</style>
-
-

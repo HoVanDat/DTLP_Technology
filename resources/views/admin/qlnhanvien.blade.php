@@ -111,16 +111,7 @@
     </div>
 </main>
 
-<!--
-  MODAL
--->
-<!--  -->
-<!--
-  MODAL
--->
-<script>
 
-</script>
 <!-- Essential javascripts for application to work-->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -140,7 +131,6 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
-$('#sampleTable').DataTable();
 <script>
 function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({
@@ -163,23 +153,6 @@ function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("myTable").deleteRow(i);
 }
-jQuery(function() {
-    // jQuery(".trash").click(function() {
-    //     swal({
-    //             title: "Cảnh báo",
-
-    //             text: "Bạn có chắc chắn là muốn xóa nhân viên này?",
-    //             buttons: ["Hủy bỏ", "Đồng ý"],
-    //         })
-    //         .then((willDelete) => {
-    //             if (willDelete) {
-    //                 swal("Đã xóa thành công.!", {
-
-    //                 });
-    //             }
-    //         });
-    // });
-});
 oTable = $('#sampleTable').dataTable();
 $('#all').click(function(e) {
     $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
