@@ -138,7 +138,7 @@
                         </div>
 
                     </div>
-                    <form class="row" action="{{route('edit.qlnhanvien.post')}}" method='POST'>
+                    <form class="row" action="{{route('edit.qlnhanvien.post')}}" method='POST' enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group col-md-4">

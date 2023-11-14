@@ -35,8 +35,8 @@ class EmployeeAdminController extends Controller
             $file = $request->file('hinh');
             $name = $file->getClientOriginalName();
             $image = time()."_".$name;
-            $file->move(public_path().'/img/',$image);
-            $hinh = $image;
+            $file->move(public_path().'/img/img-anhthe/',$image);
+            $hinh = '/img/img-anhthe/'.$image;
         }
         NguoiDung::create(['ten'=>$ten,'email'=>$email,'password'=>$password,'dia_chi'=>$dia_chi,'so_dien_thoai'=>$so_dien_thoai,
         'ngay_sinh'=>$ngay_sinh,'noi_sinh'=>$noi_sinh,'CCCD'=>$CCCD,'ngay_cap'=>$ngay_cap,'noi_cap'=>$noi_cap,'gioi_tinh'=>$gioi_tinh,'chuc_vu'=>$chuc_vu,'bang_cap'=>$bang_cap,
@@ -69,8 +69,8 @@ class EmployeeAdminController extends Controller
             $file = $request->file('hinh');
             $name = $file->getClientOriginalName();
             $image = time()."_".$name;
-            $file->move(public_path().'/img/',$image);
-            $hinh = $image;
+            $file->move(public_path().'/img/img-anhthe/',$image);
+            $hinh = '/img/img-anhthe/'.$image;
         }
         NguoiDung::where('id_nguoi_dung',$id_nguoi_dung)->update(['ten'=>$ten,'email'=>$email,'password'=>$password,'dia_chi'=>$dia_chi,'so_dien_thoai'=>$so_dien_thoai,
     'ngay_sinh'=>$ngay_sinh,'noi_sinh'=>$noi_sinh,'CCCD'=>$CCCD,'ngay_cap'=>$ngay_cap,'noi_cap'=>$noi_cap,'gioi_tinh'=>$gioi_tinh,'chuc_vu'=>$chuc_vu,'bang_cap'=>$bang_cap,

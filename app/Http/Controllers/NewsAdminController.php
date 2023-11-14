@@ -27,8 +27,8 @@ class NewsAdminController extends Controller
         $file = $request->file('hinh');
         $name = $file->getClientOriginalName();
         $image = time()."_".$name;
-        $file->move(public_path().'/img/',$image);
-        $hinh = $image;
+        $file->move(public_path().'/img/img-post/',$image);
+        $hinh = '/img/img-post/'.$image;
     }
        $tennguoidang = session('userInfo')['ten'];
        TinTuc::create(['id_danh_muc_tin'=>$id_danh_muc_tin,'ten_nguoi_dang'=>$tennguoidang,'tieu_de'=>$tieu_de,'tom_tat'=>$tom_tat,'noi_dung'=>$noi_dung,'hinh'=>$hinh]);
@@ -49,8 +49,8 @@ class NewsAdminController extends Controller
         $file = $request->file('hinh');
         $name = $file->getClientOriginalName();
         $image = time()."_".$name;
-        $file->move(public_path().'/img/',$image);
-        $hinh = $image;
+        $file->move(public_path().'/img/img-post/',$image);
+        $hinh = '/img/img-post/'.$image;
     }
    TinTuc::where('id_tin',$id_tin)->update(['id_danh_muc_tin'=>$id_danh_muc_tin,'tieu_de'=>$tieu_de,'tom_tat'=>$tom_tat,'noi_dung'=>$noi_dung,'hinh'=>$hinh]);
    session()->flash('success', 'Sửa thành công');

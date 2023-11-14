@@ -127,7 +127,7 @@ $(document).ready(function () {
 
           <h3 class="tile-title">Tạo mới nhân viên</h3>
           <div class="tile-body">
-            <form class="row" action="#" method='POST'>
+            <form class="row" action="#" method='POST'enctype="multipart/form-data">
                @csrf  
             
               <div class="form-group col-md-4">

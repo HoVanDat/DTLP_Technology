@@ -66,7 +66,7 @@
                                 <td>{{$ds->id_tin}}</td>
                                 <td>{{$ds->ten_nguoi_dang}}</td>
                                 <td>{{$ds->tieu_de}}</td>
-                                <td><img class="img-card-person" src="img-anhthe/{{$ds->hinh}}" alt=""></td>
+                                <td><img class="img-card-person" src="{{$ds->hinh}}" alt=""></td>
                                 <td>{{$ds->tom_tat}}</td>
                                 <!-- <td>{{$ds->noi_dung}}</td> xuất ra nội dung khoảng 50 chữ -->
                                 <td>{!!substr($ds->noi_dung,0,200)!!}...</td>
