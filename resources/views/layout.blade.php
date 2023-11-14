@@ -192,11 +192,9 @@
                     <div class="footer-menu">
                     <h2 class="footer-wid-title">Danh Mục</h2>
                         <ul>
-                            <li><a href="#">Điện thoại di động</a></li>
-                            <li><a href="#">Phụ kiện nhà cửa</a></li>
-                            <li><a href="#">TV LED</a></li>
-                            <li><a href="#">Máy tính</a></li>
-                            <li><a href="#">Gadget</a></li>
+                        @foreach($danhmucsanpham as $dm)
+                <li><a href="#">{{$dm->ten_loai}}</a></li>
+            @endforeach
                         </ul>
 
                     </div>
