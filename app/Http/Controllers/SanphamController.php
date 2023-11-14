@@ -262,5 +262,11 @@ class SanphamController extends Controller
             return view('shopsearch', ['listtin'=>$listtin,'keyword'=>$keyword,'count'=>$count,'product'=>$products]);
 
         }
-
+        public function deletechitietsanpham(Request $request)
+        {
+            $id_chi_tiet = $request->input('id_chi_tiet');
+            $id_san_pham = $request->input('id_sanpham');
+            $chitietsanpham = ChiTietSanPham::where('id_chi_tiet', $id_chi_tiet)->delete();
+            return redirect('admin/qlchitietsanpham' . $id_san_pham);
+        }
 }

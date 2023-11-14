@@ -1,9 +1,10 @@
 @extends('admin/layout')
 @section('noidung')
+<link rel="stylesheet" type="text/css" href="css/main2.css">
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách tin tức</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Hòm thư góp ý</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -12,94 +13,40 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" href="{{route('create.qltintuc')}}" title="Thêm"><i
-                                    class="fas fa-plus"></i>
-                                Tạo mới tin tức</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
-                                onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-                        </div>
 
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file" type="button" title="In"
-                                onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button"
-                                title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất
-                                Excel</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm pdf-file" type="button" title="In"
-                                onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                        </div>
-                    </div>
                     <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0"
                         border="0" id="sampleTable">
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
                                 <th>ID</th>
-                                <th width="150">Tiêu đề</th>
-                                <th width="100">Người đăng</th>
+                                <th>Họ và tên</th>
+                                <th width="150">Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Nội dung</th>
+                                <th>Ngày gửi</th>
+                                <th width="60">Tính năng</th>
 
-                                <th width="20">Hình ảnh</th>
-                                <th>Tóm tắt</th>
-                                <th>Loại tin</th>
-                                <th width="300">Ngày đăng</th>
-                                <th width="70">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dstin as $ds)
+                            @foreach($lienhe as $lh)
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ds->id_tin}}</td>
-                                <td>{{$ds->tieu_de}}</td>
-                                <td>{{$ds->ten_nguoi_dang}}</td>
-
-                                <td><img class="img-card-person" src="img-anhthe/{{$ds->hinh}}" alt=""></td>
-                                <td>{{$ds->tom_tat}}</td>
-                                <td>
-                                    @if($ds->id_danh_muc_tin == 1)
-                                    Công nghệ
-                                    @elseif($ds->id_danh_muc_tin == 2)
-                                    Giải trí
-                                    @elseif($ds->id_danh_muc_tin == 3)
-                                    Giáo dục
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Du lịch
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Thể thao
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Khoa học
-                                    @elseif($ds->id_danh_muc_tin == 4)
-                                    Sáng tạo
-                                    @endif
-                                </td>
-                                <!-- <td>{{$ds->noi_dung}}</td> xuất ra nội dung khoảng 50 chữ -->
-                                <td>{{$ds->created_at}}</td>
-
+                                <td>{{$lh->id_lien_he}}</td>
+                                <td>{{$lh->ten}}</td>
+                                <td>{{$lh->email}}</td>
+                                <td>{{$lh->sdt}}</td>
+                                <td>{{$lh->noi_dung}}</td>
+                                <td>{{$lh->created_at}}</td>
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"
-                                        onclick="showDeleteConfirmation('{{ $ds->id_tin }}', 'delete-qltintuc/{{ $ds->id_tin }}')"
+                                        onclick="showDeleteConfirmation('{{ $lh->id_lien_he}}', 'delete-homthugopy/{{ $lh->id_lien_he}}')"
                                         href="#" title="Xóa" type="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <a class="btn btn-primary btn-sm edit" href="edit-qltintuc{{$ds->id_tin}}"
-                                        title="Sửa" type="button"><i class="fas fa-edit"></i></a>
+
 
                                 </td>
                             </tr>
@@ -115,16 +62,7 @@
     </div>
 </main>
 
-<!--
-  MODAL
--->
-<!--  -->
-<!--
-  MODAL
--->
-<script>
 
-</script>
 <!-- Essential javascripts for application to work-->
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>
@@ -144,7 +82,6 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
-$('#sampleTable').DataTable();
 <script>
 function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({
@@ -167,23 +104,6 @@ function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("myTable").deleteRow(i);
 }
-jQuery(function() {
-    // jQuery(".trash").click(function() {
-    //     swal({
-    //             title: "Cảnh báo",
-
-    //             text: "Bạn có chắc chắn là muốn xóa tin tức này?",
-    //             buttons: ["Hủy bỏ", "Đồng ý"],
-    //         })
-    //         .then((willDelete) => {
-    //             if (willDelete) {
-    //                 swal("Đã xóa thành công.!", {
-
-    //                 });
-    //             }
-    //         });
-    // });
-});
 oTable = $('#sampleTable').dataTable();
 $('#all').click(function(e) {
     $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));

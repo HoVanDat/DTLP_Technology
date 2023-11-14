@@ -120,8 +120,8 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item">Danh sách nhân viên</li>
-            <li class="breadcrumb-item"><a href="#">Sửa nhân viên</a></li>
+            <li class="breadcrumb-item">Danh sách danh mục tin tức</li>
+            <li class="breadcrumb-item"><a href="#">Sửa danh mục tin tức</a></li>
         </ul>
     </div>
     <div class="row">
@@ -129,7 +129,7 @@
 
             <div class="tile">
 
-                <h3 class="tile-title">Sửa nhân viên</h3>
+                <h3 class="tile-title">Sửa danh mục tin tức</h3>
                 <div class="tile-body">
                     <form class="row" action="{{route('edit.qldanhmuctintuc.post')}}" method='POST'>
                         @csrf

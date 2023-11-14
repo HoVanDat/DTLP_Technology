@@ -509,12 +509,12 @@ body {
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
                                         cart</a>
-                                    <a href="/chitiet" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
                                         See details</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -567,12 +567,12 @@ body {
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
                                         cart</a>
-                                    <a href="/chitiet" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
                                         See details</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -590,12 +590,12 @@ body {
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
                                         cart</a>
-                                    <a href="/chitiet" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
                                         See details</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -630,12 +630,12 @@ body {
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
                                         cart</a>
-                                    <a href="/chitiet" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
                                         See details</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -652,12 +652,12 @@ body {
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
                                         cart</a>
-                                    <a href="/chitiet" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
                                         See details</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitiet">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br> <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
@@ -686,8 +686,8 @@ body {
                     <h2 class="product-wid-title">Top Sellers</h2>
                     <a href="" class="wid-view-more">Xem tất cả</a>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Sony Smart TV - 2015</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony Smart TV - 2015</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -700,8 +700,8 @@ body {
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Apple new mac book 2015</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Apple new mac book 2015</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -714,8 +714,8 @@ body {
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Apple new i phone 6</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Apple new i phone 6</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -734,8 +734,8 @@ body {
                     <h2 class="product-wid-title">Top lượt xem</h2>
                     <a href="#" class="wid-view-more">Xem tất cả</a>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Sony playstation microsoft</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony playstation microsoft</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -748,8 +748,8 @@ body {
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Sony Smart Air Condtion</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony Smart Air Condtion</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -762,8 +762,8 @@ body {
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Samsung gallaxy note 4</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Samsung gallaxy note 4</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -782,8 +782,8 @@ body {
                     <h2 class="product-wid-title">Top New</h2>
                     <a href="#" class="wid-view-more">Xem tất cả</a>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Apple new i phone 6</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Apple new i phone 6</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -796,8 +796,8 @@ body {
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Samsung gallaxy note 4</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Samsung gallaxy note 4</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -810,8 +810,8 @@ body {
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="/chitiet"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitiet">Sony playstation microsoft</a></h2>
+                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony playstation microsoft</a></h2>
                         <div class="product-wid-rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>

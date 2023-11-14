@@ -16,9 +16,10 @@ class BinhLuan extends Model
         'id_san_pham',
         'noi_dung',
         'thoi_diem',
-
-        'name',
+        'ten',
         'email',
         'sdt',
+        'ten_san_pham',
+        'rating'
     ];
 }

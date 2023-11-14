@@ -2,7 +2,6 @@
 @section('noidung')
 
 <head>
-
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script>
     function readURL(input, thumbimage) {
@@ -17,7 +16,7 @@
 
         }
         $("#thumbimage").show();
-        $('.filename').text($("#uploadfile").val());
+        $('.filename').text($("#ImageUpload").val());
         $('.Choicefile').css('background', '#14142B');
         $('.Choicefile').css('cursor', 'default');
         $(".removeimg").show();
@@ -26,25 +25,22 @@
     }
     $(document).ready(function() {
         $(".Choicefile").bind('click', function() {
-            $("#uploadfile").click();
+            $("#ImageUpload").click();
 
         });
         $(".removeimg").click(function() {
             $("#thumbimage").attr('src', '').hide();
-            $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
+            $("#myfileupload").html(
+            '<input type="file" id="ImageUpload"  onchange="readURL(this);" />');
             $(".removeimg").hide();
             $(".Choicefile").bind('click', function() {
-                $("#uploadfile").click();
+                $("#ImageUpload").click();
             });
             $('.Choicefile').css('background', '#14142B');
             $('.Choicefile').css('cursor', 'pointer');
             $(".filename").text("");
         });
     })
-
-    function editSuccess() {
-        alert("Chỉnh sửa thành công");
-    }
     </script>
     <style>
     .Choicefile {
@@ -68,7 +64,7 @@
         color: white;
     }
 
-    #uploadfile,
+    #ImageUpload,
     .removeimg {
         display: none;
     }
@@ -120,34 +116,50 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb">
-            <li class="breadcrumb-item">Danh sách danh mục sản phẩm</li>
-            <li class="breadcrumb-item"><a href="#">Sửa danh mục sản phẩm</a></li>
+            <li class="breadcrumb-item">Quản lý banner</li>
+            <li class="breadcrumb-item"><a href="#">Tạo banner</a></li>
         </ul>
     </div>
     <div class="row">
         <div class="col-md-12">
-
             <div class="tile">
-
-                <h3 class="tile-title">Sửa danh mục sản phẩm</h3>
+                <h3 class="tile-title">Tạo banner</h3>
                 <div class="tile-body">
-                    <form class="row" action="{{route('edit.qldanhmucsanpham.post')}}" method='POST'>
+                    <div class="row element-button">
+                        <div class="col-sm-2">
+                        </div>
+
+                    </div>
+                    <form class="row" action="{{route('create.qlbanner.post')}}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
-
                         <div class="form-group col-md-4">
-                            <label class="control-label">ID danh mục tin tức</label>
-                            <input name="id_loai" class="form-control" type="text" value="{{$edit->id_loai}}"
-                                readonly>
+                            <label class="control-label">Tên banner</label>
+                            <input class="form-control" type="text" required name="ten">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Tên danh mục</label>
-                            <input name="ten_loai" class="form-control" type="text" value="{{$edit->ten_loai}}"
-                                required>
+                        <div class="form-group col-md-12">
+                            <label for="ImageUpload" class="control-label">Ảnh banner</label>
+                            <div id="myfileupload">
+                                <!-- uploadfile -->
+                                <input type="file" class="form-control-file" id="ImageUpload" name="hinh"
+                                    onchange="readURL(this);" />
+                            </div>
+                            <div id="thumbbox">
+                                <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
+                                <a class="removeimg" href="javascript:"></a>
+                            </div>
+                            <div id="boxchoice">
+                                <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
+                                <p style="clear:both"></p>
+                            </div>
                         </div>
-
                 </div>
-                <button class="btn btn-save" type="submit" onclick="editSuccess()">Lưu lại</button>
-                </form> <a class="btn btn-cancel" href="/admin/qldanhmucsanpham">Hủy bỏ</a>
+                <button class="btn btn-save" type="submit">Lưu lại</button>
+                <a class="btn btn-cancel" href="/admin/qlbanner">Hủy bỏ</a>
             </div>
+            </form>
 </main>
+
+
+
 @endsection

@@ -10,7 +10,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách hàng</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Quản lý banner</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -23,9 +23,9 @@
                     <div class="row element-button">
                         <div class="col-sm-2">
 
-                            <a class="btn btn-add btn-sm" href="create-qlkhachhang" title="Thêm"><i
+                            <a class="btn btn-add btn-sm" href="create-qlbanner" title="Thêm"><i
                                     class="fas fa-plus"></i>
-                                Tạo mới khách hàng</a>
+                                Tạo mới banner</a>
                         </div>
                         <div class="col-sm-2">
                             <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
@@ -59,44 +59,38 @@
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>ID khách hàng</th>
-                                <th width="150">Họ và tên</th>
-                                <th width="20">Ảnh</th>
-                                <th width="250">Địa chỉ</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới tính</th>
-                                <th>SĐT</th>
+                                <th>STT</th>
+                                <th width="150">Tên banner</th>
+                                <th width="20">Hình ảnh</th>
+                                <th width="250">Ngày tạo</th>
                                 <th width="100">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $user)
+                            @if(isset($banner) && !empty($banner))
+                            @foreach($banner as $b)
                             <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$user->id_nguoi_dung}}</td>
-                                <td>{{$user->ten}}</td>
-                                <td><img class="img-card-person" src="{{$user->hinh}}" alt=""></td>
-                                <td>{{$user->dia_chi}}</td>
-                                <td>{{$user->ngay_sinh}}</td>
-                                <td>@if($user->gioi_tinh == 1) Nam @else Nữ @endif
-                                </td>
-                                <td>{{$user->so_dien_thoai}}</td>
+                                <td width="5"><input type="checkbox" name="check1" value="1"></td>
+                                <td width="5">{{ $loop->iteration }}</td>
+                                <td width="100">{{$b->ten}}</td>
+                                <td><img class="img-card-person" src="{{$b->hinh}}" alt=""></td>
+                                <td width="50">{{$b->created_at}}</td>
                                 <td class="table-td-center">
                                     <a class="btn btn-primary btn-sm trash"
-                                        onclick="showDeleteConfirmation('{{$user->id_nguoi_dung}}', 'delete-qlkhachhang{{$user->id_nguoi_dung}}')"
+                                        onclick="showDeleteConfirmation('{{$b->id_banner}}', 'delete-qlbanner/{{$b->id_banner}}')"
                                         href="#" title="Xóa" type="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <a class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                                        href="edit-qlkhachhang{{$user->id_nguoi_dung}}"><i class="fas fa-edit"></i></a>
+                                        href="edit-qlbanner{{$b->id_banner}}"><i class="fas fa-edit"></i></a>
                                 </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </main>
@@ -112,13 +106,13 @@
                 <div class="row">
                     <div class="form-group  col-md-12">
                         <span class="thong-tin-thanh-toan">
-                            <h5>Chỉnh sửa thông tin khách hàng cơ bản</h5>
+                            <h5>Chỉnh sửa thông tin banner cơ bản</h5>
                         </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label">ID khách hàng</label>
+                        <label class="control-label">ID banner</label>
                         <input class="form-control" type="text" required value="#CD2187" disabled id="customerID">
                     </div>
                     <div class="form-group col-md-6">
