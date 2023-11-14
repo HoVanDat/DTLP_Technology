@@ -147,7 +147,7 @@
                         </div>
 
                     </div>
-                    <form class="row" action="#" method='POST'>
+                    <form class="row" action="#" method='POST' enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group col-md-3">

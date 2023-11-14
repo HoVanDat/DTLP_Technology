@@ -67,9 +67,12 @@
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 <td>{{$ds->id_tin}}</td>
                                 <td>{{$ds->tieu_de}}</td>
+
+                                <td><img class="img-card-person" src="{{$ds->hinh}}" alt=""></td>
+
                                 <td>{{$ds->ten_nguoi_dang}}</td>
 
-                                <td><img class="img-card-person" src="img-anhthe/{{$ds->hinh}}" alt=""></td>
+ 
                                 <td>{{$ds->tom_tat}}</td>
                                 <td>
                                     @if($ds->id_danh_muc_tin == 1)

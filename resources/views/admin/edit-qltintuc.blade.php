@@ -151,7 +151,7 @@
                         </div>
 
                     </div>
-                    <form class="row" action="{{route('edit.qltintuc.post')}}" method='POST'>
+                    <form class="row" action="{{route('edit.qltintuc.post')}}" method='POST'enctype="multipart/form-data">
                         @csrf
                         <div class="form-group col-md-4">
                             <label class="control-label">ID tin tức</label>

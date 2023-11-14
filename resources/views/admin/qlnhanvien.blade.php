@@ -68,7 +68,7 @@
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 <td>{{$ds->id_nguoi_dung}}</td>
                                 <td>{{$ds->ten}}</td>
-                                <td><img class="img-card-person" src="img-anhthe/{{$ds->hinh}}" alt=""></td>
+                                <td><img class="img-card-person" src="{{$ds->hinh}}" alt=""></td>
                                 <td>{{$ds->dia_chi}}</td>
                                 <td>{{$ds->ngay_sinh}}</td>
                                 <td>

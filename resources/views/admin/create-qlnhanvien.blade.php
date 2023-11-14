@@ -120,113 +120,112 @@
         </ul>
     </div>
     <div class="row">
-        <div class="col-md-12">
 
-            <div class="tile">
+      <div class="col-md-12">
 
-                <h3 class="tile-title">Tạo mới nhân viên</h3>
-                <div class="tile-body">
-                    <form class="row" action="{{route('create.qlnhanvien.post')}}" method='POST'>
-                        @csrf
+        <div class="tile">
 
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Họ và tên</label>
-                            <input name="hoten" class="form-control" type="text" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Địa chỉ email</label>
-                            <input class="form-control" name="email" type="email" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Mật khẩu</label>
-                            <input class="form-control" name="password" type="password" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Địa chỉ thường trú</label>
-                            <input class="form-control" name="dc_tt" type="text">
-                        </div>
-                        <div class="form-group  col-md-4">
-                            <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" name="sdt" type="number">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Ngày sinh</label>
-                            <input class="form-control" name="ngaysinh" type="date">
-                        </div>
-                        <div class="form-group  col-md-3">
-                            <label class="control-label">Nơi sinh</label>
-                            <input class="form-control" name="noisinh" type="text">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Số CCCD</label>
-                            <input class="form-control" name="cccd" type="number">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Ngày cấp</label>
-                            <input class="form-control" name="ngaycap" type="date">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Nơi cấp</label>
-                            <input class="form-control" name="noicap" type="text">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Giới tính</label>
-                            <select class="form-control" name="gioitinh" id="exampleSelect2">
-                                <option value="">-- Chọn giới tính --</option>
-                                <option value="1">Nam</option>
-                                <option value="2">Nữ</option>
-                            </select>
-                        </div>
+          <h3 class="tile-title">Tạo mới nhân viên</h3>
+          <div class="tile-body">
+            <form class="row" action="#" method='POST'enctype="multipart/form-data">
+               @csrf  
+            
+              <div class="form-group col-md-4">
+                <label class="control-label">Họ và tên</label>
+                <input name="hoten" class="form-control" type="text" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Địa chỉ email</label>
+                <input class="form-control" name="email" type="email" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Mật khẩu</label>
+                <input class="form-control" name="password" type="password" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Địa chỉ thường trú</label>
+                <input class="form-control" name="dc_tt" type="text" >
+              </div>
+              <div class="form-group  col-md-4">
+                <label class="control-label">Số điện thoại</label>
+                <input class="form-control" name="sdt" type="number" >
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Ngày sinh</label>
+                <input class="form-control" name="ngaysinh" type="date">
+              </div>
+              <div class="form-group  col-md-3">
+                <label class="control-label">Nơi sinh</label>
+                <input class="form-control" name="noisinh" type="text" >
+              </div>
+              <div class="form-group col-md-3">
+                <label class="control-label">Số CCCD</label>
+                <input class="form-control" name="cccd" type="number" >
+              </div>
+              <div class="form-group col-md-3">
+                <label class="control-label">Ngày cấp</label>
+                <input class="form-control" name="ngaycap" type="date" >
+              </div>
+              <div class="form-group col-md-3">
+                <label class="control-label">Nơi cấp</label>
+                <input class="form-control" name="noicap" type="text" >
+              </div>
+              <div class="form-group col-md-3">
+                <label class="control-label">Giới tính</label>
+                <select class="form-control" name="gioitinh" id="exampleSelect2" >
+                  <option value="">-- Chọn giới tính --</option>
+                  <option value="1">Nam</option>
+                  <option value="2">Nữ</option>
+                </select>
+              </div>
 
-                        <div class="form-group  col-md-3">
-                            <label for="exampleSelect1" class="control-label">Chức vụ</label>
-                            <select class="form-control" name="chucvu" id="exampleSelect1">
-                                <option value="">-- Chọn chức vụ --</option>
-                                <option value="1">Bán hàng</option>
-                                <option value="2">Tư vấn</option>
-                                <option value="3">Dịch vụ</option>
-                                <option value="4">Thu Ngân</option>
-                                <option value="5">Quản kho</option>
-                                <option value="6">Bảo trì</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Bằng cấp</label>
-                            <select class="form-control" name="bangcap" id="exampleSelect3">
-                                <option value="">-- Chọn bằng cấp --</option>
-                                <option value="1">Tốt nghiệp Đại Học</option>
-                                <option value="2">Tốt nghiệp Cao Đẳng</option>
-                                <option value="3">Tốt nghiệp Phổ Thông</option>
-                                <option value="4">Chưa tốt nghiệp</option>
-                                <option value="5">Không bằng cấp</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="control-label">Tình trạng hôn nhân</label>
-                            <select class="form-control" name="tthonnhan" id="exampleSelect2">
-                                <option value="">-- Chọn tình trạng hôn nhân --</option>
-                                <option value="1">Độc thân</option>
-                                <option value="2">Đã kết hôn</option>
-                                <option value="3">Góa</option>
-                                <option value="4">Khác</option>
-                            </select>
-                        </div>
+              <div class="form-group  col-md-3">
+                <label for="exampleSelect1" class="control-label">Chức vụ</label>
+                <select class="form-control" name="chucvu" id="exampleSelect1">
+                  <option value="">-- Chọn chức vụ --</option>
+                  <option value="1">Bán hàng</option>
+                  <option value="2">Tư vấn</option>
+                  <option value="3">Dịch vụ</option>
+                  <option value="4">Thu Ngân</option>
+                  <option value="5">Quản kho</option>
+                  <option value="6">Bảo trì</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="control-label">Bằng cấp</label>
+                <select class="form-control" name="bangcap" id="exampleSelect3">
+                  <option value="">-- Chọn bằng cấp --</option>
+                  <option value="1">Tốt nghiệp Đại Học</option>
+                  <option value="2">Tốt nghiệp Cao Đẳng</option>
+                  <option value="3">Tốt nghiệp Phổ Thông</option>
+                  <option value="4">Chưa tốt nghiệp</option>
+                  <option value="5">Không bằng cấp</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="control-label">Tình trạng hôn nhân</label>
+                <select class="form-control" name="tthonnhan" id="exampleSelect2">
+                  <option value="">-- Chọn tình trạng hôn nhân --</option>
+                  <option value="1">Độc thân</option>
+                  <option value="2">Đã kết hôn</option>
+                  <option value="3">Góa</option>
+                  <option value="4">Khác</option>
+                </select>
+              </div>
 
-                        <div class="form-group col-md-12">
-                            <label class="control-label">Ảnh 3x4 nhân viên</label>
-                            <div id="myfileupload">
-                                <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
-                            </div>
-                            <div id="thumbbox">
-                                <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
-                                <a class="removeimg" href="javascript:"></a>
-                            </div>
-                            <div id="boxchoice">
-                                <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
-                                <p style="clear:both"></p>
-                            </div>
-
-                        </div>
+              <div class="form-group col-md-12">
+                <label class="control-label">Ảnh 3x4 nhân viên</label>
+                <div id="myfileupload">
+                  <input type="file" id="uploadfile" name="hinh" onchange="readURL(this);" />
+                </div>
+                <div id="thumbbox">
+                  <img height="300" width="300" alt="Thumb image" id="thumbimage" style="display: none" />
+                  <a class="removeimg" href="javascript:"></a>
+                </div>
+                <div id="boxchoice">
+                  <a href="javascript:" class="Choicefile"><i class='bx bx-upload'></i></a>
+                  <p style="clear:both"></p>
+                </div>
 
 
 
