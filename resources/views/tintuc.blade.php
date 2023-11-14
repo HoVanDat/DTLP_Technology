@@ -201,7 +201,7 @@ div.group_sidebar{
 
                                         <div class="col-md-5 col-xs-12 col-sm-12 img-article">
                                             <div class="art-img">
-                                                <img src="img/product-2.jpg"
+                                                <img src="admin/img-anhthe/{{$tt->hinh}}"
                                                     alt="">
                                             </div>
                                         </div>
@@ -259,7 +259,7 @@ div.group_sidebar{
 
         <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
             <div class="art-img">
-                <img src="{{ asset('img/' . $dt->hinh) }}"
+                <img src="admin/img-anhthe/{{$dt->hinh}}"
                     alt="">
             </div>
         </div>

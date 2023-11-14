@@ -80,4 +80,18 @@ class UserAdminController extends Controller
         $user->delete();
         return redirect()->route('admin-qlkhachhang');
     }
+    public function block($id)
+    {
+        $user = User::where('id_nguoi_dung', $id)->first();
+        $user->lock = 1;
+        $user->save();
+        return redirect()->route('admin-qlkhachhang');
+    }
+    public function unblock($id)
+    {
+        $user = User::where('id_nguoi_dung', $id)->first();
+        $user->lock = 0;
+        $user->save();
+        return redirect()->route('admin-qlkhachhang');
+    }
 }

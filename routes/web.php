@@ -137,6 +137,9 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('create-qlnoibo',function(){
         return view('admin/create-qlnoibo');
     });  
+    Route::get('block-qlkhachhang{id}',[UserAdminController::class,'block'])->name('admin-block-qlkhachhang');
+    Route::get('unblock-qlkhachhang{id}',[UserAdminController::class,'unblock'])->name('admin-unblock-qlkhachhang');
+
     Route::get('create-qlsanpham',[SanphamController::class,'create'])->name('admin-create-qlsanpham');
     Route::post('create-qlsanpham',[SanphamController::class,'store'])->name('admin-store-qlsanpham');
 
