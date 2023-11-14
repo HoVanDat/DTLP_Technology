@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\NguoiDung;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
@@ -20,35 +21,45 @@ class AuthController extends Controller
     return view('dangnhap');
    }
 
-   public function loginPost(Request $request){
-    $request->validate([
-        'email'=> 'required',
-        'password'=> 'required'
-    ]);
-    $email=$request->email;
-    $password=$request->password;
-    if (Auth::attempt(['email' => $email, 'password' => $password])){
-        $user = Auth()->user();
-        $userInfo = [
-            'ho' => $user->ho,
-            'ten' => $user->ten,
-            'email' => $user->email,
-            'dia_chi' => $user->dia_chi,
-            'so_dien_thoai' => $user->so_dien_thoai,
-            'hinh' => $user->hinh,
-            'vai_tro' => $user->vai_tro,
-        ];
-        session(['userInfo' => $userInfo]);
-        // nếu vai trò là 0 thì là user
-        //nếu vai trò lớn hơn 1 thì là admin
-        if($user->vai_tro > 0){
-            return redirect()->intended(route('admin-trang-chu'));
-        }else{
-            return redirect()->intended(route('home'));
+   public function loginPost(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $email = $request->email;
+        $password = $request->password;
+
+        $user = NguoiDung::where('email', $email)->first();
+
+        if ($user && Hash::check($password, $user->password)) {
+            // Xác thực đăng nhập thành công
+            // Thực hiện các hành động sau khi đăng nhập thành công
+            // Ví dụ: Lưu thông tin người dùng vào session
+            $userInfo = [
+                'iduser' => $user->id_nguoi_dung,
+                'ho' => $user->ho,
+                'ten' => $user->ten,
+                'email' => $user->email,
+                'dia_chi' => $user->dia_chi,
+                'so_dien_thoai' => $user->so_dien_thoai,
+                'hinh' => $user->hinh,
+                'vai_tro' => $user->vai_tro,
+            ];
+            session(['userInfo' => $userInfo]);
+
+            if ($user->vai_tro > 0) {
+                return redirect()->intended(route('admin-trang-chu'));
+            } else {
+                return redirect()->intended(route('home'));
+            }
+        } else {
+            // Đăng nhập không thành công, xử lý lỗi tương ứng
+            // Ví dụ: Hiển thị thông báo lỗi và chuyển hướng người dùng về trang đăng nhập
+            return redirect('/dangnhap')->with('error', 'Email hoặc mật khẩu không đúng');
         }
     }
-    return redirect(route('login'))->with('error','Email hoặc password sai');
-}
 
 public function register(){
     return view('dangky');
@@ -67,7 +78,7 @@ public function register(){
     $data['so_dien_thoai']= $request->sdt; 
     $data['email']= $request->email; 
     $data['password']= Hash::make($request->password); 
-    $user = \DB::table('nguoidung')->insert($data);
+    $user = NguoiDung::create($data);
     if(!$user){
     return redirect(route('register'))->with('error','Email hoặc password sai'); 
 }

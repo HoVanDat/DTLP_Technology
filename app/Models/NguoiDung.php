@@ -11,7 +11,7 @@ class NguoiDung extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'NguoiDung';
+    protected $table = 'nguoidung';
     protected $primaryKey = 'id_nguoi_dung';
     protected $fillable = [
         'id_nguoi_dung','ten','password','email','dia_chi','so_dien_thoai','vai_tro','hinh','trang_thai','ngay_sinh','noi_sinh','CCCD','ngay_cap','noi_cap','gioi_tinh','chuc_vu','bang_cap','tinh_trang_hon_nhan','token','created_at','update_at'];
