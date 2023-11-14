@@ -2,36 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BinhLuan;
 
 class CommentController extends Controller
 {
+    public function index(){
+        $binhluan = BinhLuan::get();
+        return view('admin.qlbinhluan', ['binhluan' => $binhluan]);
+    }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'content' => 'required',
-        ]);
+        // Lấy dữ liệu từ request
+        $rating = $request->input('rating');
+        $ten = $request->input('ten');
+        $ten_san_pham = $request->input('ten_san_pham');
+        $comment = $request->input('comment');
 
-        if (session()->has('userInfo')) {
-            $iduser = session('userInfo.iduser');
-        } else {
-            $iduser = 0;
-        }
+        // Tạo một đối tượng BinhLuan mới
+        $binhLuan = new BinhLuan();
+        $binhLuan->rating = $rating;
+        $binhLuan->ten = $ten;
+        $binhLuan->ten_san_pham = $ten_san_pham;
+        $binhLuan->noi_dung = $comment;
 
-        BinhLuan::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'sdt' => $request->sdt,
+        // Lưu đối tượng vào cơ sở dữ liệu
+        $binhLuan->save();
 
-            'noi_dung' => $request->content,
-            'thoi_diem' => now(), // Thêm dấu phẩy thay cho dấu chấm phẩy
-            'id_san_pham' => $request->idsp, // Thêm dấu phẩy thay cho dấu chấm phẩy
-            'id_nguoi_dung' => $iduser, // Thêm dấu phẩy thay cho dấu chấm phẩy
-        ]);
+        // Điều hướng hoặc trả về phản hồi thành công
+        return redirect()->back()->with('success', 'Bình luận của bạn đã được gửi thành công.');
+    }
 
-        return back()->with('success', 'Bình luận của bạn đã được gửi.');
+    public function editqlbinhluan(string $id){
+        $binhluan= BinhLuan::where('id_binh_luan',$id)->first();
+    return view('admin/edit-qlbinhluan',['binhluan'=>$binhluan]);
+    }
+    public function editqlbinhluanpost(Request $request){
+    $id_binh_luan=$request['id_binh_luan'];
+    // $ten_san_pham=$request['ten_san_pham'];
+    // $ten=$request['ten'];
+    $an_hien=$request['an_hien'];
+    $noi_dung=$request['noi_dung'];
+   BinhLuan::where('id_binh_luan',$id_binh_luan)->update([/*'ten_san_pham'=>$ten_san_pham,'ten'=>$ten,*/'an_hien'=>$an_hien,'noi_dung'=>$noi_dung]);
+   session()->flash('success', 'Sửa thành công');
+return redirect('admin/qlbinhluan');
+    }
+    public function deleteqlbinhluan(string $id){
+        BinhLuan::where('id_binh_luan',$id)->delete();
+        return redirect('admin/qlbinhluan');
     }
 }

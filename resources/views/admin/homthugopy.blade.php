@@ -4,7 +4,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Hòm thư góp ý</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -13,89 +13,40 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" href="{{route('create.qlnhanvien')}}" title="Thêm"><i
-                                    class="fas fa-plus"></i>
-                                Tạo mới nhân viên</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
-                                onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-                        </div>
 
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file" type="button" title="In"
-                                onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button"
-                                title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất
-                                Excel</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm pdf-file" type="button" title="In"
-                                onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                        </div>
-                    </div>
                     <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0"
                         border="0" id="sampleTable">
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>ID nhân viên</th>
-                                <th width="100">Họ và tên</th>
-                                <th width="20">Ảnh thẻ</th>
-                                <th width="200">Địa chỉ</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới tính</th>
-                                <th>SĐT</th>
-                                <th>Chức vụ</th>
-                                <th width="100">Tính năng</th>
+                                <th>ID</th>
+                                <th>Họ và tên</th>
+                                <th width="150">Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Nội dung</th>
+                                <th>Ngày gửi</th>
+                                <th width="60">Tính năng</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dsnhanvien as $ds)
+                            @foreach($lienhe as $lh)
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ds->id_nguoi_dung}}</td>
-                                <td>{{$ds->ten}}</td>
-                                <td><img class="img-card-person" src="{{$ds->hinh}}" alt=""></td>
-                                <td>{{$ds->dia_chi}}</td>
-                                <td>{{$ds->ngay_sinh}}</td>
-                                <td>
-                                    @if ($ds->gioi_tinh == 1) Nam
-                                    @elseif ($ds->gioi_tinh == 2) Nữ
-                                    @else Trống
-                                    @endif
-                                </td>
-                                <td>{{$ds->so_dien_thoai}}</td>
-                                <td>
-                                    @if($ds->id_chuc_vu == 1) Bán hàng
-                                    @elseif($ds->id_chuc_vu == 2) Tư vấn
-                                    @elseif($ds->id_chuc_vu == 3) Dịch vụ
-                                    @elseif($ds->id_chuc_vu == 4) Thu Ngân
-                                    @elseif($ds->id_chuc_vu == 5) Quản kho
-                                    @else Bảo trì
-                                    @endif    
-                                </td>
+                                <td>{{$lh->id_lien_he}}</td>
+                                <td>{{$lh->ten}}</td>
+                                <td>{{$lh->email}}</td>
+                                <td>{{$lh->sdt}}</td>
+                                <td>{{$lh->noi_dung}}</td>
+                                <td>{{$lh->created_at}}</td>
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"
-                                        onclick="showDeleteConfirmation('{{ $ds->id_nguoi_dung }}', 'delete-qlnhanvien/{{ $ds->id_nguoi_dung }}')"
+                                        onclick="showDeleteConfirmation('{{ $lh->id_lien_he}}', 'delete-homthugopy/{{ $lh->id_lien_he}}')"
                                         href="#" title="Xóa" type="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <a class="btn btn-primary btn-sm edit" href="edit-qlnhanvien{{$ds->id_nguoi_dung}}"
-                                        title="Sửa" type="button"><i class="fas fa-edit"></i></a>
+
 
                                 </td>
                             </tr>

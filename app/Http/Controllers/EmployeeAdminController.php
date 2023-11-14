@@ -31,6 +31,7 @@ class EmployeeAdminController extends Controller
         $chuc_vu=$request['chucvu'];
         $bang_cap=$request['bangcap'];
         $tinh_trang_hon_nhan=$request['tthonnhan'];
+
         if($request->hasFile('hinh')){
             $file = $request->file('hinh');
             $name = $file->getClientOriginalName();
@@ -42,6 +43,7 @@ class EmployeeAdminController extends Controller
         'ngay_sinh'=>$ngay_sinh,'noi_sinh'=>$noi_sinh,'CCCD'=>$CCCD,'ngay_cap'=>$ngay_cap,'noi_cap'=>$noi_cap,'gioi_tinh'=>$gioi_tinh,'chuc_vu'=>$chuc_vu,'bang_cap'=>$bang_cap,
         'tinh_trang_hon_nhan'=>$tinh_trang_hon_nhan,'hinh'=>$hinh]);
        return redirect('admin/qlnhanvien');
+
     }
     public function editqlnhanvien(string $id){
         

@@ -3,8 +3,7 @@
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item">Danh sách sản phẩm</li>
-            <li class="breadcrumb-item active"><a href="#"><b>Danh sách chi tiết sản phẩm</b></a></li>
+            <li class="breadcrumb-item active"><a href="#"><b>Danh sách bình luận</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>
@@ -12,84 +11,77 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" href="create-qlchitietsanpham{{$sanpham->id_san_pham}}"
-                                title="Thêm"><i class="fas fa-plus"></i>
-                                Tạo mới chi tiết sản phẩm</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập"
-                                onclick="myFunction(this)"><i class="fas fa-file-upload"></i> Tải từ file</a>
-                        </div>
+                    <!-- <div class="row element-button">
+                            <div class="col-sm-2">
 
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file" type="button" title="In"
-                                onclick="myApp.printTable()"><i class="fas fa-print"></i> In dữ liệu</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button"
-                                title="Sao chép"><i class="fas fa-copy"></i> Sao chép</a>
-                        </div>
+                                <a class="btn btn-add btn-sm" href="create-qlsanpham" title="Thêm"><i class="fas fa-plus"></i>
+                                Tạo mới bình luận</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
+                                  class="fas fa-file-upload"></i> Tải từ file</a>
+                            </div>
 
-                        <div class="col-sm-2">
-                            <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất
-                                Excel</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm pdf-file" type="button" title="In"
-                                onclick="myFunction(this)"><i class="fas fa-file-pdf"></i> Xuất PDF</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                        </div>
-                    </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
+                                  class="fas fa-print"></i> In dữ liệu</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
+                                  class="fas fa-copy"></i> Sao chép</a>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
+                                  class="fas fa-file-pdf"></i> Xuất PDF</a>
+                            </div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                            </div>
+                        </div> -->
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>Mã chi tiết sản phẩm</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Ảnh</th>
-                                <th>Số lượng</th>
-                                <th>Tình trạng</th>
-                                <th>Màu sắc</th>
-                                <th>Ram</th>
-                                <th>Giá tiền</th>
+                                <th width="100">Id bình luận</th>
+                                <th>Tiêu đề</th>
+                                <th>Họ và tên</th>
+                                <th>Bình luận</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày đăng</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($chitietsanpham as $ctsp)
+                            @foreach ($binhluan as $bl)
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ctsp->id_chi_tiet}}</td>
-                                <td>{{$sanpham->ten_san_pham}}</td>
-                                <td><img src="{{$ctsp->hinh}}" alt="" width="40px" height="40px"></td>
-                                <td>{{$ctsp->so_luong}}</td>
-                                <td>@if ($ctsp->so_luong > 0)
-                                    <span class="badge bg-success">Còn hàng</span>
+                                <td>{{ $bl->id_binh_luan}}</td>
+                                <td>{{ $bl->ten_san_pham}}</td>
+                                <td>{{ $bl->ten}}</td>
+                                <td>{{ $bl->noi_dung}}</td>
+                                <td>
+                                    @if($bl->an_hien == 1)
+                                    Hiện
                                     @else
-                                    <span class="badge bg-danger">Hết hàng</span>
+                                    Ẩn
                                     @endif
                                 </td>
-                                <td>{{$ctsp->mau_sac}}</td>
-                                <td>{{$ctsp->RAM}}</td>
-                                <td>{{number_format($ctsp->gia)}} VNĐ</td>
-                                <td>
-                                    <!-- <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction(this)"><i class="fas fa-trash-alt"></i></button>  -->
-                                    <!-- <a href="delete-qlchitietsanpham?id_chi_tiet={{ $ctsp->id_chi_tiet }}&id_sanpham={{ $sanpham->id_san_pham }}"
-                                        class="btn btn-primary btn-sm trash"><i class="fas fa-trash-alt"></i></a> -->
+                                <td>{{ $bl->created_at }}</td>
+                                <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"
-                                        onclick="showDeleteConfirmation('{{ $ctsp->id_chi_tiet }}', 'delete-qlchitietsanpham?id_chi_tiet={{ $ctsp->id_chi_tiet }}&id_sanpham={{ $sanpham->id_san_pham }}')"
+                                        onclick="showDeleteConfirmation('{{ $bl->id_binh_luan }}', 'delete-qlbinhluan/{{ $bl->id_binh_luan }}')"
                                         href="#" title="Xóa" type="button">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    <!-- <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i></button> -->
-                                    <a href="edit-qlchitietsanpham?id_chi_tiet={{ $ctsp->id_chi_tiet }}&id_sanpham={{ $sanpham->id_san_pham }}"
-                                        class="btn btn-primary btn-sm edit"><i class="fas fa-edit"></i></a>
+                                    <a class="btn btn-primary btn-sm edit" href="edit-qlbinhluan{{ $bl->id_binh_luan }}"
+                                        title="Sửa" type="button"><i class="fas fa-edit"></i></a>
+
                                 </td>
                             </tr>
                             @endforeach
@@ -113,46 +105,46 @@
                 <div class="row">
                     <div class="form-group  col-md-12">
                         <span class="thong-tin-thanh-toan">
-                            <h5>Chỉnh sửa thông tin sản phẩm cơ bản</h5>
+                            <h5>Chỉnh sửa thông tin bình luận cơ bản</h5>
                         </span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label">Mã chi tiết sản phẩm</label>
+                        <label class="control-label">Mã bình luận </label>
                         <input class="form-control" type="number" value="71309005">
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label">Tên chi tiết sản phẩm</label>
+                        <label class="control-label">Tên bình luận</label>
                         <input class="form-control" type="text" required value="Bàn ăn gỗ Theresa">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label">Màu sắc</label>
-                        <input class="form-control" type="text" required value="Đỏ">
                     </div>
                     <div class="form-group  col-md-6">
                         <label class="control-label">Số lượng</label>
                         <input class="form-control" type="number" required value="20">
                     </div>
-                    <div class="form-group col-md-6 ">
-                        <label for="exampleSelect1" class="control-label">Tình trạng chi tiết sản phẩm</label>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Giá tiền</label>
+                        <input class="form-control" type="text" value="5.600.000">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="exampleSelect1" class="control-label">Danh mục</label>
                         <select class="form-control" id="exampleSelect1">
-                            <option>Còn hàng</option>
-                            <option>Hết hàng</option>
-                            <option>Đang nhập hàng</option>
+                            <option>Bàn ăn</option>
+                            <option>Bàn thông minh</option>
+                            <option>Tủ</option>
+                            <option>Ghế gỗ</option>
+                            <option>Ghế sắt</option>
+                            <option>Giường người lớn</option>
+                            <option>Giường trẻ em</option>
+                            <option>Bàn trang điểm</option>
+                            <option>Giá đỡ</option>
                         </select>
                     </div>
-                    <!-- Ram -->
-                    <div class="form-group col-md-6 ">
-                        <label for="exampleSelect1" class="control-label">Ram</label>
-                        <input class="form-control" type="text" required value="4GB">
-                    </div>
-
                 </div>
                 <BR>
-                <a href="edit-qlchitietsanpham" style="    float: right;
+                <a href="edit-qlsanpham" style="    float: right;
     font-weight: 600;
-    color: #ea0000;">Chỉnh sửa sản phẩm nâng cao</a>
+    color: #ea0000;">Chỉnh sửa bình luận nâng cao</a>
                 <BR>
                 <BR>
                 <button class="btn btn-save" type="button">Lưu lại</button>
@@ -229,12 +221,7 @@ function time() {
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
 <script>
-function deleteRow(r) {
-    var i = r.parentNode.parentNode.rowIndex;
-    document.getElementById("myTable").deleteRow(i);
-}
-
-function showDeleteConfirmation(userId, deleteUrl) {
+    function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({
         title: 'Xác nhận xóa',
         text: 'Bạn có chắc chắn muốn xóa?',
@@ -249,6 +236,11 @@ function showDeleteConfirmation(userId, deleteUrl) {
             window.location.href = deleteUrl;
         }
     });
+}
+
+function deleteRow(r) {
+    var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("myTable").deleteRow(i);
 }
 oTable = $('#sampleTable').dataTable();
 $('#all').click(function(e) {

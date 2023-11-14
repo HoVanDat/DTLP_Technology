@@ -51,11 +51,13 @@
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
                                 <th>ID</th>
-                                <th width="100">Người đăng</th>
                                 <th width="150">Tiêu đề</th>
+                                <th width="100">Người đăng</th>
+
                                 <th width="20">Hình ảnh</th>
                                 <th>Tóm tắt</th>
-                                <th width="300">Nội dung</th>
+                                <th>Loại tin</th>
+                                <th width="300">Ngày đăng</th>
                                 <th width="70">Tính năng</th>
                             </tr>
                         </thead>
@@ -64,13 +66,34 @@
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 <td>{{$ds->id_tin}}</td>
-                                <td>{{$ds->ten_nguoi_dang}}</td>
                                 <td>{{$ds->tieu_de}}</td>
+
                                 <td><img class="img-card-person" src="{{$ds->hinh}}" alt=""></td>
+
+                                <td>{{$ds->ten_nguoi_dang}}</td>
+
+ 
                                 <td>{{$ds->tom_tat}}</td>
+                                <td>
+                                    @if($ds->id_danh_muc_tin == 1)
+                                    Công nghệ
+                                    @elseif($ds->id_danh_muc_tin == 2)
+                                    Giải trí
+                                    @elseif($ds->id_danh_muc_tin == 3)
+                                    Giáo dục
+                                    @elseif($ds->id_danh_muc_tin == 4)
+                                    Du lịch
+                                    @elseif($ds->id_danh_muc_tin == 4)
+                                    Thể thao
+                                    @elseif($ds->id_danh_muc_tin == 4)
+                                    Khoa học
+                                    @elseif($ds->id_danh_muc_tin == 4)
+                                    Sáng tạo
+                                    @endif
+                                </td>
                                 <!-- <td>{{$ds->noi_dung}}</td> xuất ra nội dung khoảng 50 chữ -->
-                                <td>{!!substr($ds->noi_dung,0,200)!!}...</td>
-                                
+                                <td>{{$ds->created_at}}</td>
+
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"
