@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Loai extends Model
 {
     use HasFactory;
+
     protected $table = 'loai';
     protected $primaryKey = 'id_loai';
     protected $fillable = [
@@ -18,4 +19,8 @@ class Loai extends Model
         'created_at',
         'updated_at',
     ];
+      public function sanpham(){
+        return $this->hasMany('App\Models\SanPham','id_loai','id_loai');
+    }
+
 }

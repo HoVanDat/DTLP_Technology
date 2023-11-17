@@ -9,6 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class DanhMucTinTuc extends Model
 {
+
     use HasApiTokens, HasFactory, Notifiable;
 
    
@@ -17,4 +18,8 @@ class DanhMucTinTuc extends Model
      protected $fillable = [
         'ten_danh_muc'
      ];
+     public function tintuc(){
+        return $this->hasMany('App\Models\TinTuc','id_danh_muc_tin','id_danh_muc_tin');
+    }
+
 }

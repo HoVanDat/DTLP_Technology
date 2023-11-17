@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\NguoiDung;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
+
+
+
 
 class AuthController extends Controller
 {   
@@ -41,22 +46,27 @@ class AuthController extends Controller
     return view('dangnhap');
    }
 
-    function loginPost(Request $request){
+   public function loginPost(Request $request)
+    {
         $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
+
     
         $email = $request->email;
         $password = $request->password;
         // nếu tài khoản có lock = 1 sẽ khóa ngay lập tức
-        $lock = \DB::table('nguoidung')->where('email', $email)->first();
+        $lock = NguoiDung::where('email', $email)->first();
         if ($lock && property_exists($lock, 'lock') && $lock->lock == 1) {
        Alert::error('Lỗi', 'Tài khoản đã bị khóa')->persistent("OK");
       return redirect('/dangnhap');
 }
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            $user = Auth()->user();
+if ($user && Hash::check($password, $user->password)) {
+    // Xác thực đăng nhập thành công
+    // Thực hiện các hành động sau khi đăng nhập thành công
+    // Ví dụ: Lưu thông tin người dùng vào session
+
             $userInfo = [
                 'iduser' => $user->id_nguoi_dung,
                 'ho' => $user->ho,
@@ -68,7 +78,7 @@ class AuthController extends Controller
                 'vai_tro' => $user->vai_tro,
             ];
             session(['userInfo' => $userInfo]);
-    
+
             if ($user->vai_tro > 0) {
                 return redirect()->intended(route('admin-trang-chu'));
             } else {
@@ -125,59 +135,71 @@ class AuthController extends Controller
         }
     }
 
+
     function logout(){
         Session::flush();
         Auth::logout();
         return redirect(route('home'));
     }
-    function forgetpassword(){
-        return view('quenmatkhau');
-    }
-
-    //    function getpassword($id){
-//     $t = User::find($id);
-//     if($t==null) return redirect('/thongbao');
-//     return view('getpass', ['tin'=>$t]);
-//    }
-
-    // public function forgetPasswordPost(Request $request){
-    //     $request->validate([
-    //         'email'=>'required|email|exists:users',
-    //     ]);
-    //     $token = Str::random(64);
-    //     \DB::table('password_resets')->insert([
-    //         'email'->$request->email,
-    //         'token'=>$token,
-    //         'created_at'=>Carbon::now()
-    //     ]);
-    //     Mail::send('emails.forget-password',['token'=>$token],function($message)use ($request){
-    //         $mesage->to($request->email);
-    //         $mesage->subject("Đặt lại mật khẩu");
-    //     });
-    // return redirect()->to(route("forget.password"))->with("success","Chúng tôi đã gửi email để đặt lại mật khẩu");
-    // }
-    //      function resetPassword($token){
-    //     return view('new-password',compact('token'));
-    // }
-    // function resetPasswordPost(Request $request){
-    //     $request->validate([
-    //         'email'=>'require|email|exists:users',
-    //         'password'=>'require|string|min:6|confirmed',
-    //         'password_confirmation'=>'require',
-    //     ]);
-    //     $updatePassword = \DB::table('password_resets')->where([
-    //         'email'=>$request->email,
-    //         'token'=>$request->token,
-    //     ])->first();
-    //     if(!$updatePassword)
-    //             return redirect()->to(route('reset.password'))->with('error',"Invalid");
-    //         User::where('email',$request->email)->update(["password"=>Hash::make($request->password)]);
-    //         \DB::table('password_resets')->where(["email"=>$request->email])->delete();
-    //         return redirect()->to(route("login"))->with("success","Dặt lại mật khẩu thành công");
-    //         }
-    }
+  
+   
     
 
 
 
- 
+
+
+
+
+public function forgetPassword(){
+return view('forget-password');
+}
+
+public function forgetPasswordPost(Request $req) {
+    $this->validate(
+        $req,
+        [
+           'email' => 'required|exists:nguoidung',
+        ],
+        [
+           'email.required' => 'Bạn chưa nhập email',
+           'email.exists' => 'Email không tồn tại trong hệ thống',
+
+        ]
+     );
+
+     $nguoidung = NguoiDung::where('email', $req->email)->first();
+     $nguoidung->token = $req->token ?? Str::random(10);
+     $nguoidung->update(['token' => $nguoidung->token]);
+     Mail::send('emails.forget-password', compact('nguoidung'), function ($email) use ($nguoidung) {
+        $email->subject('DTLP - Lấy lại mật khẩu');
+        $email->to($nguoidung->email, $nguoidung->ten);
+     });
+     return redirect('dangnhap')->with('success', 'Vui lòng check email để thực hiện thay đổi mật khẩu');
+}
+
+public function resetPassword(NguoiDung $nguoidung, $token){
+    if($nguoidung->token == $token){
+       return view('change-password');
+    }
+    return abort(404);
+}
+
+public function resetPasswordPost(NguoiDung $nguoidung, Request $req){
+    $this->validate($req,[
+             'password'=>'required',
+             'confirmpassword'=>'required|same:password',
+      ],
+      [
+             'password.required'=>'Password chưa nhập',
+             'confirmpassword.required'=>'Nhập lại password không đúng',
+             'confirmpassword.same'=>'Không khớp',
+      ]);
+       
+     $nguoidung->password = bcrypt($req->password);
+     $nguoidung->update(['password'=>$nguoidung->password,'token'=>null]);
+     return redirect('dangnhap')->with('success','Đổi mật khẩu thành công.Bạn có thể đăng nhập với mật khẩu mới!');
+      
+}
+
+ }

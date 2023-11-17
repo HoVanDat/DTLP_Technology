@@ -103,7 +103,7 @@
                 <div class="alert alert-danger">{{session('error')}}</div>
                 @endif
                 @if(session()->has('success'))
-                <div class="alert alert-danger">{{session('success')}}</div>
+                <div class="alert alert-success">{{session('success')}}</div>
                 @endif
               </div>
               <form action="{{route('login.post')}}" method="POST">
@@ -127,9 +127,7 @@
                     <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
                     <label class="form-check-label" for="form1Example3"> Remember me </label>
                   </div>
-
-                  <a href="{{route('customer.forgetpass')}}">Forgot password?</a>
-
+                  <a href="{{route('forget.password')}}">Forgot password?</a>
                 </div>
 
                 <!-- Submit button -->

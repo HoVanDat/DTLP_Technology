@@ -1,6 +1,5 @@
 @extends('layout')
 @section('noidung')
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 .mainmenu-area {
     background: none repeat scroll 0 0 #333;
@@ -26,6 +25,13 @@
 
 .header-area {
     background-color: #f17024;
+}
+
+.single-product h2 {
+    font-size: 18px;
+    line-height: 25px;
+    margin-bottom: 4px;
+    margin-top: 4px;
 }
 
 .header-area a {
@@ -55,180 +61,23 @@ button[type=submit] {
     text-transform: uppercase;
 }
 
-.product-main-img img.hinh2 {
-    width: 400px;
-}
-
-.container .row {
-    display: flex;
+table {
+    border-collapse: collapse;
     width: 100%;
 }
 
-.container .row .col-8 {
-    background-color: white;
-    padding: 30px;
-    width: 70%;
-    margin-right: 20px;
 
+td {
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
-.container .row .col-4 {
-    width: 30%;
-    background-color: white;
-    padding: 30px;
-}
-
-.col-8 span {
-    font-weight: bolder;
-    font-size: 20px;
-}
-
-.col-8 p {
-    font-size: 17px;
-}
-
-.col-4 h4 {
-    font-weight: bolder;
-}
-
-.col-4 span {
-    font-weight: bolder;
-}
-
-.bonho .tieude {
-    width: 100%;
-    background-color: #f17024;
-    padding: 10px 0;
-}
-
-.bonho .tieude h4 {
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-table tr td {
-    padding: 10px 0;
+th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    text-align: left;
 
 }
-
-table tr td:first-child {
-    padding: 10px 0;
-    font-weight: bolder;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    background-color: white;
-    width: 100%;
-    padding: 10px;
-}
-
-.grid-item {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    width: 30%;
-
-    font-size: 30px;
-    text-align: center;
-}
-
-.grid-item input {
-    width: 100%;
-}
-
-.grid-container .item1 {
-    width: 100%;
-
-}
-
-.grid-container .item1 input {
-    width: 80%;
-
-}
-
-.grid-container .item2 {
-    width: 100%;
-
-}
-
-.grid-container .item2 input {
-    width: 80%;
-
-}
-
-.grid-container .item3 {
-    width: 100%;
-
-}
-
-.grid-container .item3 input {
-    width: 80%;
-
-}
-
-#review {
-    width: 100%;
-}
-
-.bl img {
-    width: 70px;
-    border-radius: 100%;
-    margin-right: 20px;
-}
-
-.bl {
-    display: flex;
-}
-
-.bl h5 {
-    font-weight: bolder;
-}
-
-.product-inner-price .gia {
-    font-size: 25px;
-}
-
-h5.mausac {
-    color: #f17024;
-    font-weight: bolder;
-    font-size: 20px;
-}
-
-.but button {
-    width: 70px;
-    height: 40px;
-    background-color: white;
-    border: 1px solid #cccccc;
-    margin-bottom: 20px;
-}
-
-/* bình luận */
-.star {
-    cursor: pointer;
-}
-
-.star:hover,
-.star.active {
-    color: gold;
-}
-.notification {
-      display: none;
-      padding: 10px;
-      background: #4CAF50;
-      color: #ffffff;
-      border-radius: 4px;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      transition: opacity 0.3s ease-in-out;
-    }
-    .notification.show {
-      display: block;
-    }
 </style>
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
@@ -240,392 +89,242 @@ h5.mausac {
                 <div class="product-content-right">
                     <div class="product-breadcroumb">
                         <a href="">Home</a>
-                        <a href="">Category Name</a>
-                        <a href="">{{$tin->ten_san_pham}}</a>
+                        <a href="">{{$sanpham->loai->ten_loai}}</a>
+                        <a href="">{{$sanpham->ten_san_pham}}</a>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="product-images">
                                 <div class="product-main-img">
-                                    <img class="hinh2" src="{{ asset('img/' . $tin->hinh) }}" alt="">
+                                    <img src="/img/{{$sanpham->hinh}}" width="300px" alt="hinh">
+                                </div>
+                                <div class="product-gallery">
+                                    @foreach($anhsanpham as $asp)
+                                    <img src="/img/{{$asp->url_anh}}" alt="">
+                                    @endforeach
                                 </div>
 
-                                <div class="product-gallery">
-                                    <img src="img/product-thumb-1.jpg" alt="">
-                                    <img src="img/product-thumb-2.jpg" alt="">
-                                    <img src="img/product-thumb-3.jpg" alt="">
-                                </div>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="product-inner">
-                                <h2 class="product-name">{{$tin->ten_san_pham}}</h2>
+                                <h2 class="product-name">{{$sanpham->ten_san_pham}}</h2>
                                 <div class="product-inner-price">
-                                    <ins class="gia">{{ number_format($tin->gia_khuyen_mai, 0, ',', '.') }} đ</ins> <del
-                                        class="gia1">{{ number_format($tin->gia, 0, ',', '.') }} đ</del>
+                                    <ins>{{ number_format($sanpham->gia, 0, ',', '.') }} VNĐ</ins>
+                                    <del>{{ number_format($sanpham->gia_khuyen_mai, 0, ',', '.') }} VNĐ</del>
                                 </div>
-                                <h5 class="mausac">Màu sắc:</h5>
-                                @foreach($tin1 as $t)
-                                <div class="but">
-                                    <button>{{$t->mau_sac}}</button>
-                                </div>
-                                @endforeach
-                                <form action="{{ url('/muahang', [$tin->id_san_pham]) }}" class="cart">
-                                    @csrf
-                                    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+                                <form action="" class="cart">
                                     <div class="quantity">
-                                        <input type="number" id="soluong" size="4" class="input-text qty text"
-                                            title="Qty" value="1" name="soluong" min="1" step="1">
+                                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1"
+                                            name="quantity" min="1" step="1">
                                     </div>
-                                    <input type="hidden" id="tensp" value="{{$tin->ten_san_pham}}">
-                                    <button id="add-to-cart-button" class="add_to_cart_button" type="submit">Thêm vào
-                                        giỏ hàng</button>
-                                    <button class="add_to_cart_button" type="submit">Mua ngay</button>
+                                    <button class="add_to_cart_button" type="submit">Add to cart</button>
                                 </form>
 
+                                <div class="product-inner-category">
+                                    <p>Category: <a href="">{{$sanpham->loai->ten_loai}}</a>. Tags: <a
+                                            href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>. </p>
+                                </div>
 
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-8">
-                            <span>{{$tin->ten_san_pham}}</span>
-                            <p>{{$tin->mo_ta}}</p>
-                        </div>
-                        <div class="col-4">
-                            <h4>Thông số kỹ thuật của {{$tin->ten_san_pham}}</h4>
-                            <img class="" src="{{ asset('img/' . $tin->hinh) }}" alt="">
-                            <p><span>Số hiệu CPU :</span>{{$tin2->CPU}}</p>
-                            <p><span>RAM :</span>{{$tin2->RAM}}</p>
-                            <p><span>Độ phân giải :</span>{{$tin2->man_hinh}}</p>
-                            <p><span>Hệ điều hành:</span>{{$tin2->he_dieu_hanh}}</p>
-                            <button onclick="document.getElementById('id01').style.display='block'"
-                                class="w3-button w3-black">Xem chi tiết</button>
-                            <div id="id01" class="w3-modal">
-                                <div class="w3-modal-content">
-                                    <div class="w3-container">
-                                        <span onclick="document.getElementById('id01').style.display='none'"
-                                            class="w3-button w3-display-topright">&times;</span>
-                                        <div class="bonho">
-                                            <div class="tieude">
-                                                <h4>Bộ xử lý</h4>
-                                            </div>
-                                            <table style="width:100%">
+                                <div role="tabpanel">
+                                    <ul class="product-tab" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home"
+                                                role="tab" data-toggle="tab">Description</a></li>
+                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                                data-toggle="tab">Reviews</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <h2>Product Description</h2>
+                                                @if($chitietsanpham)
+                                            <table>
                                                 <tr>
-                                                    <td>RAM</td>
-                                                    <td>{{$tin2->RAM}}</td>
+                                                    <th>Mã sản phẩm
+                                                    </th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Ram</th>
+                                                    <th>CPU</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>Tốc độ Bus</td>
-                                                    <td>{{$tin2->toc_do_bus}}
-                                                    </td>
-                                                <tr>
-                                                    <td>Khả năng nâng cấp</td>
-                                                    <td>{{$tin2->tinh_nang}}
-                                                    </td>
-                                                <tr>
-                                                    <td>Rom</td>
-                                                    <td>{{$tin2->ROM}}
-                                                    </td>
-
-                                                <tr>
-                                                    <td>CPU</td>
-                                                    <td>{{$tin2->CPU}}
-                                                    </td>
+                                                    <td>SP00{{$chitietsanpham->id_chi_tiet}}</td>
+                                                    <td>{{$sanpham->ten_san_pham}}</td>
+                                                    <td>{{$chitietsanpham->RAM}}</td>
+                                                    <td>{{$chitietsanpham->CPU}}</td>
                                                 </tr>
+                                                <tr>
+                                                    <th>ROM <p></p>
+                                                    </th>
+                                                    <th>Màu Sắc</th>
+                                                    <th>Cân Nặng</th>
+                                                    <th>GPU</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{$chitietsanpham->ROM}}</td>
+                                                    <td>{{$chitietsanpham->kich_thuoc}}</td>
+                                                    <td>{{$chitietsanpham->can_nang}}</td>
+                                                    <td>{{$chitietsanpham->GPU}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Màn Hình<p></p>
+                                                    </th>
+                                                    <th>Kích Thước</th>
+                                                    <th>Xuất xứ</th>
+                                                    <th>Thời điểm ra mắt</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{$chitietsanpham->man_hinh}}</td>
+                                                    <td>{{$chitietsanpham->kich_thuoc}}</td>
+                                                    <td>{{$chitietsanpham->xuat_xu}}</td>
+                                                    <td>{{$chitietsanpham->thoi_diem_ra_mat}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Hệ điều hành <p></p>
+                                                    </th>
+                                                    <th>Camera trước</th>
+                                                    <th>Camera sau</th>
+                                                    <th>Dung lượng pin</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{$chitietsanpham->he_dieu_hanh}}</td>
+                                                    <td>{{$chitietsanpham->camera_truoc}}</td>
+                                                    <td>{{$chitietsanpham->camera_sau}}</td>
+                                                    <td>{{$chitietsanpham->dung_luong_pin}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Sim<p></p>
+                                                    </th>
+                                                    <th>Tính năng</th>
+                                                    <th>Bảo hành</th>
+                                                    <th>Cổng giao tiếp</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{$chitietsanpham->sim}}</td>
+                                                    <td>{{$chitietsanpham->tinh_nang}}</td>
+                                                    <td>{{$chitietsanpham->bao_hanh}}</td>
+                                                    <td>{{$chitietsanpham->cong_giao_tiep}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Thương hiệu <p></p>
+                                                    </th>
+                                                    <th>Độ dài dây</th>
+                                                    <th>Loại tai nghe</th>
+                                                    <th>Chất liệu</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{$chitietsanpham->thuong_hieu}}</td>
+                                                    <td>{{$chitietsanpham->do_dai_day}}</td>
+                                                    <td>{{$chitietsanpham->loai_tai_nghe}}</td>
+                                                    <td>{{$chitietsanpham->chat_lieu}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Thời gian sạc đầy<p></p>
+                                                    </th>
+                                                    <th>Thời gian sử dụng</th>
+                                                    <th>Đai tần số</th>
+                                                    <th>Số lượng</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{$chitietsanpham->thoi_gian_sac_day}}</td>
+                                                    <td>{{$chitietsanpham->thoi_gian_su_dung}}</td>
+                                                    <td>{{$chitietsanpham->dai_tan_so}}</td>
+                                                    <td>{{$chitietsanpham->so_luong}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Tốc độ bus <p></p>
+                                                    </th>
+                                                    <th>Ổ cứng</th>
+                                                    <th>Tần số quét</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{$chitietsanpham->toc_do_bus}}</td>
+                                                    <td>{{$chitietsanpham->o_cung}}</td>
+                                                    <td>{{$chitietsanpham->tan_so_quet}}</td>
+                                                </tr>
+
+                                                <!-- Thêm các dòng khác tương tự cho các sản phẩm khác -->
                                             </table>
+                                            @else
+                                                <p class="alert alert-danger">Không có tin chi tiết cho sản phẩm này</p>
+
+                                            @endif
+                                            
                                         </div>
-                                        <div class="bonho">
-                                            <div class="tieude">
-                                                <h4>Màn hình và Âm thanh</h4>
+                                        <div role="tabpanel" class="tab-pane fade" id="profile">
+                                            <h2>Reviews</h2>
+                                            <div class="submit-review">
+                                                <p><label for="name">Name</label> <input name="name" type="text"></p>
+                                                <p><label for="email">Email</label> <input name="email" type="email">
+                                                </p>
+                                                <div class="rating-chooser">
+                                                    <p>Your rating</p>
+
+                                                    <div class="rating-wrap-post">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <p><label for="review">Your review</label> <textarea name="review" id=""
+                                                        cols="30" rows="10"></textarea></p>
+                                                <p><input type="submit" value="Submit"></p>
                                             </div>
-                                            <table style="width:100%">
-                                                <tr>
-                                                    <td>Kích thước màn hình</td>
-                                                    <td>{{$tin2->kich_thuoc}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Độ phân giải</td>
-                                                    <td>{{$tin2->man_hinh}}
-                                                    </td>
-                                                <tr>
-                                                    <td>Tần số quét</td>
-                                                    <td>{{$tin2->tan_so_quet}}
-                                                    </td>
-                                                <tr>
-                                                    <td>Công nghệ âm thanh</td>
-                                                    <td>{{$tin2->loai_tai_nghe}}
-                                                    </td>
-
-                                                </tr>
-                                            </table>
                                         </div>
-                                        <div class="bonho">
-                                            <div class="tieude">
-                                                <h4>Thông tin khác</h4>
-                                            </div>
-                                            <table style="width:100%">
-                                                <tr>
-                                                    <td>Trọng lượng</td>
-                                                    <td>{{$tin2->can_nang}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Dung lượng pin</td>
-                                                    <td>{{$tin2->dung_luong_pin}}
-                                                    </td>
-                                                <tr>
-                                                    <td>Hệ điều hành</td>
-                                                    <td>{{$tin2->he_dieu_hanh}}
-                                                    </td>
-
-
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <p>Some text. Some text. Some text.</p>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- BÌNH LUẬN -->
-                <?php
-// Kiểm tra xem phiên đăng nhập đã tồn tại hay chưa
-if (session()->has('userInfo')) {
-    // Lấy thông tin người dùng từ phiên đăng nhập
-    $userInfo = session('userInfo');
-?>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                        @if (session('success'))
-  <div class="notification" id="successNotification">{{ session('success') }}</div>
-@endif
-                            
-                            
-                            <h3>BÌNH LUẬN</h3>
-                            <!-- HTML -->
-                            <div class="user-profile">
-                                <img src="path/to/user-avatar.png" alt="User Avatar" class="avatar">
-                                <span class="username">{{session('userInfo.ten')}}</span>
+
+                    <div class="related-products-wrapper">
+                        <h2 class="related-products-title">Related Products</h2>
+                        <div class="related-products-carousel">
+                            <div class="row">
+                                @foreach($sanphamlienquan as $splq)
+                                <div class="col-md-4">
+                                    <div class="single-product" style="margin-bottom:25px;">
+                                        <div class="product-f-image">
+                                            <img src="/img/{{$splq->hinh}}" alt="">
+                                            <div class="product-hover">
+                                                <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>
+                                                    Add to cart</a>
+                                                <a href="" class="view-details-link"><i class="fa fa-link"></i> See
+                                                    details</a>
+                                            </div>
+                                        </div>
+
+                                        <h2><a href="">{{$splq->ten_san_pham}}</a></h2>
+
+                                        <div class="product-carousel-price">
+                                            <ins>{{ number_format($splq->gia, 0, ',', '.') }} VNĐ</ins>
+                                            <del>{{ number_format($splq->gia_khuyen_mai, 0, ',', '.') }} VNĐ</del>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
                             </div>
-
-                            <!-- CSS -->
-                            <style>
-                            .user-profile {
-                                display: flex;
-                                align-items: center;
-                            }
-
-                            .avatar {
-                                width: 30px;
-                                height: 30px;
-                                border-radius: 50%;
-                                margin-right: 10px;
-                            }
-                            </style>
-
-                            <form action="{{ url('/comments') }}" id="comment-form" method="POST">
-                                @csrf
-                                <div class="rating">
-                                    <input type="hidden" name="rating" id="ratingInput">
-                                    <span class="star" data-rating="1"><i class="fas fa-star"></i></span>
-                                    <span class="star" data-rating="2"><i class="fas fa-star"></i></span>
-                                    <span class="star" data-rating="3"><i class="fas fa-star"></i></span>
-                                    <span class="star" data-rating="4"><i class="fas fa-star"></i></span>
-                                    <span class="star" data-rating="5"><i class="fas fa-star"></i></span>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="ten" value="{{session('userInfo.ten')}}" name="ten"
-                                        type="hidden" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="email" value="{{$tin->ten_san_pham}}"
-                                        name="ten_san_pham" type="hidden" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comment">Bình luận:</label>
-                                    <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
-                                </div>
-                                <button id="submit-comment" type="submit" class="btn btn-primary">Gửi</button>
-                            </form>
+                            <div class="text-center">
+                                {{ $sanphamlienquan->appends(request()->all())->links() }}
+                                <!-- Hiển thị liên kết phân trang -->
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
-
-                <?php
-}
-?>
-
-
-
-                <script>
-                document.getElementById('submit-comment').addEventListener('click', function(event) {
-                    var nameInput = document.querySelector('input[name="name"]');
-                    var emailInput = document.querySelector('input[name="email"]');
-                    var contentTextarea = document.querySelector('textarea[name="comment"]');
-
-                    if (nameInput.value.trim() === '' || emailInput.value.trim() === '' || contentTextarea.value
-                        .trim() === '') {
-                        alert('Vui lòng điền đầy đủ thông tin và đánh giá trước khi gửi bình luận.');
-                        event.preventDefault(); // Ngăn chặn hành vi mặc định của nút
-                    }
-                });
-                </script>
-
             </div>
-            <!-- <div class="related-products-wrapper">
-                            <h2 class="related-products-title">Related Products</h2>
-                            <div class="related-products-carousel">
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/product-1.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Sony Smart TV - 2015</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>$700.00</ins> <del>$100.00</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/product-2.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                                    <div class="product-carousel-price">
-                                        <ins>$899.00</ins> <del>$999.00</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/product-3.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Apple new i phone 6</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>$400.00</ins> <del>$425.00</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/product-4.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Sony playstation microsoft</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>$200.00</ins> <del>$225.00</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/product-5.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Sony Smart Air Condtion</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>$1200.00</ins> <del>$1355.00</del>
-                                    </div>
-                                </div>
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/product-6.jpg" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="">Samsung gallaxy note 4</a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins>$400.00</ins>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
         </div>
     </div>
 </div>
-</div>
-</div>
-<div class="container">
-    <h2>Thống kê bình luận</h2>
-    <hr>
-    @foreach($binhluan as $bl)
-    <div class="bl">
-        <img src="{{ asset('img/avata.jpeg') }}" alt="">
-        <div class="noidungbl">
-            <h5>{{$bl->name}}</h5>
-            <p>{{$bl->noi_dung}}</p>
-        </div>
-    </div>
-    @endforeach
-</div>
-<!-- JavaScript đánh giá-->
-<script>
-const stars = document.querySelectorAll('.star');
 
-stars.forEach((star, index) => {
-    star.addEventListener('click', () => {
-        const rating = star.dataset.rating;
-        ratingInput.value = rating;
-        highlightStars(index);
-    });
-});
 
-function highlightStars(index) {
-    stars.forEach((star, i) => {
-        if (i <= index) {
-            star.classList.add('active');
-        } else {
-            star.classList.remove('active');
-        }
-    });
-}
-// thông báo 2s
-window.onload = function() {
-  var successNotification = document.getElementById('successNotification');
-  if (successNotification) {
-    successNotification.style.display = 'block';
-    setTimeout(function() {
-      successNotification.style.display = 'none';
-    }, 2000); // Thời gian hiển thị thông báo (2 giây)
-  }
-};
-</script>
+
+
 
 @endsection

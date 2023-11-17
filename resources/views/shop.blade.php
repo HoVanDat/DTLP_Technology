@@ -165,8 +165,8 @@ body {
                         <div class="product-upper">
                             <img src="img/{{$d->hinh}}" alt="">
                         </div>
-
-                        <h2><a href="{{ url('/chitietsp',[$d->id_san_pham]) }}">{{$d->ten_san_pham}}</a></h2>
+                               
+                        <h2><a href="{{url('chi-tiet-san-pham',[$d->id_san_pham])}}">{{$d->ten_san_pham}}</a></h2>
 <div class="product-bottom">
                         <div class="product-carousel-price" style="margin-top:10px">
                             <ins>{{number_format($d->gia, 2, ',', '.')}} VND</ins><br> <del>{{number_format($d->gia_khuyen_mai, 2, ',', '.')}} VND</del>

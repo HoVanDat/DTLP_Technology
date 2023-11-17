@@ -97,30 +97,37 @@
                 <div class="alert alert-danger">{{session('error')}}</div>
                 @endif
                 @if(session()->has('success'))
-                <div class="alert alert-danger">{{session('success')}}</div>
+                <div class="alert alert-success">{{session('success')}}</div>
                 @endif
               </div>
               <form action="" method="POST">
                 @csrf
                 <div class="title-login">
-                <h2>Quên mật khẩu</h2>
-                </div>
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                  <input type="email" name="email" id="form1Example13" placeholder="Email" class="form-control form-control-lg" />
+                <h2>Đổi mật khẩu </h2>
                 </div>
       
                 <!-- Password input -->
-              
+                <div class="form-outline mb-4">
+                  <input type="password" name="password" id="form1Example23" placeholder="Password" class="form-control form-control-lg" />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" name="confirmpassword" id="form1Example23" placeholder="Confirm Password" class="form-control form-control-lg" />
+                </div>
+      
+                <div class="d-flex justify-content-around align-items-center mb-4">
+                  <!-- Checkbox -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                    <label class="form-check-label" for="form1Example3"> Remember me </label>
+                  </div>
+                </div>
       
                 <!-- Submit button -->
-                <div class="form-outline mb-4">
-
-                <button type="submit" class=" btn-primary btn-lg btn-block">Lấp mật khẩu</button>
-                </div>
-              
+                <button type="submit" class=" btn-primary btn-lg btn-block">Submit</button>
       
-            
+                
+      
               </form>
             </div>
           </div>

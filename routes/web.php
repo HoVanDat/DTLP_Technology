@@ -1,6 +1,7 @@
     <?php
 
 
+
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\SanphamController;
     use App\Http\Controllers\AuthController;
@@ -13,7 +14,8 @@
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\ContactAdminController;
     use App\Http\Controllers\BannerAdminController;
-  
+  use App\Http\Controllers\ChiTietSanPhamController;
+use App\Http\Controllers\TinKhuyenMaiController;
 
 
  // tài khoản
@@ -24,10 +26,7 @@
  Route::get('/dangky',[AuthController::class,'register'])->name('register');
  Route::post('/dangky',[AuthController::class,'registerPost'])->name('register.post');
  Route::get('/dangxuat',[AuthController::class,'logout'])->name('logout');
- // Route::get('/forget-password',[AuthController::class,'forgetPassword'])->name('forget.password');
- // Route::post('/forget-password',[AuthController::class,'forgetPasswordPost'])->name('forget.password.post');
- // Route::get('/reset-password/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
- // Route::post('/reset-password',[AuthController::class,'resetPasswordPost'])->name('reset.password.post');
+
     Route::get('/', [SanphamController::class, 'index'])->name('home');
 
 
@@ -43,43 +42,36 @@ Route::get('/tintuc',function(){
 });
 
 
+
   Route::get('/products/search', [SanphamController::class, 'search'])->name('products.search');
 
 route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('profile');
 
 
 Route::post('/filter-products', 'SanphamController@filter')->name('filterProducts');
+Route::get('/khuyenmai',[TinKhuyenMaiController::class,'tinkhuyenmai'])->name('tinkhuyenmai');
 
-Route::get('/khuyenmai',function(){
-    return view('khuyenmai');
-});
+
 Route::get('/lienhe',function(){
     return view('lienhe');
 });
 
-
 Route::get('/muahang/{id}',[OrderController::class, 'muahang'])->name('muahang');
-Route::post('/forget-password',[AuthController::class, 'postforgetpassword']);
-
-Route::get('/forget-password',[AuthController::class, 'forgetpassword'])->name('customer.forgetpass');
-
-
-Route::get('/get-password/{id}', [AuthController::class, 'getpassword'])->name('customer.getpa');
-
 Route::get('/dangnhap',[AuthController::class,'login'])->name('login');
 Route::post('/dangnhap',[AuthController::class,'loginPost'])->name('login.post');
 Route::get('/dangky',[AuthController::class,'register'])->name('register');
 Route::post('/dangky',[AuthController::class,'registerPost'])->name('register.post');
 Route::get('/dangxuat',[AuthController::class,'logout'])->name('logout');
-Route::get('/forgot-password', function(){
-    return view('forget-password');
-})->name('forget.password.get');
-Route::post('/forget-password',[AuthController::class,'forgetPasswordPost'])->name('forget.password.post');
-Route::get('/reset-password/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
-Route::post('/reset-password',[AuthController::class,'resetPasswordPost'])->name('reset.password.post');
-Route::get('/chitiet',function(){
-    return view('chitiet');
-});
+
+Route::get('/forget-password',[AuthController::class,'forgetPassword'])->name('forget.password');
+Route::post('/forget-password',[AuthController::class,'forgetPasswordPost']);
+Route::get('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
+Route::post('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPasswordPost']);
+
+
+Route::get('/chi-tiet-san-pham/{id}',[ChiTietSanPhamController::class,'chitiet'])->name('chitietsanpham');
+
+
 Route::get('/giohang',function(){
     return view('giohang');
 });

@@ -103,7 +103,7 @@
                         <li><a href="/shopdienthoai">Điện thoại</a></li>
                         <li><a href="/shopmaytinhbang">Máy tính bảng</a></li>
                         <li><a href="/tintuc">Tin tức</a></li>
-                        <li><a href="/khuyenmai">Khuyến mãi</a></li>
+                        <li><a href="{{route('tinkhuyenmai')}}">Khuyến mãi</a></li>
                         <li><a href="/lienhe">Liên hệ</a></li>
                     </ul>
 
@@ -204,11 +204,9 @@ $(document).ready(function() {
                     <div class="footer-menu">
                     <h2 class="footer-wid-title">Danh Mục</h2>
                         <ul>
-                            <li><a href="#">Điện thoại di động</a></li>
-                            <li><a href="#">Phụ kiện nhà cửa</a></li>
-                            <li><a href="#">TV LED</a></li>
-                            <li><a href="#">Máy tính</a></li>
-                            <li><a href="#">Gadget</a></li>
+                        @foreach($danhmucsanpham as $dm)
+                <li><a href="#">{{$dm->ten_loai}}</a></li>
+            @endforeach
                         </ul>
 
                     </div>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChiTietSanPham extends Model
 {
     use HasFactory;
+
     protected $table = 'chitietsanpham';
     protected $primaryKey = 'id_chi_tiet';
     	protected $fillable = [
@@ -42,4 +43,8 @@ class ChiTietSanPham extends Model
         'so_luong',
         'hinh',
     ];
+     public function sanpham(){
+        return $this->belongsTo('App\Models\SanPham','id_san_pham','id_san_pham');
+    }
+
 }
