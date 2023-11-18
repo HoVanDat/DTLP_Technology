@@ -112,9 +112,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('bangkeluong',function(){
         return view('admin/bangkeluong');
     });
-    Route::get('bcdoanhthu',function(){
-        return view('admin/bcdoanhthu');
-    });
+    Route::get('bcdoanhthu',[App\Http\Controllers\BaoCaoDoanhThuController::class,'index'])->name('bcdoanhthu');
     Route::get('create-bangkeluong',function(){
         return view('admin/create-bangkeluong');
     });
