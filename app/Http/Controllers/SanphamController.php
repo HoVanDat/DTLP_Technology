@@ -10,6 +10,10 @@ use App\Http\Requests;
 use App\Models\SanPham;
 use App\Models\Loai;
 use App\Models\ChiTietSanPham;
+use App\Models\TinTuc;
+use App\Models\DanhMucTinTuc;
+use App\Models\NguoiDung;
+
 use Carbon\Carbon;
 use DB;
 class SanphamController extends Controller
@@ -38,6 +42,18 @@ class SanphamController extends Controller
         ->limit(4) // Giới hạn số lượng bài viết
         ->get(); // Thực hiện truy vấn sau khi gọi get()
         return view('tintuc', ['dt' => $dt,'dt1'=>$dt1]);
+    }
+    public function cttin($id){
+        $chitiettin = TinTuc::find($id);
+        $tinlienquan = TinTuc::where('id_danh_muc_tin',$id)->limit(3)->get();
+        $danhmuctin = DanhMucTinTuc::all();
+        $randsp = SanPham::inRandomOrder()->first();
+        $randspchitiet = null; 
+        $sanpham = SanPham::where('hot',1)->limit(4)->get();
+        if ($randsp) {
+        $randspchitiet = ChiTietSanPham::where('id_san_pham', $randsp->id)->first();
+        }
+        return view('chitiettin',['chitiettin'=>$chitiettin,'tinlienquan'=>$tinlienquan,'danhmuctin'=>$danhmuctin,'randsp' => $randsp,'randspchitiet' => $randspchitiet,'sanpham'=>$sanpham]);
     }
     public function mtb(){
         $dt= DB::table('sanpham')->where('id_loai','3')->paginate(13);

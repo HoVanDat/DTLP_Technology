@@ -13,7 +13,7 @@ class DanhMucTinTuc extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
    
-    protected $table='danhmuc_tintuc';
+    protected $table='DanhMuc_TinTuc';
     protected $primaryKey='id_danh_muc_tin';
      protected $fillable = [
         'ten_danh_muc'

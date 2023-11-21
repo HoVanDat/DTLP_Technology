@@ -88,6 +88,7 @@ Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
 
 Route::get('/tintuc',[SanphamController::class, 'tintuc']);
+Route::get('/chi-tiet-tin/{id}',[SanphamController::class, 'cttin']);
 
 Route::get('/shopmaytinhbang',[SanphamController::class, 'mtb']);
 // bình luận

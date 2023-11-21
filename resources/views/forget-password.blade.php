@@ -116,7 +116,7 @@
                 <!-- Submit button -->
                 <div class="form-outline mb-4">
 
-                <button type="submit" class=" btn-primary btn-lg btn-block">Lấp mật khẩu</button>
+                <button type="submit" class=" btn-primary btn-lg btn-block">Lấy mật khẩu</button>
                 </div>
               
       

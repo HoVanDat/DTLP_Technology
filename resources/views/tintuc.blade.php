@@ -273,7 +273,7 @@ div.group_sidebar{
             </div>
             <!-- End: Nội dung bài viết -->
             <a class="readmore btn-rb clear-fix"
-                href="/blogs/news/goi-y-su-dung-dong-ho" role="button">Xem
+                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
                 tiếp <span class="fa fa-angle-double-right"></span></a>
         </div>
 
