@@ -19,20 +19,31 @@ class SanphamController extends Controller
         $sp2= DB::table('sanpham')->where('id_san_pham','>=',100)->limit(20)->get();
         $sp3= DB::table('sanpham')->where('id_san_pham','>=',30)->limit(20)->get();
         $sp4= DB::table('sanpham')->where('id_san_pham','>=',130)->limit(20)->get();
-        return view('home',['sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4]);
+        $sp5= DB::table('sanpham')->where('id_loai',2)->limit(5)->get();
+        $sp6= DB::table('sanpham')->where('id_loai',1)->limit(5)->get();
+
+        return view('home',['sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6]);
     }
     public function dt(){
-        $dt= DB::table('sanpham')->where('id_loai','1')->paginate(12);
-        return view('shop',['dt'=>$dt]);
-    }
-    public function lt(){
-        $dt = DB::table('sanpham')->where('id_loai', '2')->paginate(10); // 10 sản phẩm trên mỗi trang
-    return view('shop', ['dt' => $dt]);
+        $dt= DB::table('sanpham')->where('id_loai','1')->paginate(9);
+        $dt1 = DB::table('sanpham')
+    ->orderBy('hot')
+    ->limit(5)
+    ->get();
+        return view('shop',['dt'=>$dt, 'dt1'=>$dt1]);
     }
 
+    public function lt(){
+        $dt = DB::table('sanpham')->where('id_loai', '2')->paginate(9); // 10 sản phẩm trên mỗi trang
+        $dt1 = DB::table('sanpham')
+    ->orderBy('hot')
+    ->limit(5)
+    ->get();
+    return view('shop', ['dt' => $dt, 'dt1'=>$dt1]);
+    }
 
     public function tintuc(){
-        $dt = DB::table('tintuc')->paginate(10); // 10 sản phẩm trên mỗi trang
+        $dt = DB::table('tintuc')->paginate(4); // 10 sản phẩm trên mỗi trang
         $dt1 = DB::table('tintuc')
         ->orderBy('view', 'desc')
         ->limit(4) // Giới hạn số lượng bài viết
@@ -40,10 +51,13 @@ class SanphamController extends Controller
         return view('tintuc', ['dt' => $dt,'dt1'=>$dt1]);
     }
     public function mtb(){
-        $dt= DB::table('sanpham')->where('id_loai','3')->paginate(13);
-        return view('shop',['dt'=>$dt]);
+        $dt= DB::table('sanpham')->where('id_loai','3')->paginate(9);
+        $dt1 = DB::table('sanpham')
+    ->orderBy('hot')
+    ->limit(5)
+    ->get();
+        return view('shop',['dt'=>$dt,'dt1'=>$dt1]);
     }
-
     public function qlsanpham(){
         $sanpham = SanPham::all();
         return view('admin/qlsanpham',compact('sanpham'));
@@ -108,7 +122,7 @@ class SanphamController extends Controller
         $chitietsanpham = ChiTietSanPham::where('id_san_pham', $id)->get();
         $sanpham = SanPham::where('id_san_pham', $id)->first();
         return view('admin/qlchitietsanpham', compact('sanpham', 'chitietsanpham'));
-    }    
+    }
     public function createchitietsanpham($id){
         $sanpham = SanPham::where('id_san_pham', $id)->first();
         return view('admin/create-qlchitietsanpham', compact('sanpham'));
@@ -208,28 +222,11 @@ class SanphamController extends Controller
 
         $idsp = $tin->id_san_pham;
         $product = BinhLuan::where('id_san_pham', $idsp)->get();
-
-        // Tạo một mảng để lưu trữ tất cả đánh giá
-        // $ratings = [];
-
-        // Lặp qua danh sách đánh giá và lấy ra các giá trị sao
-        // foreach ($product as $item) {
-        //     $ratings[] = $item->sao;
-        // }
-
-        // Tính toán số sao trung bình
-        // if (count($ratings) > 0) {
-        //     $totalRatings = array_sum($ratings);
-        //     $averageRating = $totalRatings / count($ratings);
-        // } else {
-        //     $averageRating = 0;
-        // }
-
         $data = ['id' => $id, 'tin' => $tin, 'tin1'=>$tin1, 'tin2'=>$tin2, 'binhluan'=>$product];
         return view('chitiet', $data);
     }
-
-        public function filter(Request $request)
+    
+    public function filter(Request $request)
         {
             $selectedPrices = $request->input('price', []);
 
@@ -269,4 +266,16 @@ class SanphamController extends Controller
             $chitietsanpham = ChiTietSanPham::where('id_chi_tiet', $id_chi_tiet)->delete();
             return redirect('admin/qlchitietsanpham' . $id_san_pham);
         }
+
+        public function timKiem(Request $request)
+{
+    $tu = $request->input('tu');
+    $den = $request->input('den');
+
+    // Thực hiện truy vấn tìm kiếm sản phẩm với giá trong khoảng từ $tu đến $den
+    $dt = SanPham::whereBetween('gia', [$tu, $den])->get();
+
+    return view('shop', compact('dt'));
+}
+
 }

@@ -507,10 +507,9 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
-                                        cart</a>
-                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
-                                        See details</a>
+                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                        Xem thêm</a>
                                 </div>
                             </div>
 
@@ -560,15 +559,36 @@ body {
                 <div class="latest-product">
                     <h2 class="section-title">Sản phẩm mới</h2>
                     <div class="product-carousel">
-                        @foreach($sp2 as $s)
+                        @foreach($sp5 as $s)
                         <div class="single-product">
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
-                                        cart</a>
-                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
-                                        See details</a>
+                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                        Xem thêm</a>
+                                </div>
+                            </div>
+
+                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+
+                            <div class="product-carousel-price">
+                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
+                                <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+                    <div class="product-carousel">
+                        @foreach($sp6 as $s)
+                        <div class="single-product">
+                            <div class="product-f-image">
+                                <img src="img/{{$s->hinh}}" alt="">
+                                <div class="product-hover">
+                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                        Xem thêm</a>
                                 </div>
                             </div>
 
@@ -588,10 +608,9 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
-                                        cart</a>
-                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
-                                        See details</a>
+                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                        Xem thêm</a>
                                 </div>
                             </div>
 
@@ -628,10 +647,9 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
-                                        cart</a>
+                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                                     <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
-                                        See details</a>
+                                        Xem thêm</a>
                                 </div>
                             </div>
 
@@ -650,10 +668,9 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
-                                        cart</a>
-                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
-                                        See details</a>
+                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                        Xem thêm</a>
                                 </div>
                             </div>
 

@@ -1,3 +1,10 @@
+<?php
+
+
+
+?>
+
+
 @extends('layout')
 @section('noidung')
 <!-- css trang shop -->
@@ -98,25 +105,49 @@ body {
     <div class="container">
         <div class="row">
             <div class="title-block-common mb-2">
-                <h1>Shop Page</h1>
+                <h1>Sản phẩm</h1>
             </div>
             <div class="space2"></div>
             <div class="col-md-4">
                 <div class="col-md-12">
 
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Products</h2>
-                        <form class="filter-form">
-    <label>
-        <input type="checkbox" name="price" value="under-2m"> Dưới 2 triệu
-    </label>
-    <label>
-        <input type="checkbox" name="price" value="2m-to-5m"> Từ 2 - 5 triệu
-    </label>
-    <label>
-        <input type="checkbox" name="price" value="above-5m"> Trên 5 triệu
-    </label>
+                        <h2 class="sidebar-title">Lọc giá sản phẩm</h2>
+                        <form class="filter-form" action="{{ route('tim-kiem') }}" method="get">
+    <div class="row">
+        <div class="col-4">
+            <input type="text" name="tu" placeholder="Từ giá">
+        </div>
+        <div class="col-4">
+            <h3>Đến</h3>
+        </div>
+        <div class="col-4">
+            <input type="text" name="den" placeholder="Đến giá">
+        </div>
+
+    </div>
+    <div class="col-12">
+            <button type="submit">Tìm kiếm</button>
+        </div>
 </form>
+<style>
+    .filter-form .row{
+        display:flex;
+    }
+    .filter-form .row .col-3{
+        padding:10px;
+        width:260px;
+    }
+    .filter-form .col-4 h3{
+        font-size:10px;
+        margin-top:30px;
+    }
+    .filter-form button{
+        padding: 10px;
+        margin-top:15px;
+        width:100%;
+    }
+</style>
 
 <div id="products-list">
     <!-- Hiển thị danh sách sản phẩm ở đây -->
@@ -152,8 +183,28 @@ body {
 </form>
                     </div>
                     <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
+                        <h2 class="sidebar-title">Sản phẩm mới nhất</h2>
+                        @foreach($dt1 as $d)
+                <div class="col-md-12 col-sm-6">
+                    <div class="single-shop-product">
+                        <div class="row">
+                            <div class="col-4">
+                            <div class="product-upper">
+                            <img src="img/{{$d->hinh}}" alt="">
+                        </div>
+                            </div>
+                            <div class="col-8">
+                            <h2><a href="{{url('chi-tiet-san-pham',[$d->id_san_pham])}}">{{$d->ten_san_pham}}</a></h2>
+<p>{{number_format($d->gia, 2, ',', '.')}} VND</p>
+                            </div>
+                        </div>
 
+
+<div class="product-bottom">
+
+                    </div></div>
+                </div>
+                @endforeach
                     </div>
                 </div>
             </div>
@@ -165,7 +216,7 @@ body {
                         <div class="product-upper">
                             <img src="img/{{$d->hinh}}" alt="">
                         </div>
-                               
+
                         <h2><a href="{{url('chi-tiet-san-pham',[$d->id_san_pham])}}">{{$d->ten_san_pham}}</a></h2>
 <div class="product-bottom">
                         <div class="product-carousel-price" style="margin-top:10px">
@@ -177,6 +228,7 @@ body {
                         </div>
                     </div></div>
                 </div>
+
                 @endforeach
 
                 <!-- <div class="col-md-4 col-sm-6">
@@ -359,7 +411,11 @@ body {
                             </div>
                         </div>
                     </div> -->
+                    <div class="pagination">
+    {{ $dt->withQueryString()->links('pagination::bootstrap-4') }}
+</div>
             </div>
+
 </div>
 
 
@@ -369,8 +425,13 @@ body {
     </div>
 </div>
 <style>
+    .single-shop-product .row .col-8{
+        margin-left:5px;
+    }
+
     .pagination{
         background-color:red;
+        display:block;
     }
     .filter-form {
             background-color: #f2f2f2;
@@ -378,7 +439,9 @@ body {
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
+.single-sidebar{
+    background-color:white;
+}
         .filter-form label {
             display: block;
             margin-bottom: 5px;
@@ -387,14 +450,58 @@ body {
         .filter-form input[type="checkbox"] {
             margin-right: 5px;
         }
-
+.col-8 h2 a{
+    text-align:justify;
+}
         .filter-form label, .filter-form input[type="checkbox"] {
             cursor: pointer;
         }
-
+.row .col-3 input{
+    width: 100px;
+}
         .filter-form input[type="checkbox"]:checked + label {
             font-weight: bold;
         }
+        .single-sidebar .row{
+            display:flex;
+        }
+        .single-sidebar .row .col-4 img{
+            width: 80px;
+        }
+
+
+.filter-form .col-4 h3{
+}
+.single-sidebar .col-4{
+    height:50px;
+
+}
+
+.single-sidebar .col-4 input{
+width:90%;
+margin-left:10px;
+}
+.single-sidebar .row .col-12{
+    width: 100%;
+}
+.shop-product h2 {
+    font-size: 18px;
+    margin: 10px 0 20px 0;
+    text-transform: uppercase;
+text-align:left;}
+.single-shop-product {
+    margin-bottom: 10px;
+    text-align: left;
+}
+.filter-form{
+    background-color:white;
+}
+.single-shop-product h2 {
+    font-size: 18px;
+    margin: 10px 0 20px 0;
+    text-transform: uppercase;
+    text-align: left;
+}
 </style>
 
 @endsection

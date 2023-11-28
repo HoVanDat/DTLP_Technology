@@ -42,8 +42,8 @@ hr {
     border-top: 1px solid #eee;
 }
 .group_sidebar{
-    background-color: white;
     border-radius: 10px;
+    margin-top:20px;
 }
 .title-block-common {
     overflow: hidden;
@@ -127,63 +127,7 @@ div.group_sidebar{
                         <div class="col-md-3  col-sm-12 col-xs-12 leftsidebar-col" data-sticky_column>
                             <!-- Begin sidebar blog -->
                             <div class="sidebar ">
-                                <div class="group_sidebar">
-                                    <div class="list-group navbar-inner ">
 
-
-                                        <div>
-                                            <h3 class="sb-title">Danh mục</h3>
-                                        </div>
-
-                                        <ul class="nav navs sidebar menu" id="menu-blog">
-
-
-
-
-                                            <li class="item  first">
-                                                <a href="/collections/dong-ho-nam">
-                                                    <span>Laptop</span>
-                                                </a>
-                                            </li>
-
-
-
-
-
-                                            <li class="item  ">
-                                                <a href="/collections/dong-ho-nu">
-                                                    <span>Laptop</span>
-                                                </a>
-                                            </li>
-
-
-
-
-
-                                            <li class="item  ">
-                                                <a href="/collections/dong-ho-tre-em">
-                                                    <span>Laptop</span>
-                                                </a>
-                                            </li>
-
-
-
-
-
-                                            <li class="item last">
-                                                <a href="/collections/phu-kien-dong-ho">
-                                                    <span>Laptop</span>
-                                                </a>
-                                            </li>
-
-
-                                        </ul>
-
-                                    </div>
-
-
-
-                                </div>
                                 <!-- End: Danh mục tin tức -->
 
 
@@ -192,7 +136,7 @@ div.group_sidebar{
 
 
                                 <!--Begin: Bài viết mới nhất-->
-                                <div class=" group_sidebar">
+                                <div id="group_sidebar" class="group_sidebar">
                                     <h3 class="sb-title">
                                         Bài viết mới nhất
                                     </h3>
@@ -201,7 +145,7 @@ div.group_sidebar{
 
                                         <div class="col-md-5 col-xs-12 col-sm-12 img-article">
                                             <div class="art-img">
-                                                <img src="admin/img-anhthe/{{$tt->hinh}}"
+                                                <img src="/img/{{$tt->hinh}}"
                                                     alt="">
                                             </div>
                                         </div>
@@ -259,7 +203,7 @@ div.group_sidebar{
 
         <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
             <div class="art-img">
-                <img src="admin/img-anhthe/{{$dt->hinh}}"
+                <img src="/img/{{$dt->hinh}}"
                     alt="">
             </div>
         </div>
@@ -316,6 +260,10 @@ div.group_sidebar{
     <!-- End product widget area -->
 
 
-
+<style>
+    #group_sidebar{
+        padding-top:10px;
+    }
+</style>
 
 @endsection

@@ -204,6 +204,12 @@ p {
 margin-top: 12px;
 }
 /* end */
+  button.add_to_cart_buttonss{
+        height:40px;
+        border:none;
+        background-color:#5a88ca;
+        color:white;
+    }
 </style>
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
@@ -241,14 +247,64 @@ margin-top: 12px;
                                     <ins>{{ number_format($sanpham->gia, 0, ',', '.') }} VNĐ</ins>
                                     <del>{{ number_format($sanpham->gia_khuyen_mai, 0, ',', '.') }} VNĐ</del>
                                 </div>
+                                <p>Màu sắc: Đen </p>
+                                <div id="cartMessage"></div>
 
-                                <form action="" class="cart">
-                                    <div class="quantity">
-                                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1"
-                                            name="quantity" min="1" step="1">
-                                    </div>
-                                    <button class="add_to_cart_button" type="submit">Add to cart</button>
-                                </form>
+                                <form action="{{ route('muahang',['id' => $sanpham->id_san_pham]) }}" method="get" class="cart" id="addToCartForm">
+    <div class="quantity">
+        <input type="number" size="4" class="input-text qty text" title="Qty" value="1"
+            name="quantity" min="1" step="1">
+    </div>
+    <input type="hidden" name="product_id" value="{{ $sanpham->id_san_pham }}">
+
+    <button class="" type="submit">Mua ngay</button>
+    <button class="add_to_cart_buttonss" type="button" onclick="addToCart('cart')">Thêm vào giỏ hàng</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function addToCart(action) {
+        <?php if (!session()->has('userInfo')): ?>
+            window.location.href = '<?php echo route("login"); ?>';
+        <?php else: ?>
+            var quantity = $('#addToCartForm input[name="quantity"]').val();
+            var product_id = $('#addToCartForm input[name="product_id"]').val();
+
+            var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type: 'POST',
+                url: '/add-to-cart123',
+                data: {
+                    action: action,
+                    quantity: quantity,
+                    product_id: product_id,
+                    _token: csrf_token,
+                },
+                success: function(response) {
+                    // Thêm mã hiển thị thông báo từ AlertSweet2 ở đây
+                    Swal.fire({
+                        title: 'Đã thêm vào giỏ hàng',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function(error) {
+                    console.error('Lỗi khi thêm vào giỏ hàng', error);
+                    // Thêm mã hiển thị thông báo lỗi từ AlertSweet2 ở đây
+                    Swal.fire({
+                        title: 'Đã thêm vào giỏ hàng lỗi',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        <?php endif; ?>
+    }
+</script>
+
+
 
                                 <div class="product-inner-category">
                                     <p>Category: <a href="">{{$sanpham->loai->ten_loai}}</a>. Tags: <a
@@ -523,9 +579,6 @@ margin-top: 12px;
     </div>
 </div>
 
-
-
-
 <!-- JavaScript đánh giá-->
 <script>
 const stars = document.querySelectorAll('.star');
@@ -559,3 +612,4 @@ window.onload = function() {
 };
 </script>
 @endsection
+
