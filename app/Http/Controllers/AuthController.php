@@ -18,10 +18,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 
 class AuthController extends Controller
-{   
+{
 
      function thongtin(Request $request){
- return view('thongtin');
+
+        $iduser = session('userInfo.iduser');
+        $tin123 = DB::table('donhang')->where('id_nguoi_dung',$iduser)->get();
+
+
+
+ return view('thongtin', ['tin123' => $tin123]);
+
     }
      function thongtinpost(Request $request){
         $ten = $request->ten;
@@ -53,7 +60,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-    
+
         $email = $request->email;
         $password = $request->password;
         $user = NguoiDung::where('email', $email)->first();
@@ -96,8 +103,8 @@ if ($user && Hash::check($password, $user->password)) {
     public function register(){
         return view('dangky');
        }
-    
-    
+
+
        public function registerPost(Request $request){
         $request->validate([
             'hoten' => 'required',
@@ -106,17 +113,17 @@ if ($user && Hash::check($password, $user->password)) {
             'email' => 'required|email', // Thêm kiểm tra email hợp lệ
             'password' => 'required',
         ]);
-    
+
         $data['ten'] = $request->hoten;
         $data['dia_chi'] = $request->diachi;
         $data['so_dien_thoai'] = $request->sdt;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
-    
+
         // Kiểm tra xem email đã tồn tại hay chưa
         $existingUser = \DB::table('nguoidung')->where('email', $data['email'])->first();
         $existingUser1 = \DB::table('nguoidung')->where('so_dien_thoai', $data['so_dien_thoai'])->first();
-    
+
         if ($existingUser) {
             // Email đã tồn tại, hiển thị thông báo lỗi bằng SweetAlert2
             Alert::error('Lỗi', 'Gmail đã tồn tại')->persistent("OK");
@@ -142,9 +149,9 @@ if ($user && Hash::check($password, $user->password)) {
         Auth::logout();
         return redirect(route('home'));
     }
-  
-   
-    
+
+
+
 
 
 
@@ -196,11 +203,11 @@ public function resetPasswordPost(NguoiDung $nguoidung, Request $req){
              'confirmpassword.required'=>'Nhập lại password không đúng',
              'confirmpassword.same'=>'Không khớp',
       ]);
-       
+
      $nguoidung->password = bcrypt($req->password);
      $nguoidung->update(['password'=>$nguoidung->password,'token'=>null]);
      return redirect('dangnhap')->with('success','Đổi mật khẩu thành công.Bạn có thể đăng nhập với mật khẩu mới!');
-      
+
 }
 
  }

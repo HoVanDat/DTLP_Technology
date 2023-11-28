@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DonHang;
+use App\Models\SanPham;
+
 use DB;
 use App\Models\DonHangChiTiet;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -12,7 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class OrderController extends Controller
 {
     function muahang($id, Request $request){
-        $soluong = $request->input('soluong');
+        $soluong = $request->input('quantity');
 
         $tin = DB::table('sanpham')->where('id_san_pham',$id)->first();
         $data= ['soluong'=>$soluong,'tin'=>$tin];
@@ -55,7 +57,7 @@ class OrderController extends Controller
             return redirect()->route('login');
         }else{
             if (session()->has('userInfo')) {
-                $iduser = session('userInfo.id_nguoi_dung');
+                $iduser = session('userInfo.iduser');
             } else {
                 $iduser = 0;
             }
@@ -137,7 +139,9 @@ class OrderController extends Controller
                         } else {
                             // Xử lý lỗi khi không có khóa 'payUrl' trong dữ liệu trả về từ API
                             return redirect()->back()->with('error', 'Có lỗi xảy ra khi thanh toán qua MoMo.');
-                        }   }
+                        }
+
+                     }
 
             }else{
                 $donHang = new DonHang;
@@ -179,4 +183,113 @@ class OrderController extends Controller
 
 
 }
+
+public function addToCart(Request $request)
+{
+    // Xử lý logic thêm vào giỏ hàng ở đây
+    // Sử dụng $request để lấy thông tin sản phẩm và số lượng
+
+    $productInfo = [
+        'product_id' => $request->input('product_id'), // Sửa khóa này để phù hợp với view
+        'quantity' => $request->input('quantity'),
+
+        // Thêm thông tin khác nếu cần
+    ];
+
+    // Lưu thông tin vào session giỏ hàng
+    $cart = session()->get('cart', []);
+    $cart[] = $productInfo;
+    session()->put('cart', $cart);
+
+    // Trả về số lượng sản phẩm trong giỏ hàng
+    $cartCount = count($cart);
+
+    // Trả về kết quả JSON với số lượng sản phẩm
+    return response()->json(['success' => 'Đã thêm vào giỏ hàng', 'cartCount' => $cartCount]);
+}
+
+
+public function showCart()
+{
+    // Lấy thông tin giỏ hàng từ session
+    $cart = session()->get('cart', []);
+
+    // Truyền thông tin giỏ hàng đến view
+    return view('giohang', compact('cart'));
+}
+public function muaHang1(Request $request)
+{
+    $productData = $request->input('products', []);
+
+
+    return view('dathang1', compact('productData'));
+}
+
+public function timKiemDonHang(Request $request)
+{
+    $tuKhoa = $request->input('tu-khoa');
+
+    // Thực hiện tìm kiếm trong CSDL dựa trên từ khóa
+
+    // Ví dụ:
+    $tin123 = DonHang::where('id_don_hang', 'LIKE', "%$tuKhoa%")
+        ->orWhere('trang_thai', 'LIKE', "%$tuKhoa%")
+        ->get();
+
+    return view('thongtin', ['tin123' => $tin123]);
+}
+
+
+
+function xuLyMaGiamGia(Request $request)
+{
+    if (session()->has('userInfo')) {
+        $iduser = session('userInfo.iduser');
+    } else {
+        $iduser = 0;
+    }
+
+    $maGiamGia = $request->input('ma_giam_gia');
+    $tin = DB::table('magiamgia')->where('id_nguoi_dung', $iduser)->first();
+
+    if ($tin && $maGiamGia == $tin->tieude && $tin->gia > 0) {
+        $giaGiam = $tin->gia;
+
+        $thanhtien = session('thanhtien');
+        // Cập nhật giá trị mới của $thanhtien sau khi áp dụng giảm giá
+        $thanhtien -= $thanhtien*$giaGiam; // logic tính toán giá trị mới ứng với mã giảm giá
+        // Lưu giá trị mới của $thanhtien vào session hoặc nơi khác
+        session()->put('thanhtien', $thanhtien);
+    }
+
+    return redirect()->back();
+}
+
+
+
+public function datHang12(Request $request)
+{
+      // Lấy thông tin sản phẩm và số lượng từ request
+      $selectedProductData = $request->input('selected_products', []);
+
+      // Lấy thông tin sản phẩm từ database dựa trên các ID đã chọn
+      $sanPham = SanPham::whereIn('id_san_pham', array_keys($selectedProductData))->get();
+
+      // Tạo một mảng mới để lưu trữ thông tin sản phẩm và số lượng
+      $sanPhamInfo = [];
+
+      foreach ($sanPham as $sp) {
+          // Lấy số lượng từ dữ liệu đã chọn
+          $quantity = $selectedProductData[$sp->id_san_pham];
+
+          // Thêm thông tin vào mảng
+          $sanPhamInfo[] = [
+              'sanPham' => $sp,
+              'soLuong' => $quantity,
+          ];
+      }
+    // Hiển thị thông tin sản phẩm (hoặc bạn có thể thực hiện bất kỳ logic xử lý nào khác)
+    return view('dathang1', ['sanPhamInfo' => $sanPhamInfo]);
+}
+
 }

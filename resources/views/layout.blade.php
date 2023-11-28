@@ -10,18 +10,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Ustora Demo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet'
         type='text/css'>
+
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
     <!-- Bootstrap -->
@@ -64,7 +65,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="logo">
-                        <h1><a href="/"><img src="{{ asset('img/logo.png') }}"></a></h1>
+                        <h1><a href="/"><img style="width:100px;" src="img/logo2.jpg"></a></h1>
                     </div>
                 </div>
                 <div id="sm" class="col-sm-6">
@@ -77,8 +78,8 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="shopping-item">
-                        <a href="/giohang">Cart - <span class="cart-amunt">$100</span> <i
-                                class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="/cart">Giỏ hàng<span class="cart-amunt"></span> <i
+                                class="fa fa-shopping-cart"></i> <span class="product-count">{{ count(session('cart', [])) }}   </span></a>
                     </div>
                 </div>
             </div>
@@ -121,7 +122,7 @@
           aria-expanded="false"
         >
           <img width= 22px;
-            src="img/{{session('userInfo.hinh')}}"
+            src="img/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
             class="rounded-circle"
             height="22"
             alt="Portrait of a Woman"
@@ -175,7 +176,7 @@ $(document).ready(function() {
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h1><a href="./"><img src="/img/logo.png"></a></h1>
+                    <h1><a href="./"><img src="{{ asset('img/logo2.jpg') }}"></a></h1>
                         <p>Cảm ơn quý khách hàng đã tin tưởng và lựa chọn chúng tôi. Chúng tôi sẽ không ngừng phấn đấu để đáp ứng và vượt qua mong đợi của quý khách hàng, xây dựng một mối quan hệ lâu dài và mang lại giá trị không ngừng.</p>
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>

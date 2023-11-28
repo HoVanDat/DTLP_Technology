@@ -1,9 +1,9 @@
 <?php
-
+session(['start']);
 $thanhtien = $tin->gia * $soluong;
-
+session(['thanhtien' => $thanhtien]);
 if (session()->has('userInfo')) {
-    $iduser = session('userInfo.id_nguoi_dung');
+    $iduser = session('userInfo.iduser');
 } else {
     $iduser = 0;
 }
@@ -41,7 +41,9 @@ $email = $tin123->email;
                             <input type="hidden" name="sanphamgiohang[1][sp_ma]" value="2">
                             <input type="hidden" name="sanphamgiohang[1][gia]" value="11800000.00">
                             <input type="hidden" name="sanphamgiohang[1][soluong]" value="2">
-                            <li class="list-group-item   lh-condensed">
+                            <div class="row-de" style="display:flex; height:120px; padding:0px;">
+                            <img style="width:100px; " src="/img/{{$tin->hinh}}" alt="">
+                            <li  class="list-group-item   lh-condensed">
                                 <div>
                                     <h6 class="my-0">{{$tin->ten_san_pham}}
                                 </div>
@@ -51,6 +53,8 @@ $email = $tin123->email;
 
 
                             </li>
+                            </div>
+
                             <input type="hidden" name="sanphamgiohang[2][sp_ma]" value="4">
                             <input type="hidden" name="sanphamgiohang[2][gia]" value="14990000.00">
                             <input type="hidden" name="sanphamgiohang[2][soluong]" value="8">
@@ -63,10 +67,31 @@ $email = $tin123->email;
 
 
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Mã khuyến mãi">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Xác nhận</button>
-                            </div>
+                        <form method="post" action="{{ route('xu-ly-ma-giam-gia') }}" onsubmit="return xuLyMaGiamGia()">
+    @csrf
+    <div class="input-group">
+        <input type="text" class="form-control" name="ma_giam_gia" placeholder="Mã khuyến mãi">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-secondary">Xác nhận</button>
+        </div>
+    </div>
+</form>
+<script>
+ function xuLyMaGiamGia(event) {
+        // Thực hiện logic xử lý mã giảm giá ở đây
+
+        // Ngăn chặn hành vi mặc định của nút "Xác nhận"
+        event.preventDefault();
+
+        // Submit form mã giảm giá
+        document.forms[0].submit();
+        return false;
+    }
+</script>
+
+
+
+
                         </div>
 
                     </div>
@@ -110,11 +135,7 @@ $email = $tin123->email;
                                     value="2">
                                 <label class="custom-control-label" for="httt-2">Chuyển khoản momo</label>
                             </div>
-                            <div class="custom-control custom-radio">
-                                <input id="httt-3" name="httt_ma" type="radio" class="custom-control-input" required=""
-                                    value="3">
-                                <label class="custom-control-label" for="httt-3">Ship COD</label>
-                            </div>
+
                         </div>
                         <input type="hidden" name="idsp"value="{{$tin->id_san_pham}}">
                         <input type="hidden" name="tensp"value="{{$tin->ten_san_pham}}">
@@ -164,6 +185,15 @@ h6.my-0{
 }
 span.text-muted{
     font-weight:bolder;
-    margin-right:60px;
+    margin-right:40px;
+}
+Li.lh-condensed{
+    border:none;
+    width: 400px;
+}
+div.input-group{
+    display:flex;
+}.input-group button{
+    height:36px;
 }
 </style>

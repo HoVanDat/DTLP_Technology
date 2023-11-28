@@ -26,9 +26,19 @@ use App\Http\Controllers\TinKhuyenMaiController;
  Route::get('/dangky',[AuthController::class,'register'])->name('register');
  Route::post('/dangky',[AuthController::class,'registerPost'])->name('register.post');
  Route::get('/dangxuat',[AuthController::class,'logout'])->name('logout');
+ Route::get('/tim-kiem-don-hang', [OrderController::class,'timKiemDonHang'])->name('tim-kiem-don-hang');
+
+ Route::post('/xu-ly-ma-giam-gia', [OrderController::class,'xuLyMaGiamGia'])->name('xu-ly-ma-giam-gia');
+
+ Route::post('/mua-hang', 'OrderController@muaHang1');
+
+ Route::get('/tim-kiem', [SanphamController::class, 'timKiem'])->name('tim-kiem');
+
+ Route::match(['get', 'post'], '/dathang1', [OrderController::class, 'datHang12'])->name('mua_hang');
 
     Route::get('/', [SanphamController::class, 'index'])->name('home');
 
+    Route::get('/cart', [OrderController::class, 'showCart']);
 
 Route::get('/', [SanphamController::class, 'index'])->name('home');
 
@@ -70,6 +80,7 @@ Route::post('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetP
 
 
 Route::get('/chi-tiet-san-pham/{id}',[ChiTietSanPhamController::class,'chitiet'])->name('chitietsanpham');
+Route::post('/add-to-cart123', [OrderController::class, 'addToCart']);
 
 
 Route::get('/giohang',function(){
@@ -121,14 +132,15 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('create-qldonhang',function(){
         return view('admin/create-qldonhang');
 
-    });  
+    });
     Route::get('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvien'])->name('create.qlnhanvien');
     Route::post('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvienpost'])->name('create.qlnhanvien.post');
     Route::get('edit-qlkhachhang{id}',[UserAdminController::class,'edit'])->name('admin-edit-qlkhachhang');
     Route::post('edit-qlkhachhang',[UserAdminController::class,'update'])->name('admin-update-qlkhachhang');
     Route::get('create-qlnoibo',function(){
         return view('admin/create-qlnoibo');
-    });  
+    });
+
     Route::get('block-qlkhachhang{id}',[UserAdminController::class,'block'])->name('admin-block-qlkhachhang');
     Route::get('unblock-qlkhachhang{id}',[UserAdminController::class,'unblock'])->name('admin-unblock-qlkhachhang');
 
@@ -141,11 +153,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('qldonhang',function(){
         return view('admin/qldonhang');
 
-    });  
+    });
     Route::get('qlnhanvien',[EmployeeAdminController::class,'index'])->name('qlnhanvien');
     Route::get('qlnoibo',function(){
         return view('admin/qlnoibo');
-    });  
+    });
     Route::get('qlsanpham',[SanphamController::class,'qlsanpham'])->name('admin-qlsanpham');
 
     Route::get('posbanhang',function(){
@@ -206,4 +218,8 @@ Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqlda
     Route::get('edit-qlbanner{id}',[BannerAdminController::class,'editqlbanner'])->name('edit.qlbanner');
     Route::post('edit-qlbanner',[BannerAdminController::class,'editqlbannerpost'])->name('edit.qlbanner.post');
     Route::get('delete-qlbanner/{id}',[BannerAdminController::class,'deleteqlbanner'])->name('delete.qltintuc');
+
+
+
+
 });
