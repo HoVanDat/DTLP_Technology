@@ -85,15 +85,15 @@
                         class="app-menu__label">Quản lý banner</span></a></li>
             <li><a class="app-menu__item" href="homthugopy"><i class='app-menu__icon bx bx-run'></i><span
                         class="app-menu__label">Hòm thư góp ý</span></a></li>
-            <li><a class="app-menu__item" href="bangkeluong"><i class='app-menu__icon bx bx-dollar'></i><span
-                        class="app-menu__label">Bảng kê lương</span></a></li>
+            <!-- <li><a class="app-menu__item" href="bangkeluong"><i class='app-menu__icon bx bx-dollar'></i><span
+                        class="app-menu__label">Bảng kê lương</span></a></li> -->
             <li><a class="app-menu__item" href="bcdoanhthu"><i class='app-menu__icon bx bx-pie-chart-alt-2'></i><span
                         class="app-menu__label">Báo cáo doanh thu</span></a>
             </li>
-            <li><a class="app-menu__item" href="lichcongtac"><i class='app-menu__icon bx bx-calendar-check'></i><span
+            <!-- <li><a class="app-menu__item" href="lichcongtac"><i class='app-menu__icon bx bx-calendar-check'></i><span
                         class="app-menu__label">Lịch công tác </span></a></li>
             <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span
-                        class="app-menu__label">Cài đặt hệ thống</span></a></li>
+                        class="app-menu__label">Cài đặt hệ thống</span></a></li> -->
         </ul>
     </aside>
 

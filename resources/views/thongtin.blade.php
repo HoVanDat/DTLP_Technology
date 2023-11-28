@@ -13,9 +13,28 @@
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="/css/theme-default.css" class="template-customizer-theme-css" />
-    <style>
+   <script>
+    function readURL(input, thumbimage) {
+        if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#thumbimage").attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else { // Sử dụng cho IE
+            $("#thumbimage").attr('src', input.value);
 
-    </style>
+        }
+        $("#thumbimage").show();
+        $('.filename').text($("#uploadfile").val());
+        $('.Choicefile').css('background', '#14142B');
+        $('.Choicefile').css('cursor', 'default');
+        $(".removeimg").show();
+        $(".Choicefile").unbind('click');
+
+    }
+   </script>
+   
 </head>
 
 <body>
@@ -37,24 +56,23 @@
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" href="javascript:void(0);"><i
-                                                class="bx bx-user me-1"></i> Account</a>
+                                                class="bx bx-user me-1"></i> Thông tin cá nhân</a>
                                     </li>
                                   
                                 </ul>
                                 <div class="card mb-4">
                                     <h5 class="card-header">Thông tin cá nhân</h5>
                                     <!-- Account -->
-                                    <form id="formAccountSettings" action="{{route('thongtin.post')}}" method="POST">
+                                    <form id="formAccountSettings" action="{{route('thongtin.post')}}" method="POST" enctype="multipart/form-data">
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                            <img src="img/{{session('userInfo.hinh')}}" alt="user-avatar" class="d-block rounded"
+                                            <img src="{{session('userInfo.hinh')}}" alt="user-avatar" class="d-block rounded"
                                                 height="100" width="100" id="uploadedAvatar" />
                                             <div class="button-wrapper">
                                                 <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                                    <span class="d-none d-sm-block">Tải hình ảnh mới</span>
+                                                    <!-- <span class="d-none d-sm-block">Tải hình ảnh mới</span> -->
                                                     <i class="bx bx-upload d-block d-sm-none"></i>
-                                                    <input type="file" name="hinh" id="upload" class="account-file-input" hidden
-                                                        accept="image/png, image/jpeg" />
+                                                    <input type="file" name="hinh" id="uploadfile" class="account-file-input"  onchange="readURL(this);" />
                                                 </label>
                                                 <!-- <button type="button"
                                                     class="btn btn-outline-secondary account-image-reset mb-4">

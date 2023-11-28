@@ -50,22 +50,29 @@
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>ID</th>
-                                <th width="150">Tiêu đề</th>
+                                <th width="30">STT</th>
+                                <th width="200">Tiêu đề</th>
+                                <th width="60">Ảnh</th>
                                 <th width="100">Người đăng</th>
-
-                                <th width="20">Hình ảnh</th>
-                                <th>Tóm tắt</th>
-                                <th>Loại tin</th>
-                                <th width="300">Ngày đăng</th>
+                                
+                                <th width="70">Danh mục</th>
+                                <th width="40">Lượt xem</th>
+                                <th width="60">Trạng thái</th>
+                                <th width="60">Ngày đăng</th>
                                 <th width="70">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @php
+                            $i=0;
+                            @endphp
                             @foreach($dstin as $ds)
+                            @php
+                            $i++;
+                            @endphp
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ds->id_tin}}</td>
+                                <td>{{$i}}</td>
                                 <td>{{$ds->tieu_de}}</td>
 
                                 <td><img class="img-card-person" src="{{$ds->hinh}}" alt=""></td>
@@ -73,7 +80,7 @@
                                 <td>{{$ds->ten_nguoi_dang}}</td>
 
  
-                                <td>{{$ds->tom_tat}}</td>
+                               
                                 <td>
                                     @if($ds->id_danh_muc_tin == 1)
                                     Công nghệ
@@ -89,6 +96,15 @@
                                     Khoa học
                                     @elseif($ds->id_danh_muc_tin == 4)
                                     Sáng tạo
+                                    @endif
+                                </td>
+                                <td>{{$ds->view}}</td>
+
+                                <td>
+                                    @if($ds->an_hien == 1)
+                                    Hiện
+                                    @else
+                                    Ẩn
                                     @endif
                                 </td>
                                 <!-- <td>{{$ds->noi_dung}}</td> xuất ra nội dung khoảng 50 chữ -->

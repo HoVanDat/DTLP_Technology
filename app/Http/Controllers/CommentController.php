@@ -17,14 +17,14 @@ class CommentController extends Controller
         // Lấy dữ liệu từ request
         $rating = $request->input('rating');
         $ten = $request->input('ten');
-        $ten_san_pham = $request->input('ten_san_pham');
+        $id_san_pham = $request->input('id_san_pham');
         $comment = $request->input('comment');
 
         // Tạo một đối tượng BinhLuan mới
         $binhLuan = new BinhLuan();
         $binhLuan->rating = $rating;
         $binhLuan->ten = $ten;
-        $binhLuan->ten_san_pham = $ten_san_pham;
+        $binhLuan->id_san_pham = $id_san_pham;
         $binhLuan->noi_dung = $comment;
 
         // Lưu đối tượng vào cơ sở dữ liệu

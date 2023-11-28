@@ -51,20 +51,32 @@
                         <thead>
                             <tr>
                                 <th ><input type="checkbox" id="all"></th>
-                                <th width="200">ID danh mục tin tức</th>
+                                <th width="40">STT</th>
                                 <th >Tên danh mục tin tức</th>
-                               
-                                <th width="200">Tính năng</th>
+                                <th>Trạng thái</th>
+                                <th width="100">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                        @php
+                            $i=0;
+                            @endphp
                         @foreach($danhmuctin as $dm)
+                        @php
+                            $i++;
+                            @endphp
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                 
-                                <td>{{$dm->id_danh_muc_tin}}</td>
+                                <td>{{$i}}</td>
                                 <td>{{$dm->ten_danh_muc}}</td>
+                                <td>
+                                    @if($dm->an_hien == 1)
+                                    Hiện
+                                    @else
+                                    Ẩn
+                                    @endif
+                                </td>
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"

@@ -147,6 +147,11 @@
                         </div>
 
                     </div>
+                    @if(session()->has('message'))
+    <script>
+        alert("{{ session('message') }}");
+    </script>
+@endif
                     <form class="row" action="#" method='POST' enctype="multipart/form-data">
                         @csrf
 

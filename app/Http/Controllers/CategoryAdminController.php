@@ -30,7 +30,8 @@ class CategoryAdminController extends Controller
 
         $id_danh_muc_tin=$request['id_danh_muc_tin'];
         $ten_danh_muc=$request['ten_danh_muc'];
-       DanhMucTinTuc::where('id_danh_muc_tin',$id_danh_muc_tin)->update(['ten_danh_muc'=>$ten_danh_muc]);
+        $an_hien=$request['an_hien'];
+       DanhMucTinTuc::where('id_danh_muc_tin',$id_danh_muc_tin)->update(['ten_danh_muc'=>$ten_danh_muc,'an_hien'=>$an_hien]);
        session()->flash('success', 'Sửa thành công');
        return redirect('admin/qldanhmuctintuc');
        }
@@ -62,7 +63,8 @@ class CategoryAdminController extends Controller
 
         $id_loai=$request['id_loai'];
         $ten_loai=$request['ten_loai'];
-      Loai::where('id_loai',$id_loai)->update(['ten_loai'=>$ten_loai]);
+        $an_hien=$request['an_hien'];
+      Loai::where('id_loai',$id_loai)->update(['ten_loai'=>$ten_loai,'an_hien'=>$an_hien]);
        session()->flash('success', 'Sửa thành công');
        return redirect('admin/qldanhmucsanpham');
        }
