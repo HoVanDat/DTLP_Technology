@@ -121,7 +121,7 @@ hr {
                                     <ul class="nav navs sidebar menu" id="menu-blog">
                                         @foreach($danhmuc as $dm)
                                         <li class="item  first">
-                                            <a href="/collections/dong-ho-nam">
+                                            <a href="">
                                                 <span>{{$dm->ten_danh_muc}}</span>
                                             </a>
                                         </li>
@@ -147,17 +147,18 @@ hr {
                                 </h3>
                                 @foreach($nhieuluotxem as $nlx)
                                 <div class="news-content row">
-
+                                 
                                     <div class="col-md-5 col-xs-12 col-sm-12 img-article">
+
                                         <div class="art-img">
-                                            <img src="/img/{{$nlx->hinh}}" alt="">
+                                       <a href="/chi-tiet-tin/{{$nlx->id_tin}}"><img src="/img/{{$nlx->hinh}}" alt=""></a>
                                         </div>
                                     </div>
 
 
                                     <div class=" col-md-7 col-sm-12  col-xs-12">
                                         <!-- Begin: Nội dung bài viết -->
-                                        <a href="/blogs/news/goi-y-su-dung-dong-ho">{{$nlx->tieu_de}}</a>
+                                        <a href="/chi-tiet-tin/{{$nlx->id_tin}}">{{$nlx->tieu_de}}</a>
                                         <div class="body-content">
                                             <i class="fa fa-calendar-o"></i><time pubdate
                                                 datetime="2017-03-26">{{$nlx->created_at}}</time>
@@ -202,7 +203,8 @@ hr {
 
                                     <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
                                         <div class="art-img">
-                                            <img src="/img/{{$bvmn->hinh}}" alt="">
+
+                                         <a href="/chi-tiet-tin/{{$bvmn->id_tin}}"><img src="/img/{{$bvmn->hinh}}" alt=""></a>
                                         </div>
                                     </div>
 
@@ -210,7 +212,7 @@ hr {
                                     <div class=" col-md-7 col-sm-12  col-xs-12">
                                         <!-- Begin: Nội dung bài viết -->
 
-                                        <h2 class="title-article"><a href="/blogs/news/goi-y-su-dung-dong-ho">{{$bvmn->tieu_de}}</a></h2>
+                                        <h2 class="title-article"><a href="/chi-tiet-tin/{{$bvmn->id_tin}}">{{$bvmn->tieu_de}}</a></h2>
                                         <div class="body-content">
                                             <ul class="info-more">
                                                 <li><i class="fa fa-calendar-o"></i><time pubdate
@@ -222,7 +224,7 @@ hr {
                                             <p>{{$bvmn->tom_tat}}</p>
                                         </div>
                                         <!-- End: Nội dung bài viết -->
-                                        <a class="readmore btn-rb clear-fix" href="/blogs/news/goi-y-su-dung-dong-ho"
+                                        <a class="readmore btn-rb clear-fix" href="/chi-tiet-tin/{{$bvmn->id_tin}}"
                                             role="button">Xem
                                             tiếp <span class="fa fa-angle-double-right"></span></a>
                                     </div>

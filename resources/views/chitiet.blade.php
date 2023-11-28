@@ -88,7 +88,7 @@ th {
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="product-breadcroumb">
-                        <a href="">Home</a>
+                        <a href="">Trang chủ</a>
                         <a href="">{{$sanpham->loai->ten_loai}}</a>
                         <a href="">{{$sanpham->ten_san_pham}}</a>
                     </div>
@@ -121,25 +121,25 @@ th {
                                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1"
                                             name="quantity" min="1" step="1">
                                     </div>
-                                    <button class="add_to_cart_button" type="submit">Add to cart</button>
+                                    <button class="add_to_cart_button" type="submit">Thêm vào giỏ hàng</button>
                                 </form>
 
                                 <div class="product-inner-category">
-                                    <p>Category: <a href="">{{$sanpham->loai->ten_loai}}</a>. Tags: <a
+                                    <p>Danh mục: <a href="">{{$sanpham->loai->ten_loai}}</a>. Tags: <a
                                             href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>. </p>
                                 </div>
 
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home"
-                                                role="tab" data-toggle="tab">Description</a></li>
+                                                role="tab" data-toggle="tab">MÔ TẢ SẢN PHẨM</a></li>
                                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
-                                                data-toggle="tab">Reviews</a></li>
+                                                data-toggle="tab">ĐÁNH GIÁ</a></li>
                                     </ul>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                            <h2>Product Description</h2>
-                                                @if($chitietsanpham)
+                                            <h2>Mô tả sản phẩm</h2>
+                                            @if($chitietsanpham)
                                             <table>
                                                 <tr>
                                                     <th>Mã sản phẩm
@@ -247,19 +247,19 @@ th {
                                                 <!-- Thêm các dòng khác tương tự cho các sản phẩm khác -->
                                             </table>
                                             @else
-                                                <p class="alert alert-danger">Không có tin chi tiết cho sản phẩm này</p>
+                                            <p class="alert alert-danger">Không có tin chi tiết cho sản phẩm này</p>
 
                                             @endif
-                                            
+
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <h2>Reviews</h2>
+                                            <h2>Đánh giá</h2>
                                             <div class="submit-review">
-                                                <p><label for="name">Name</label> <input name="name" type="text"></p>
+                                                <p><label for="name">Tên</label> <input name="name" type="text"></p>
                                                 <p><label for="email">Email</label> <input name="email" type="email">
                                                 </p>
                                                 <div class="rating-chooser">
-                                                    <p>Your rating</p>
+                                                    <p>Xếp hạng</p>
 
                                                     <div class="rating-wrap-post">
                                                         <i class="fa fa-star"></i>
@@ -269,9 +269,9 @@ th {
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                 </div>
-                                                <p><label for="review">Your review</label> <textarea name="review" id=""
+                                                <p><label for="review">Đánh giá</label> <textarea name="review" id=""
                                                         cols="30" rows="10"></textarea></p>
-                                                <p><input type="submit" value="Submit"></p>
+                                                <p><input type="submit" value="Gửi"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -283,7 +283,7 @@ th {
 
 
                     <div class="related-products-wrapper">
-                        <h2 class="related-products-title">Related Products</h2>
+                        <h2 class="related-products-title">Sản phẩm liên quan</h2>
                         <div class="related-products-carousel">
                             <div class="row">
                                 @foreach($sanphamlienquan as $splq)
