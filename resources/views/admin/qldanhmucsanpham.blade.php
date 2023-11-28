@@ -50,21 +50,33 @@
                         border="0" id="sampleTable">
                         <thead>
                             <tr>
-                                <th ><input type="checkbox" id="all"></th>
-                                <th width="200">ID danh mục sản phẩm</th>
-                                <th >Tên danh mục sản phẩm</th>
-                               
-                                <th width="200">Tính năng</th>
+                                <th><input type="checkbox" id="all"></th>
+                                <th width="40">STT</th>
+                                <th>Tên danh mục sản phẩm</th>
+                                <th>Trạng thái</th>
+                                <th width="100">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
-                        @foreach($danhmuctin as $dm)
+                            @php
+                            $i=0;
+                            @endphp
+                            @foreach($danhmuctin as $dm)
+                            @php
+                            $i++;
+                            @endphp
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                
-                                <td>{{$dm->id_loai}}</td>
+
+                                <td>{{$i}}</td>
                                 <td>{{$dm->ten_loai}}</td>
+                                <td>
+                                    @if($dm->an_hien == 1)
+                                    Hiện
+                                    @else
+                                    Ẩn
+                                    @endif
+                                </td>
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"
@@ -118,7 +130,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
 
-<script>$('#sampleTable').DataTable();
+<script>
+$('#sampleTable').DataTable();
+
 function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({
         title: 'Xác nhận xóa',

@@ -136,13 +136,22 @@
 
                         <div class="form-group col-md-4">
                             <label class="control-label">ID danh mục tin tức</label>
-                            <input name="id_danh_muc_tin" class="form-control" type="text" value="{{$edit->id_danh_muc_tin}}"
-                                readonly>
+                            <input name="id_danh_muc_tin" class="form-control" type="text"
+                                value="{{$edit->id_danh_muc_tin}}" readonly>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Tên danh mục</label>
                             <input name="ten_danh_muc" class="form-control" type="text" value="{{$edit->ten_danh_muc}}"
                                 required>
+                        </div>
+                        <!-- option ẩn hiện -->
+                        <div class="form-group col-md-3">
+                            <label for="exampleSelect1" class="control-label">Trạng thái</label>
+                            <select class="form-control" id="exampleSelect1" name="an_hien">
+                                <option>-- Chọn danh mục --</option>
+                                <option value="1" {{$edit->an_hien == 1 ? 'selected' : ''}}>Hiện</option>
+                                <option value="0" {{$edit->an_hien == 0 ? 'selected' : ''}}>Ẩn</option>
+                            </select>
                         </div>
 
                 </div>

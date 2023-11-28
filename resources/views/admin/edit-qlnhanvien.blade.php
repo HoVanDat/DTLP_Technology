@@ -138,7 +138,8 @@
                         </div>
 
                     </div>
-                    <form class="row" action="{{route('edit.qlnhanvien.post')}}" method='POST' enctype="multipart/form-data">
+                    <form class="row" action="{{route('edit.qlnhanvien.post')}}" method='POST'
+                        enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group col-md-4">
@@ -155,7 +156,8 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Mật khẩu</label>
-                            <input class="form-control" name="password" type="password" value="{{$edit->password}}" required>
+                            <input class="form-control" name="password" type="password" value="{{$edit->password}}"
+                                required>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Địa chỉ thường trú</label>
