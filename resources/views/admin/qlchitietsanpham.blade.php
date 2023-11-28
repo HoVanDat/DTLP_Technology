@@ -49,7 +49,7 @@
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>Mã chi tiết sản phẩm</th>
+                                <th>STT</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Ảnh</th>
                                 <th>Số lượng</th>
@@ -61,10 +61,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @php
+                            $i=0;
+                            @endphp
                             @foreach($chitietsanpham as $ctsp)
+                            @php
+                            $i++;
+                            @endphp
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ctsp->id_chi_tiet}}</td>
+                                <td>{{$i}}</td>
                                 <td>{{$sanpham->ten_san_pham}}</td>
                                 <td><img src="{{$ctsp->hinh}}" alt="" width="40px" height="40px"></td>
                                 <td>{{$ctsp->so_luong}}</td>

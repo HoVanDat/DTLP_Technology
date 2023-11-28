@@ -37,15 +37,28 @@ class AuthController extends Controller
         session(['userInfo.dia_chi' => $dia_chi]);
         $so_dien_thoai = $request->so_dien_thoai;
         session(['userInfo.so_dien_thoai' => $so_dien_thoai]);
-        $hinh = $request->hinh;
+       
+       $hinh = null;
+        if($request->hasFile('hinh')){
+            // dd($request->all()); 
+            $file = $request->file('hinh');
+            $name = $file->getClientOriginalName();
+            $image = time()."_".$name;
+            $file->move(public_path().'/img/img-anhthe/',$image);
+            $hinh = '/img/img-anhthe/'.$image;
         session(['userInfo.hinh' => $hinh]);
-            NguoiDung::where('id_nguoi_dung', session('userInfo.id_nguoi_dung'))
+        //   dd(session('userInfo'));
+        }
+    //    dd(session('userInfo.iduser'));
+       $id=session('userInfo.iduser');
+            NguoiDung::where('id_nguoi_dung',$id)
             ->update([
-                'ten' => $ten,
-                'dia_chi' => $dia_chi,
-                'so_dien_thoai' => $so_dien_thoai,
-                'hinh' => $hinh,
+                'ten' => session('userInfo.ten'),
+                'dia_chi' =>session('userInfo.dia_chi'),
+                'so_dien_thoai' => session('userInfo.so_dien_thoai'),   
+                'hinh' => session('userInfo.hinh'),
             ]);
+            
         return view('thongtin');
     }
 

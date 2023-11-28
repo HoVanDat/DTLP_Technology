@@ -23,8 +23,7 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -46,16 +45,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<!-- MDB -->
-<!-- <link
+    <!-- MDB -->
+    <!-- <link
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
   rel="stylesheet"
 /> -->
-<!-- MDB -->
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
-></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 </head>
 
 <body>
@@ -69,12 +65,17 @@
                     </div>
                 </div>
                 <div id="sm" class="col-sm-6">
-                <form action="{{ route('products.search') }}" method="get" autocomplete="off">
-                        <label for="key" class="mf-vhiditem" style="width:1px;height:1px;position:absolute;overflow:hidden;">Nhập tên điện thoại, máy tính, phụ kiện... cần tìm</label>
-                        <input class="fs-stxt" type="text" id="key" name="keyword" placeholder="Nhập tên điện thoại, máy tính, phụ kiện... cần tìm" autocomplete="off" maxlength="50">
+                    <form action="{{ route('products.search') }}" method="get" autocomplete="off">
+                        <label for="key" class="mf-vhiditem"
+                            style="width:1px;height:1px;position:absolute;overflow:hidden;">Nhập tên điện thoại, máy
+                            tính, phụ kiện... cần tìm</label>
+                        <input class="fs-stxt" type="text" id="key" name="keyword"
+                            placeholder="Nhập tên điện thoại, máy tính, phụ kiện... cần tìm" autocomplete="off"
+                            maxlength="50">
                         <span class="icon-cance" id="icon-cance" style="display:none" title="Xóa">✕</span>
-                        <button type="submit" aria-label="Tìm kiếm" class="search-button" title="Tìm kiếm"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </form>
+                        <button type="submit" aria-label="Tìm kiếm" class="search-button" title="Tìm kiếm"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
                 </div>
                 <div class="col-sm-3">
                     <div class="shopping-item">
@@ -111,57 +112,50 @@
                     <ul id="right" class="nav navbar-nav navbar-right">
 
                         @if (session('userInfo'))
-      <!-- Avatar -->
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle d-flex align-items-center"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img width= 22px;
-            src="img/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-            class="rounded-circle"
-            height="22"
-            alt="Portrait of a Woman"
-            loading="lazy"
-          />
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li>
 
-            <a class="dropdown-item" href="/thongtin">Thông tin của tôi</a>
+                        <!-- Avatar -->
+                        <li class="nav-item dropdown">
+                            <!-- Add this to your HTML where you have the dropdown toggle -->
+                            <div class="nav-link dropdown-toggle nav-dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="{{ session('userInfo.hinh') }}" class="nav-avatar rounded-circle"
+                                    alt="Portrait of a Woman" loading="lazy" />
+                                <!-- Add any other content for the dropdown toggle -->
+                            </div>
 
-          </li>
-          <li>
-            <a class="dropdown-item" href="/dangxuat">Đăng xuất</a>
-          </li>
-        </ul>
-      </li>
+                            <!-- Your dropdown menu structure goes here -->
+                            <div class="dropdown-menu nav-dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <!-- Add dropdown menu items here -->
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
 
+                                    <a class="dropdown-item" href="/thongtin">Thông tin của tôi</a>
 
-
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/dangxuat">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>
                         @else
                         <li><a href="/dangnhap"><i class="fa-regular fa-user"></i> Đăng nhập </a></li>
                         <li><a href="/dangky"><i class="fa-regular fa-user"></i> Đăng ký</a></li>
                         @endif
 
-<script>
-    // Sử dụng jQuery để hiển thị dropdown-menu khi hover vào thẻ a
-$(document).ready(function() {
-    $('.nav-item.dropdown').hover(
-        function() {
-            $(this).find('.dropdown-menu').stop(true, true).slideDown(200);
-        },
-        function() {
-            $(this).find('.dropdown-menu').stop(true, true).slideUp(200);
-        }
-    );
-});
-
-</script>
+                        <script>
+                        // Sử dụng jQuery để hiển thị dropdown-menu khi hover vào thẻ a
+                        $(document).ready(function() {
+                            $('.nav-item.dropdown').hover(
+                                function() {
+                                    $(this).find('.dropdown-menu').stop(true, true).slideDown(200);
+                                },
+                                function() {
+                                    $(this).find('.dropdown-menu').stop(true, true).slideUp(200);
+                                }
+                            );
+                        });
+                        </script>
                 </div>
             </div>
         </div>
@@ -189,7 +183,7 @@ $(document).ready(function() {
 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                    <h2 class="footer-wid-title">Hướng Dẫn</h2>
+                        <h2 class="footer-wid-title">Hướng Dẫn</h2>
                         <ul>
                             <li><a href="#">Tài khoản của tôi</a></li>
                             <li><a href="#">Lịch sử đơn hàng</a></li>
@@ -203,11 +197,11 @@ $(document).ready(function() {
 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                    <h2 class="footer-wid-title">Danh Mục</h2>
+                        <h2 class="footer-wid-title">Danh Mục</h2>
                         <ul>
-                        @foreach($danhmucsanpham as $dm)
-                <li><a href="#">{{$dm->ten_loai}}</a></li>
-            @endforeach
+                            @foreach($danhmucsanpham as $dm)
+                            <li><a href="#">{{$dm->ten_loai}}</a></li>
+                            @endforeach
                         </ul>
 
                     </div>
@@ -216,7 +210,8 @@ $(document).ready(function() {
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-newsletter">
                         <h2 class="footer-wid-title">Đăng Ký</h2>
-                        <p>Đăng ký nhận bản tin của chúng tôi và nhận các ưu đãi độc quyền mà bạn không tìm thấy ở bất kỳ đâu khác, ngay trong hộp thư đến của bạn!</p>
+                        <p>Đăng ký nhận bản tin của chúng tôi và nhận các ưu đãi độc quyền mà bạn không tìm thấy ở bất
+                            kỳ đâu khác, ngay trong hộp thư đến của bạn!</p>
                         <div class="newsletter-form">
                             <form action="#">
                                 <input type="email" placeholder="Type your email">
@@ -257,7 +252,7 @@ $(document).ready(function() {
 </html>
 
 <style>
-    .dropdown-menu {
+.dropdown-menu {
     display: none;
     /*Thêm các thuộc tính CSS tùy ý khác */
 }

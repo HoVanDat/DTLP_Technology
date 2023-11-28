@@ -151,14 +151,14 @@
                         </div>
 
                     </div>
-                    <form class="row" action="{{route('edit.qltintuc.post')}}" method='POST'enctype="multipart/form-data">
+                    <form class="row" action="{{route('edit.qltintuc.post')}}" method='POST' enctype="multipart/form-data">
                         @csrf
                         <div class="form-group col-md-4">
                             <label class="control-label">ID tin tức</label>
                             <input name="id_tin" class="form-control" type="text" value="{{$edit->id_tin}}" readonly>
                         </div>
                         <div class="form-group col-md-3">
-                            <label class="control-label">Loại tin</label>
+                            <label class="control-label">Danh mục</label>
                             <select class="form-control" name="id_danh_muc_tin" id="exampleSelect2">
                                 <option value="">-- Chọn loại tin --</option>
                                 @php
@@ -188,6 +188,15 @@
                         <div class="form-group col-md-4">
                             <label class="control-label">Tóm tắt</label>
                             <input class="form-control" name="tomtat" type="text" value="{{$edit->tom_tat}}">
+                        </div>
+                        <!-- option ẩn hiện -->
+                        <div class="form-group col-md-3">
+                            <label for="exampleSelect1" class="control-label">Trạng thái</label>
+                            <select class="form-control" id="exampleSelect1" name="an_hien">
+                                <option>-- Chọn danh mục --</option>
+                                <option value="1" {{$edit->an_hien == 1 ? 'selected' : ''}}>Hiện</option>
+                                <option value="0" {{$edit->an_hien == 0 ? 'selected' : ''}}>Ẩn</option>
+                            </select>
                         </div>
                         <!-- Mô tả -->
                         <div class="form-group col-md-12">

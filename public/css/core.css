@@ -77,6 +77,9 @@ body {
   -webkit-tap-highlight-color: rgba(67, 89, 113, 0);
 }
 
+#uploadedAvatar {
+  object-fit: cover;}
+
 hr {
   margin: 1rem 0;
   color: #d9dee3;
@@ -336,6 +339,7 @@ button,
 select,
 optgroup,
 textarea {
+  padding: 5px 0;
   margin: 0;
   font-family: inherit;
   font-size: inherit;

@@ -1,5 +1,6 @@
 @extends('layout')
 @section('noidung')
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 .mainmenu-area {
     background: none repeat scroll 0 0 #333;
@@ -61,23 +62,154 @@ button[type=submit] {
     text-transform: uppercase;
 }
 
+/* Style for the table */
 table {
-    border-collapse: collapse;
     width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-
+th,
 td {
     border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
 }
 
 th {
     background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    text-align: left;
-
 }
+
+/* Style for the product description container */
+#home {
+    padding: 20px;
+}
+
+/* Style for alert message */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+/* Responsive styling for small screens */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+}
+
+
+/* bình luận */
+/* Container styling */
+/* .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+/* Title styling */
+h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Horizontal line styling */
+hr {
+    border: 1px solid #ccc;
+    margin: 15px 0;
+}
+
+/* Comment styling */
+.bl {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+/* Comment image styling */
+.bl img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #007bff;
+    /* Change the color as needed */
+}
+
+/* Comment content styling */
+.noidungbl {
+    flex-grow: 1;
+}
+
+/* Comment author styling */
+h5 {
+    font-size: 18px;
+    margin: 0;
+    color: #007bff;
+}
+
+/* Comment text styling */
+p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Hover effect for comments */
+.bl:hover {
+    background-color: #e2e8f0;
+    transition: background-color 0.3s ease;
+}
+
+
+.star {
+    cursor: pointer;
+}
+
+.star:hover,
+.star.active {
+    color: gold;
+}
+
+.notification {
+    display: none;
+    padding: 10px;
+    background: #4CAF50;
+    color: #ffffff;
+    border-radius: 4px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification.show {
+    display: block;
+}
+.username>h5{
+margin-top: 12px;
+}
+/* end */
+  button.add_to_cart_buttonss{
+        height:40px;
+        border:none;
+        background-color:#5a88ca;
+        color:white;
+    }
 </style>
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
@@ -182,14 +314,14 @@ th {
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home"
-                                                role="tab" data-toggle="tab">Description</a></li>
+                                                role="tab" data-toggle="tab">Thông tin chi tiết</a></li>
                                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
-                                                data-toggle="tab">Reviews</a></li>
+                                                data-toggle="tab">Đánh giá</a></li>
                                     </ul>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="home">
                                             <h2>Product Description</h2>
-                                                @if($chitietsanpham)
+                                            @if($chitietsanpham)
                                             <table>
                                                 <tr>
                                                     <th>Mã sản phẩm
@@ -297,31 +429,105 @@ th {
                                                 <!-- Thêm các dòng khác tương tự cho các sản phẩm khác -->
                                             </table>
                                             @else
-                                                <p class="alert alert-danger">Không có tin chi tiết cho sản phẩm này</p>
+                                            <p class="alert alert-danger">Không có tin chi tiết cho sản phẩm này</p>
 
                                             @endif
 
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <h2>Reviews</h2>
-                                            <div class="submit-review">
-                                                <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                <p><label for="email">Email</label> <input name="email" type="email">
-                                                </p>
-                                                <div class="rating-chooser">
-                                                    <p>Your rating</p>
+                                            <!-- BÌNH LUẬN -->
+                                            <?php
+                                            // Kiểm tra xem phiên đăng nhập đã tồn tại hay chưa
+                                            if (session()->has('userInfo')) {
+                                                // Lấy thông tin người dùng từ phiên đăng nhập
+                                                $userInfo = session('userInfo');
+                                            ?>
 
-                                                    <div class="rating-wrap-post">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-8 offset-md-2">
+                                                        @if (session('success'))
+                                                        <div class="notification" id="successNotification">
+                                                            {{ session('success') }}</div>
+                                                        @endif
+
+
+                                                        <h3>BÌNH LUẬN</h3>
+                                                        <div class="bl">
+                                                            <img src="{{session('userInfo.hinh')}}" alt="User Avatar">
+                                                            <div class="username">
+                                                                <h5>{{session('userInfo.ten')}}</h5>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- CSS -->
+                                                        <style>
+                                                        .user-profile {
+                                                            display: flex;
+                                                            align-items: center;
+                                                        }
+
+                                                        .avatar {
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            border-radius: 50%;
+                                                            margin-right: 10px;
+                                                        }
+                                                        </style>
+
+                                                        <form action="{{ url('/comments') }}" id="comment-form"
+                                                            method="POST">
+                                                            @csrf
+                                                            <div class="rating">
+                                                                <input type="hidden" name="rating" id="ratingInput">
+                                                                <span class="star" data-rating="1"><i
+                                                                        class="fas fa-star"></i></span>
+                                                                <span class="star" data-rating="2"><i
+                                                                        class="fas fa-star"></i></span>
+                                                                <span class="star" data-rating="3"><i
+                                                                        class="fas fa-star"></i></span>
+                                                                <span class="star" data-rating="4"><i
+                                                                        class="fas fa-star"></i></span>
+                                                                <span class="star" data-rating="5"><i
+                                                                        class="fas fa-star"></i></span>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input class="form-control" id="ten"
+                                                                    value="{{session('userInfo.ten')}}" name="ten"
+                                                                    type="hidden" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input class="form-control" id="email" value="{{$id}}"
+                                                                    name="id_san_pham" type="hidden" readonly>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="comment">Nội dung:</label>
+                                                                <textarea class="form-control" id="comment"
+                                                                    name="comment" rows="4" required></textarea>
+                                                            </div>
+                                                            <button id="submit-comment" type="submit"
+                                                                class="btn btn-primary">Gửi</button>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                                <p><label for="review">Your review</label> <textarea name="review" id=""
-                                                        cols="30" rows="10"></textarea></p>
-                                                <p><input type="submit" value="Submit"></p>
+                                            </div>
+
+                                            <?php
+                                                            }
+
+                                                            ?>
+                                            <div class="container">
+                                                <h2>Thống kê bình luận</h2>
+                                                <hr>
+                                                @foreach($binhluan as $bl)
+                                                <div class="bl">
+                                                    <img src="{{ asset('img/1.jfif') }}" alt="">
+                                                    <div class="noidungbl">
+                                                        <h5>{{$bl->ten}}</h5>
+                                                        <p>{{$bl->noi_dung}}</p>
+                                                    </div>
+                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -333,7 +539,7 @@ th {
 
 
                     <div class="related-products-wrapper">
-                        <h2 class="related-products-title">Related Products</h2>
+                        <h2 class="related-products-title">Sản phẩm tương tự</h2>
                         <div class="related-products-carousel">
                             <div class="row">
                                 @foreach($sanphamlienquan as $splq)
@@ -373,16 +579,37 @@ th {
     </div>
 </div>
 
+<!-- JavaScript đánh giá-->
+<script>
+const stars = document.querySelectorAll('.star');
 
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const rating = star.dataset.rating;
+        ratingInput.value = rating;
+        highlightStars(index);
+    });
+});
 
-
-<style>
-    button.add_to_cart_buttonss{
-        height:40px;
-        border:none;
-        background-color:#5a88ca;
-        color:white;
+function highlightStars(index) {
+    stars.forEach((star, i) => {
+        if (i <= index) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+// thông báo 2s
+window.onload = function() {
+    var successNotification = document.getElementById('successNotification');
+    if (successNotification) {
+        successNotification.style.display = 'block';
+        setTimeout(function() {
+            successNotification.style.display = 'none';
+        }, 2000); // Thời gian hiển thị thông báo (2 giây)
     }
-</style>
+};
+</script>
 @endsection
 

@@ -144,6 +144,15 @@
                             <input name="ten_loai" class="form-control" type="text" value="{{$edit->ten_loai}}"
                                 required>
                         </div>
+                         <!-- option ẩn hiện -->
+                         <div class="form-group col-md-3">
+                            <label for="exampleSelect1" class="control-label">Trạng thái</label>
+                            <select class="form-control" id="exampleSelect1" name="an_hien">
+                                <option>-- Chọn danh mục --</option>
+                                <option value="1" {{$edit->an_hien == 1 ? 'selected' : ''}}>Hiện</option>
+                                <option value="0" {{$edit->an_hien == 0 ? 'selected' : ''}}>Ẩn</option>
+                            </select>
+                        </div>
 
                 </div>
                 <button class="btn btn-save" type="submit" onclick="editSuccess()">Lưu lại</button>
