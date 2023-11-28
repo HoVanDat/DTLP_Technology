@@ -60,10 +60,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($sanpham as $sp)
+                            @foreach ($sanpham as $index => $sp)
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{ $sp->id_san_pham }}</td>
+                                <td>{{ $index + 1 }}</td>
                                 <td>{{ $sp->ten_san_pham }}</td>
                                 <td><img src="/img/{{ $sp->hinh }}" alt="" height="40px" width="40px"></td>
                                 <td>

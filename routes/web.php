@@ -14,8 +14,9 @@
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\ContactAdminController;
     use App\Http\Controllers\BannerAdminController;
-  use App\Http\Controllers\ChiTietSanPhamController;
-use App\Http\Controllers\TinKhuyenMaiController;
+    use App\Http\Controllers\ChiTietSanPhamController;
+    use App\Http\Controllers\TinKhuyenMaiController;
+    use App\Http\Controllers\TrangChuAdminController;
 
 
  // tài khoản
@@ -106,9 +107,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('forgot',function(){
         return view('admin/forgot');
     });
-    Route::get('trangchu',function(){
-        return view('admin/home');
-    })->name('admin-trang-chu');
+    Route::get('trangchu',[TrangChuAdminController::class,'index'])->name('trangchu');
     Route::get('bangkeluong',function(){
         return view('admin/bangkeluong');
     });

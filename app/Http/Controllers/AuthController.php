@@ -56,6 +56,7 @@ class AuthController extends Controller
     
         $email = $request->email;
         $password = $request->password;
+        $user = NguoiDung::where('email', $email)->first();
         // nếu tài khoản có lock = 1 sẽ khóa ngay lập tức
         $lock = NguoiDung::where('email', $email)->first();
         if ($lock && property_exists($lock, 'lock') && $lock->lock == 1) {

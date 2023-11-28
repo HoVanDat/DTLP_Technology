@@ -20,7 +20,7 @@
         <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
           <div class="info">
             <h4>Tổng khách hàng</h4>
-            <p><b>56 khách hàng</b></p>
+            <p><b>{{$khach_hang}} khách hàng</b></p>
             <p class="info-tong">Tổng số khách hàng được quản lý.</p>
           </div>
         </div>
@@ -30,7 +30,7 @@
             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
               <div class="info">
                 <h4>Tổng sản phẩm</h4>
-                <p><b>1850 sản phẩm</b></p>
+                <p><b>{{$tong_san_pham}} sản phẩm</b></p>
                 <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
               </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
               <div class="info">
                 <h4>Tổng đơn hàng</h4>
-                <p><b>247 đơn hàng</b></p>
+                <p><b>{{$tong_don_hang}} đơn hàng</b></p>
                 <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
               </div>
             </div>
@@ -50,7 +50,7 @@
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
                 <h4>Sắp hết hàng</h4>
-                <p><b>4 sản phẩm</b></p>
+                <p><b>{{$san_pham_sap_het_hang}} sản phẩm</b></p>
                 <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
               </div>
             </div>
@@ -70,38 +70,27 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($don_hang as $dh)
                     <tr>
-                      <td>AL3947</td>
-                      <td>Phạm Thị Ngọc</td>
+                      <td>{{$dh->id_don_hang}}</td>
+                      @php
+                      $khach_hang = App\Models\NguoiDung::where('id_nguoi_dung', $dh->id_nguoi_dung)->first();
+                      @endphp
+                      <td>{{$khach_hang->ten}}</td>
                       <td>
                         19.770.000 đ
                       </td>
+                      @if($dh->trang_thai == 0)
                       <td><span class="badge bg-info">Chờ xử lý</span></td>
-                    </tr>
-                    <tr>
-                      <td>ER3835</td>
-                      <td>Nguyễn Thị Mỹ Yến</td>
-                      <td>
-                        16.770.000 đ	
-                      </td>
+                      @elseif($dh->trang_thai == 1)
                       <td><span class="badge bg-warning">Đang vận chuyển</span></td>
-                    </tr>
-                    <tr>
-                      <td>MD0837</td>
-                      <td>Triệu Thanh Phú</td>
-                      <td>
-                        9.400.000 đ	
-                      </td>
+                      @elseif($dh->trang_thai == 2)
                       <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                    </tr>
-                    <tr>
-                      <td>MT9835</td>
-                      <td>Đặng Hoàng Phúc	</td>
-                      <td>
-                        40.650.000 đ	
-                      </td>
+                      @else
                       <td><span class="badge bg-danger">Đã hủy	</span></td>
+                      @endif
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -124,30 +113,14 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($khach_hang_moi as $khm)
                       <tr>
-                        <td>#183</td>
-                        <td>Hột vịt muối</td>
-                        <td>21/7/1992</td>
-                        <td><span class="tag tag-success">0921387221</span></td>
+                        <td>{{$khach_hang_moi->id_nguoi_dung}}</td>
+                        <td>{{$khach_hang_moi->ten}}</td>
+                        <td>{{$khach_hang_moi->ngay_sinh}}</td>
+                        <td><span class="tag tag-success">{{$khach_hang_moi->so_dien_thoai}}</span></td>
                       </tr>
-                      <tr>
-                        <td>#219</td>
-                        <td>Bánh tráng trộn</td>
-                        <td>30/4/1975</td>
-                        <td><span class="tag tag-warning">0912376352</span></td>
-                      </tr>
-                      <tr>
-                        <td>#627</td>
-                        <td>Cút rang bơ</td>
-                        <td>12/3/1999</td>
-                        <td><span class="tag tag-primary">01287326654</span></td>
-                      </tr>
-                      <tr>
-                        <td>#175</td>
-                        <td>Hủ tiếu nam vang</td>
-                        <td>4/12/20000</td>
-                        <td><span class="tag tag-danger">0912376763</span></td>
-                      </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
@@ -206,23 +179,13 @@
         pointStrokeColor: "rgb(255, 212, 59)",
         pointHighlightFill: "rgb(255, 212, 59)",
         pointHighlightStroke: "rgb(255, 212, 59)",
-        data: [20, 59, 90, 51, 56, 100]
+        data: [20 , 59, 90, 51, 56, 100],
+        device: 'laptop',
       },
-      {
-        label: "Dữ liệu kế tiếp",
-        fillColor: "rgba(9, 109, 239, 0.651)  ",
-        pointColor: "rgb(9, 109, 239)",
-        strokeColor: "rgb(9, 109, 239)",
-        pointStrokeColor: "rgb(9, 109, 239)",
-        pointHighlightFill: "rgb(9, 109, 239)",
-        pointHighlightStroke: "rgb(9, 109, 239)",
-        data: [48, 48, 49, 39, 86, 10]
-      }
-      ]
+      ],
     };
     var ctxl = $("#lineChartDemo").get(0).getContext("2d");
     var lineChart = new Chart(ctxl).Line(data);
-
     var ctxb = $("#barChartDemo").get(0).getContext("2d");
     var barChart = new Chart(ctxb).Bar(data);
   </script>

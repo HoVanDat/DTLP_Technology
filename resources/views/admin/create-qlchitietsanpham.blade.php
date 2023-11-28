@@ -288,7 +288,7 @@
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>
-                    <a class="btn btn-cancel" href="qlchitietsanpham{{$chitietsanpham->id_san_pham}}">Hủy bỏ</a>
+                    <a class="btn btn-cancel" href="qlchitietsanpham{{$sanpham->id_san_pham}}">Hủy bỏ</a>
                 </div>
                 </form>
     </main>
@@ -313,7 +313,7 @@
                     </div>
                     <BR>
                     <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="qlchitietsanpham{{$chitietsanpham->id_san_pham}}">Hủy bỏ</a>
+                    <a class="btn btn-cancel" data-dismiss="modal" href="qlchitietsanpham{{$sanpham->id_san_pham}}">Hủy bỏ</a>
                     <BR>
                 </div>
                 <div class="modal-footer">

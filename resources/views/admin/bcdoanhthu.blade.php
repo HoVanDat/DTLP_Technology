@@ -32,7 +32,7 @@
                 <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-shopping-bag-alt'></i>
                     <div class="info">
                         <h4>Tổng đơn hàng</h4>
-                        <p><b>457 đơn hàng</b></p>
+                        <p><b>{{ $tong_don_hang }} đơn hàng</b></p>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-info-circle' ></i>
                     <div class="info">
                         <h4>Bị cấm</h4>
-                        <p><b>4 nhân viên</b></p>
+                        <p><b>{{ $nhan_vien_bi_cam }} nhân viên</b></p>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-tag-x' ></i>
                     <div class="info">
                         <h4>Hết hàng</h4>
-                        <p><b>1 sản phẩm</b></p>
+                        <p><b>{{ $san_pham_het_hang }} sản phẩm</b></p>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-receipt' ></i>
                     <div class="info">
                         <h4>Đơn hàng hủy</h4>
-                        <p><b>2 đơn hàng</b></p>
+                        <p><b>{{ $don_hang_bi_huy }} đơn hàng</b></p>
                     </div>
                 </div>
             </div>
@@ -101,30 +101,6 @@
                                     <td>Bàn ăn gỗ Theresa</td>
                                     <td>5.600.000 đ</td>
                                     <td>Bàn ăn</td>
-                                </tr>
-                                <tr>
-                                    <td>62304003</td>
-                                    <td>Bàn ăn Vitali mặt đá</td>
-                                    <td>33.235.000 đ</td>
-                                    <td>Bàn ăn</td>
-                                </tr>
-                                <tr>
-                                    <td>72109004</td>
-                                    <td>Ghế làm việc Zuno</td>
-                                    <td>3.800.000 đ</td>
-                                    <td>Ghế gỗ</td>
-                                </tr>
-                                <tr>
-                                    <td>83826226</td>
-                                    <td>Tủ ly - tủ bát</td>
-                                    <td>2.450.000 đ</td>
-                                    <td>Tủ</td>
-                                </tr>
-                                <tr>
-                                    <td>71304041</td>
-                                    <td>Bàn ăn mở rộng Vegas</td>
-                                    <td>21.550.000 đ</td>
-                                    <td>Bàn thông minh</td>
                                 </tr>
                             </tbody>
                         </table>
