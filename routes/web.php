@@ -77,11 +77,8 @@ Route::get('/forget-password',[AuthController::class,'forgetPassword'])->name('f
 Route::post('/forget-password',[AuthController::class,'forgetPasswordPost']);
 Route::get('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
 Route::post('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPasswordPost']);
-
-
 Route::get('/chi-tiet-san-pham/{id}',[ChiTietSanPhamController::class,'chitiet'])->name('chitietsanpham');
 Route::post('/add-to-cart123', [OrderController::class, 'addToCart']);
-
 
 Route::get('/giohang',function(){
     return view('giohang');
@@ -93,8 +90,6 @@ Route::get('/thanhtoan',function(){
 Route::post('/luu-don-hang', [OrderController::class, 'store'])->name('luu_don_hang');
 
 
-
-
 Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
 
@@ -103,11 +98,7 @@ Route::get('/tintuc',[SanphamController::class, 'tintuc']);
 Route::get('/shopmaytinhbang',[SanphamController::class, 'mtb']);
 // bình luận
 Route::post('/comments', [CommentController::class, 'store']);
-
-
 Route::get('/chitietsp/{id}',[SanphamController::class, 'chitietsp'])->name('chitietsp');
-
-
 // route admin
 Route::group(['prefix'=>'admin'],function(){
 

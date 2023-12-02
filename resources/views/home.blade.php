@@ -507,7 +507,7 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
                                     <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
@@ -564,7 +564,7 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
                                     <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
@@ -586,7 +586,7 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
                                     <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
@@ -608,7 +608,7 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                                     <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
@@ -647,7 +647,7 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                                     <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
@@ -668,7 +668,7 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
                                     <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>

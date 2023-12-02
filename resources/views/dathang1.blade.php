@@ -1,3 +1,5 @@
+@extends('layout')
+@section('noidung')
 <?php
 
 
@@ -16,8 +18,6 @@ $email = $tin123->email;
 
 ?>
 
-@extends('layout')
-@section('noidung')
 
 
     <!-- Bootstrap CSS -->
@@ -414,8 +414,6 @@ $donHang->tong_don_hang = $thanhtien;
 
     <!-- footer -->
 
-@endsection
-
 <style>
     div.mainmenu-area{
         width: 100%;
@@ -445,4 +443,10 @@ span.text-muted{
     font-weight:bolder;
     margin-right:60px;
 }
+.mainmenu-area ul.navbar-nav li a {
+    color: white;
+    font-size: 14px;
+    padding: 20px;
+}
 </style>
+@endsection
