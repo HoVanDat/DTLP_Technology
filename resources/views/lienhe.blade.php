@@ -115,10 +115,10 @@
                     <div class="contact-form">
                         <h2>Contact Us</h2>
                         <form>
-                            <div>
-                                <span><label>NAME</label></span>
-                                <span><input type="text" value=""></span>
+                            <div>></span>
                             </div>
+                                <span><label>NAME</label></span>
+                                <span><input type="text" value=""
                             <div>
                                 <span><label>E-MAIL</label></span>
                                 <span><input type="text" value=""></span>

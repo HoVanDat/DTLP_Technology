@@ -220,7 +220,7 @@ margin-top: 12px;
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="product-breadcroumb">
-                        <a href="">Home</a>
+                        <a href="">Trang chủ</a>
                         <a href="">{{$sanpham->loai->ten_loai}}</a>
                         <a href="">{{$sanpham->ten_san_pham}}</a>
                     </div>
@@ -307,7 +307,7 @@ margin-top: 12px;
 
 
                                 <div class="product-inner-category">
-                                    <p>Category: <a href="">{{$sanpham->loai->ten_loai}}</a>. Tags: <a
+                                    <p>Danh mục: <a href="">{{$sanpham->loai->ten_loai}}</a>. Tags: <a
                                             href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>. </p>
                                 </div>
 
@@ -320,7 +320,7 @@ margin-top: 12px;
                                     </ul>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                            <h2>Product Description</h2>
+                                            <h2>Mô tả sản phẩm</h2>
                                             @if($chitietsanpham)
                                             <table>
                                                 <tr>

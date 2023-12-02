@@ -27,4 +27,8 @@ class NguoiDung extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function tintuc(){
+        return $this->hasMany('App\Models\TinTuc','id_nguoi_dung','id_nguoi_dung');
+    }
 }

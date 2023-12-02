@@ -17,7 +17,11 @@ class TinTuc extends Model
          'created_at','updated_at'
      ];
     public function danhmuc_tintuc(){
-        return $this->belongsTo('App\Models\DanhMuc_TinTuc','id_danh_muc_tin','id_danh_muc_tin');
+        return $this->belongsTo('App\Models\DanhMucTinTuc','id_danh_muc_tin','id_danh_muc_tin');
+    }
+
+    public function nguoidung(){
+        return $this->belongsTo('App\Models\NguoiDung','id_nguoi_dung','id_nguoi_dung');
     }
 
 }
