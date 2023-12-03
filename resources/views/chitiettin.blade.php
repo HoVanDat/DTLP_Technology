@@ -14,7 +14,9 @@
     font-size: 14px;
     padding: 20px;
 }
-
+.logo img{
+    width: 100px;
+}
 .no-gutters {
     margin-right: 0;
     margin-left: 0;

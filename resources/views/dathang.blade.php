@@ -196,5 +196,7 @@ div.input-group{
 }.input-group button{
     height:36px;
 }
-
+.logo img{
+    width: 100px;
+}
 </style>

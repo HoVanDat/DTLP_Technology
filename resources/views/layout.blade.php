@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="logo">
-                        <h1><a href="/"><img style="width:100px;" src="img/logo2.jpg"></a></h1>
+                        <h1><a href="/"><img src="http://127.0.0.1:8000/img/logo2.jpg"></a></h1>
                     </div>
                 </div>
                 <div id="sm" class="col-sm-6">
@@ -185,11 +185,10 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Hướng Dẫn</h2>
                         <ul>
-                            <li><a href="#">Tài khoản của tôi</a></li>
-                            <li><a href="#">Lịch sử đơn hàng</a></li>
-                            <li><a href="#">Danh sách mong muốn</a></li>
-                            <li><a href="#">Liên hệ nhà cung cấp</a></li>
-                            <li><a href="#">Trang chủ</a></li>
+                            <li><a href="/shop">Sản phẩm</a></li>
+                            <li><a href="/tintuc">Tin tức</a></li>
+                            <li><a href="{{route('tinkhuyenmai')}}">Khuyến mãi</a></li>
+                            <li><a href="/lienhe">Liên hệ</a></li>
                         </ul>
 
                     </div>
@@ -199,9 +198,11 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Danh Mục</h2>
                         <ul>
-                            @foreach($danhmucsanpham as $dm)
-                            <li><a href="#">{{$dm->ten_loai}}</a></li>
-                            @endforeach
+
+                            <li><a href="/shoplaptop">Laptop</a></li>
+                            <li><a href="/shopdienthoai">Điện thoại</a></li>
+                            <li><a href="/shopmaytinhbang">Máy tính bảng</a></li>
+
                         </ul>
 
                     </div>
@@ -214,8 +215,8 @@
                             kỳ đâu khác, ngay trong hộp thư đến của bạn!</p>
                         <div class="newsletter-form">
                             <form action="#">
-                                <input type="email" placeholder="Type your email">
-                                <input type="submit" value="Subscribe">
+                                <input type="email" placeholder="email">
+                                <input type="submit" value="Theo dõi">
                             </form>
                         </div>
                     </div>

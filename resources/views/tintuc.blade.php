@@ -117,17 +117,39 @@ div.group_sidebar{
     box-shadow: 1px solid red;
 }
 </style>
-    <section id="content" class="clearfix container">
+    <section id="content" class="clearfix container danhmuc">
         <div class="row">
             <div id="blog" class="page-content main-content content-pages" data-sticky_parent>
 
                 <!-- Begin content -->
                 <div class="blog-content col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
-                        <div class="col-md-3  col-sm-12 col-xs-12 leftsidebar-col" data-sticky_column>
+                        <div class="col-md-3 pt-4  col-sm-12 col-xs-12 leftsidebar-col" data-sticky_column>
                             <!-- Begin sidebar blog -->
                             <div class="sidebar ">
+                            <div class="mt-4">
+                                <div class="list-group navbar-inner ">
 
+
+                                    <div>
+                                        <h3 class="sb-title">Danh mục tin tức</h3>
+                                    </div>
+
+                                    <ul class="nav navs sidebar menu" id="menu-blog">
+                                        @foreach($dt2 as $dm)
+                                        <li class="item  first">
+                                            <a href="{{ url('danh-muc',[$dm->id_danh_muc_tin]) }}">
+                                                <span>{{$dm->ten_danh_muc}}</span>
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+
+                                </div>
+
+
+
+                            </div>
                                 <!-- End: Danh mục tin tức -->
 
 
@@ -190,14 +212,14 @@ div.group_sidebar{
 
                                     <!-- Begin: Nội dung blog -->
                                     <div class="title-block-common mb-2">
-                                        <h1>News</h1>
+                                        <h1>Tin tức</h1>
                                       </div>
                                       <div class="space2"></div>
 
 
 
 <div class="nen">
-
+@if(isset($dt))
 @foreach($dt as $dt)
     <div class="news-content row">
 
@@ -211,7 +233,7 @@ div.group_sidebar{
 
         <div class=" col-md-7 col-sm-12  col-xs-12">
             <h2 class="title-article"><a
-                    href="/blogs/news/goi-y-su-dung-dong-ho">{{$dt->tieu_de}}</a></h2>
+                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
             <div class="body-content">
                 <p>{{$dt->tom_tat}}</p>
             </div>
@@ -224,9 +246,12 @@ div.group_sidebar{
 
     </div>
     <hr class="line-blog" />
+
     @endforeach
 
-
+@else
+<p>Không có tin tức nào</p>
+@endif
     <!-- End: Nội dung blog -->
 
 </div>
@@ -262,6 +287,10 @@ div.group_sidebar{
 
 <style>
     #group_sidebar{
+        padding-top:10px;
+    }
+    section.danhmuc .col-md-3
+{
         padding-top:10px;
     }
 </style>

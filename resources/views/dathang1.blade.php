@@ -343,17 +343,19 @@ $donHang->tong_don_hang = $thanhtien;
 
         // Lấy dữ liệu sản phẩm từ biến $_POST hoặc tham số URL nếu bạn muốn
         // $productData = json_decode($_POST['products']); // hoặc sử dụng tham số URL
-
+        echo '<script>';
+        echo 'alert("Cảm ơn bạn đặt hàng thành công");';
+        echo '</script>';
         // Thực hiện lưu dữ liệu chi tiết đơn hàng vào CSDL
         $productData = json_decode($_POST['productData']);
-
+        $chuyenHuong = false;
         foreach ($productData as $dt) {
             // Kiểm tra nếu $dt là một đối tượng
             if (is_object($dt)) {
                 $idsp = $dt->id_san_pham;
                 $tensp = $dt->ten_san_pham;
                 $gia = $dt->gia;
-                $soluong = 2;
+                $soluong = 1;
 
                 // Thực hiện chèn thông tin chi tiết đơn hàng
                 $donHangchitiet = new DonHangChiTiet;
@@ -364,6 +366,8 @@ $donHang->tong_don_hang = $thanhtien;
                 $donHangchitiet->ten_san_pham = $tensp;
 
                 $donHangchitiet->save();
+
+                // Sau đó chuyển hướng người dùng về trang chủ
             } else {
                 // Nếu $dt không phải là đối tượng, xử lý tùy thuộc vào cấu trúc dữ liệu của $dt
                 // Ví dụ: giả sử $dt có cấu trúc là một mảng
@@ -384,16 +388,17 @@ $donHang->tong_don_hang = $thanhtien;
                     $donHangchitiet->ten_san_pham = $tensp;
 
                     $donHangchitiet->save();
-                    alert()->success('Đặt hàng thành công', 'Cảm ơn bạn đã mua hàng!')->persistent("OK");
 
-    // Sau đó chuyển hướng người dùng về trang chủ
-    return redirect('/');
                 } else {
                     // Xử lý cho trường hợp khác nếu cần
                     error_log('Dữ liệu không phải là đối tượng hoặc mảng: ' . print_r($dt, true));
                 }
+
             }
         }
+
+            // Nếu biến flaglà true, thực hiện chuyển hướng
+
 
 
 
@@ -447,6 +452,9 @@ span.text-muted{
     color: white;
     font-size: 14px;
     padding: 20px;
+}
+.logo img{
+    width: 100px;
 }
 </style>
 @endsection
