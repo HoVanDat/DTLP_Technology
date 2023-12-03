@@ -37,10 +37,10 @@ class AuthController extends Controller
         session(['userInfo.dia_chi' => $dia_chi]);
         $so_dien_thoai = $request->so_dien_thoai;
         session(['userInfo.so_dien_thoai' => $so_dien_thoai]);
-       
+
        $hinh = null;
         if($request->hasFile('hinh')){
-            // dd($request->all()); 
+            // dd($request->all());
             $file = $request->file('hinh');
             $name = $file->getClientOriginalName();
             $image = time()."_".$name;
@@ -55,11 +55,12 @@ class AuthController extends Controller
             ->update([
                 'ten' => session('userInfo.ten'),
                 'dia_chi' =>session('userInfo.dia_chi'),
-                'so_dien_thoai' => session('userInfo.so_dien_thoai'),   
+                'so_dien_thoai' => session('userInfo.so_dien_thoai'),
                 'hinh' => session('userInfo.hinh'),
             ]);
-            
-        return view('thongtin');
+
+     $thongbao1 = "Cập nhật thông tin thành công";
+     return view('thongtin',['thongbao1' => $thongbao1]);
     }
 
     function login(){
@@ -224,3 +225,6 @@ public function resetPasswordPost(NguoiDung $nguoidung, Request $req){
 }
 
  }
+
+
+

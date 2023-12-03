@@ -12,6 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <meta name="description" content="" />
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('css/core.css') }}" class="template-customizer-core-css" />
@@ -38,7 +40,8 @@
 
     }
    </script>
-   
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -141,13 +144,17 @@
     <input style="width:50%; border:1px solid #cccccc" class="input" type="text" name="tu-khoa" placeholder="Có thể tìm kiếm tên sản phẩm hoặc mã đơn hàng">
     <button style="border:none; background-color:#F17024; color:white;" type="submit">Tìm kiếm</button>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="donhang">
-@foreach($tin123 as $donhang)
 
-    <div style="padding:20px; margin-top:20px;" class="tong">
-        @php
-        $tt = DB::table('donhangchitiet')->where('id_don_hang',$donhang->id_don_hang)->get();
+
+@if(isset($tin123))
+    @foreach($tin123 as $donhang)
+
+        <div style="padding:20px; margin-top:20px;" class="tong ">
+            @php
+            $tt = DB::table('donhangchitiet')->where('id_don_hang',$donhang->id_don_hang)->get();
 
             if($donhang->trang_thai == 0){
                 $trangthai = 'Chờ xác nhận';
@@ -158,45 +165,47 @@
             } else{
                 $trangthai = 'Đã hủy';
             }
-        @endphp
-        <div class="donhang1">
-            <h5>Mã đơn hàng:{{$donhang->id_don_hang}}</h5>
-            <p>Tình trạng: {{$trangthai}}</p>
-            <hr>
-        </div>
-        @foreach($tt as $t)
+            @endphp
+            <div class="donhang1">
+                <h5>Mã đơn hàng:{{$donhang->id_don_hang}}</h5>
+                <p>Tình trạng: {{$trangthai}}</p>
+                <hr>
+            </div>
+            @foreach($tt as $t)
 
-        <div class="donhang2">
-            <div class="row">
-                <div class="col-6">
-                    @php
-                    $tongtien = $t->so_luong * $t->gia;
+            <div class="donhang2">
+                <div class="row">
+                    <div class="col-6">
+                        @php
+                        $tongtien = $t->so_luong * $t->gia;
 
-                    $tt3 = DB::table('sanpham')->where('id_san_pham',$t->id_san_pham)->get();
+                        $tt3 = DB::table('sanpham')->where('id_san_pham',$t->id_san_pham)->get();
 
-                    @endphp
-                    @foreach($tt3 as $tt2)
-                    <img src="./img/{{$tt2->hinh}}" alt="">
-                    <div class="thongtin">
-                        <h5>{{$tt2->ten_san_pham}}</h5>
-                        <p>X{{$t->so_luong}}</p>
+                        @endphp
+                        @foreach($tt3 as $tt2)
+                        <img src="./img/{{$tt2->hinh}}" alt="">
+                        <div class="thongtin">
+                            <h5>{{$tt2->ten_san_pham}}</h5>
+                            <p>X{{$t->so_luong}}</p>
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
-                <div class="col-6">
-                <h4>{{ number_format($tongtien, 0, ',', '.') }} VND</h4>
+                    <div class="col-6">
+                        <h4>{{ number_format($tongtien, 0, ',', '.') }} VND</h4>
+                    </div>
                 </div>
             </div>
+            <hr>
+            @endforeach
+
+            <div class="donhang3">
+                <h4>Tổng đơn hàng:  {{ number_format($donhang->tong_don_hang, 0, ',', '.') }} VND </h4>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Chi tiết đơn hàng
+                </button>
+            </div>
         </div>
-        <hr>
-        @endforeach
-
-        <div class="donhang3">
-            <h4>Tổng đơn hàng:  {{ number_format($donhang->tong_don_hang, 0, ',', '.') }} VND </h4>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Chi tiết đơn hàng
-</button>
-
+    </div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -265,14 +274,19 @@
     </div>
   </div>
 </div>
+@endforeach
+
         </div>
+
     </div>
-    @endforeach
 
 
 </div>
 
 
+
+</div>
+@endif
 </div>
 
 <div id="Tokyo" class="w3-container city" style="display:none">
@@ -302,6 +316,8 @@ function openCity(cityName) {
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>
@@ -344,6 +360,10 @@ function openCity(cityName) {
 
         justify-content:center;
     }
+    #Paris{
+        display: flex;
+        justify-content:center;
+    }
     .search{
         margin:0 auto;
         justify-content:center;
@@ -360,5 +380,6 @@ span{
     font-weight:bolder;
 }
 </style>
+
 
 

@@ -408,6 +408,11 @@ body {
                     alt="event"></a></div>
     </div>
 </div>
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <script>
     @include('sweetalert::alert')
 </script>
@@ -416,7 +421,7 @@ body {
     <div class="block-slider block-slider4">
         <ul class="" id="bxslider-home4">
             <li>
-                <img src="img/h4-slide.png" alt="Slide">
+            <img src="img/h4-slide.png" alt="Slide">
                 <div class="caption-group">
                     <h2 class="caption title">
                         iPhone <span class="primary">6 <strong>Plus</strong></span>
@@ -530,27 +535,7 @@ body {
     </div>
 </div> <!-- End main content area -->
 
-<div class="brands-area" id="brands-areass">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="brand-wrapper">
-                    <div class="brand-list">
-                        <img src="img/brand1.png" alt="">
-                        <img src="img/brand2.png" alt="">
-                        <img src="img/brand3.png" alt="">
-                        <img src="img/brand4.png" alt="">
-                        <img src="img/brand5.png" alt="">
-                        <img src="img/brand6.png" alt="">
-                        <img src="img/brand1.png" alt="">
-                        <img src="img/brand2.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- End brands area -->
+<!-- End brands area -->
 <div class="maincontent-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
@@ -694,157 +679,7 @@ body {
 
     </div>
 </div>
-<div class="product-widget-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container" id="container2">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="single-product-widget">
-                    <h2 class="product-wid-title">Top Sellers</h2>
-                    <a href="" class="wid-view-more">Xem tất cả</a>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony Smart TV - 2015</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Apple new mac book 2015</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Apple new i phone 6</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-product-widget">
-                    <h2 class="product-wid-title">Top lượt xem</h2>
-                    <a href="#" class="wid-view-more">Xem tất cả</a>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony playstation microsoft</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony Smart Air Condtion</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Samsung gallaxy note 4</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-product-widget">
-                    <h2 class="product-wid-title">Top New</h2>
-                    <a href="#" class="wid-view-more">Xem tất cả</a>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Apple new i phone 6</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Samsung gallaxy note 4</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a href="/chitietsp/{{$s->id_san_pham}}"><img src="img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
-                        <h2><a href="/chitietsp/{{$s->id_san_pham}}">Sony playstation microsoft</a></h2>
-                        <div class="product-wid-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-wid-price">
-                            <ins>$400.00</ins> <del>$425.00</del>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> <!-- End product widget area -->
+     <!-- End product widget area -->
 <div class="container" id="container1">
     <div class="col2-tech">
         <!-- 24h công nghệ -->
@@ -855,48 +690,22 @@ body {
                 <a href="/tin-tuc">Xem tất cả</a>
             </strong>
             <ul>
+                @foreach($sp7 as $tt)
                 <li>
-                    <a href="/tin-tuc/deal-to-chan-dong-dien-thoai-moi-ra-mat-nam-2023-1542518">
+                    <a href="chi-tiet-tin/{{$tt->id_tin}}">
                         <img data-src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/14/1542518/galaxy-z-fold-5-bo-sung-111111-140823-085238-200x200.jpg"
                             class=" lazyloaded" alt="Deal to chấn động, điện thoại mới ra mắt năm 2023 giảm đến 9 triệu"
                             width="270" height="151"
-                            src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/14/1542518/galaxy-z-fold-5-bo-sung-111111-140823-085238-200x200.jpg">
+                            src="/img/{{$tt->hinh}}">
                         <div class="text-tech">
                             <span>
-                                Deal to chấn động, điện thoại mới ra mắt năm 2023 giảm đến 9 triệu
+                                {{$tt->tieu_de}}
                             </span>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="/tin-tuc/oppo-lan-san-tri-tue-nhan-tao-gioi-thieu-tro-ly-ao-cua-rieng-hang-1542517">
-                        <img data-src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/14/1542517/thumnb-140823-082827-200x200.jpg"
-                            class=" ls-is-cached lazyloaded"
-                            alt="OPPO lấn sân trí tuệ nhân tạo, giới thiệu trợ lý ảo đột phá của riêng hãng" width="270"
-                            height="151"
-                            src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/14/1542517/thumnb-140823-082827-200x200.jpg">
-                        <div class="text-tech">
-                            <span>
-                                OPPO lấn sân trí tuệ nhân tạo, giới thiệu trợ lý ảo đột phá của riêng hãng
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/tin-tuc/oppo-a18-co-gi-moi-1542267">
-                        <img data-src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/12/1542267/11-120823-105504-200x200.jpg"
-                            class=" lazyloaded"
-                            alt="Nghe Đồn Là: OPPO A18 sắp được ra mắt, chip Dimensity 810, camera 50 MP (liên tục cập nhật)"
-                            width="270" height="151"
-                            src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/12/1542267/11-120823-105504-200x200.jpg">
-                        <div class="text-tech">
-                            <span>
-                                Nghe Đồn Là: OPPO A18 sắp được ra mắt, chip Dimensity 810, camera 50 MP (liên tục cập
-                                nhật)
-                            </span>
-                        </div>
-                    </a>
-                </li>
+                @endforeach
+
             </ul>
         </div>
 

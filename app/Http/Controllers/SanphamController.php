@@ -25,8 +25,9 @@ class SanphamController extends Controller
         $sp4= DB::table('sanpham')->where('id_san_pham','>=',130)->limit(20)->get();
         $sp5= DB::table('sanpham')->where('id_loai',2)->limit(5)->get();
         $sp6= DB::table('sanpham')->where('id_loai',1)->limit(5)->get();
+        $sp7= DB::table('tintuc')->limit(3)->get();
 
-        return view('home',['sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6]);
+        return view('home',['sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6, 'sp7'=>$sp7]);
     }
     public function dt(){
         $dt= DB::table('sanpham')->where('id_loai','1')->paginate(9);
@@ -47,19 +48,40 @@ class SanphamController extends Controller
     }
 
     public function tintuc(){
-        $dt = DB::table('tintuc')->paginate(4); // 10 sản phẩm trên mỗi trang
+        $dt = DB::table('tintuc')->orderBy('id_tin', 'desc')->paginate(4);
         $dt1 = DB::table('tintuc')
         ->orderBy('view', 'desc')
         ->limit(4) // Giới hạn số lượng bài viết
-        ->get(); // Thực hiện truy vấn sau khi gọi get()
-        return view('tintuc', ['dt' => $dt,'dt1'=>$dt1]);
+        ->get();
+
+        $dt2 = DB::table('danhmuc_tintuc')
+       // Giới hạn số lượng bài viết
+        ->get();// Thực hiện truy vấn sau khi gọi get()
+        return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2]);
+    }
+
+
+    public function tintuctheoloai($id){
+        $dt = DB::table('tintuc')
+        ->where('id_danh_muc_tin', $id)
+        ->limit(4) // Giới hạn số lượng bài viết
+        ->get();
+        $dt1 = DB::table('tintuc')
+        ->orderBy('view', 'desc')
+        ->limit(4) // Giới hạn số lượng bài viết
+        ->get();
+
+        $dt2 = DB::table('danhmuc_tintuc')
+       // Giới hạn số lượng bài viết
+        ->get();// Thực hiện truy vấn sau khi gọi get()
+        return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2]);
     }
     public function cttin($id){
         $chitiettin = TinTuc::find($id);
         $tinlienquan = TinTuc::where('id_danh_muc_tin',$id)->limit(3)->get();
         $danhmuctin = DanhMucTinTuc::all();
         $randsp = SanPham::inRandomOrder()->first();
-        $randspchitiet = null; 
+        $randspchitiet = null;
         $sanpham = SanPham::where('hot',1)->limit(4)->get();
         if ($randsp) {
         $randspchitiet = ChiTietSanPham::where('id_san_pham', $randsp->id)->first();
@@ -241,7 +263,7 @@ class SanphamController extends Controller
         $data = ['id' => $id, 'tin' => $tin, 'tin1'=>$tin1, 'tin2'=>$tin2, 'binhluan'=>$product];
         return view('chitiet', $data);
     }
-    
+
     public function filter(Request $request)
         {
             $selectedPrices = $request->input('price', []);

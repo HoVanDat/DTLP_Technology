@@ -53,7 +53,7 @@ Route::get('/tintuc',function(){
 
 
 
-  Route::get('/products/search', [SanphamController::class, 'search'])->name('products.search');
+Route::get('/products/search', [SanphamController::class, 'search'])->name('products.search');
 
 route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('profile');
 
@@ -65,6 +65,7 @@ Route::get('/khuyenmai',[TinKhuyenMaiController::class,'tinkhuyenmai'])->name('t
 Route::get('/lienhe',function(){
     return view('lienhe');
 });
+Route::post('/deletecart',[OrderController::class, 'muahang'])->name('muahang');
 
 Route::get('/muahang/{id}',[OrderController::class, 'muahang'])->name('muahang');
 Route::get('/dangnhap',[AuthController::class,'login'])->name('login');
@@ -79,6 +80,7 @@ Route::get('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPa
 Route::post('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPasswordPost']);
 Route::get('/chi-tiet-san-pham/{id}',[ChiTietSanPhamController::class,'chitiet'])->name('chitietsanpham');
 Route::post('/add-to-cart123', [OrderController::class, 'addToCart']);
+Route::get('/danh-muc/{id}',[SanphamController::class,'tintuctheoloai'])->name('chitietsanpham');
 
 Route::get('/giohang',function(){
     return view('giohang');
@@ -88,11 +90,8 @@ Route::get('/thanhtoan',function(){
 });
 
 Route::post('/luu-don-hang', [OrderController::class, 'store'])->name('luu_don_hang');
-
-
 Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
-
 Route::get('/tintuc',[SanphamController::class, 'tintuc']);
 Route::get('/chi-tiet-tin/{id}',[SanphamController::class, 'cttin']);
 

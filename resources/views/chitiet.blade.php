@@ -1,6 +1,7 @@
 @extends('layout')
 @section('noidung')
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <style>
 .mainmenu-area {
     background: none repeat scroll 0 0 #333;
@@ -318,9 +319,22 @@ margin-top: 12px;
                                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
                                                 data-toggle="tab">Đánh giá</a></li>
                                     </ul>
-                                    <div class="tab-content">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+<div class="row banner">
+    <div class="col-6">
+        <h3>Thông tin sản phẩm {{$sanpham->ten_san_pham}}</h3>
+        <img src="/img/{{$sanpham->hinh}}" alt="">
+        <p>Đang cập nhật</p>
+    </div>
+    <div class="col-6">
+    <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                            <h2>Mô tả sản phẩm</h2>
+                                            <h2>Thông số kỹ thuật</h2>
                                             @if($chitietsanpham)
                                             <table>
                                                 <tr>
@@ -516,9 +530,14 @@ margin-top: 12px;
                                                             }
 
                                                             ?>
-                                            <div class="container">
-                                                <h2>Thống kê bình luận</h2>
-                                                <hr>
+
+                                        </div>
+                                    </div>
+    </div>
+</div>
+<div class="row binhluan">
+<h2>Ý kiến nhận xét</h2>
+
                                                 @foreach($binhluan as $bl)
                                                 <div class="bl">
                                                     <img src="{{ asset('img/1.jfif') }}" alt="">
@@ -528,15 +547,8 @@ margin-top: 12px;
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-
+</div>
 
                     <div class="related-products-wrapper">
                         <h2 class="related-products-title">Sản phẩm tương tự</h2>
@@ -548,10 +560,9 @@ margin-top: 12px;
                                         <div class="product-f-image">
                                             <img src="/img/{{$splq->hinh}}" alt="">
                                             <div class="product-hover">
-                                                <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>
-                                                    Add to cart</a>
-                                                <a href="" class="view-details-link"><i class="fa fa-link"></i> See
-                                                    details</a>
+                                                <a href="{{ route('muahang',['id' => $splq->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>
+                                                    Mua ngay</a>
+                                                <a href="{{url('chi-tiet-san-pham',[$splq->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i> Xem thêm</a>
                                             </div>
                                         </div>
 
@@ -612,4 +623,43 @@ window.onload = function() {
 };
 </script>
 @endsection
+
+<style>
+    .row {
+    display: flex;
+}
+.banner{
+border-radius:10px;
+margin-top:20px;
+}
+
+.col-6 {
+    width: 50%;
+    background-color:white;
+    padding:20px;
+    box-shadow: 1px 1px 1px #cccccc;
+}
+.binhluan{
+    display:block;
+    background-color:white;
+    padding:20px;
+    margin-top:20px;
+}
+.tab-content {
+    /* Thêm các quy tắc thiết kế cho tab-content tại đây */
+}
+
+.tab-pane {
+    /* Thêm các quy tắc thiết kế cho tab-pane tại đây */
+}
+.binhluan hr{
+    height:1px;
+}
+#comment-form{
+    width: 50%;
+}
+.binhluan .bl{
+    margin-top:20px;
+}
+</style>
 
