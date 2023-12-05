@@ -123,25 +123,14 @@
 
                 <div class="d-flex justify-content-around align-items-center mb-4">
                   <!-- Checkbox -->
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                    <label class="form-check-label" for="form1Example3"> Remember me </label>
-                  </div>
-                  <a href="{{route('forget.password')}}">Forgot password?</a>
+
+                  <a href="{{route('forget.password')}}">Quên mật khẩu?</a>
                 </div>
 
                 <!-- Submit button -->
                 <button type="submit" class=" btn-primary btn-lg btn-block">Đăng nhập</button>
 
-                <div class="divider d-flex align-items-center my-4">
-                  <p class="text-center fw-bold mx-3 mb-0 text-muted">Hoặc</p>
-                </div>
 
-                <button class="btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!">
-                  <i class="fab fa-facebook-f me-2"></i>Tiếp tục với Facebook
-                </button>
-                <button class="btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!" role="button"><i class="fab fa-twitter me-2"></i>
-                  Tiếp tục với Twitter</button>
               </form>
             </div>
           </div>

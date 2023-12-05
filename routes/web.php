@@ -17,6 +17,7 @@
   use App\Http\Controllers\ChiTietSanPhamController;
 use App\Http\Controllers\TinKhuyenMaiController;
 
+Route::post('/delete-product/{productId}', [OrderController::class, 'deleteProduct'])->name('delete-product');
 
  // tài khoản
  Route::get('thongtin',[AuthController::class,'thongtin']);
@@ -90,6 +91,8 @@ Route::get('/thanhtoan',function(){
 });
 
 Route::post('/luu-don-hang', [OrderController::class, 'store'])->name('luu_don_hang');
+Route::post('/luudonhang2', [OrderController::class, 'store1'])->name('luudonhang2');
+
 Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
 Route::get('/tintuc',[SanphamController::class, 'tintuc']);

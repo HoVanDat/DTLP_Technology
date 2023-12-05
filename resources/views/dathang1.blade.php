@@ -31,8 +31,8 @@ $email = $tin123->email;
         <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
         <div class="container mt-4">
             <form class="needs-validation" name="" method="post"
-                action="">
-                {{ csrf_field() }}
+                action="{{route('luudonhang2')}}">
+                @csrf
 
 
                 <div class="row">
@@ -62,19 +62,16 @@ $email = $tin123->email;
                 <!-- Các input hidden khác bạn có thể giữ nguyên -->
             </div>
         </li>
-        <input type="hidden" name="idsp"value="{{$item['sanPham']->id_san_pham}}">
-                        <input type="hidden" name="tensp"value="{{$item['sanPham']->ten_san_pham}}">
-                        <input type="hidden" name="gia"value="{{$item['sanPham']->gia}}">
-                        <input type="hidden" name="soluong"value="{{ $item['soLuong'] }}">
-                        <input type="hidden" name="tongtien"value="{{ $thanhtien }}">
+
                         <input type="hidden" name="productData" value="<?= htmlentities(json_encode($item)); ?>">
 
     <?php endforeach; ?>
 
-
+    <input type="hidden" name="sanPhamInfo" value="<?= htmlentities(json_encode($sanPhamInfo)); ?>">
     <li class="list-group-item d-flex justify-content-between">
         <span>Tổng thành tiền</span>
         <strong>{{ number_format($thanhtien, 0, ',', '.') }} VNĐ</strong>
+        <input type="hidden" name="thanhtien" value="{{$thanhtien}}">
     </li>
 
                         </ul>
@@ -137,281 +134,7 @@ $email = $tin123->email;
                 </div>
             </form>
 
-            <?php
 
-use App\Models\DonHang;
-
-use App\Models\DonHangChiTiet;
-function execPostRequest($url, $data)
-{
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt(
-        $ch,
-        CURLOPT_HTTPHEADER,
-        array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($data)
-        )
-    );
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-    //execute post
-    $result = curl_exec($ch);
-    //close connection
-    curl_close($ch);
-    return $result;
-}
-
-
-$tongtien = 0; // Khởi tạo tổng tiền
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Xử lý Đặt hàng ở đây
-    $tenNguoiNhan = $_POST['ten_nguoi_nhan'];
-    $diaChi = $_POST['dia_chi'];
-    $soDienThoai = $_POST['so_dien_thoai'];
-    $email = $_POST['email'];
-    $htttMa = $_POST['httt_ma'];
-    $tonggia = $_POST['tongtien'];
-    if (session()->has('userInfo')) {
-        $iduser = session('userInfo.iduser');
-    } else {
-        $iduser = 0;
-    }
-    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $code = '';
-
-    for ($i = 0; $i < 8; $i++) {
-        $code .= $characters[rand(0, strlen($characters) - 1)];
-    }
-
-    if ($htttMa == 2) {
-        if (session()->has('userInfo')) {
-            $iduser = session('userInfo.iduser');
-        } else {
-            $iduser = 0;
-        }
-        $donHang = new DonHang;
-        $donHang->pttt = $htttMa;
-        $donHang->thoi_diem_mua_hang = now();
-        $donHang->ten_nguoi_nhan = $tenNguoiNhan;
-        $donHang->dia_chi = $diaChi;
-        $donHang->so_dien_thoai = $soDienThoai;
-        $donHang->email = $email;
-$donHang->id_nguoi_dung = $iduser;
-$donHang->tong_don_hang = $thanhtien;
-
-        $donHang->save();
-
-        $donhangID = $donHang->id_don_hang; // Lấy ID của đơn hàng sau khi thêm
-
-
-        // Lấy dữ liệu sản phẩm từ biến $_POST hoặc tham số URL nếu bạn muốn
-        // $productData = json_decode($_POST['products']); // hoặc sử dụng tham số URL
-
-        // Thực hiện lưu dữ liệu chi tiết đơn hàng vào CSDL
-        $productData = json_decode($_POST['productData']);
-
-        foreach ($productData as $dt) {
-            // Kiểm tra nếu $dt là một đối tượng
-            if (is_object($dt)) {
-                $idsp = $dt->id_san_pham;
-                $tensp = $dt->ten_san_pham;
-                $gia = $dt->gia;
-                $soluong = 2;
-
-                // Thực hiện chèn thông tin chi tiết đơn hàng
-                $donHangchitiet = new DonHangChiTiet;
-                $donHangchitiet->id_don_hang = $donhangID;
-                $donHangchitiet->id_san_pham = $idsp;
-                $donHangchitiet->so_luong = $soluong;
-                $donHangchitiet->gia = $gia;
-                $donHangchitiet->ten_san_pham = $tensp;
-
-                $donHangchitiet->save();
-                $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
-
-
-                $partnerCode = 'MOMOBKUN20180529';
-                $accessKey = 'klm05TvNBzhg7h7j';
-                $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-                $orderInfo = "Thanh toán qua MoMo";
-                $amount = $tonggia;
-                $orderId = rand(00, 9999);
-                $redirectUrl = "http://127.0.0.1:8000/";
-                $ipnUrl = "http://127.0.0.1:8000/";
-                $extraData = "";
-
-
-                if (!empty($_POST)) {
-                    $partnerCode = $partnerCode;
-                    $accessKey = $accessKey;
-                    $serectkey = $secretKey;
-                    $orderId = $orderId; // Mã đơn hàng
-
-                    $orderInfo = $orderInfo;
-                    $amount = $amount;
-                    $ipnUrl = $ipnUrl;
-                    $redirectUrl = $redirectUrl;
-                    $extraData = $extraData;
-
-                    $requestId = time() . "";
-                    $requestType = "payWithATM";
-                    // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
-                    //before sign HMAC SHA256 signature
-                    $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
-                    $signature = hash_hmac("sha256", $rawHash, $serectkey);
-                    $data = array(
-                        'partnerCode' => $partnerCode,
-                        'partnerName' => "Test",
-                        "storeId" => "MomoTestStore",
-                        'requestId' => $requestId,
-                        'amount' => $amount,
-                        'orderId' => $orderId,
-                        'orderInfo' => $orderInfo,
-                        'redirectUrl' => $redirectUrl,
-                        'ipnUrl' => $ipnUrl,
-                        'lang' => 'vi',
-                        'extraData' => $extraData,
-                        'requestType' => $requestType,
-                        'signature' => $signature
-                    );
-                    $result = execPostRequest($endpoint, json_encode($data));
-                    $jsonResult = json_decode($result, true); // decode json
-
-                    //Just a example, please check more in there
-
-                    // return redirect('/home')->with('thongbao', $thongbao);
-                    if (isset($jsonResult['payUrl'])) {
-                        return redirect()->away($jsonResult['payUrl']);
-                    } else {
-                        // Xử lý nếu không có URL thanh toán
-                    }
-                }
-            } else {
-                // Nếu $dt không phải là đối tượng, xử lý tùy thuộc vào cấu trúc dữ liệu của $dt
-                // Ví dụ: giả sử $dt có cấu trúc là một mảng
-                // Lưu ý: Bạn cần biết cấu trúc thực tế của $dt khi nó không phải là đối tượng
-                if (is_array($dt)) {
-                    // Xử lý để lấy thông tin từ mảng $dt và lưu vào CSDL
-                    $idsp = $dt['id_san_pham'];
-                    $tensp = $dt['ten_san_pham'];
-                    $gia = $dt['gia'];
-                    $soluong = 2;
-
-                    // Thực hiện chèn thông tin chi tiết đơn hàng
-                    $donHangchitiet = new DonHangChiTiet;
-                    $donHangchitiet->id_don_hang = $donhangID;
-                    $donHangchitiet->id_san_pham = $idsp;
-                    $donHangchitiet->so_luong = $soluong;
-                    $donHangchitiet->gia = $gia;
-                    $donHangchitiet->ten_san_pham = $tensp;
-
-                    $donHangchitiet->save();
-
-
-                } else {
-                    // Xử lý cho trường hợp khác nếu cần
-                    error_log('Dữ liệu không phải là đối tượng hoặc mảng: ' . print_r($dt, true));
-                }
-            }
-        }
-
-
-    } else {
-        if (session()->has('userInfo')) {
-            $iduser = session('userInfo.iduser');
-        } else {
-            $iduser = 0;
-        }
-        $donHang = new DonHang;
-        $donHang->pttt = $htttMa;
-        $donHang->thoi_diem_mua_hang = now();
-        $donHang->ten_nguoi_nhan = $tenNguoiNhan;
-        $donHang->dia_chi = $diaChi;
-        $donHang->so_dien_thoai = $soDienThoai;
-        $donHang->email = $email;
-$donHang->id_nguoi_dung = $iduser;
-$donHang->tong_don_hang = $thanhtien;
-
-        $donHang->save();
-
-        $donhangID = $donHang->id_don_hang; // Lấy ID của đơn hàng sau khi thêm
-
-        // Lấy dữ liệu sản phẩm từ biến $_POST hoặc tham số URL nếu bạn muốn
-        // $productData = json_decode($_POST['products']); // hoặc sử dụng tham số URL
-        echo '<script>';
-        echo 'alert("Cảm ơn bạn đặt hàng thành công");';
-        echo '</script>';
-        // Thực hiện lưu dữ liệu chi tiết đơn hàng vào CSDL
-        $productData = json_decode($_POST['productData']);
-        $chuyenHuong = false;
-        foreach ($productData as $dt) {
-            // Kiểm tra nếu $dt là một đối tượng
-            if (is_object($dt)) {
-                $idsp = $dt->id_san_pham;
-                $tensp = $dt->ten_san_pham;
-                $gia = $dt->gia;
-                $soluong = 1;
-
-                // Thực hiện chèn thông tin chi tiết đơn hàng
-                $donHangchitiet = new DonHangChiTiet;
-                $donHangchitiet->id_don_hang = $donhangID;
-                $donHangchitiet->id_san_pham = $idsp;
-                $donHangchitiet->so_luong = $soluong;
-                $donHangchitiet->gia = $gia;
-                $donHangchitiet->ten_san_pham = $tensp;
-
-                $donHangchitiet->save();
-
-                // Sau đó chuyển hướng người dùng về trang chủ
-            } else {
-                // Nếu $dt không phải là đối tượng, xử lý tùy thuộc vào cấu trúc dữ liệu của $dt
-                // Ví dụ: giả sử $dt có cấu trúc là một mảng
-                // Lưu ý: Bạn cần biết cấu trúc thực tế của $dt khi nó không phải là đối tượng
-                if (is_array($dt)) {
-                    // Xử lý để lấy thông tin từ mảng $dt và lưu vào CSDL
-                    $idsp = $dt['id_san_pham'];
-                    $tensp = $dt['ten_san_pham'];
-                    $gia = $dt['gia'];
-                    $soluong = 2;
-
-                    // Thực hiện chèn thông tin chi tiết đơn hàng
-                    $donHangchitiet = new DonHangChiTiet;
-                    $donHangchitiet->id_don_hang = $donhangID;
-                    $donHangchitiet->id_san_pham = $idsp;
-                    $donHangchitiet->so_luong = $soluong;
-                    $donHangchitiet->gia = $gia;
-                    $donHangchitiet->ten_san_pham = $tensp;
-
-                    $donHangchitiet->save();
-
-                } else {
-                    // Xử lý cho trường hợp khác nếu cần
-                    error_log('Dữ liệu không phải là đối tượng hoặc mảng: ' . print_r($dt, true));
-                }
-
-            }
-        }
-
-            // Nếu biến flaglà true, thực hiện chuyển hướng
-
-
-
-
-
-
-
-    }
-
-
-}
-
-// Đóng kết nối CSDL
-?>
 
         </div>
         <!-- End block content -->
