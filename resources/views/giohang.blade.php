@@ -99,8 +99,6 @@ div.quantity input.minus {
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="woocommerce">
-                        <form method="POST" action="">
-                            @CSRF
                             <table cellspacing="0" class="shop_table cart">
                                 <thead>
                                     <tr>
@@ -114,12 +112,18 @@ div.quantity input.minus {
 
                                     </tr>
                                 </thead>
-<tbody>
+
+                                <tbody>
+
+
                                     @foreach($cart as $item)
 @php
                                     $idproduct = $item['product_id'];
                                     $tin = DB::table('sanpham')->where('id_san_pham', $idproduct)->first();
                                     @endphp
+                                    <form method="POST" action="{{ route('delete-product', ['productId' =>$tin->id_san_pham]) }}">
+                                    @csrf
+
                                     <tr class="cart_item">
                                         <td class="product-remove">
                                             <input type="checkbox" name="selected_products[]"
@@ -152,25 +156,28 @@ div.quantity input.minus {
                                         <span class="amount">{{ number_format($tin->gia, 0, ',', '.') ?? '£0.00' }}</span>
                                         </td>
                                         <td class="product-price">
-                                        <button>Xóa</button>
+
+                                        <button type="submit">Xóa</button>
+
                                         </td>
                                     @endforeach
 
                                     <tr>
+
+</form>
+
+
                                         <td class="actions" colspan="6">
 
                                             <input type="button" id="buy-button" value="Mua hàng"
                                                 class="checkout-button button alt wc-forward">
                                         </td>
-<td class="actions" colspan="6">
 
-                                            <input type="button" id="buy-button" value="Xóa tất cả"
-                                                class="checkout-button button alt wc-forward">
-                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
-</form>
+
                         <script>
                         document.addEventListener("DOMContentLoaded", function() {
 var buyButton = document.getElementById('buy-button');
