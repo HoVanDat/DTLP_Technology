@@ -534,6 +534,7 @@ button.add_to_cart_buttonss {
 
                                                             ?>
 
+
                                 </div>
                             </div>
                         </div>
@@ -552,6 +553,7 @@ button.add_to_cart_buttonss {
                         @endforeach
 
                     </div>
+
 
                     <div class="related-products-wrapper">
                         <h2 class="related-products-title">Sản phẩm tương tự</h2>
@@ -656,7 +658,13 @@ window.onload = function() {
 .tab-content {
     /* Thêm các quy tắc thiết kế cho tab-content tại đây */
 }
+.bl {
+    display: flex;
+    margin-bottom: 20px;
+    width: 30%;
+    pointer-events: none;
 
+}
 .tab-pane {
     /* Thêm các quy tắc thiết kế cho tab-pane tại đây */
 }

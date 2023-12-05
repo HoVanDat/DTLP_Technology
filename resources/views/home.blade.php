@@ -501,7 +501,7 @@ body {
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -540,7 +540,7 @@ body {
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -564,7 +564,7 @@ body {
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -588,7 +588,7 @@ body {
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
