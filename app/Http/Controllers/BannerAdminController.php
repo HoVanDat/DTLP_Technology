@@ -10,7 +10,7 @@ use Illuminate\Http\UploadedFile;
 class BannerAdminController extends Controller
 {
     public function index(){
-       $banner= Banner::get();
+       $banner= Banner::orderBy('id_banner','desc')->get();
         return view('/admin/qlbanner',['banner'=>$banner]);
     }
     public function createqlbanner(){
@@ -19,6 +19,7 @@ class BannerAdminController extends Controller
     public function createqlbannerpost(Request $request){
         $addbanner = new Banner();
         $addbanner->ten= $request->get('ten');
+        $addbanner->mo_ta= $request->get('mo_ta');
         if ($request->hasFile('hinh')) {
             $file = $request->file('hinh');
             $name = $file->getClientOriginalName();
@@ -36,6 +37,8 @@ class BannerAdminController extends Controller
     public function editqlbannerpost(Request $request){
      $id_banner=$request->id_banner;
      $ten=$request->ten;
+     $mo_ta=$request->mo_ta;
+     $trang_thai=$request->trang_thai;
      if ($request->hasFile('hinh')) {
         $file = $request->file('hinh');
         $name = $file->getClientOriginalName();
@@ -44,7 +47,7 @@ class BannerAdminController extends Controller
         $hinh = '/admin/img-banner/' .$image;
     }
         $edit = Banner::find($id_banner);
-        $edit->update(['ten'=>$ten,'hinh'=>$hinh]);
+        $edit->update(['ten'=>$ten,'hinh'=>$hinh,'mo_ta'=>$mo_ta,'trang_thai'=>$trang_thai]);
         session()->flash('success', 'Sửa thành công');
     return redirect('admin/qlbanner');
     }

@@ -59,11 +59,13 @@
                         <thead>
                             <tr>
                                 <th width="10"><input type="checkbox" id="all"></th>
-                                <th>STT</th>
-                                <th width="150">Tên banner</th>
+                                <th width="10">STT</th>
+                                <th width="100">Tên banner</th>
                                 <th width="20">Hình ảnh</th>
-                                <th width="250">Ngày tạo</th>
-                                <th width="100">Tính năng</th>
+                                <th width="20">Mô tả</th>
+                                <th width="25">Ngày tạo</th>
+                                <th width="10">Trạng thái</th>
+                                <th width="40">Tính năng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,7 +76,13 @@
                                 <td width="5">{{ $loop->iteration }}</td>
                                 <td width="100">{{$b->ten}}</td>
                                 <td><img class="img-card-person" src="{{$b->hinh}}" alt=""></td>
+                                <td width="100">{{$b->mo_ta}}</td>
                                 <td width="50">{{$b->created_at}}</td>
+                                <td width="10">@if($b->trang_thai == 1)
+                                    Hiện
+                                    @else
+                                    Ẩn
+                                    @endif</td>
                                 <td class="table-td-center">
                                     <a class="btn btn-primary btn-sm trash"
                                         onclick="showDeleteConfirmation('{{$b->id_banner}}', 'delete-qlbanner/{{$b->id_banner}}')"
@@ -321,5 +329,11 @@ function loadDataFromDatabase(userId) {
         }
     });
 }
+document.addEventListener('DOMContentLoaded', function () {
+    var divs = document.querySelectorAll('div[contenteditable="true"] > div');
+    divs.forEach(function (div) {
+        div.outerHTML = div.innerHTML;
+    });
+});
 </script>
 @endsection

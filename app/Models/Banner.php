@@ -10,5 +10,5 @@ class Banner extends Model
     use HasFactory;
     protected $table='banner';
     protected $primaryKey='id_banner';
-    protected $fillable=['ten','hinh'];
+    protected $fillable=['ten','hinh','mo_ta','trang_thai'];
 }

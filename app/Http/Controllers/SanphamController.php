@@ -12,6 +12,7 @@ use App\Models\Loai;
 use App\Models\ChiTietSanPham;
 use App\Models\TinTuc;
 use App\Models\DanhMucTinTuc;
+use App\Models\Banner;
 use App\Models\NguoiDung;
 
 use Carbon\Carbon;
@@ -19,6 +20,8 @@ use DB;
 class SanphamController extends Controller
 {
     public function index(){
+        // slider
+        $banner= Banner::where('trang_thai','1')->get();
         $sp=DB::table('sanpham')->limit(10)->get();
         $sp2= DB::table('sanpham')->where('id_san_pham','>=',100)->limit(20)->get();
         $sp3= DB::table('sanpham')->where('id_san_pham','>=',30)->limit(20)->get();
@@ -27,7 +30,7 @@ class SanphamController extends Controller
         $sp6= DB::table('sanpham')->where('id_loai',1)->limit(5)->get();
         $sp7= DB::table('tintuc')->limit(3)->get();
 
-        return view('home',['sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6, 'sp7'=>$sp7]);
+        return view('home',['banner'=>$banner,'sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6, 'sp7'=>$sp7]);
     }
     public function dt(){
         $dt= DB::table('sanpham')->where('id_loai','1')->paginate(9);
@@ -86,6 +89,7 @@ class SanphamController extends Controller
         return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2]);
     }
     public function cttin($id){
+          $binhluantin = BinhLuan::where('id_tin',$id)->get();
         $chitiettin = TinTuc::find($id);
         $tinlienquan = TinTuc::where('id_danh_muc_tin',$id)->limit(3)->get();
         $danhmuctin = DanhMucTinTuc::all();
@@ -95,7 +99,7 @@ class SanphamController extends Controller
         if ($randsp) {
         $randspchitiet = ChiTietSanPham::where('id_san_pham', $randsp->id)->first();
         }
-        return view('chitiettin',['chitiettin'=>$chitiettin,'tinlienquan'=>$tinlienquan,'danhmuctin'=>$danhmuctin,'randsp' => $randsp,'randspchitiet' => $randspchitiet,'sanpham'=>$sanpham]);
+        return view('chitiettin',['id'=>$id,'binhluantin'=>$binhluantin,'chitiettin'=>$chitiettin,'tinlienquan'=>$tinlienquan,'danhmuctin'=>$danhmuctin,'randsp' => $randsp,'randspchitiet' => $randspchitiet,'sanpham'=>$sanpham]);
     }
     public function mtb(){
         $dt= DB::table('sanpham')->where('id_loai','3')->paginate(9);

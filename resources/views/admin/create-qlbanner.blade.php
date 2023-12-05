@@ -2,6 +2,10 @@
 @section('noidung')
 
 <head>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
     <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
     <script>
     function readURL(input, thumbimage) {
@@ -137,6 +141,12 @@
                             <label class="control-label">Tên banner</label>
                             <input class="form-control" type="text" required name="ten">
                         </div>
+                        <div class="form-group col-md-12">
+    <label class="control-label">Mô tả sản phẩm</label>
+    <input id="mo_ta" type="hidden" name="mo_ta" value="">
+    <trix-editor class="form-control" input="mo_ta"></trix-editor>
+</div>
+                  
                         <div class="form-group col-md-12">
                             <label for="ImageUpload" class="control-label">Ảnh banner</label>
                             <div id="myfileupload">
