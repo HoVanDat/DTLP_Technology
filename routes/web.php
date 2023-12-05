@@ -62,9 +62,8 @@ Route::post('/filter-products', 'SanphamController@filter')->name('filterProduct
 Route::get('/khuyenmai',[TinKhuyenMaiController::class,'tinkhuyenmai'])->name('tinkhuyenmai');
 
 
-Route::get('/lienhe',function(){
-    return view('lienhe');
-});
+Route::get('/lienhe',[ContactAdminController::class,'lienhe']);
+Route::post('/lienhe',[ContactAdminController::class,'lienhepost'])->name('lienhe.post');
 Route::post('/deletecart',[OrderController::class, 'muahang'])->name('muahang');
 
 Route::get('/muahang/{id}',[OrderController::class, 'muahang'])->name('muahang');

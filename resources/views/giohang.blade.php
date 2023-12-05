@@ -99,7 +99,7 @@ div.quantity input.minus {
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="woocommerce">
-                        <form method="POST" action="{{route('deletecart)}}">
+                        <form method="POST" action="">
                             @CSRF
                             <table cellspacing="0" class="shop_table cart">
                                 <thead>
@@ -110,9 +110,11 @@ div.quantity input.minus {
                                         <th class="product-price">Giá</th>
                                         <th class="product-quantity">Số lượng</th>
                                         <th class="product-subtotal">Tổng tiền</th>
+                                        <th class="product-subtotal">Hành động</th>
+
                                     </tr>
                                 </thead>
-                                <tbody>
+<tbody>
                                     @foreach($cart as $item)
 @php
                                     $idproduct = $item['product_id'];
@@ -149,7 +151,9 @@ div.quantity input.minus {
                                         <td class="product-subtotal">
                                         <span class="amount">{{ number_format($tin->gia, 0, ',', '.') ?? '£0.00' }}</span>
                                         </td>
-                                        <td><button class="delete_product"  type="submit" name="delete_product" value="$idproduct">Xóa</button></td>
+                                        <td class="product-price">
+                                        <button>Xóa</button>
+                                        </td>
                                     @endforeach
 
                                     <tr>
@@ -158,27 +162,15 @@ div.quantity input.minus {
                                             <input type="button" id="buy-button" value="Mua hàng"
                                                 class="checkout-button button alt wc-forward">
                                         </td>
+<td class="actions" colspan="6">
+
+                                            <input type="button" id="buy-button" value="Xóa tất cả"
+                                                class="checkout-button button alt wc-forward">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </form>
-                        <?php
-
-
-
-if (isset($_POST['delete_product'])) {
-    $product_id_to_delete = $_POST['delete_product'];
-    // Xử lý xóa sản phẩm có $product_id_to_delete ra khỏi giỏ hàng ở đây
-    if (array_key_exists($product_id_to_delete, $_SESSION['cart'])) {
-        unset($_SESSION['cart'][$product_id_to_delete]);
-        $delete_success = true; // Đặt biến kiểm tra xóa thành công thành true
-
-    }
-}
-
-
-
-?>
+</form>
                         <script>
                         document.addEventListener("DOMContentLoaded", function() {
 var buyButton = document.getElementById('buy-button');
@@ -228,7 +220,7 @@ var buyButton = document.getElementById('buy-button');
 
                                     <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state"
                                             name="calc_shipping_state" placeholder="State / county" value=""
-                                            class="input-text"> </p>
+class="input-text"> </p>
 
                                     <p class="form-row form-row-wide"><input type="text" id="calc_shipping_postcode"
                                             name="calc_shipping_postcode" placeholder="Postcode / Zip" value=""
@@ -253,6 +245,13 @@ Totals</button></p>
 
 <style>
     #buy-button{
+        background-color:#f17024;
+        border:none;
+        color:white;
+        width: 100px;
+        height:40px;
+    }
+    .product-price button{
         background-color:#f17024;
         border:none;
         color:white;

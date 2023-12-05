@@ -139,14 +139,19 @@ button[type=submit] {
                         <input type="password" name="password" id="form1Example23" placeholder="Password"
                             class="form-control form-control-lg" />
                     </div>
+                    <div class="form-outline mb-4">
+                        <input type="password" name="password_confirmation" id="form1Example23" placeholder="Password"
+                            class="form-control form-control-lg" />
+                    </div>
+                  
 
                     <div class="d-flex justify-content-around align-items-center mb-4">
                         <!-- Checkbox -->
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                            <label class="form-check-label" for="form1Example3"> Remember me </label>
+                            <label class="form-check-label" for="form1Example3"> Nhớ mật khẩu </label>
                         </div>
-                        <a href="#">Forgot password?</a>
+                        <a href="{{route('forget.password')}}">Quên mật khẩu?</a>
                     </div>
 
                     <!-- Submit button -->
