@@ -107,62 +107,8 @@ hr {
             <!-- Begin content -->
             <div class="blog-content col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
-                    <div class="col-md-3  col-sm-12 col-xs-12 leftsidebar-col" data-sticky_column>
-                        <!-- Begin sidebar blog -->
-                        <div class="sidebar ">
 
-                            <!-- End: Danh mục tin tức -->
-
-
-
-
-
-
-                            <!--Begin: Bài viết mới nhất-->
-                            <div class=" group_sidebar">
-                                <h3 class="sb-title">
-                                    Nhiều lượt xem
-                                </h3>
-                                @foreach($nhieuluotxem as $nlx)
-                                <div class="news-content row">
-
-                                    <div class="col-md-5 col-xs-12 col-sm-12 img-article">
-
-                                        <div class="art-img">
-                                       <a href="/chi-tiet-tin/{{$nlx->id_tin}}"><img src="/img/{{$nlx->hinh}}" alt=""></a>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" col-md-7 col-sm-12  col-xs-12">
-                                        <!-- Begin: Nội dung bài viết -->
-                                        <a href="/chi-tiet-tin/{{$nlx->id_tin}}">{{$nlx->tieu_de}}</a>
-                                        <div class="body-content">
-                                            <i class="fa fa-calendar-o"></i><time pubdate
-                                                datetime="2017-03-26">{{$nlx->created_at}}</time>
-
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-                                @endforeach
-
-
-
-
-                            </div>
-                            <!--End: Bài viết mới nhất-->
-
-
-
-
-
-                        </div>
-                        <!-- End sidebar blog -->
-                    </div>
-                    <div class="col-md-9 col-sm-12 col-xs-12 " id="blog-container" data-sticky_column>
+                    <div class="col-md-12 col-sm-12 col-xs-12 " id="blog-container" data-sticky_column>
                         <div class="row">
                             <div class="articles clearfix" id="layout-page">
 
@@ -174,7 +120,7 @@ hr {
 
 
 
-
+@if(count($baivietmoinhat)>0)
                                 @foreach($baivietmoinhat as $bvmn)
                                 <hr class="line-blog"/>
                                 <div class="news-content row">
@@ -212,7 +158,10 @@ hr {
 
                                @endforeach
 
+@else
+<p style="color:red; text-align:center; margin-top:30px;">Không có tin khuyến mãi nào</p>
 
+@endif
                                 <!-- End: Nội dung blog -->
 
                             </div>
@@ -252,6 +201,9 @@ hr {
     width: 90%;
     margin-left: 76px;
     margin-top: 40px;
+}
+.blog-content .col-md-12{
+    min-height:400px;
 }
 </style>
 

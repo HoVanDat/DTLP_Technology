@@ -48,7 +48,7 @@
     margin-bottom: 5px;
     width: 97%;
     margin-left: 30px;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
 }
 
 .title-block-common h1 {
@@ -103,33 +103,97 @@ body {
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+    .loctt {
+        width: 96%;
+        margin: 10px auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    .loctt .filter-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+   .loctt .row {
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+   .loctt .col-4 {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+   .loctt label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .loctt input,
+    select {
+        width: 100%;
+        padding: 8px;
+        height:40px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+   .loctt button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+   .loctt button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+
+
+
+   <script>
+    $(document).ready(function () {
+        // Bắt sự kiện thay đổi của thẻ select
+        $('#cars').change(function () {
+            // Lấy giá trị của option đã chọn
+            console.log('Change event triggered'); // Thêm dòng này
+
+            var selectedManufacturer = $(this).val();
+
+            // Thực hiện AJAX để gửi yêu cầu lấy danh sách sản phẩm theo hãng
+            $.ajax({
+                url: '/get-products-by-manufacturer/' + selectedManufacturer,
+                type: 'GET',
+                success: function (data) {
+                    // Xử lý dữ liệu sản phẩm (ở đây là ví dụ hiển thị thông tin trong console)
+                    console.log(data);
+
+                    // TODO: Xử lý hiển thị sản phẩm trong giao diện web của bạn
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+
+    </script>
         <div class="row">
             <div class="title-block-common mb-2">
                 <h1>Sản phẩm</h1>
             </div>
-            <div class="space2"></div>
-            <div class="col-md-4">
-                <div class="col-md-12">
 
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Lọc giá sản phẩm</h2>
-                        <form class="filter-form" action="{{ route('tim-kiem') }}" method="get">
-    <div class="row">
-        <div class="col-4">
-            <input type="text" name="tu" placeholder="Từ giá">
-        </div>
-        <div class="col-4">
-            <h3>Đến</h3>
-        </div>
-        <div class="col-4">
-            <input type="text" name="den" placeholder="Đến giá">
-        </div>
-
-    </div>
-    <div class="col-12">
-            <button type="submit">Tìm kiếm</button>
-        </div>
-</form>
 <style>
     .filter-form .row{
         display:flex;
@@ -180,38 +244,43 @@ body {
         }
     });
 </script>
-</form>
-                    </div>
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Sản phẩm mới nhất</h2>
-                        @foreach($dt1 as $d)
-                <div class="col-md-12 col-sm-6">
-                    <div class="single-shop-product">
-                        <div class="row">
-                            <div class="col-4">
-                            <div class="product-upper">
-                            <img src="img/{{$d->hinh}}" alt="">
-                        </div>
-                            </div>
-                            <div class="col-8">
-                            <h2><a href="{{url('chi-tiet-san-pham',[$d->id_san_pham])}}">{{$d->ten_san_pham}}</a></h2>
-<p>{{number_format($d->gia, 2, ',', '.')}} VND</p>
-                            </div>
-                        </div>
-
-
-<div class="product-bottom">
-
-                    </div></div>
-                </div>
-                @endforeach
-                    </div>
-                </div>
+<div class="loctt">
+    <form class="filter-form" action="{{ route('tim-kiem') }}" method="get">
+        <div class="row">
+            <div class="col-4">
+                <input type="text" id="tu" name="tu" placeholder="Nhập giá tối thiểu">
             </div>
-            <div class="col-md-8" id="col-md-8">
+            <div class="col-4">
+                <h3 style="text-align:center">Đến</h3>
+            </div>
+            <div class="col-4">
+                <input type="text" id="den" name="den" placeholder="Nhập giá tối đa">
+            </div>
+        </div>
 
+        <label for="manufacturer">Chọn hãng:</label>
+        <select id="manufacturer" name="hang">
+            <option value="Saumsung">Samsung</option>
+            <option value="Iphone">Iphone</option>
+            <option value="Oppo">Oppo</option>
+            <option value="Khac" selected>khác</option>
+        </select>
+        <label for="manufacturer">Loại sản phẩm:</label>
+
+        <select id="manufacturer" name="loai">
+            <option value="1">Điện thoại</option>
+            <option value="2">Laptop</option>
+            <option value="3">Máy tính bảng</option>
+        </select>
+
+        <button type="submit">Tìm kiếm</button>
+    </form>
+</div>
+
+            <div class="col-md-12" id="col-md-8">
+                @if(count($dt) > 0)
                 @foreach($dt as $d)
-                <div class="col-md-4 col-sm-6 h-380">
+                <div  class="col-md-3 col-sm-6 h-380">
                     <div class="single-shop-product">
                         <div class="product-upper">
                             <img src="img/{{$d->hinh}}" alt="">
@@ -230,7 +299,9 @@ body {
                 </div>
 
                 @endforeach
-
+@else
+<p style="color:red; text-align:center; margin-top:30px;">Không có sản phẩm nào</p>
+@endif
                 <!-- <div class="col-md-4 col-sm-6">
                         <div class="single-shop-product">
                             <div class="product-upper">
@@ -411,11 +482,14 @@ body {
                             </div>
                         </div>
                     </div> -->
-                    <div class="pagination">
-    {{ $dt->withQueryString()->links('pagination::bootstrap-4') }}
-</div>
-            </div>
 
+
+            </div>
+            @if(count($dt) > 0)
+    <div class="pagination">
+        {{ $dt->withQueryString()->links('pagination::bootstrap-4') }}
+    </div>
+@endif
 </div>
 
 
@@ -425,10 +499,29 @@ body {
     </div>
 </div>
 <style>
+    .product-upper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Các thuộc tính khác nếu cần */
+}
+
+.product-upper img {
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước của div */
+    height: auto; /* Đảm bảo tỷ lệ khung hình bảo toàn */
+}
     .single-shop-product .row .col-8{
         margin-left:5px;
     }
-
+    .product-bottom {
+        position: static !important;
+}
+.single-shop-product h2 {
+    font-size: 18px;
+    margin: 10px 0 20px 0;
+    text-transform: uppercase;
+    text-align: center !important;
+}
     .pagination{
         background-color:red;
         display:block;

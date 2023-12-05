@@ -23,7 +23,7 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -118,7 +118,7 @@
                             <!-- Add this to your HTML where you have the dropdown toggle -->
                             <div class="nav-link dropdown-toggle nav-dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
                                 aria-expanded="false">
-                                <img src="{{ session('userInfo.hinh') }}" class="nav-avatar rounded-circle"
+                                <img src="img/<?=session('userInfo.hinh');?>" class="nav-avatar rounded-circle"
                                     alt="Portrait of a Woman" loading="lazy" />
                                 <!-- Add any other content for the dropdown toggle -->
                             </div>

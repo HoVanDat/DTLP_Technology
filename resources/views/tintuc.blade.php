@@ -117,6 +117,8 @@ div.group_sidebar{
     box-shadow: 1px solid red;
 }
 </style>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <section id="content" class="clearfix container danhmuc">
         <div class="row">
             <div id="blog" class="page-content main-content content-pages" data-sticky_parent>
@@ -124,89 +126,8 @@ div.group_sidebar{
                 <!-- Begin content -->
                 <div class="blog-content col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
-                        <div class="col-md-3 pt-4  col-sm-12 col-xs-12 leftsidebar-col" data-sticky_column>
-                            <!-- Begin sidebar blog -->
-                            <div class="sidebar ">
-                            <div class="mt-4">
-                                <div class="list-group navbar-inner ">
 
-
-                                    <div>
-                                        <h3 class="sb-title">Danh mục tin tức</h3>
-                                    </div>
-
-                                    <ul class="nav navs sidebar menu" id="menu-blog">
-                                        @foreach($dt2 as $dm)
-                                        <li class="item  first">
-                                            <a href="{{ url('danh-muc',[$dm->id_danh_muc_tin]) }}">
-                                                <span>{{$dm->ten_danh_muc}}</span>
-                                            </a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-
-                                </div>
-
-
-
-                            </div>
-                                <!-- End: Danh mục tin tức -->
-
-
-
-
-
-
-                                <!--Begin: Bài viết mới nhất-->
-                                <div id="group_sidebar" class="group_sidebar">
-                                    <h3 class="sb-title">
-                                        Bài viết mới nhất
-                                    </h3>
-@foreach($dt1 as $tt)
-                                    <div class="news-content row">
-
-                                        <div class="col-md-5 col-xs-12 col-sm-12 img-article">
-                                            <div class="art-img">
-                                                <img src="/img/{{$tt->hinh}}"
-                                                    alt="">
-                                            </div>
-                                        </div>
-
-
-                                        <div class=" col-md-7 col-sm-12  col-xs-12">
-                                            <!-- Begin: Nội dung bài viết -->
-                                            <a
-                                                    href="/blogs/news/goi-y-su-dung-dong-ho">{{$tt->tieu_de}}</a>
-                                            <div class="body-content">
-                                                    <i class="fa fa-calendar-o"></i><time pubdate
-                                                            datetime="2017-03-26"> 26/03/2017</time>
-
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                    @endforeach
-
-
-
-
-
-
-
-                                </div>
-
-                                <!--End: Bài viết mới nhất-->
-
-
-
-
-
-                            </div>
-                            <!-- End sidebar blog -->
-                        </div>
-                        <div class="col-md-9 col-sm-12 col-xs-12 " id="blog-container" data-sticky_column>
+                        <div class="col-md-12 col-sm-12 col-xs-12 " id="blog-container" data-sticky_column>
                             <div class="row">
                                 <div class="articles clearfix" id="layout-page">
 
@@ -217,9 +138,17 @@ div.group_sidebar{
                                       <div class="space2"></div>
 
 
+                                      <div id="khung" class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="openCity('London')">Công nghệ</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Giải trí </button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Giáo dục</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Tokyook')">Du lịch</button>
 
+</div>
+
+<div id="London" class="w3-container city">
 <div class="nen">
-@if(isset($dt))
+@if(count($dt)>0)
 @foreach($dt as $dt)
     <div class="news-content row">
 
@@ -250,10 +179,140 @@ div.group_sidebar{
     @endforeach
 
 @else
-<p>Không có tin tức nào</p>
+<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
 @endif
     <!-- End: Nội dung blog -->
 
+</div>
+<script>
+function openCity(cityName) {
+  var i;
+  var x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  document.getElementById(cityName).style.display = "block";
+}
+</script>
+</div>
+
+<div id="Paris" class="w3-container city" style="display:none">
+<div class="nen">
+@if(count($dt1)>0)
+@foreach($dt1 as $dt)
+    <div class="news-content row">
+
+        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
+            <div class="art-img">
+                <img src="/img/{{$dt->hinh}}"
+                    alt="">
+            </div>
+        </div>
+
+
+        <div class=" col-md-7 col-sm-12  col-xs-12">
+            <h2 class="title-article"><a
+                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
+            <div class="body-content">
+                <p>{{$dt->tom_tat}}</p>
+            </div>
+            <!-- End: Nội dung bài viết -->
+            <a class="readmore btn-rb clear-fix"
+                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
+                tiếp <span class="fa fa-angle-double-right"></span></a>
+        </div>
+
+
+    </div>
+    <hr class="line-blog" />
+
+    @endforeach
+
+@else
+<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
+@endif
+    <!-- End: Nội dung blog -->
+
+</div>
+</div>
+
+<div id="Tokyo" class="w3-container city" style="display:none">
+<div class="nen">
+@if(count($dt2)>0)
+@foreach($dt2 as $dt)
+    <div class="news-content row">
+
+        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
+            <div class="art-img">
+                <img src="/img/{{$dt->hinh}}"
+                    alt="">
+            </div>
+        </div>
+
+
+        <div class=" col-md-7 col-sm-12  col-xs-12">
+            <h2 class="title-article"><a
+                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
+            <div class="body-content">
+                <p>{{$dt->tom_tat}}</p>
+            </div>
+            <!-- End: Nội dung bài viết -->
+            <a class="readmore btn-rb clear-fix"
+                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
+                tiếp <span class="fa fa-angle-double-right"></span></a>
+        </div>
+
+
+    </div>
+    <hr class="line-blog" />
+
+    @endforeach
+
+@else
+<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
+@endif
+    <!-- End: Nội dung blog -->
+
+</div>
+</div>
+<div id="Tokyook" class="w3-container city" style="display:none">
+<div class="nen">
+@if(count($dt3)>0)
+@foreach($dt3 as $dt)
+    <div class="news-content row">
+
+        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
+            <div class="art-img">
+                <img src="/img/{{$dt->hinh}}"
+                    alt="">
+            </div>
+        </div>
+
+
+        <div class=" col-md-7 col-sm-12  col-xs-12">
+            <h2 class="title-article"><a
+                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
+            <div class="body-content">
+                <p>{{$dt->tom_tat}}</p>
+            </div>
+            <!-- End: Nội dung bài viết -->
+            <a class="readmore btn-rb clear-fix"
+                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
+                tiếp <span class="fa fa-angle-double-right"></span></a>
+        </div>
+
+
+    </div>
+    <hr class="line-blog" />
+
+    @endforeach
+
+@else
+<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
+@endif
+    <!-- End: Nội dung blog -->
+
+</div>
 </div>
 </div>
 
@@ -293,6 +352,31 @@ div.group_sidebar{
 {
         padding-top:10px;
     }
+    div#khung{
+        width: 96%;
+        margin-left:40px !important;
+        margin-top:20px !important;
+        margin:0 auto;
+        background-color:white !important;
+        border:1px solid #cccccc;
+        color:black !important;
+    }
+    div.city{
+        min-height:400px;
+    }
+    #khung {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    height: 60px; /* Hoặc bạn có thể thiết lập chiều cao theo ý muốn */
+}
+
+.w3-bar-item {
+    margin: 0 0px; /* Tăng hoặc giảm giữa các nút theo ý muốn */
+}
+div#khung{
+    margin:0 auto;
+}
 </style>
 
 @endsection

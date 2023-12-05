@@ -95,10 +95,19 @@ div.quantity input.minus {
             <div class="col-md-4">
 
             </div>
-
+            @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Xóa giỏ hàng thành công',
+            text: '{{ session('success') }}',
+        });
+    </script>
+@endif
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="woocommerce">
+                        @if($soLuongSanPham > 0)
                             <table cellspacing="0" class="shop_table cart">
                                 <thead>
                                     <tr>
@@ -123,6 +132,8 @@ div.quantity input.minus {
                                     @endphp
                                     <form method="POST" action="{{ route('delete-product', ['productId' =>$tin->id_san_pham]) }}">
                                     @csrf
+
+
 
                                     <tr class="cart_item">
                                         <td class="product-remove">
@@ -160,6 +171,9 @@ div.quantity input.minus {
                                         <button type="submit">Xóa</button>
 
                                         </td>
+
+
+
                                     @endforeach
 
                                     <tr>
@@ -173,11 +187,32 @@ div.quantity input.minus {
                                                 class="checkout-button button alt wc-forward">
                                         </td>
 
+                                        <td class="actions" colspan="6">
+    <input type="button" id="buy-button123" value="Xóa tất cả">
+</td>
+<script>
+    document.getElementById('buy-button123').addEventListener('click', function () {
+        // Gửi yêu cầu xóa tất cả sản phẩm đến endpoint trên server
+        fetch('/cart/remove-all', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+    }
+})
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+
 
                                     </tr>
                                 </tbody>
                             </table>
+@else
 
+<p style="color:red; text-align:center; margin-top:30px;">Không có sản phẩm nào trong giỏ hàng</p>
+
+@endif
                         <script>
                         document.addEventListener("DOMContentLoaded", function() {
 var buyButton = document.getElementById('buy-button');
@@ -266,4 +301,5 @@ Totals</button></p>
         height:40px;
     }
 </style>
+
 @endsection

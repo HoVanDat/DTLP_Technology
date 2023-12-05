@@ -28,19 +28,37 @@ class OrderController extends Controller
         // Lấy giỏ hàng từ session
         $cart = session()->get('cart', []);
 
-        // Kiểm tra xem sản phẩm có tồn tại trong giỏ hàng không
-        if (array_key_exists($productId, $cart)) {
-            // Xóa sản phẩm khỏi giỏ hàng
-            unset($cart[$productId]);
-
-            // Cập nhật lại giỏ hàng trong session
-            session()->put('cart', $cart);
+        // Tìm kiếm và xóa sản phẩm theo id
+        foreach ($cart as $index => $item) {
+            if ($item['product_id'] == $productId) {
+                unset($cart[$index]);
+                break; // Ngừng vòng lặp sau khi xóa
+            }
         }
 
+        // Cập nhật lại giỏ hàng trong session
+        session()->put('cart', $cart);
+
         // Chuyển hướng trở lại trang trước đó sau khi xóa
-        return redirect()->back();
+        return redirect('/cart')->with('success', 'xóa sản phẩm thành công.');
     }
 
+    public function removeAllItems(Request $request)
+    {
+        try {
+            // Lấy giỏ hàng từ session
+            $cart = session()->get('cart', []);
+
+            // Xóa tất cả sản phẩm trong giỏ hàng
+            session()->forget('cart');
+
+            // Trả về kết quả (có thể là JSON hoặc thông báo khác)
+            return redirect('/thongtin')->with('success', 'Đã xóa sản phẩm khỏi giỏ hàng.');
+        } catch (\Exception $e) {
+            // Xử lý lỗi nếu có
+            return response()->json(['error' => 'Đã xảy ra lỗi khi xóa giỏ hàng'], 500);
+        }
+    }
     public function execPostRequest($url, $data)
     {
         $ch = curl_init($url);
@@ -451,9 +469,10 @@ public function showCart()
 {
     // Lấy thông tin giỏ hàng từ session
     $cart = session()->get('cart', []);
+    $soLuongSanPham = count($cart);
 
     // Truyền thông tin giỏ hàng đến view
-    return view('giohang', compact('cart'));
+    return view('giohang', compact('cart', 'soLuongSanPham'));
 }
 public function muaHang1(Request $request)
 {
