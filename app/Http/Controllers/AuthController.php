@@ -72,9 +72,12 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required',
-        ]);
-
-
+        ],
+        [
+            'email.required' => 'Vui lòng nhập email',
+            'password.required' => 'Vui lòng nhập password',
+        ]
+    );
         $email = $request->email;
         $password = $request->password;
         $user = NguoiDung::where('email', $email)->first();
@@ -121,12 +124,24 @@ if ($user && Hash::check($password, $user->password)) {
 
        public function registerPost(Request $request){
         $request->validate([
-            'hoten' => 'required',
+            'hoten' => 'required|string|max:255',
             'diachi' => 'required',
             'sdt' => 'required',
-            'email' => 'required|email', // Thêm kiểm tra email hợp lệ
-            'password' => 'required',
-        ]);
+            'email' => 'required|string|email|max:255|unique:nguoidung',
+            'password' => 'required|string|min:8|confirmed',
+        ],
+        [
+            'hoten.required' => 'Vui lòng nhập họ tên.',
+            'diachi.required' => 'Vui lòng nhập địa chỉ.',
+            'sdt.required' => 'Vui lòng nhập số điện thoại.',
+            'email.required' => 'Vui lòng nhập địa chỉ email.',
+            'email.email' => 'Vui lòng nhập địa chỉ email hợp lệ.',
+            'email.unique' => 'Email này đã được sử dụng.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
+            'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
+        ]
+    );
 
         $data['ten'] = $request->hoten;
         $data['dia_chi'] = $request->diachi;

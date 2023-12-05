@@ -99,8 +99,6 @@ div.quantity input.minus {
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="woocommerce">
-
-                            @CSRF
                             <table cellspacing="0" class="shop_table cart">
                                 <thead>
                                     <tr>
@@ -114,7 +112,9 @@ div.quantity input.minus {
 
                                     </tr>
                                 </thead>
+
                                 <tbody>
+
 
                                     @foreach($cart as $item)
 @php
@@ -156,7 +156,9 @@ div.quantity input.minus {
                                         <span class="amount">{{ number_format($tin->gia, 0, ',', '.') ?? '£0.00' }}</span>
                                         </td>
                                         <td class="product-price">
+
                                         <button type="submit">Xóa</button>
+
                                         </td>
                                     @endforeach
 
@@ -171,9 +173,11 @@ div.quantity input.minus {
                                                 class="checkout-button button alt wc-forward">
                                         </td>
 
+
                                     </tr>
                                 </tbody>
                             </table>
+
                         <script>
                         document.addEventListener("DOMContentLoaded", function() {
 var buyButton = document.getElementById('buy-button');
@@ -223,7 +227,7 @@ var buyButton = document.getElementById('buy-button');
 
                                     <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state"
                                             name="calc_shipping_state" placeholder="State / county" value=""
-                                            class="input-text"> </p>
+class="input-text"> </p>
 
                                     <p class="form-row form-row-wide"><input type="text" id="calc_shipping_postcode"
                                             name="calc_shipping_postcode" placeholder="Postcode / Zip" value=""
