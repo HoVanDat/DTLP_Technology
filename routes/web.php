@@ -36,6 +36,7 @@ Route::post('/delete-product/{productId}', [OrderController::class, 'deleteProdu
  Route::get('/tim-kiem', [SanphamController::class, 'timKiem'])->name('tim-kiem');
 
  Route::match(['get', 'post'], '/dathang1', [OrderController::class, 'datHang12'])->name('mua_hang');
+ Route::post('/change-password', [AuthController::class, 'changePassword']);
 
     Route::get('/', [SanphamController::class, 'index'])->name('home');
 
@@ -53,7 +54,8 @@ Route::get('/tintuc',function(){
 });
 
 
-
+Route::get('/get-products-by-manufacturer/{manufacturer}', [SanphamController::class, 'getProductsByManufacturer'])
+    ->name('get-products-by-manufacturer');
 Route::get('/products/search', [SanphamController::class, 'search'])->name('products.search');
 
 route::get('/profile/{id}', [ProfileController::class, 'profile'])->name('profile');
@@ -91,6 +93,7 @@ Route::get('/thanhtoan',function(){
 
 Route::post('/luu-don-hang', [OrderController::class, 'store'])->name('luu_don_hang');
 Route::post('/luudonhang2', [OrderController::class, 'store1'])->name('luudonhang2');
+Route::post('/cart/remove-all', [OrderController::class,'removeAllItems'])->name('cart.removeAll');
 
 Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);

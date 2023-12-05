@@ -547,7 +547,6 @@ margin-top: 12px;
                                                     </div>
                                                 </div>
                                                 @endforeach
-
 </div>
 
                     <div class="related-products-wrapper">
@@ -648,7 +647,13 @@ margin-top:20px;
 .tab-content {
     /* Thêm các quy tắc thiết kế cho tab-content tại đây */
 }
+.bl {
+    display: flex;
+    margin-bottom: 20px;
+    width: 30%;
+    pointer-events: none;
 
+}
 .tab-pane {
     /* Thêm các quy tắc thiết kế cho tab-pane tại đây */
 }
