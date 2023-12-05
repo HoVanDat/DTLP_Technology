@@ -13,6 +13,7 @@ class BinhLuan extends Model
 
     protected $fillable = [
         'id_nguoi_dung',
+        'id_tin',
         'id_san_pham',
         'noi_dung',
         'thoi_diem',

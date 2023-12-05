@@ -1,6 +1,142 @@
 @extends('layout')
 @section('noidung')
+
 <style>
+/* bình luận */
+/* Title styling */
+h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Horizontal line styling */
+hr {
+    border: 1px solid #ccc;
+    margin: 15px 0;
+}
+
+/* Comment styling */
+.bl {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+/* Comment image styling */
+.bl img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #007bff;
+    /* Change the color as needed */
+}
+
+/* Comment content styling */
+.noidungbl {
+    flex-grow: 1;
+}
+
+/* Comment author styling */
+h5 {
+    font-size: 18px;
+    margin: 0;
+    color: #007bff;
+}
+
+/* Comment text styling */
+p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Hover effect for comments */
+.bl:hover {
+    background-color: #e2e8f0;
+    transition: background-color 0.3s ease;
+}
+
+
+.star {
+    cursor: pointer;
+}
+
+.star:hover,
+.star.active {
+    color: gold;
+}
+
+.notification {
+    display: none;
+    padding: 10px;
+    background: #4CAF50;
+    color: #ffffff;
+    border-radius: 4px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification.show {
+    display: block;
+}
+
+.username>h5 {
+    margin-top: 12px;
+}
+
+/* end */
+/* Css ý kiến nhận xét */
+.row {
+    display: flex;
+}
+
+.banner {
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.col-6 {
+    width: 50%;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 1px 1px 1px #cccccc;
+}
+
+.binhluan {
+    display: block;
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: 170px;
+}
+
+.tab-content {
+    /* Thêm các quy tắc thiết kế cho tab-content tại đây */
+}
+
+.tab-pane {
+    /* Thêm các quy tắc thiết kế cho tab-pane tại đây */
+}
+
+.binhluan hr {
+    height: 1px;
+}
+
+#comment-form {
+    width: 50%;
+}
+
+.binhluan .bl {
+    margin-top: 20px;
+}
+
+/* end css ý kiến nhận xét */
 .mainmenu-area {
     background: none repeat scroll 0 0 #333;
     font-family: "Roboto Condensed", sans-serif;
@@ -14,9 +150,11 @@
     font-size: 14px;
     padding: 20px;
 }
-.logo img{
+
+.logo img {
     width: 100px;
 }
+
 .no-gutters {
     margin-right: 0;
     margin-left: 0;
@@ -689,7 +827,7 @@ element.style {
     <div class="container">
         <div id="root-comment" data-title="Mách bạn TOP 4 điện thoại HONOR giá rẻ cấu hình mạnh đáng mua nhất hiện nay"
             data-modulid="2" data-total="0">
-            <div class="fpt-comment">
+            <!-- <div class="fpt-comment">
                 <div class="">
                     <div class="card card-md user-feedback">
                         <div class="card-title">
@@ -715,7 +853,7 @@ element.style {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -724,6 +862,123 @@ element.style {
 
 
 
+<!-- BÌNH LUẬN -->
+<?php
+                                            // Kiểm tra xem phiên đăng nhập đã tồn tại hay chưa
+                                            if (session()->has('userInfo')) {
+                                                // Lấy thông tin người dùng từ phiên đăng nhập
+                                                $userInfo = session('userInfo');
+                                            ?>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            @if (session('success'))
+            <div class="notification" id="successNotification">
+                {{ session('success') }}</div>
+            @endif
+
+
+            <h3>BÌNH LUẬN</h3>
+            <div class="bl">
+                <img src="{{session('userInfo.hinh')}}" alt="User Avatar">
+                <div class="username">
+                    <h5>{{session('userInfo.ten')}}</h5>
+                </div>
+            </div>
+
+            <!-- CSS -->
+            <style>
+            .user-profile {
+                display: flex;
+                align-items: center;
+            }
+
+            .avatar {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+            </style>
+
+            <form action="{{ url('/comments') }}" id="comment-form" method="POST">
+                @csrf
+                <div class="rating">
+                    <input type="hidden" name="rating" id="ratingInput">
+                    <span class="star" data-rating="1"><i class="fas fa-star"></i></span>
+                    <span class="star" data-rating="2"><i class="fas fa-star"></i></span>
+                    <span class="star" data-rating="3"><i class="fas fa-star"></i></span>
+                    <span class="star" data-rating="4"><i class="fas fa-star"></i></span>
+                    <span class="star" data-rating="5"><i class="fas fa-star"></i></span>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id="ten" value="{{session('userInfo.ten')}}" name="ten" type="hidden"
+                        readonly>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" id="email" value="{{$id}}" name="id_tin" type="hidden" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Nội dung:</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
+                </div>
+                <button id="submit-comment" type="submit" class="btn btn-primary">Gửi</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php
+                                                            }
+
+                                                            ?>
+<div class="row binhluan">
+    <h2>Ý kiến nhận xét</h2>
+
+    @foreach($binhluantin as $bl)
+    <div class="bl">
+        <img src="{{ asset('img/1.jfif') }}" alt="">
+        <div class="noidungbl">
+            <h5>{{$bl->ten}}</h5>
+            <p>{{$bl->noi_dung}}</p>
+        </div>
+    </div>
+    @endforeach
+
+</div>
+
+<!-- JavaScript đánh giá-->
+<script>
+const stars = document.querySelectorAll('.star');
+
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const rating = star.dataset.rating;
+        ratingInput.value = rating;
+        highlightStars(index);
+    });
+});
+
+function highlightStars(index) {
+    stars.forEach((star, i) => {
+        if (i <= index) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+// thông báo 2s
+window.onload = function() {
+    var successNotification = document.getElementById('successNotification');
+    if (successNotification) {
+        successNotification.style.display = 'block';
+        setTimeout(function() {
+            successNotification.style.display = 'none';
+        }, 4000); // Thời gian hiển thị thông báo (2 giây)
+    }
+};
+</script>
 
 @endsection

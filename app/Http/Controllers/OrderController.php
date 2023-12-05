@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\DonHang;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\Session;
-
 use DB;
 use App\Models\DonHangChiTiet;
 use RealRashid\SweetAlert\Facades\Alert;
