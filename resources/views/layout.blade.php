@@ -173,11 +173,8 @@
                     <h1><a href="./"><img src="{{ asset('img/logo2.jpg') }}"></a></h1>
                         <p>Cảm ơn quý khách hàng đã tin tưởng và lựa chọn chúng tôi. Chúng tôi sẽ không ngừng phấn đấu để đáp ứng và vượt qua mong đợi của quý khách hàng, xây dựng một mối quan hệ lâu dài và mang lại giá trị không ngừng.</p>
                         <div class="footer-social">
-                            <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        </div>
+                            <a href="https://www.facebook.com/hoangtiennn" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.youtube.com/channel/UClojYLbnD4mcXp1heQHy8xA" target="_blank"><i class="fa fa-youtube"></i></a>                        </div>
                     </div>
                 </div>
 
