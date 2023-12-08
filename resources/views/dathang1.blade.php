@@ -44,8 +44,11 @@ $email = $tin123->email;
     $thanhtien = 0; // Khởi tạo giá trị $thanhtien
 
     foreach ($sanPhamInfo as $item):
-        $thanhtienItem = $item['soLuong'] * $item['sanPham']->gia; // Tính thành tiền cho mỗi sản phẩm
-        $thanhtien += $thanhtienItem; // Thêm vào tổng thành tiền
+        // Thêm vào tổng thành tiền
+        $id_chi_tiet = $item['id_chi_tiet'];
+        $tin1 = DB::table('chitietsanpham')->where('id_chi_tiet', $id_chi_tiet)->first();
+        $thanhtienItem = $item['soLuong'] * $tin1->gia; // Tính thành tiền cho mỗi sản phẩm
+        $thanhtien += $thanhtienItem;
         ?>
 
         <li class="list-group-item justify-content-between lh-condensed">
@@ -55,16 +58,20 @@ $email = $tin123->email;
                     <h6 class="my-0">
                         {{ $item['sanPham']->ten_san_pham }}
                         <span>Số lượng: {{ $item['soLuong'] }}</span>
-                </div>
 
-                <span class="text-muted">Giá: {{ number_format($item['sanPham']->gia, 0, ',', '.') }}</span> </br>
+                </div>
+                <span class="text-muted">Giá: {{ number_format($tin1->gia, 0, ',', '.') }}</span> </br>
                 <span>Số lượng: {{ $item['soLuong'] }}</span>
+                <span>Màu sắc: {{ $tin1->mau_sac }}</span>
+                <span>Ram: {{ $tin1->RAM }}</span>                <span>
+</span>
                 <!-- Các input hidden khác bạn có thể giữ nguyên -->
             </div>
         </li>
+        <input type="hidden" name="sanpham[{{ $item['sanPham']->id_san_pham }}][id_chi_tiet]" value="{{ $item['id_chi_tiet'] }}">
+<input type="hidden" name="sanpham[{{ $item['sanPham']->id_san_pham }}][so_luong]" value="{{ $item['soLuong'] }}">
 
                         <input type="hidden" name="productData" value="<?= htmlentities(json_encode($item)); ?>">
-
     <?php endforeach; ?>
 
     <input type="hidden" name="sanPhamInfo" value="<?= htmlentities(json_encode($sanPhamInfo)); ?>">

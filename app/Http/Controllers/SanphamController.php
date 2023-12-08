@@ -273,8 +273,8 @@ class SanphamController extends Controller
 
         $idsp = $tin->id_san_pham;
         $product = BinhLuan::where('id_san_pham', $idsp)->get();
-        $data = ['id' => $id, 'tin' => $tin, 'tin1'=>$tin1, 'tin2'=>$tin2, 'binhluan'=>$product];
-        return view('chitiet', $data);
+        $chitietsp = DB::table('chitietsanpham')->where('id_san_pham',$idsp)->get();
+        var_dump($tin1);
     }
 
     public function filter(Request $request)

@@ -227,7 +227,6 @@ button.add_to_cart_buttonss {
                         <a href="">{{$sanpham->loai->ten_loai}}</a>
                         <a href="">{{$sanpham->ten_san_pham}}</a>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="product-images">
@@ -250,7 +249,51 @@ button.add_to_cart_buttonss {
                                     <ins>{{ number_format($sanpham->gia, 0, ',', '.') }} VNĐ</ins>
                                     <del>{{ number_format($sanpham->gia_khuyen_mai, 0, ',', '.') }} VNĐ</del>
                                 </div>
-                                <p>Màu sắc: Đen </p>
+
+                                <div class="d-block my-3">
+                                <div class="d-block mb5 my-3">
+    @if(count($chitietsanpham1)>0)
+    <label for="">Màu sắc:</label>
+    <div class="custom-control custom-radio">
+
+        @foreach($chitietsanpham1 as $dt1)
+                <input id="httt-{{ $dt1->id_chi_tiet }}" name="httt_ma" type="radio" class="custom-control-input" required=""
+                       value="{{ $dt1->id_chi_tiet }}" data-mau="{{ $dt1->mau_sac }}">
+                <label class="custom-control-label" for="httt-{{ $dt1->id_chi_tiet }}">{{ $dt1->mau_sac }}</label>
+
+                <!-- Hidden fields -->
+                <input type="hidden" value="{{ $dt1->id_chi_tiet }}" name="id_chi_tiet" class="id_chi_tiet">
+                <input type="hidden" name="mau_sac" class="mau_sac">
+        @endforeach
+        </div>
+<div class="custom-control custom-radio">
+        <label style="font-weight:bold !important" for="">RAM:</label>
+
+@foreach($chitietsanpham1 as $dt1)
+        <input id="httt-{{ $dt1->id_chi_tiet }}" name="httt_ma1" type="radio" class="custom-control-input" required=""
+               value="{{ $dt1->id_chi_tiet }}" data-mau1="{{ $dt1->RAM }}">
+        <label class="custom-control-label" for="httt-{{ $dt1->id_chi_tiet }}">{{ $dt1->RAM }}GB</label>
+
+        <!-- Hidden fields -->
+        <input type="hidden" value="{{ $dt1->id_chi_tiet }}" name="id_chi_tiet" class="id_chi_tiet">
+@endforeach
+</div>
+    @else
+        <div class="custom-control custom-radio">
+        <label for="">Màu sắc:</label>
+
+        <input id="" name="httt_ma" type="radio" class="custom-control-input" required=""
+               value="" data-mau="">
+        <label class="custom-control-label" for="">đen</label>
+
+        <!-- Hidden fields -->
+        <input type="hidden" name="mau_sac" class="mau_sac">
+</div>
+    @endif
+</div>
+
+</div>
+
                                 <div id="cartMessage"></div>
 
                                 <form action="{{ route('muahang',['id' => $sanpham->id_san_pham]) }}" method="get"
@@ -260,20 +303,115 @@ button.add_to_cart_buttonss {
                                             name="quantity" min="1" step="1">
                                     </div>
                                     <input type="hidden" name="product_id" value="{{ $sanpham->id_san_pham }}">
+                                    <input type="hidden" name="id_chi_tiet_mausac" id="id_chi_tiet_mausac" value="">
+                                    <input type="hidden" name="id_chi_tiet_ram" id="id_chi_tiet_mausac" value="">
 
-                                    <button class="" type="submit">Mua ngay</button>
+                                    <button class="" type="submit" onclick="prepareForSubmit()">Mua ngay</button>
                                     <button class="add_to_cart_buttonss" type="button" onclick="addToCart('cart')">Thêm
                                         vào giỏ hàng</button>
                                 </form>
-                                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
                                 <script>
+                                    function prepareForSubmit() {
+    var selectedMauSac = $('input[name="httt_ma"]:checked');
+    var selectedMauSac1 = $('input[name="httt_ma1"]:checked');
+
+    if (selectedMauSac.length === 0) {
+        Swal.fire({
+            title: 'Vui lòng chọn màu sắc',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        event.preventDefault(); // Ngăn chặn form submit
+        return;
+    }
+    if (selectedMauSac1.length === 0) {
+        Swal.fire({
+            title: 'Vui lòng chọn số Ram',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        event.preventDefault(); // Ngăn chặn form submit
+        return;
+    }
+    var idMauSac = selectedMauSac.val();
+    var idRam = selectedMauSac1.val();
+if(idMauSac != idRam){
+    Swal.fire({
+            title: 'Sản phẩm này đã hết hàng',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        event.preventDefault(); // Ngăn chặn form submit
+        return;
+}else{
+    var soLuong = $('#addToCartForm input[name="quantity"]').val();
+    var idSanPham = $('#addToCartForm input[name="product_id"]').val();
+
+    // Cập nhật giá trị vào các input trong form
+    $('#addToCartForm input[name="id_chi_tiet_mausac"]').val(idMauSac);
+    $('#addToCartForm input[name="id_chi_tiet_ram"]').val(idRam);
+    $('#addToCartForm input[name="quantity"]').val(soLuong);
+    $('#addToCartForm input[name="product_id"]').val(idSanPham);
+
+    // Tiếp tục submit form
+    $('#addToCartForm').submit();
+}
+
+}
+
+
+                                </script>
+                                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                   <script>
                                 function addToCart(action) {
                                     <?php if (!session()->has('userInfo')): ?>
                                     window.location.href = '<?php echo route("login"); ?>';
                                     <?php else: ?>
                                     var quantity = $('#addToCartForm input[name="quantity"]').val();
                                     var product_id = $('#addToCartForm input[name="product_id"]').val();
+                                    var selectedMauSac = $('input[name="httt_ma"]:checked');
+                                    var selectedMauSac1 = $('input[name="httt_ma1"]:checked');
 
+                                    if (selectedMauSac.length === 0) {
+    // Hiển thị thông báo lỗi hoặc thực hiện các hành động khác khi không có checkbox được chọn.
+    Swal.fire({
+                                                title: 'Vui lòng chọn 1 màu sắc',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            });      return; // Ngăn chặn việc tiếp tục thực hiện ajax nếu không có checkbox được chọn.
+}
+if (selectedMauSac1.length === 0) {
+    // Hiển thị thông báo lỗi hoặc thực hiện các hành động khác khi không có checkbox được chọn.
+    Swal.fire({
+                                                title: 'Vui lòng chọn số RAM',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            });      return; // Ngăn chặn việc tiếp tục thực hiện ajax nếu không có checkbox được chọn.
+}
+var idChiTiet = selectedMauSac.val();
+var idChiTiet1 = selectedMauSac1.val();
+if(idChiTiet != idChiTiet1){
+    Swal.fire({
+                                                title: 'Sản phẩm này đã hết hàng',
+                                                icon: 'error',
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            });    return;
+}
+
+
+var mauSac = selectedMauSac.data('mau');
+
+// Set hidden field values
+$('.id_chi_tiet').val(idChiTiet);
+$('.mau_sac').val(mauSac);
                                     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
                                     $.ajax({
@@ -283,6 +421,8 @@ button.add_to_cart_buttonss {
                                             action: action,
                                             quantity: quantity,
                                             product_id: product_id,
+                                            id_chi_tiet: idChiTiet,
+                                            mau_sac: mauSac,
                                             _token: csrf_token,
                                         },
                                         success: function(response) {
@@ -632,10 +772,15 @@ window.onload = function() {
 @endsection
 
 <style>
+    .custom-control{
+        display:flex;
+    }
 .row {
     display: flex;
 }
-
+.mb5{
+    display:flex;
+}
 .banner {
     border-radius: 10px;
     margin-top: 20px;
@@ -648,6 +793,16 @@ window.onload = function() {
     box-shadow: 1px 1px 1px #cccccc;
 }
 
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    margin: 10px  !important;
+}
+.custom-control label{
+    font-weight:100 !important;
+}
 .binhluan {
     display: block;
     background-color: white;

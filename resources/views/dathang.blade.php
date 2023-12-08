@@ -36,7 +36,6 @@ $email = $tin123->email;
                 @csrf
                 <div class="row">
                     <div class="col-md-4 order-md-2 mb-4">
-
                         <ul class="list-group mb-3">
                             <input type="hidden" name="sanphamgiohang[1][sp_ma]" value="2">
                             <input type="hidden" name="sanphamgiohang[1][gia]" value="11800000.00">
@@ -50,7 +49,7 @@ $email = $tin123->email;
 
                                 <span class="text-muted">{{ number_format($tin->gia, 0, ',', '.') }} VNĐ</span>
                                 <span>Số lượng: {{$soluong}}</span>
-
+                                <span>idmausac: {{$idmausac}}</span>
 
                             </li>
                             </div>
@@ -63,6 +62,7 @@ $email = $tin123->email;
                                 <span>Tổng thành tiền</span>
                                 <strong>{{ number_format($thanhtien, 0, ',', '.') }} VNĐ</strong>
                             </li>
+
                         </ul>
 
 
@@ -141,7 +141,7 @@ $email = $tin123->email;
                         <input type="hidden" name="tensp"value="{{$tin->ten_san_pham}}">
                         <input type="hidden" name="gia"value="{{$tin->gia}}">
                         <input type="hidden" name="soluong"value="{{$soluong}}">
-
+<input type="hidden"  name="idmausac" value="{{$idmausac}}">
                         <hr class="mb-4">
 <input type="hidden" name="tongtien" value="{{$thanhtien}}">
                         <button class="btn btn-primary btn-lg btn-block" type="submit" name="btnDatHang">Đặt

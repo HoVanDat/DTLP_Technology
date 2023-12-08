@@ -93,7 +93,7 @@ Route::get('/thanhtoan',function(){
 
 Route::post('/luu-don-hang', [OrderController::class, 'store'])->name('luu_don_hang');
 Route::post('/luudonhang2', [OrderController::class, 'store1'])->name('luudonhang2');
-Route::post('/cart/remove-all', [OrderController::class,'removeAllItems'])->name('cart.removeAll');
+Route::get('/cart/remove-all', [OrderController::class,'removeAllItems'])->name('cart.removeAll');
 
 Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
