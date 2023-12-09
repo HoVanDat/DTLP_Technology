@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TinTuc;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 class NewsAdminController extends Controller
 {
     // Quản lý tin tức
     public function index(){
-        $dstin=TinTuc::orderBy('id_tin','desc')->get();
-       return view('admin/qltintuc',['dstin'=>$dstin]);
-   }
+        $dstin = DB::table('tintuc')->orderBy('id_tin','desc')->get();
+        return view('admin/qltintuc', compact('dstin'));
+    }
    public function createqltintuc(){
     $loaitin=\DB::table('danhmuc_tintuc')->get();
        return view('admin/create-qltintuc',['loaitin'=>$loaitin]);

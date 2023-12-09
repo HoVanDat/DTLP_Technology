@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\BinhLuan;
-
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Models\SanPham;
 use App\Models\Loai;
@@ -14,9 +11,8 @@ use App\Models\TinTuc;
 use App\Models\DanhMucTinTuc;
 use App\Models\Banner;
 use App\Models\NguoiDung;
-
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 class SanphamController extends Controller
 {
     public function index(){
@@ -110,72 +106,81 @@ class SanphamController extends Controller
         return view('shop',['dt'=>$dt,'dt1'=>$dt1]);
     }
     public function qlsanpham(){
-        $sanpham = SanPham::all();
+        $sanpham = DB::table('sanpham')->get();
         return view('admin/qlsanpham',compact('sanpham'));
     }
     public function create(){
         //lấy id của tất cả danh mục
-        $danhmuc = Loai::all();
+        $danhmuc = DB::table('loai')->get();
         return view('admin/create-qlsanpham',compact('danhmuc'));
     }
     public function store(Request $request){
-        $sanpham = new SanPham();
-        $sanpham->ten_san_pham = $request->tensanpham;
-        $sanpham->id_loai = $request->danhmuc;
-        $sanpham->mo_ta = $request->content;
-        $sanpham->an_hien = $request->anhien;
-        $sanpham->gia = $request->giatien;
-        $sanpham->gia_khuyen_mai = $request->giakhuyenmai;
-        if($request->hasFile('ImageUpload')){
-            $file = $request->file('ImageUpload');
-            $name = $file->getClientOriginalName();
-            $image = time()."_".$name;
-            $file->move(public_path().'/img/',$image);
-            $sanpham->hinh = $image;
-        }
-        $sanpham->save();
-        return redirect()->route('admin-qlsanpham');
+    $sanpham = array(
+        'ten_san_pham' => $request->tensanpham,
+        'id_loai' => $request->danhmuc,
+        'mo_ta' => $request->content,
+        'an_hien' => $request->anhien,
+        'gia' => $request->giatien,
+        'gia_khuyen_mai' => $request->giakhuyenmai,
+    );
+
+    if($request->hasFile('ImageUpload')){
+        $file = $request->file('ImageUpload');
+        $name = $file->getClientOriginalName();
+        $image = time()."_".$name;
+        $file->move(public_path().'/img/',$image);
+        $sanpham['hinh'] = $image;
+    }
+        DB::table('sanpham')->insert($sanpham);
+    return redirect()->route('admin-qlsanpham');
     }
     public function edit($id){
-        $sanpham = SanPham::where('id_san_pham',$id)->first();
+        $sanpham = DB::table('sanpham')->where('id_san_pham',$id)->first();
         $danhmuc = Loai::all();
         return view('admin/edit-qlsanpham',compact('sanpham','danhmuc'));
     }
     public function update(Request $request){
-        $id = $request->id_san_pham;
-        $sanpham = SanPham::where('id_san_pham',$id)->first();
-        $sanpham->ten_san_pham = $request->tensanpham;
-        if($request->danhmuc != null){
-            $sanpham->id_loai = $request->danhmuc;
-        }
-        $sanpham->mo_ta = $request->content;
-        if($request->anhien != null){
-            $sanpham->an_hien = $request->anhien;
-        }
-        $sanpham->gia = $request->giatien;
-        $sanpham->gia_khuyen_mai = $request->giakhuyenmai;
-        if($request->hasFile('ImageUpload')){
-            $file = $request->file('ImageUpload');
-            $name = $file->getClientOriginalName();
-            $image = time()."_".$name;
-            $file->move(public_path().'/img/',$image);
-            $sanpham->hinh = $image;
-        }
-        $sanpham->save();
-        return redirect()->route('admin-qlsanpham');
+    $id = $request->id_san_pham;
+
+    $sanphamData = array(
+        'ten_san_pham' => $request->tensanpham,
+        'mo_ta' => $request->content,
+        'gia' => $request->giatien,
+        'gia_khuyen_mai' => $request->giakhuyenmai,
+    );
+
+    if($request->danhmuc != null){
+        $sanphamData['id_loai'] = $request->danhmuc;
     }
+
+    if($request->anhien != null){
+        $sanphamData['an_hien'] = $request->anhien;
+    }
+
+    if($request->hasFile('ImageUpload')){
+        $file = $request->file('ImageUpload');
+        $name = $file->getClientOriginalName();
+        $image = time()."_".$name;
+        $file->move(public_path().'/img/',$image);
+        $sanphamData['hinh'] = $image;
+    }
+
+    DB::table('sanpham')->where('id_san_pham', $id)->update($sanphamData);
+
+    return redirect()->route('admin-qlsanpham');
+}
     public function destroy($id){
-        $sanpham = SanPham::where('id_san_pham',$id)->first();
+        $sanpham = DB::table('sanpham')->where('id_san_pham',$id)->first();
         $sanpham->delete();
         return redirect()->route('admin-qlsanpham');
     }
     public function qlchitietsanpham($id){
-        $chitietsanpham = ChiTietSanPham::where('id_san_pham', $id)->get();
-        $sanpham = SanPham::where('id_san_pham', $id)->first();
+        $chitietsanpham = DB::table('chitietsanpham')->where('id_san_pham', $id)->get();
+        $sanpham = DB::table('sanpham')->where('id_san_pham', $id)->first();
         return view('admin/qlchitietsanpham', compact('sanpham', 'chitietsanpham'));
     }
     public function createchitietsanpham($id){
-        $sanpham = SanPham::where('id_san_pham', $id)->first();
+        $sanpham = DB::table('sanpham')->where('id_san_pham', $id)->first();
         return view('admin/create-qlchitietsanpham', compact('sanpham'));
     }
     public function storechitietsanpham(Request $request){
@@ -221,13 +226,13 @@ class SanphamController extends Controller
     public function editchitietsanpham(Request $request){
         $id_chi_tiet = $request->input('id_chi_tiet');
         $id_san_pham = $request->input('id_sanpham');
-        $chitietsanpham = ChiTietSanPham::where('id_chi_tiet', $id_chi_tiet)->first();
-        $sanpham = SanPham::where('id_san_pham', $id_san_pham)->first();
+        $chitietsanpham = DB::table('chitietsanpham')->where('id_chi_tiet', $id_chi_tiet)->first();
+        $sanpham = DB::table('sanpham')->where('id_san_pham', $id_san_pham)->first();
         return view('admin/edit-qlchitietsanpham', compact('chitietsanpham', 'sanpham'));
     }
     public function updatechitietsanpham(Request $request){
         $id=$request->idchitietsanpham;
-        $chitietsanpham = ChiTietSanPham::where('id_chi_tiet', $id)->first();
+        $chitietsanpham = DB::table('chitietsanpham')->where('id_chi_tiet', $id)->first();
         $chitietsanpham->id_san_pham = $request->masanpham;
         $chitietsanpham->so_luong = $request->soluong;
         $chitietsanpham->RAM = $request->ram;
@@ -313,7 +318,7 @@ class SanphamController extends Controller
         {
             $id_chi_tiet = $request->input('id_chi_tiet');
             $id_san_pham = $request->input('id_sanpham');
-            $chitietsanpham = ChiTietSanPham::where('id_chi_tiet', $id_chi_tiet)->delete();
+            $chitietsanpham = DB::table('chitietsanpham')->where('id_chi_tiet', $id_chi_tiet)->delete();
             return redirect('admin/qlchitietsanpham' . $id_san_pham);
         }
 

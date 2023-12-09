@@ -9,8 +9,9 @@ use App\Models\Loai;
 
 class CategoryAdminController extends Controller
 {
-    public function qldanhmuctintuc(){
+    public function qldanhmuctintuc(){ echo "aaa";
         $danhmuctin=DanhMucTinTuc::get();
+        echo "bb";
         return view('admin/qldanhmuctintuc',['danhmuctin'=>$danhmuctin]);
     }
 
