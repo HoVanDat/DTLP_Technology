@@ -228,7 +228,7 @@
                                 @endphp
 
                                 @foreach ($positions as $value => $position)
-                                @if ($edit->chuc_vu == $value)
+                                @if ($edit->vai_tro == $value)
                                 <option value="{{ $value }}" selected>{{ $position }}</option>
                                 @else
                                 <option value="{{ $value }}">{{ $position }}</option>

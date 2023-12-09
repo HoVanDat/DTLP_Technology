@@ -100,6 +100,7 @@ Route::get('/shopmaytinhbang',[SanphamController::class, 'mtb']);
 Route::post('/comments', [CommentController::class, 'store']);
 Route::get('/chitietsp/{id}',[SanphamController::class, 'chitietsp'])->name('chitietsp');
 // route admin
+Route::middleware(['checkRole'])->group(function () {
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('login',function(){
@@ -209,8 +210,5 @@ Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqlda
     Route::get('edit-qlbanner{id}',[BannerAdminController::class,'editqlbanner'])->name('edit.qlbanner');
     Route::post('edit-qlbanner',[BannerAdminController::class,'editqlbannerpost'])->name('edit.qlbanner.post');
     Route::get('delete-qlbanner/{id}',[BannerAdminController::class,'deleteqlbanner'])->name('delete.qltintuc');
-
-
-
-
+    });
 });

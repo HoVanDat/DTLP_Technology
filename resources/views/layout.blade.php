@@ -52,6 +52,25 @@
 /> -->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+    <style>
+    .footer-about-us {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0; /* Adjust the padding as needed */
+    }
+
+    .logo-img {
+        max-width: 50%; /* Set the maximum width of the image to 100% of its container */
+        height: auto;    /* Allow the height to adjust proportionally */
+    }
+
+    .description {
+        margin-top: 20px; /* Adjust the margin between the logo and description */
+        text-align: center;
+    }
+</style>
+
 </head>
 
 <body>
@@ -165,65 +184,24 @@
 
 
     <div class="footer-top-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-about-us">
-                    <h1><a href="./"><img src="{{ asset('img/logo2.jpg') }}"></a></h1>
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-about-us text-center">
+                    <div class="logo">
+                        <a href="./"><img class="logo-img" src="{{ asset('img/logo2.jpg') }}" alt="Logo"></a>
+                    </div>
+                    <div class="description">
                         <p>Cảm ơn quý khách hàng đã tin tưởng và lựa chọn chúng tôi. Chúng tôi sẽ không ngừng phấn đấu để đáp ứng và vượt qua mong đợi của quý khách hàng, xây dựng một mối quan hệ lâu dài và mang lại giá trị không ngừng.</p>
-                        <div class="footer-social">
-                            <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
-                            <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-menu">
-                        <h2 class="footer-wid-title">Hướng Dẫn</h2>
-                        <ul>
-                            <li><a href="/shop">Sản phẩm</a></li>
-                            <li><a href="/tintuc">Tin tức</a></li>
-                            <li><a href="{{route('tinkhuyenmai')}}">Khuyến mãi</a></li>
-                            <li><a href="/lienhe">Liên hệ</a></li>
-                        </ul>
-
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-menu">
-                        <h2 class="footer-wid-title">Danh Mục</h2>
-                        <ul>
-
-                            <li><a href="/shoplaptop">Laptop</a></li>
-                            <li><a href="/shopdienthoai">Điện thoại</a></li>
-                            <li><a href="/shopmaytinhbang">Máy tính bảng</a></li>
-
-                        </ul>
-
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-newsletter">
-                        <h2 class="footer-wid-title">Đăng Ký</h2>
-                        <p>Đăng ký nhận bản tin của chúng tôi và nhận các ưu đãi độc quyền mà bạn không tìm thấy ở bất
-                            kỳ đâu khác, ngay trong hộp thư đến của bạn!</p>
-                        <div class="newsletter-form">
-                            <form action="#">
-                                <input type="email" placeholder="email">
-                                <input type="submit" value="Theo dõi">
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- End footer top area -->
+    </div>
+</div>
+
+ <!-- End footer top area -->
 
     <!-- End footer bottom area -->
 

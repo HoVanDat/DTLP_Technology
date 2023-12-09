@@ -10,7 +10,7 @@ class TinTuc extends Model
 {
     use HasFactory;
 
-    protected $table ="TinTuc";
+    protected $table ="tintuc";
     protected $primaryKey = 'id_tin';
      protected $fillable = [
          'tieu_de','noi_dung','id_danh_muc_tin','id_nguoi_dung','tom_tat','ten_nguoi_dang','hinh',
