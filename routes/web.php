@@ -94,7 +94,7 @@ Route::get('/thanhtoan',function(){
 
 Route::post('/luu-don-hang', [OrderController::class, 'store'])->name('luu_don_hang');
 Route::post('/luudonhang2', [OrderController::class, 'store1'])->name('luudonhang2');
-Route::post('/cart/remove-all', [OrderController::class,'removeAllItems'])->name('cart.removeAll');
+Route::get('/cart/remove-all', [OrderController::class,'removeAllItems'])->name('cart.removeAll');
 
 Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
@@ -106,6 +106,7 @@ Route::get('/shopmaytinhbang',[SanphamController::class, 'mtb']);
 Route::post('/comments', [CommentController::class, 'store']);
 Route::get('/chitietsp/{id}',[SanphamController::class, 'chitietsp'])->name('chitietsp');
 // route admin
+Route::middleware(['checkRole'])->group(function () {
 Route::group(['prefix'=>'admin'],function(){
 
     Route::get('login',function(){
@@ -209,6 +210,7 @@ Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqlda
     Route::get('edit-qlbanner{id}',[BannerAdminController::class,'editqlbanner'])->name('edit.qlbanner');
     Route::post('edit-qlbanner',[BannerAdminController::class,'editqlbannerpost'])->name('edit.qlbanner.post');
     Route::get('delete-qlbanner/{id}',[BannerAdminController::class,'deleteqlbanner'])->name('delete.qltintuc');
+
     // Quản lý đơn hàng
     Route::get('qldonhang',[OrderAdminController::class,'index']);
     Route::get('duyet-qldonhang/{id}',[OrderAdminController::class,'duyet']);
@@ -217,3 +219,4 @@ Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqlda
  
 
 });
+

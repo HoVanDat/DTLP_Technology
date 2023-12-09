@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 class SanPham extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table ="SanPham";
+    protected $table='sanpham';
     protected $primaryKey = 'id_san_pham';
     protected $fillable = [
         'id_san_pham',
@@ -26,16 +26,4 @@ class SanPham extends Model
         'updated_at',
 
     ];
-    public function chitietsanpham(){
-        return $this->hasMany('App\Models\ChiTietSanPham','id_san_pham','id_san_pham');
-    }
-
-    public function anhsp(){
-        return $this->hasMany('App\Models\AnhSP','id_san_pham','id_san_pham');
-    }
-    
-    public function loai(){
-        return $this->belongsTo('App\Models\Loai','id_loai','id_loai');
-    }
-    
 }

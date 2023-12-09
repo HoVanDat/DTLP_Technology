@@ -15,10 +15,11 @@ class OrderController extends Controller
 {
     function muahang($id, Request $request){
         $soluong = $request->input('quantity');
-
-        $tin = DB::table('sanpham')->where('id_san_pham',$id)->first();
-        $data= ['soluong'=>$soluong,'tin'=>$tin];
-        return view('dathang', $data);
+    $idMauSac = $request->input('id_chi_tiet_mausac');
+    $idRam = $request->input('id_chi_tiet_ram');
+    $tin = DB::table('sanpham')->where('id_san_pham', $id)->first();
+    $data = ['soluong' => $soluong, 'tin' => $tin, 'idmausac' => $idMauSac];
+    return view('dathang', $data);
 
     }
 
@@ -42,22 +43,7 @@ class OrderController extends Controller
         return redirect('/cart')->with('success', 'xóa sản phẩm thành công.');
     }
 
-    public function removeAllItems(Request $request)
-    {
-        try {
-            // Lấy giỏ hàng từ session
-            $cart = session()->get('cart', []);
 
-            // Xóa tất cả sản phẩm trong giỏ hàng
-            session()->forget('cart');
-
-            // Trả về kết quả (có thể là JSON hoặc thông báo khác)
-            return redirect('/thongtin')->with('success', 'Đã xóa sản phẩm khỏi giỏ hàng.');
-        } catch (\Exception $e) {
-            // Xử lý lỗi nếu có
-            return response()->json(['error' => 'Đã xảy ra lỗi khi xóa giỏ hàng'], 500);
-        }
-    }
     public function execPostRequest($url, $data)
     {
         $ch = curl_init($url);
@@ -88,6 +74,8 @@ class OrderController extends Controller
         $tensp = $request->input('tensp');
         $gia = $request->input('gia');
         $soluong = $request->input('soluong');
+$idmausac = $request->input('idmausac');
+
 
         if (!session()->has('userInfo')) {
             // Nếu session 'iduser' không tồn tại, chuyển người dùng sang trang đăng nhập
@@ -107,6 +95,7 @@ class OrderController extends Controller
                 $donHang->dia_chi = $dia_chi;
                 $donHang->so_dien_thoai = $so_dien_thoai;
                 $donHang->email = $email;
+
         $donHang->id_nguoi_dung = $iduser;
         $donHang->tong_don_hang = $thanhtien;
                 $donHang->save();
@@ -115,6 +104,8 @@ class OrderController extends Controller
  $donHangchitiet = new DonHangChiTiet;
  $donHangchitiet->id_don_hang = $iddh;
  $donHangchitiet->id_san_pham = $idsp;
+ $donHangchitiet->id_chi_tiet = $idmausac;
+
  $donHangchitiet->so_luong = $soluong;
  $donHangchitiet->gia = $gia;
  $donHangchitiet->ten_san_pham = $tensp;
@@ -197,6 +188,7 @@ class OrderController extends Controller
  $donHangchitiet = new DonHangChiTiet;
  $donHangchitiet->id_don_hang = $iddh;
  $donHangchitiet->id_san_pham = $idsp;
+ $donHangchitiet->id_chi_tiet = $idmausac;
  $donHangchitiet->so_luong = $soluong;
  $donHangchitiet->gia = $gia;
  $donHangchitiet->ten_san_pham = $tensp;
@@ -264,25 +256,39 @@ $donHang->tong_don_hang = $thanhtien;
         $donHang->save();
 
         $donhangID = $donHang->id_don_hang; // Lấy ID của đơn hàng sau khi thêm
-        $sanPhamInfo = json_decode($sanPhamInfo);
 
-        foreach ($sanPhamInfo as $dt) {
+        $sanPhamData = $request->input('sanpham', []);
 
-            $idsp = $dt->sanPham->id_san_pham;
-        $soluong = 1;
-                $gia = $dt->sanPham->gia;
-            $tensp = $dt->sanPham->ten_san_pham;
+        foreach ($sanPhamData  as $idSanPham => $item) {
+            // Kiểm tra nếu $dt là một đối tượng
+            $idChiTiet = $item['id_chi_tiet'];
+            $soLuong = $item['so_luong'];
+            $idSanPham1 = $idSanPham;
+            $tin = DB::table('sanpham')->where('id_san_pham',$idSanPham1)->first();
+$tensp = $tin->ten_san_pham;
+$gia = $tin->gia;
 
 
-            $donHangchitiet = new DonHangChiTiet;
-            $donHangchitiet->id_don_hang = $donhangID;
-            $donHangchitiet->id_san_pham = $idsp;
-            $donHangchitiet->so_luong = $soluong;
-            $donHangchitiet->gia = $gia;
-            $donHangchitiet->ten_san_pham = $tensp;
+                // Thực hiện chèn thông tin chi tiết đơn hàng
+                $donHangchitiet = new DonHangChiTiet;
+                $donHangchitiet->id_don_hang = $donhangID;
+                $donHangchitiet->id_san_pham = $idSanPham1;
+                $donHangchitiet->id_chi_tiet = $idChiTiet;
+                $donHangchitiet->so_luong = $soLuong;
+                $donHangchitiet->gia = $gia;
+                $donHangchitiet->ten_san_pham = $tensp;
+                $donHangchitiet->save();
+                $cart = session()->get('cart', []);
 
-            $donHangchitiet->save();
-        }
+                foreach ($cart as $index => $item) {
+                    if ($item['product_id'] == $idSanPham) {
+                        unset($cart[$index]);
+                        break; // Ngừng vòng lặp sau khi xóa
+                    }
+                }
+                session()->put('cart', $cart);
+
+            }
         // Lấy dữ liệu sản phẩm từ biến $_POST hoặc tham số URL nếu bạn muốn
         // $productData = json_decode($_POST['products']); // hoặc sử dụng tham số URL
 
@@ -372,52 +378,39 @@ $donHang->tong_don_hang = $thanhtien;
         // $productData = json_decode($_POST['products']); // hoặc sử dụng tham số URL
 
         // Thực hiện lưu dữ liệu chi tiết đơn hàng vào CSDL
-        $productData = json_decode($_POST['productData']);
-        $chuyenHuong = false;
-        foreach ($productData as $dt) {
+        $sanPhamData = $request->input('sanpham', []);
+
+        foreach ($sanPhamData  as $idSanPham => $item) {
             // Kiểm tra nếu $dt là một đối tượng
-            if (is_object($dt)) {
-                $idsp = $dt->id_san_pham;
-                $tensp = $dt->ten_san_pham;
-                $gia = $dt->gia;
-                $soluong = 1;
+            $idChiTiet = $item['id_chi_tiet'];
+            $soLuong = $item['so_luong'];
+            $idSanPham1 = $idSanPham;
+
+            $tin = DB::table('sanpham')->where('id_san_pham',$idSanPham1)->first();
+            $tensp = $tin->ten_san_pham;
+            $gia = $tin->gia;
 
                 // Thực hiện chèn thông tin chi tiết đơn hàng
                 $donHangchitiet = new DonHangChiTiet;
                 $donHangchitiet->id_don_hang = $donhangID;
-                $donHangchitiet->id_san_pham = $idsp;
-                $donHangchitiet->so_luong = $soluong;
+                $donHangchitiet->id_san_pham = $idSanPham1;
+                $donHangchitiet->id_chi_tiet = $idChiTiet;
+
+                $donHangchitiet->so_luong = $soLuong;
                 $donHangchitiet->gia = $gia;
                 $donHangchitiet->ten_san_pham = $tensp;
 
                 $donHangchitiet->save();
+                $cart = session()->get('cart', []);
 
-                // Sau đó chuyển hướng người dùng về trang chủ
-            } else {
-                // Nếu $dt không phải là đối tượng, xử lý tùy thuộc vào cấu trúc dữ liệu của $dt
-                // Ví dụ: giả sử $dt có cấu trúc là một mảng
-                // Lưu ý: Bạn cần biết cấu trúc thực tế của $dt khi nó không phải là đối tượng
-                if (is_array($dt)) {
-                    // Xử lý để lấy thông tin từ mảng $dt và lưu vào CSDL
-                    $idsp = $dt['id_san_pham'];
-                    $tensp = $dt['ten_san_pham'];
-                    $gia = $dt['gia'];
-                    $soluong = 2;
-
-                    // Thực hiện chèn thông tin chi tiết đơn hàng
-                    $donHangchitiet = new DonHangChiTiet;
-                    $donHangchitiet->id_don_hang = $donhangID;
-                    $donHangchitiet->id_san_pham = $idsp;
-                    $donHangchitiet->so_luong = $soluong;
-                    $donHangchitiet->gia = $gia;
-                    $donHangchitiet->ten_san_pham = $tensp;
-
-                    $donHangchitiet->save();
-
-                } else {
-                    // Xử lý cho trường hợp khác nếu cần
-                    error_log('Dữ liệu không phải là đối tượng hoặc mảng: ' . print_r($dt, true));
+                foreach ($cart as $index => $item) {
+                    if ($item['product_id'] == $idSanPham1) {
+                        unset($cart[$index]);
+                        break; // Ngừng vòng lặp sau khi xóa
+                    }
                 }
+                session()->put('cart', $cart);
+
                 alert()->success('Đặt hàng thành công', 'Cảm ơn bạn đã mua hàng!')->persistent("OK");
 
                 // Sau đó chuyển hướng người dùng về trang chủ
@@ -427,18 +420,11 @@ $donHang->tong_don_hang = $thanhtien;
         }
 
             // Nếu biến flaglà true, thực hiện chuyển hướng
-
-
-
-
-
-
-
-    }
-
-
-
 }
+
+
+
+
 public function addToCart(Request $request)
 {
     // Xử lý logic thêm vào giỏ hàng ở đây
@@ -447,7 +433,8 @@ public function addToCart(Request $request)
     $productInfo = [
         'product_id' => $request->input('product_id'), // Sửa khóa này để phù hợp với view
         'quantity' => $request->input('quantity'),
-
+        'id_chi_tiet' => $request->has('id_chi_tiet') ? $request->input('id_chi_tiet') : 1,
+        'mau_sac' => $request->input('mau_sac'),
         // Thêm thông tin khác nếu cần
     ];
 
@@ -480,6 +467,15 @@ public function muaHang1(Request $request)
 
     return view('dathang1', compact('productData'));
 }
+public function removeAllItems()
+{
+    // Xóa toàn bộ sản phẩm trong giỏ hàng từ session
+    session()->forget('cart');
+
+    // Redirect hoặc trả về JSON response tùy thuộc vào yêu cầu của bạn
+
+    // Chuyển hướng trở lại trang trước đó sau khi xóa
+    return redirect('/cart')->with('success', 'xóa sản phẩm thành công.');}
 
 public function timKiemDonHang(Request $request)
 {
@@ -494,8 +490,6 @@ public function timKiemDonHang(Request $request)
 
     return view('thongtin', ['tin123' => $tin123]);
 }
-
-
 
 function xuLyMaGiamGia(Request $request)
 {
@@ -537,11 +531,12 @@ public function datHang12(Request $request)
       foreach ($sanPham as $sp) {
           // Lấy số lượng từ dữ liệu đã chọn
           $quantity = $selectedProductData[$sp->id_san_pham];
+          $idChiTiet = request('selected_chitiet.'.$sp->id_san_pham);
 
-          // Thêm thông tin vào mảng
           $sanPhamInfo[] = [
               'sanPham' => $sp,
               'soLuong' => $quantity,
+              'id_chi_tiet'=> $idChiTiet,
           ];
       }
     // Hiển thị thông tin sản phẩm (hoặc bạn có thể thực hiện bất kỳ logic xử lý nào khác)

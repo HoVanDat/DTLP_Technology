@@ -87,11 +87,13 @@
                                 </td>
                                 <td>{{$ds->so_dien_thoai}}</td>
                                 <td>
-                                    @if($ds->chuc_vu == 1) Bán hàng
-                                    @elseif($ds->chuc_vu == 2) Tư vấn
-                                    @elseif($ds->chuc_vu == 3) Dịch vụ
-                                    @elseif($ds->chuc_vu == 4) Thu Ngân
-                                    @elseif($ds->chuc_vu == 5) Quản kho
+
+                                    @if($ds->vai_tro == 1) Bán hàng
+                                    @elseif($ds->vai_tro == 2) Tư vấn
+                                    @elseif($ds->vai_tro == 3) Dịch vụ
+                                    @elseif($ds->vai_tro == 4) Thu Ngân
+                                    @elseif($ds->vai_tro == 5) Quản kho
+
                                     @else Bảo trì
                                     @endif    
                                 </td>
