@@ -63,10 +63,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @php
+                            $i=0;
+                            @endphp
+                            @if(isset($dsnhanvien))
                             @foreach($dsnhanvien as $ds)
+                            @php
+                            $i++;
+                            @endphp
+                           
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$ds->id_nguoi_dung}}</td>
+                                <td>{{$i}}</td>
                                 <td>{{$ds->ten}}</td>
                                 <td><img class="img-card-person" src="{{$ds->hinh}}" alt=""></td>
                                 <td>{{$ds->dia_chi}}</td>
@@ -79,11 +87,11 @@
                                 </td>
                                 <td>{{$ds->so_dien_thoai}}</td>
                                 <td>
-                                    @if($ds->id_chuc_vu == 1) Bán hàng
-                                    @elseif($ds->id_chuc_vu == 2) Tư vấn
-                                    @elseif($ds->id_chuc_vu == 3) Dịch vụ
-                                    @elseif($ds->id_chuc_vu == 4) Thu Ngân
-                                    @elseif($ds->id_chuc_vu == 5) Quản kho
+                                    @if($ds->chuc_vu == 1) Bán hàng
+                                    @elseif($ds->chuc_vu == 2) Tư vấn
+                                    @elseif($ds->chuc_vu == 3) Dịch vụ
+                                    @elseif($ds->chuc_vu == 4) Thu Ngân
+                                    @elseif($ds->chuc_vu == 5) Quản kho
                                     @else Bảo trì
                                     @endif    
                                 </td>
@@ -102,7 +110,7 @@
 
 
                             @endforeach
-
+                            @endif
                         </tbody>
                     </table>
                 </div>

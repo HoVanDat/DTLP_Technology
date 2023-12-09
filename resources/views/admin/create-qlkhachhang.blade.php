@@ -31,7 +31,7 @@
         $(".removeimg").click(function() {
             $("#thumbimage").attr('src', '').hide();
             $("#myfileupload").html(
-            '<input type="file" id="ImageUpload"  onchange="readURL(this);" />');
+                '<input type="file" id="ImageUpload"  onchange="readURL(this);" />');
             $(".removeimg").hide();
             $(".Choicefile").bind('click', function() {
                 $("#ImageUpload").click();
@@ -159,12 +159,13 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label class="control-label">Giới tính</label>
-                            <select class="form-control" id="exampleSelect2" name="exampleSelect2">
-                                <option>-- Chọn giới tính --</option>
+                            <select class="form-control" id="exampleSelect2" name="exampleSelect2" required>
+                                <option value="" disabled selected>-- Chọn giới tính --</option>
                                 <option value="1">Nam</option>
                                 <option value="2">Nữ</option>
                             </select>
                         </div>
+
                         <div class="form-group col-md-12">
                             <label for="ImageUpload" class="control-label">Ảnh 3x4 khách hàng</label>
                             <div id="myfileupload">

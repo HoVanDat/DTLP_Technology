@@ -70,10 +70,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @php
+                            $i=0;
+                            @endphp
+                            @if(isset($users))
                             @foreach($users as $user)
+                            @php
+                            $i++;
+                            @endphp
+                          
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{$user->id_nguoi_dung}}</td>
+                                <td>{{$i}}</td>
                                 <td>{{$user->ten}}</td>
                                 <td><img class="img-card-person" src="{{$user->hinh}}" alt=""></td>
                                 <td>{{$user->dia_chi}}</td>
@@ -92,6 +100,7 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

@@ -53,7 +53,8 @@
                                 <th><input type="checkbox" id="all"></th>
                                 <th width="40">STT</th>
                                 <th>Tên danh mục sản phẩm</th>
-                                <th>Trạng thái</th>
+                                <th width="100">Trạng thái</th>
+                                <th width="250">Ngày tạo</th>
                                 <th width="100">Tính năng</th>
                             </tr>
                         </thead>
@@ -61,6 +62,7 @@
                             @php
                             $i=0;
                             @endphp
+                            @if(isset($danhmuctin))
                             @foreach($danhmuctin as $dm)
                             @php
                             $i++;
@@ -77,6 +79,7 @@
                                     Ẩn
                                     @endif
                                 </td>
+                                <td>{{$dm->created_at}}</td>
                                 <td class="table-td-center">
 
                                     <a class="btn btn-primary btn-sm trash"
@@ -92,6 +95,7 @@
 
 
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -135,7 +139,7 @@ $('#sampleTable').DataTable();
 
 function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({
-        title: 'Xác nhận xóa',
+        title: 'Dữ liệu trong danh mục này sẽ mất',
         text: 'Bạn có chắc chắn muốn xóa?',
         icon: 'warning',
         showCancelButton: true,

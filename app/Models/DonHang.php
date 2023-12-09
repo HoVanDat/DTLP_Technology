@@ -20,5 +20,7 @@ class DonHang extends Model
         'email',
         'pttt',
         'tong_don_hang',
+        'created_at',
+        'updated_at',
     ];
 }

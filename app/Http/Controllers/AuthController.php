@@ -20,7 +20,7 @@ class AuthController extends Controller
      function thongtin(Request $request){
 
         $iduser = session('userInfo.iduser');
-        $tin123 = DB::table('donhang')->where('id_nguoi_dung',$iduser)->paginate(2);;
+        $tin123 = DB::table('donhang')->where('id_nguoi_dung',$iduser)->paginate(2);
 
 
 

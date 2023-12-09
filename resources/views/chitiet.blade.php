@@ -250,7 +250,9 @@ button.add_to_cart_buttonss {
                                     <ins>{{ number_format($sanpham->gia, 0, ',', '.') }} VNĐ</ins>
                                     <del>{{ number_format($sanpham->gia_khuyen_mai, 0, ',', '.') }} VNĐ</del>
                                 </div>
-                                <p>Màu sắc: Đen </p>
+                                @if(isset($chitietsanpham))
+                                <p>Màu sắc: {{$chitietsanpham->mau_sac}} </p>
+                                @endif
                                 <div id="cartMessage"></div>
 
                                 <form action="{{ route('muahang',['id' => $sanpham->id_san_pham]) }}" method="get"

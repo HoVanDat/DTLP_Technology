@@ -39,6 +39,7 @@ class BannerAdminController extends Controller
      $ten=$request->ten;
      $mo_ta=$request->mo_ta;
      $trang_thai=$request->trang_thai;
+     $hinh=null;
      if ($request->hasFile('hinh')) {
         $file = $request->file('hinh');
         $name = $file->getClientOriginalName();

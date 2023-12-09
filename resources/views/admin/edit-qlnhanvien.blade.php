@@ -131,13 +131,13 @@
 
                 <h3 class="tile-title">Sửa nhân viên</h3>
                 <div class="tile-body">
-                    <div class="row element-button">
+                    <!-- <div class="row element-button">
                         <div class="col-sm-2">
                             <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
                                         class="fas fa-folder-plus"></i> Tạo chức vụ mới</b></a>
                         </div>
 
-                    </div>
+                    </div> -->
                     <form class="row" action="{{route('edit.qlnhanvien.post')}}" method='POST'
                         enctype="multipart/form-data">
                         @csrf

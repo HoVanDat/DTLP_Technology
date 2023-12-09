@@ -13,10 +13,13 @@ class DanhMucTinTuc extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
    
-    protected $table='DanhMuc_TinTuc';
+    protected $table='danhmuc_tintuc';
     protected $primaryKey='id_danh_muc_tin';
      protected $fillable = [
-        'ten_danh_muc'
+        'ten_danh_muc',
+        'mo_ta',
+        'an_hien',
+        'created_at'
      ];
      public function tintuc(){
         return $this->hasMany('App\Models\TinTuc','id_danh_muc_tin','id_danh_muc_tin');
