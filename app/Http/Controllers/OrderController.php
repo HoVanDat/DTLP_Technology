@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DonHang;
 use App\Models\SanPham;
-
+use Illuminate\Support\Facades\Session;
 use DB;
 use App\Models\DonHangChiTiet;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -15,12 +15,35 @@ class OrderController extends Controller
 {
     function muahang($id, Request $request){
         $soluong = $request->input('quantity');
-
-        $tin = DB::table('sanpham')->where('id_san_pham',$id)->first();
-        $data= ['soluong'=>$soluong,'tin'=>$tin];
-        return view('dathang', $data);
+    $idMauSac = $request->input('id_chi_tiet_mausac');
+    $idRam = $request->input('id_chi_tiet_ram');
+    $tin = DB::table('sanpham')->where('id_san_pham', $id)->first();
+    $data = ['soluong' => $soluong, 'tin' => $tin, 'idmausac' => $idMauSac];
+    return view('dathang', $data);
 
     }
+
+    public function deleteProduct($productId)
+    {
+        // Lấy giỏ hàng từ session
+        $cart = session()->get('cart', []);
+
+        // Tìm kiếm và xóa sản phẩm theo id
+        foreach ($cart as $index => $item) {
+            if ($item['product_id'] == $productId) {
+                unset($cart[$index]);
+                break; // Ngừng vòng lặp sau khi xóa
+            }
+        }
+
+        // Cập nhật lại giỏ hàng trong session
+        session()->put('cart', $cart);
+
+        // Chuyển hướng trở lại trang trước đó sau khi xóa
+        return redirect('/cart')->with('success', 'xóa sản phẩm thành công.');
+    }
+
+
     public function execPostRequest($url, $data)
     {
         $ch = curl_init($url);
@@ -51,6 +74,8 @@ class OrderController extends Controller
         $tensp = $request->input('tensp');
         $gia = $request->input('gia');
         $soluong = $request->input('soluong');
+$idmausac = $request->input('idmausac');
+
 
         if (!session()->has('userInfo')) {
             // Nếu session 'iduser' không tồn tại, chuyển người dùng sang trang đăng nhập
@@ -70,6 +95,7 @@ class OrderController extends Controller
                 $donHang->dia_chi = $dia_chi;
                 $donHang->so_dien_thoai = $so_dien_thoai;
                 $donHang->email = $email;
+
         $donHang->id_nguoi_dung = $iduser;
         $donHang->tong_don_hang = $thanhtien;
                 $donHang->save();
@@ -78,11 +104,13 @@ class OrderController extends Controller
  $donHangchitiet = new DonHangChiTiet;
  $donHangchitiet->id_don_hang = $iddh;
  $donHangchitiet->id_san_pham = $idsp;
+ $donHangchitiet->id_chi_tiet = $idmausac;
+
  $donHangchitiet->so_luong = $soluong;
  $donHangchitiet->gia = $gia;
  $donHangchitiet->ten_san_pham = $tensp;
 
- $donHangchitiet->save();
+                $donHangchitiet->save();
                 $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
 
@@ -160,6 +188,7 @@ class OrderController extends Controller
  $donHangchitiet = new DonHangChiTiet;
  $donHangchitiet->id_don_hang = $iddh;
  $donHangchitiet->id_san_pham = $idsp;
+ $donHangchitiet->id_chi_tiet = $idmausac;
  $donHangchitiet->so_luong = $soluong;
  $donHangchitiet->gia = $gia;
  $donHangchitiet->ten_san_pham = $tensp;
@@ -183,6 +212,218 @@ class OrderController extends Controller
 
 
 }
+public function store1(Request $request) {
+    // Lấy dữ liệu từ form
+    $tongtien = 0; // Khởi tạo tổng tiền
+
+    // Xử lý Đặt hàng ở đây
+    $sanPhamInfo = $_POST['sanPhamInfo'];
+    $tenNguoiNhan = $_POST['ten_nguoi_nhan'];
+    $diaChi = $_POST['dia_chi'];
+    $soDienThoai = $_POST['so_dien_thoai'];
+    $email = $_POST['email'];
+    $htttMa = $_POST['httt_ma'];
+    $tonggia = $_POST['tongtien'];
+    $thanhtien = $_POST['thanhtien'];
+    if (session()->has('userInfo')) {
+        $iduser = session('userInfo.iduser');
+    } else {
+        $iduser = 0;
+    }
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = '';
+
+    for ($i = 0; $i < 8; $i++) {
+        $code .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    if ($htttMa == 2) {
+        if (session()->has('userInfo')) {
+            $iduser = session('userInfo.iduser');
+        } else {
+            $iduser = 0;
+        }
+        $donHang = new DonHang;
+        $donHang->pttt = $htttMa;
+        $donHang->thoi_diem_mua_hang = now();
+        $donHang->ten_nguoi_nhan = $tenNguoiNhan;
+        $donHang->dia_chi = $diaChi;
+        $donHang->so_dien_thoai = $soDienThoai;
+        $donHang->email = $email;
+$donHang->id_nguoi_dung = $iduser;
+$donHang->tong_don_hang = $thanhtien;
+
+        $donHang->save();
+
+        $donhangID = $donHang->id_don_hang; // Lấy ID của đơn hàng sau khi thêm
+
+        $sanPhamData = $request->input('sanpham', []);
+
+        foreach ($sanPhamData  as $idSanPham => $item) {
+            // Kiểm tra nếu $dt là một đối tượng
+            $idChiTiet = $item['id_chi_tiet'];
+            $soLuong = $item['so_luong'];
+            $idSanPham1 = $idSanPham;
+            $tin = DB::table('sanpham')->where('id_san_pham',$idSanPham1)->first();
+$tensp = $tin->ten_san_pham;
+$gia = $tin->gia;
+
+
+                // Thực hiện chèn thông tin chi tiết đơn hàng
+                $donHangchitiet = new DonHangChiTiet;
+                $donHangchitiet->id_don_hang = $donhangID;
+                $donHangchitiet->id_san_pham = $idSanPham1;
+                $donHangchitiet->id_chi_tiet = $idChiTiet;
+                $donHangchitiet->so_luong = $soLuong;
+                $donHangchitiet->gia = $gia;
+                $donHangchitiet->ten_san_pham = $tensp;
+                $donHangchitiet->save();
+                $cart = session()->get('cart', []);
+
+                foreach ($cart as $index => $item) {
+                    if ($item['product_id'] == $idSanPham) {
+                        unset($cart[$index]);
+                        break; // Ngừng vòng lặp sau khi xóa
+                    }
+                }
+                session()->put('cart', $cart);
+
+            }
+        // Lấy dữ liệu sản phẩm từ biến $_POST hoặc tham số URL nếu bạn muốn
+        // $productData = json_decode($_POST['products']); // hoặc sử dụng tham số URL
+
+        // Thực hiện lưu dữ liệu chi tiết đơn hàng vào CSDL
+
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+
+        $partnerCode = 'MOMOBKUN20180529';
+        $accessKey = 'klm05TvNBzhg7h7j';
+        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+        $orderInfo = "Thanh toán qua MoMo";
+        $amount = $tonggia;
+        $orderId = rand(00, 9999);
+        $redirectUrl = "http://127.0.0.1:8000/";
+        $ipnUrl = "http://127.0.0.1:8000/";
+        $extraData = "";
+
+
+        if (!empty($_POST)) {
+            $partnerCode = $partnerCode;
+            $accessKey = $accessKey;
+            $serectkey = $secretKey;
+            $orderId = $orderId; // Mã đơn hàng
+
+            $orderInfo = $orderInfo;
+            $amount = $amount;
+            $ipnUrl = $ipnUrl;
+            $redirectUrl = $redirectUrl;
+            $extraData = $extraData;
+
+            $requestId = time() . "";
+            $requestType = "payWithATM";
+            // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+            //before sign HMAC SHA256 signature
+            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+            $signature = hash_hmac("sha256", $rawHash, $serectkey);
+            $data = array(
+                'partnerCode' => $partnerCode,
+                'partnerName' => "Test",
+                "storeId" => "MomoTestStore",
+                'requestId' => $requestId,
+                'amount' => $amount,
+                'orderId' => $orderId,
+                'orderInfo' => $orderInfo,
+                'redirectUrl' => $redirectUrl,
+                'ipnUrl' => $ipnUrl,
+                'lang' => 'vi',
+                'extraData' => $extraData,
+                'requestType' => $requestType,
+                'signature' => $signature
+            );
+            $result = $this->execPostRequest($endpoint, json_encode($data));
+            $jsonResult = json_decode($result, true); // decode json
+
+            //Just a example, please check more in there
+
+            // return redirect('/home')->with('thongbao', $thongbao);
+            if (isset($jsonResult['payUrl'])) {
+                return redirect()->away($jsonResult['payUrl']);
+            } else {
+                // Xử lý nếu không có URL thanh toán
+            }
+        }
+
+    } else {
+        if (session()->has('userInfo')) {
+            $iduser = session('userInfo.iduser');
+        } else {
+            $iduser = 0;
+        }
+        $donHang = new DonHang;
+        $donHang->pttt = $htttMa;
+        $donHang->thoi_diem_mua_hang = now();
+        $donHang->ten_nguoi_nhan = $tenNguoiNhan;
+        $donHang->dia_chi = $diaChi;
+        $donHang->so_dien_thoai = $soDienThoai;
+        $donHang->email = $email;
+$donHang->id_nguoi_dung = $iduser;
+$donHang->tong_don_hang = $thanhtien;
+
+        $donHang->save();
+
+        $donhangID = $donHang->id_don_hang; // Lấy ID của đơn hàng sau khi thêm
+
+        // Lấy dữ liệu sản phẩm từ biến $_POST hoặc tham số URL nếu bạn muốn
+        // $productData = json_decode($_POST['products']); // hoặc sử dụng tham số URL
+
+        // Thực hiện lưu dữ liệu chi tiết đơn hàng vào CSDL
+        $sanPhamData = $request->input('sanpham', []);
+
+        foreach ($sanPhamData  as $idSanPham => $item) {
+            // Kiểm tra nếu $dt là một đối tượng
+            $idChiTiet = $item['id_chi_tiet'];
+            $soLuong = $item['so_luong'];
+            $idSanPham1 = $idSanPham;
+
+            $tin = DB::table('sanpham')->where('id_san_pham',$idSanPham1)->first();
+            $tensp = $tin->ten_san_pham;
+            $gia = $tin->gia;
+
+                // Thực hiện chèn thông tin chi tiết đơn hàng
+                $donHangchitiet = new DonHangChiTiet;
+                $donHangchitiet->id_don_hang = $donhangID;
+                $donHangchitiet->id_san_pham = $idSanPham1;
+                $donHangchitiet->id_chi_tiet = $idChiTiet;
+
+                $donHangchitiet->so_luong = $soLuong;
+                $donHangchitiet->gia = $gia;
+                $donHangchitiet->ten_san_pham = $tensp;
+
+                $donHangchitiet->save();
+                $cart = session()->get('cart', []);
+
+                foreach ($cart as $index => $item) {
+                    if ($item['product_id'] == $idSanPham1) {
+                        unset($cart[$index]);
+                        break; // Ngừng vòng lặp sau khi xóa
+                    }
+                }
+                session()->put('cart', $cart);
+
+                alert()->success('Đặt hàng thành công', 'Cảm ơn bạn đã mua hàng!')->persistent("OK");
+
+                // Sau đó chuyển hướng người dùng về trang chủ
+                return redirect('/');
+
+            }
+        }
+
+            // Nếu biến flaglà true, thực hiện chuyển hướng
+}
+
+
+
 
 public function addToCart(Request $request)
 {
@@ -192,7 +433,8 @@ public function addToCart(Request $request)
     $productInfo = [
         'product_id' => $request->input('product_id'), // Sửa khóa này để phù hợp với view
         'quantity' => $request->input('quantity'),
-
+        'id_chi_tiet' => $request->has('id_chi_tiet') ? $request->input('id_chi_tiet') : 1,
+        'mau_sac' => $request->input('mau_sac'),
         // Thêm thông tin khác nếu cần
     ];
 
@@ -213,9 +455,10 @@ public function showCart()
 {
     // Lấy thông tin giỏ hàng từ session
     $cart = session()->get('cart', []);
+    $soLuongSanPham = count($cart);
 
     // Truyền thông tin giỏ hàng đến view
-    return view('giohang', compact('cart'));
+    return view('giohang', compact('cart', 'soLuongSanPham'));
 }
 public function muaHang1(Request $request)
 {
@@ -224,6 +467,15 @@ public function muaHang1(Request $request)
 
     return view('dathang1', compact('productData'));
 }
+public function removeAllItems()
+{
+    // Xóa toàn bộ sản phẩm trong giỏ hàng từ session
+    session()->forget('cart');
+
+    // Redirect hoặc trả về JSON response tùy thuộc vào yêu cầu của bạn
+
+    // Chuyển hướng trở lại trang trước đó sau khi xóa
+    return redirect('/cart')->with('success', 'xóa sản phẩm thành công.');}
 
 public function timKiemDonHang(Request $request)
 {
@@ -238,8 +490,6 @@ public function timKiemDonHang(Request $request)
 
     return view('thongtin', ['tin123' => $tin123]);
 }
-
-
 
 function xuLyMaGiamGia(Request $request)
 {
@@ -281,11 +531,12 @@ public function datHang12(Request $request)
       foreach ($sanPham as $sp) {
           // Lấy số lượng từ dữ liệu đã chọn
           $quantity = $selectedProductData[$sp->id_san_pham];
+          $idChiTiet = request('selected_chitiet.'.$sp->id_san_pham);
 
-          // Thêm thông tin vào mảng
           $sanPhamInfo[] = [
               'sanPham' => $sp,
               'soLuong' => $quantity,
+              'id_chi_tiet'=> $idChiTiet,
           ];
       }
     // Hiển thị thông tin sản phẩm (hoặc bạn có thể thực hiện bất kỳ logic xử lý nào khác)

@@ -14,16 +14,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
-
-
 class AuthController extends Controller
 {
 
      function thongtin(Request $request){
 
         $iduser = session('userInfo.iduser');
-        $tin123 = DB::table('donhang')->where('id_nguoi_dung',$iduser)->get();
+        $tin123 = DB::table('donhang')->where('id_nguoi_dung',$iduser)->paginate(2);;
 
 
 
@@ -59,8 +56,8 @@ class AuthController extends Controller
                 'hinh' => session('userInfo.hinh'),
             ]);
 
-     $thongbao1 = "Cập nhật thông tin thành công";
-     return view('thongtin',['thongbao1' => $thongbao1]);
+            return redirect('/thongtin')->with('success', 'Cập nhật thông tin thành công.');
+
     }
 
     function login(){
@@ -72,9 +69,12 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required',
             'password' => 'required',
-        ]);
-
-
+        ],
+        [
+            'email.required' => 'Vui lòng nhập email',
+            'password.required' => 'Vui lòng nhập password',
+        ]
+    );
         $email = $request->email;
         $password = $request->password;
         $user = NguoiDung::where('email', $email)->first();
@@ -121,12 +121,24 @@ if ($user && Hash::check($password, $user->password)) {
 
        public function registerPost(Request $request){
         $request->validate([
-            'hoten' => 'required',
+            'hoten' => 'required|string|max:255',
             'diachi' => 'required',
             'sdt' => 'required',
-            'email' => 'required|email', // Thêm kiểm tra email hợp lệ
-            'password' => 'required',
-        ]);
+            'email' => 'required|string|email|max:255|unique:nguoidung',
+            'password' => 'required|string|min:8|confirmed',
+        ],
+        [
+            'hoten.required' => 'Vui lòng nhập họ tên.',
+            'diachi.required' => 'Vui lòng nhập địa chỉ.',
+            'sdt.required' => 'Vui lòng nhập số điện thoại.',
+            'email.required' => 'Vui lòng nhập địa chỉ email.',
+            'email.email' => 'Vui lòng nhập địa chỉ email hợp lệ.',
+            'email.unique' => 'Email này đã được sử dụng.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
+            'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
+        ]
+    );
 
         $data['ten'] = $request->hoten;
         $data['dia_chi'] = $request->diachi;
@@ -166,6 +178,35 @@ if ($user && Hash::check($password, $user->password)) {
 
 
 
+    public function changePassword(Request $request)
+    {
+        if (session()->has('userInfo')) {
+            $iduser = session('userInfo.iduser');
+            $user = NguoiDung::where('id_nguoi_dung', $iduser)->first();
+
+            // Kiểm tra mật khẩu hiện tại
+            if (!$user || !Hash::check($request->currentPassword, $user->password)) {
+                return redirect('/thongtin')->with('error', 'Mật khẩu hiện tại không đúng.');
+            }
+
+            // Kiểm tra xác nhận mật khẩu mới
+            if ($request->newPassword != $request->confirmPassword) {
+                return redirect('/thongtin')->with('error', 'Mật khẩu không khớp.');
+            }
+
+            // Kiểm tra độ dài của mật khẩu mới
+            if (strlen($request->newPassword) < 6) {
+                return redirect('/thongtin')->with('error', 'Mật khẩu mới phải có ít nhất 6 ký tự.');
+            }
+
+            // Cập nhật mật khẩu mới
+            $user->update(['password' => Hash::make($request->newPassword)]);
+
+            return redirect('/thongtin')->with('success', 'Mật khẩu đã được đổi thành công.');
+        } else {
+            return view('dangnhap');
+        }
+    }
 
 
 

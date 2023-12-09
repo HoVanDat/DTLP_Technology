@@ -17,6 +17,7 @@ class CommentController extends Controller
         // Lấy dữ liệu từ request
         $rating = $request->input('rating');
         $ten = $request->input('ten');
+        $id_tin = $request->input('id_tin');
         $id_san_pham = $request->input('id_san_pham');
         $comment = $request->input('comment');
 
@@ -24,6 +25,7 @@ class CommentController extends Controller
         $binhLuan = new BinhLuan();
         $binhLuan->rating = $rating;
         $binhLuan->ten = $ten;
+        $binhLuan->id_tin = $id_tin;
         $binhLuan->id_san_pham = $id_san_pham;
         $binhLuan->noi_dung = $comment;
 

@@ -393,6 +393,7 @@ body {
     width: 100%;
     height: auto;
     padding: 15px;
+    object-fit:cover;
 }
 
 body {
@@ -409,56 +410,36 @@ body {
     </div>
 </div>
 @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
 @endif
 <script>
-    @include('sweetalert::alert')
+@include('sweetalert::alert')
 </script>
 <div class="slider-area">
     <!-- Slider -->
+    @if (isset($banner))
     <div class="block-slider block-slider4">
-        <ul class="" id="bxslider-home4">
-            <li>
-            <img src="img/h4-slide.png" alt="Slide">
-                <div class="caption-group">
-                    <h2 class="caption title">
-                        iPhone <span class="primary">6 <strong>Plus</strong></span>
-                    </h2>
-                    <h4 class="caption subtitle">Dual SIM</h4>
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                </div>
-            </li>
-            <li><img src="img/h4-slide2.png" alt="Slide">
-                <div class="caption-group">
-                    <h2 class="caption title">
-                        by one, get one <span class="primary">50% <strong>off</strong></span>
-                    </h2>
-                    <h4 class="caption subtitle">school supplies & backpacks.*</h4>
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                </div>
-            </li>
-            <li><img src="img/h4-slide3.png" alt="Slide">
-                <div class="caption-group">
-                    <h2 class="caption title">
-                        Apple <span class="primary">Store <strong>Ipod</strong></span>
-                    </h2>
-                    <h4 class="caption subtitle">Select Item</h4>
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                </div>
-            </li>
-            <li><img src="img/h4-slide4.png" alt="Slide">
-                <div class="caption-group">
-                    <h2 class="caption title">
-                        Apple <span class="primary">Store <strong>Ipod</strong></span>
-                    </h2>
-                    <h4 class="caption subtitle">& Phone</h4>
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Shop now</a>
-                </div>
-            </li>
-        </ul>
+       
+            <ul class="" id="bxslider-home4">
+                @foreach($banner as $b)
+                <li>
+                    <img style="width=1163px;height:365px;" src="{{$b->hinh}}" alt="Slide">
+                    <div class="caption-group">
+                        <h2 class="caption title">
+                            iPhone <span class="primary">6 <strong>Plus</strong></span>
+                        </h2>
+                        <h4 class="caption subtitle">{{$b->ten}}</h4>
+                        <a class="caption button-radius" href="#"><span class="icon"></span>Mua ngay</a>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+        
     </div>
+
+    @endif
     <!-- ./Slider -->
 </div> <!-- End slider area -->
 
@@ -512,13 +493,15 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
-                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}"
+                                        class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}"
+                                        class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -549,13 +532,15 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
-                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}"
+                                        class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}"
+                                        class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -571,13 +556,15 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
-                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}"
+                                        class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}"
+                                        class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -593,13 +580,15 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
-                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}"
+                                        class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}"
+                                        class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
                             </div>
 
-                            <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
+                            <h2><a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
                                 <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
@@ -632,8 +621,10 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
-                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}"
+                                        class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="/chitietsp/{{$s->id_san_pham}}" class="view-details-link"><i
+                                            class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
                             </div>
@@ -653,8 +644,10 @@ body {
                             <div class="product-f-image">
                                 <img src="img/{{$s->hinh}}" alt="">
                                 <div class="product-hover">
-                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
-                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}" class="view-details-link"><i class="fa fa-link"></i>
+                                    <a href="{{ route('muahang',['id' => $s->id_san_pham]) }}"
+                                        class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Mua ngay</a>
+                                    <a href="{{url('chi-tiet-san-pham',[$s->id_san_pham])}}"
+                                        class="view-details-link"><i class="fa fa-link"></i>
                                         Xem thêm</a>
                                 </div>
                             </div>
@@ -662,7 +655,8 @@ body {
                             <h2><a href="/chitietsp/{{$s->id_san_pham}}">{{$s->ten_san_pham}}</a></h2>
 
                             <div class="product-carousel-price">
-                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br> <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
+                                <ins>{{number_format($s->gia, 2, ',', '.')}} VND</ins><br>
+                                <del>{{number_format($s->gia_khuyen_mai, 2, ',', '.')}} VND</del>
                             </div>
                         </div>
                         @endforeach
@@ -679,7 +673,7 @@ body {
 
     </div>
 </div>
-     <!-- End product widget area -->
+<!-- End product widget area -->
 <div class="container" id="container1">
     <div class="col2-tech">
         <!-- 24h công nghệ -->
@@ -695,8 +689,7 @@ body {
                     <a href="chi-tiet-tin/{{$tt->id_tin}}">
                         <img data-src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/14/1542518/galaxy-z-fold-5-bo-sung-111111-140823-085238-200x200.jpg"
                             class=" lazyloaded" alt="Deal to chấn động, điện thoại mới ra mắt năm 2023 giảm đến 9 triệu"
-                            width="270" height="151"
-                            src="/img/{{$tt->hinh}}">
+                            width="270" height="151" src="/img/{{$tt->hinh}}">
                         <div class="text-tech">
                             <span>
                                 {{$tt->tieu_de}}

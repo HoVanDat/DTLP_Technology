@@ -9,12 +9,15 @@ use App\Models\Loai;
 use App\Models\ChiTietSanPham;
 use App\Models\TinTuc;
 use App\Models\DanhMucTinTuc;
+use App\Models\Banner;
 use App\Models\NguoiDung;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class SanphamController extends Controller
 {
     public function index(){
+        // slider
+        $banner= Banner::where('trang_thai','1')->get();
         $sp=DB::table('sanpham')->limit(10)->get();
         $sp2= DB::table('sanpham')->where('id_san_pham','>=',100)->limit(20)->get();
         $sp3= DB::table('sanpham')->where('id_san_pham','>=',30)->limit(20)->get();
@@ -23,7 +26,7 @@ class SanphamController extends Controller
         $sp6= DB::table('sanpham')->where('id_loai',1)->limit(5)->get();
         $sp7= DB::table('tintuc')->limit(3)->get();
 
-        return view('home',['sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6, 'sp7'=>$sp7]);
+        return view('home',['banner'=>$banner,'sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6, 'sp7'=>$sp7]);
     }
     public function dt(){
         $dt= DB::table('sanpham')->where('id_loai','1')->paginate(9);
@@ -44,16 +47,25 @@ class SanphamController extends Controller
     }
 
     public function tintuc(){
-        $dt = DB::table('tintuc')->orderBy('id_tin', 'desc')->paginate(4);
-        $dt1 = DB::table('tintuc')
-        ->orderBy('view', 'desc')
+        $dt = DB::table('tintuc')
+        ->where('id_danh_muc_tin', '1')
         ->limit(4) // Giới hạn số lượng bài viết
         ->get();
-
-        $dt2 = DB::table('danhmuc_tintuc')
+        $dt1 = DB::table('tintuc')
+        ->where('id_danh_muc_tin', '2')
+        ->limit(4) // Giới hạn số lượng bài viết
+        ->get();
+        $dt2 = DB::table('tintuc')
+        ->where('id_danh_muc_tin', '3')
+        ->limit(4) // Giới hạn số lượng bài viết
+        ->get();
+        $dt3 = DB::table('tintuc')
+        ->where('id_danh_muc_tin', '4')
+        ->limit(4) // Giới hạn số lượng bài viết
+        ->get();
        // Giới hạn số lượng bài viết
-        ->get();// Thực hiện truy vấn sau khi gọi get()
-        return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2]);
+        // Thực hiện truy vấn sau khi gọi get()
+        return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2,'dt3'=>$dt3]);
     }
 
 
@@ -73,6 +85,7 @@ class SanphamController extends Controller
         return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2]);
     }
     public function cttin($id){
+          $binhluantin = BinhLuan::where('id_tin',$id)->get();
         $chitiettin = TinTuc::find($id);
         $tinlienquan = TinTuc::where('id_danh_muc_tin',$id)->limit(3)->get();
         $danhmuctin = DanhMucTinTuc::all();
@@ -82,7 +95,7 @@ class SanphamController extends Controller
         if ($randsp) {
         $randspchitiet = ChiTietSanPham::where('id_san_pham', $randsp->id)->first();
         }
-        return view('chitiettin',['chitiettin'=>$chitiettin,'tinlienquan'=>$tinlienquan,'danhmuctin'=>$danhmuctin,'randsp' => $randsp,'randspchitiet' => $randspchitiet,'sanpham'=>$sanpham]);
+        return view('chitiettin',['id'=>$id,'binhluantin'=>$binhluantin,'chitiettin'=>$chitiettin,'tinlienquan'=>$tinlienquan,'danhmuctin'=>$danhmuctin,'randsp' => $randsp,'randspchitiet' => $randspchitiet,'sanpham'=>$sanpham]);
     }
     public function mtb(){
         $dt= DB::table('sanpham')->where('id_loai','3')->paginate(9);
@@ -265,8 +278,8 @@ class SanphamController extends Controller
 
         $idsp = $tin->id_san_pham;
         $product = BinhLuan::where('id_san_pham', $idsp)->get();
-        $data = ['id' => $id, 'tin' => $tin, 'tin1'=>$tin1, 'tin2'=>$tin2, 'binhluan'=>$product];
-        return view('chitiet', $data);
+        $chitietsp = DB::table('chitietsanpham')->where('id_san_pham',$idsp)->get();
+        var_dump($tin1);
     }
 
     public function filter(Request $request)
@@ -300,7 +313,6 @@ class SanphamController extends Controller
             $products = SanPham::orderBy('created_at', 'desc')->limit(4)->get();
             $count = count($listtin);
             return view('shopsearch', ['listtin'=>$listtin,'keyword'=>$keyword,'count'=>$count,'product'=>$products]);
-
         }
         public function deletechitietsanpham(Request $request)
         {
@@ -311,14 +323,43 @@ class SanphamController extends Controller
         }
 
         public function timKiem(Request $request)
+        {
+            $tu = $request->input('tu');
+            $den = $request->input('den');
+            $hang = $request->input('hang');
+            $loai = $request->input('loai');
+
+            $query = SanPham::query();
+
+            // Kiểm tra và thêm điều kiện cho giá
+            if (!empty($tu) && !empty($den)) {
+                $query->whereBetween('gia', [$tu, $den]);
+            }
+
+            // Kiểm tra và thêm điều kiện cho hãng
+            if ($hang != 'Khac') {
+                $query->where('ten_san_pham', 'LIKE', "%$hang%");
+            }
+
+            // Kiểm tra và thêm điều kiện cho loại
+            if ($loai != 'Khac') {
+                $query->where('id_loai', $loai);
+            }
+
+            // Thực hiện truy vấn và lấy kết quả
+            $dt = $query->paginate(10); // Số sản phẩm trên mỗi trang
+
+            return view('shop', compact('dt', 'query'));
+        }
+
+public function getProductsByManufacturer($manufacturer)
 {
-    $tu = $request->input('tu');
-    $den = $request->input('den');
+    // Lấy danh sách sản phẩm từ cơ sở dữ liệu dựa trên hãng
+    $products = ChiTietSanPham::where('thuong_hieu', $manufacturer)->get();
 
-    // Thực hiện truy vấn tìm kiếm sản phẩm với giá trong khoảng từ $tu đến $den
-    $dt = SanPham::whereBetween('gia', [$tu, $den])->get();
-
-    return view('shop', compact('dt'));
+    // Trả về dữ liệu dưới dạng JSON
+    return response()->json($products);
 }
+
 
 }

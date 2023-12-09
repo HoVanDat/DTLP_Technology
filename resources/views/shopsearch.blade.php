@@ -19,7 +19,58 @@
 .product-big-title-area {
     background: url(img/crossword.png) repeat scroll 0 0 #f17024;
 }
+.loctt {
+        width: 96%;
+        margin: 10px auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
 
+    .loctt .filter-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+   .loctt .row {
+        display: flex;
+        margin-bottom: 15px;
+    }
+
+   .loctt .col-4 {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+   .loctt label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .loctt input,
+    select {
+        width: 100%;
+        padding: 8px;
+        height:40px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+   .loctt button {
+        background-color: #4CAF50 !important;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+   .loctt button:hover {
+        background-color: #45a049;
+    }
 .logo h1 a img {
     width: 30%;
 }
@@ -101,40 +152,43 @@ body {
                 <h1>Sản phẩm</h1>
 
             </div>
+            <div class="loctt">
+    <form class="filter-form" action="{{ route('tim-kiem') }}" method="get">
+        <div class="row">
+            <div class="col-4">
+                <input type="text" id="tu" name="tu" placeholder="Nhập giá tối thiểu">
+            </div>
+            <div class="col-4">
+                <h3 style="text-align:center">Đến</h3>
+            </div>
+            <div class="col-4">
+                <input type="text" id="den" name="den" placeholder="Nhập giá tối đa">
+            </div>
+        </div>
+
+        <label for="manufacturer">Chọn hãng:</label>
+        <select id="manufacturer" name="hang">
+            <option value="Saumsung">Samsung</option>
+            <option value="Iphone">Iphone</option>
+            <option value="Oppo">Oppo</option>
+            <option value="Khac" selected>khác</option>
+        </select>
+        <label for="manufacturer">Loại sản phẩm:</label>
+
+        <select id="manufacturer" name="loai">
+            <option value="1">Điện thoại</option>
+            <option value="2">Laptop</option>
+            <option value="3">Máy tính bảng</option>
+        </select>
+
+        <button type="submit">Tìm kiếm</button>
+    </form>
+</div>
             <h2 class="left">Có {{$count}} sản phẩm với từ khóa " {{$keyword}} "</h2>
 
             <div class="space2"></div>
-            <div class="col-md-4">
-                <div class="col-md-12">
 
-
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title mt04">Sản phẩm mới nhất</h2>
-                        @foreach($product as $dt)
-                        <div class="thubmnail-recent">
-                            <img src="{{ asset('img/' . $dt->hinh) }}" class="recent-thumb" alt="">
-                            <h2><a href="">{{$dt->ten_san_pham}}</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>{{ number_format($dt->gia_khuyen_mai, 0, ',', '.') }}</ins> <del>{{ number_format($dt->gia, 0, ',', '.') }}</del>
-                            </div>
-                        </div>
-                        @endforeach
-
-                    </div>
-
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
-                        <ul>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8" id="col-md-8">
+            <div class="col-md-12" id="col-md-8">
 
                 @foreach($listtin as $d)
                 <div class="col-md-4 col-sm-6">
@@ -375,6 +429,15 @@ body {
     .single-sidebar{
         margin-top:70px;
     }
+    .title-block-common {
+    overflow: hidden;
+    border-bottom: solid 2px #f17024;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 5px;
+    width: 97%;
+    margin-left: 30px;
+margin-bottom:40px in !important;}
 </style>
 
 @endsection

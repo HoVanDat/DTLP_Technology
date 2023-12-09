@@ -95,12 +95,19 @@ div.quantity input.minus {
             <div class="col-md-4">
 
             </div>
-
+            @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Xóa giỏ hàng thành công',
+            text: '{{ session('success') }}',
+        });
+    </script>
+@endif
             <div class="col-md-12">
                 <div class="product-content-right">
                     <div class="woocommerce">
-                        <form method="POST" action="{{route('deletecart)}}">
-                            @CSRF
+                        @if($soLuongSanPham > 0)
                             <table cellspacing="0" class="shop_table cart">
                                 <thead>
                                     <tr>
@@ -110,23 +117,43 @@ div.quantity input.minus {
                                         <th class="product-price">Giá</th>
                                         <th class="product-quantity">Số lượng</th>
                                         <th class="product-subtotal">Tổng tiền</th>
+                                        <th class="product-subtotal">Hành động</th>
+
                                     </tr>
                                 </thead>
+
                                 <tbody>
+
+
                                     @foreach($cart as $item)
 @php
                                     $idproduct = $item['product_id'];
+if(isset($item['id_chi_tiet'])){
+    $idchitiet = $item['id_chi_tiet'];
+
+}else{
+    $idchitiet = 1;
+}
                                     $tin = DB::table('sanpham')->where('id_san_pham', $idproduct)->first();
+                                    $tin1 = DB::table('chitietsanpham')->where('id_chi_tiet', $idchitiet)->first();
+$thanhtien = $tin1->gia * $item['quantity'];
                                     @endphp
+                                    <form method="POST" action="{{ route('delete-product', ['productId' =>$tin->id_san_pham]) }}">
+                                    @csrf
+
+
+
                                     <tr class="cart_item">
                                         <td class="product-remove">
                                             <input type="checkbox" name="selected_products[]"
-                                                value="{{$tin->id_san_pham}}" data-quantity="{{ $item['quantity'] }}">
+                                                value="{{$tin->id_san_pham}}" data-idchitiet="{{ $item['id_chi_tiet'] }}" data-quantity="{{ $item['quantity'] }}">
                                         </td>
 
                                         <td class="product-thumbnail">
                                             <a href="/chitiet"><img width="145" height="145" alt="poster_1_up"
-                                                    class="shop_thumbnail" src="img/product-thumb-2.jpg"></a>
+                                                    class="shop_thumbnail" src="img/{{$tin->hinh}}"></a>
+                                                    <p>Màu sắc: {{ $tin1->mau_sac }}</p>
+                                                    <p>RAM: {{ $tin1->RAM }}</p>
                                         </td>
 
                                         <td class="product-name">
@@ -134,85 +161,108 @@ div.quantity input.minus {
                                         </td>
 
                                         <td class="product-price">
-                                        <span class="amount">{{ number_format($tin->gia, 2, '.', ',') ?? '£0.00' }}</span>
+                                        <span class="amount">{{ number_format($tin1 ->gia, 0, '.', ',') ?? '£0.00' }}VNĐ</span>
                                         </td>
 
                                         <td class="product-quantity">
                                             <div class="quantity buttons_added">
-                                                <input type="button" class="minus" value="-">
                                                 <input type="number" size="4" class="input-text qty text" title="Qty"
                                                     value="{{ $item['quantity'] }}" min="0" step="1">
-                                                <input type="button" class="plus" value="+">
                                             </div>
                                         </td>
-
                                         <td class="product-subtotal">
-                                        <span class="amount">{{ number_format($tin->gia, 0, ',', '.') ?? '£0.00' }}</span>
+                                        <span class="amount">{{ number_format($thanhtien, 0, ',', '.') ?? '£0.00' }}VNĐ</span>
                                         </td>
-                                        <td><button class="delete_product"  type="submit" name="delete_product" value="$idproduct">Xóa</button></td>
+                                        <td class="product-price">
+
+                                        <button type="submit">Xóa</button>
+
+                                        </td>
+
+
+
                                     @endforeach
 
                                     <tr>
+
+</form>
+
+
                                         <td class="actions" colspan="6">
 
                                             <input type="button" id="buy-button" value="Mua hàng"
                                                 class="checkout-button button alt wc-forward">
                                         </td>
+
+                                        <td class="actions" colspan="6">
+                                            <a href="/cart/remove-all"><input type="button" id="buy-button123" value="Xóa tất cả"></a>
+
+</td>
+<script>
+    function removeAllItems() {
+        // Gửi yêu cầu xóa tất cả sản phẩm đến endpoint trên server
+        fetch('/cart/remove-all', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Xử lý phản hồi từ server, có thể cập nhật giao diện người dùng nếu cần
+            console.log(data);
+            alert(data.success); // Hiển thị thông báo thành công
+        })
+        .catch(error => {
+            console.error('Lỗi:', error);
+            alert('Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng');
+        });
+    }
+</script>
+
+
+
                                     </tr>
                                 </tbody>
                             </table>
-                        </form>
-                        <?php
+@else
 
+<p style="color:red; text-align:center; margin-top:30px;">Không có sản phẩm nào trong giỏ hàng</p>
 
-
-if (isset($_POST['delete_product'])) {
-    $product_id_to_delete = $_POST['delete_product'];
-    // Xử lý xóa sản phẩm có $product_id_to_delete ra khỏi giỏ hàng ở đây
-    if (array_key_exists($product_id_to_delete, $_SESSION['cart'])) {
-        unset($_SESSION['cart'][$product_id_to_delete]);
-        $delete_success = true; // Đặt biến kiểm tra xóa thành công thành true
-
-    }
-}
-
-
-
-?>
+@endif
                         <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-var buyButton = document.getElementById('buy-button');
+                      document.addEventListener("DOMContentLoaded", function () {
+    var buyButton = document.getElementById('buy-button');
 
-                            buyButton.addEventListener('click', function() {
-                                var selectedProducts = document.querySelectorAll(
-                                    'input[name="selected_products[]"]:checked');
-                                var selectedProductData = [];
+    buyButton.addEventListener('click', function () {
+        var selectedProducts = document.querySelectorAll('input[name="selected_products[]"]:checked');
+        var selectedProductData = [];
 
-                                selectedProducts.forEach(function(checkbox) {
-                                    // Lấy thông tin từ data-* attributes của checkbox
-                                    var productId = checkbox.value;
-                                    var quantity = checkbox.dataset.quantity;
+        selectedProducts.forEach(function (checkbox) {
+            var idProduct = checkbox.value;
+            var idChitiet = checkbox.getAttribute('data-idchitiet');
+            var quantity = checkbox.getAttribute('data-quantity');
 
-                                    console.log('Product ID:', productId, 'Quantity:',
-                                    quantity);
+            selectedProductData.push({
+                idProduct: idProduct,
+                idChitiet: idChitiet,
+                quantity: quantity
+            });
+        });
 
-                                    // Thêm thông tin vào mảng selectedProductData
-                                    selectedProductData.push({
-                                        id: productId,
-                                        quantity: quantity
-                                    });
-                                });
+        if (selectedProductData.length > 0) {
+            // Chuyển đến trang mua hàng với thông tin sản phẩm đã chọn
+            var url = '/dathang1?' + selectedProductData.map(data =>
+    `selected_products[${data.idProduct}]=${data.quantity}&selected_chitiet[${data.idProduct}]=${data.idChitiet}`).join('&');
+window.location.href = url;
 
-                                if (selectedProductData.length > 0) {
-                                    // Chuyển đến trang mua hàng với thông tin sản phẩm đã chọn
-                                    var url = '/dathang1?' + selectedProductData.map(data =>
-                                        `selected_products[${data.id}]=${data.quantity}`).join('&');
-                                    window.location.href = url;
-                                } else {
-                                    alert('Vui lòng chọn ít nhất một sản phẩm để mua.');
-                                }
-                            });
-                        });
+        } else {
+            alert('Vui lòng chọn ít nhất một sản phẩm để mua.');
+        }
+    });
+});
+
                         </script>
 
 
@@ -228,7 +278,7 @@ var buyButton = document.getElementById('buy-button');
 
                                     <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state"
                                             name="calc_shipping_state" placeholder="State / county" value=""
-                                            class="input-text"> </p>
+class="input-text"> </p>
 
                                     <p class="form-row form-row-wide"><input type="text" id="calc_shipping_postcode"
                                             name="calc_shipping_postcode" placeholder="Postcode / Zip" value=""
@@ -259,5 +309,19 @@ Totals</button></p>
         width: 100px;
         height:40px;
     }
+    .product-price button{
+        background-color:#f17024;
+        border:none;
+        color:white;
+        width: 100px;
+        height:40px;
+    }
+    #buy-button123{
+        border:none;
+        background-color:white;
+color:black;
+
+    }
 </style>
+
 @endsection

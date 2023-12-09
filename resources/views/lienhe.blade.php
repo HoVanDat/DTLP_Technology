@@ -102,22 +102,28 @@
                     <img src="https://cdn.nguyenkimmall.com/images/companies/_1/Content/tin-tuc/gia-dung/laptop-danh-cho-sinh-vien-nen-dat-nhung-tieu-chi-nao-h1.jpg">
                 </div>
                 <div class="col col-md-6">
-                    <form method="post" action="https://nentang.vn/">
+                    <form  action="{{route('lienhe.post')}}" method="post">
+                    @csrf
+                        <div class="form-group">
+                            <label for="ten">Họ tên</label>
+                            <input type="text" class="form-control" id="ten" name="ten"
+                                placeholder="Họ tên của bạn">
+                        </div>
                         <div class="form-group">
                             <label for="email">Email của bạn</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="Email của bạn">
                         </div>
                         <div class="form-group">
-                            <label for="title">Tiêu đề của bạn</label>
-                            <input type="text" class="form-control" id="title" name="title"
-                                placeholder="Tiêu đề của bạn">
+                            <label for="sdt">Số điện thoại</label>
+                            <input type="text" class="form-control" id="sdt" name="sdt"
+                                placeholder="Số điện thoại của bạn">
                         </div>
                         <div class="form-group">
-                            <label for="message">Lời nhắn của bạn</label>
-                            <textarea name="message" class="form-control"></textarea>
+                            <label for="noi_dung">Lời nhắn của bạn</label>
+                            <textarea name="noi_dung" class="form-control"></textarea>
                         </div>
-                        <button class="btn btn-primary" name="btnGoiLoiNhan">Gởi lời nhắn</button>
+                        <button class="btn btn-primary" name="btnGoiLoiNhan">Gửi lời nhắn</button>
                     </form>
                 </div>
             </div>

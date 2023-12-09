@@ -23,7 +23,7 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
@@ -137,7 +137,7 @@
                             <!-- Add this to your HTML where you have the dropdown toggle -->
                             <div class="nav-link dropdown-toggle nav-dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
                                 aria-expanded="false">
-                                <img src="{{ session('userInfo.hinh') }}" class="nav-avatar rounded-circle"
+                                <img src="img/<?=session('userInfo.hinh');?>" class="nav-avatar rounded-circle"
                                     alt="Portrait of a Woman" loading="lazy" />
                                 <!-- Add any other content for the dropdown toggle -->
                             </div>
@@ -184,13 +184,44 @@
 
 
     <div class="footer-top-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="footer-about-us text-center">
-                    <div class="logo">
-                        <a href="./"><img class="logo-img" src="{{ asset('img/logo2.jpg') }}" alt="Logo"></a>
+
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-about-us">
+                    <h1><a href="./"><img src="{{ asset('img/logo2.jpg') }}"></a></h1>
+                        <p>Cảm ơn quý khách hàng đã tin tưởng và lựa chọn chúng tôi. Chúng tôi sẽ không ngừng phấn đấu để đáp ứng và vượt qua mong đợi của quý khách hàng, xây dựng một mối quan hệ lâu dài và mang lại giá trị không ngừng.</p>
+                        <div class="footer-social">
+                            <a href="https://www.facebook.com/hoangtiennn" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.youtube.com/channel/UClojYLbnD4mcXp1heQHy8xA" target="_blank"><i class="fa fa-youtube"></i></a>                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-menu">
+                        <h2 class="footer-wid-title">Hướng Dẫn</h2>
+                        <ul>
+                            <li><a href="/shop">Sản phẩm</a></li>
+                            <li><a href="/tintuc">Tin tức</a></li>
+                            <li><a href="{{route('tinkhuyenmai')}}">Khuyến mãi</a></li>
+                            <li><a href="/lienhe">Liên hệ</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-menu">
+                        <h2 class="footer-wid-title">Danh Mục</h2>
+                        <ul>
+
+                            <li><a href="/shoplaptop">Laptop</a></li>
+                            <li><a href="/shopdienthoai">Điện thoại</a></li>
+                            <li><a href="/shopmaytinhbang">Máy tính bảng</a></li>
+
+                        </ul>
+
                     </div>
                     <div class="description">
                         <p>Cảm ơn quý khách hàng đã tin tưởng và lựa chọn chúng tôi. Chúng tôi sẽ không ngừng phấn đấu để đáp ứng và vượt qua mong đợi của quý khách hàng, xây dựng một mối quan hệ lâu dài và mang lại giá trị không ngừng.</p>
