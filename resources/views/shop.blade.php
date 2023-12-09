@@ -1,9 +1,3 @@
-<?php
-
-
-
-?>
-
 
 @extends('layout')
 @section('noidung')
@@ -83,9 +77,9 @@ button[type=submit] {
     text-transform: uppercase;
 }
 
-body {
+/* body {
     background-color: #fcfcfc;
-}
+} */
 
 #col-md-8 {
     background-color: white;
@@ -105,58 +99,66 @@ body {
     <div class="container">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-    .loctt {
-        width: 96%;
-        margin: 10px auto;
-        border: 1px solid #ccc;
-        padding: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-    }
+   
+    /* Lọc */
+    /* body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        } */
 
-    .loctt .filter-form {
-        display: flex;
-        flex-direction: column;
-    }
+        .filter-container {
+            width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-   .loctt .row {
-        display: flex;
-        margin-bottom: 15px;
-    }
+        .filter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-   .loctt .col-4 {
-        flex: 1;
-        margin-right: 10px;
-    }
+        .filter-form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            width: 100%;
+        }
 
-   .loctt label {
-        font-weight: bold;
-        margin-bottom: 5px;
-        display: block;
-    }
+        .filter-form input,
+        .filter-form select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
 
-    .loctt input,
-    select {
-        width: 100%;
-        padding: 8px;
-        height:40px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
+        .filter-form select {
+            margin-top: 5px; /* Add a little space between input and select */
+        }
 
-   .loctt button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+        .filter-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-   .loctt button:hover {
-        background-color: #45a049;
-    }
+        .filter-form button:hover {
+            background-color: #0056b3;
+        }
 </style>
 
 
@@ -194,25 +196,6 @@ body {
                 <h1>Sản phẩm</h1>
             </div>
 
-<style>
-    .filter-form .row{
-        display:flex;
-    }
-    .filter-form .row .col-3{
-        padding:10px;
-        width:260px;
-    }
-    .filter-form .col-4 h3{
-        font-size:10px;
-        margin-top:30px;
-    }
-    .filter-form button{
-        padding: 10px;
-        margin-top:15px;
-        width:100%;
-    }
-</style>
-
 <div id="products-list">
     <!-- Hiển thị danh sách sản phẩm ở đây -->
 </div>
@@ -245,36 +228,37 @@ body {
     });
 </script>
 <div class="loctt">
-    <form class="filter-form" action="{{ route('tim-kiem') }}" method="get">
-        <div class="row">
-            <div class="col-4">
-                <input type="text" id="tu" name="tu" placeholder="Nhập giá tối thiểu">
+<form class="filter-form" action="{{ route('tim-kiem') }}" method="get">
+            <div style="flex: 1;">
+                <label for="tu">Nhập giá tối thiểu:</label>
+                <input type="text" id="tu" name="tu" placeholder="Ví dụ: 1000000">
             </div>
-            <div class="col-4">
-                <h3 style="text-align:center">Đến</h3>
+            <div style="flex: 1;">
+                <label for="den">Nhập giá tối đa:</label>
+                <input type="text" id="den" name="den" placeholder="Ví dụ: 5000000">
             </div>
-            <div class="col-4">
-                <input type="text" id="den" name="den" placeholder="Nhập giá tối đa">
+
+            <div style="flex: 1;">
+                <label for="manufacturer">Chọn hãng:</label>
+                <select id="manufacturer" name="hang">
+                    <option value="Saumsung">Samsung</option>
+                    <option value="Iphone">iPhone</option>
+                    <option value="Oppo">Oppo</option>
+                    <option value="Khac" selected>Khác</option>
+                </select>
             </div>
-        </div>
 
-        <label for="manufacturer">Chọn hãng:</label>
-        <select id="manufacturer" name="hang">
-            <option value="Saumsung">Samsung</option>
-            <option value="Iphone">Iphone</option>
-            <option value="Oppo">Oppo</option>
-            <option value="Khac" selected>khác</option>
-        </select>
-        <label for="manufacturer">Loại sản phẩm:</label>
+            <div style="flex: 1;">
+                <label for="loai">Loại sản phẩm:</label>
+                <select id="loai" name="loai">
+                    <option value="1">Điện thoại</option>
+                    <option value="2">Laptop</option>
+                    <option value="3">Máy tính bảng</option>
+                </select>
+            </div>
 
-        <select id="manufacturer" name="loai">
-            <option value="1">Điện thoại</option>
-            <option value="2">Laptop</option>
-            <option value="3">Máy tính bảng</option>
-        </select>
-
-        <button type="submit">Tìm kiếm</button>
-    </form>
+            <button type="submit">Tìm kiếm</button>
+        </form>
 </div>
 
             <div class="col-md-12" id="col-md-8">
@@ -302,186 +286,7 @@ body {
 @else
 <p style="color:red; text-align:center; margin-top:30px;">Không có sản phẩm nào</p>
 @endif
-                <!-- <div class="col-md-4 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-2.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-1.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-3.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-4.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-2.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-1.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-3.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-4.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-2.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-1.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-3.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="single-shop-product">
-                            <div class="product-upper">
-                                <img src="img/product-4.jpg" alt="">
-                            </div>
-                            <h2><a href="">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-                                <ins>$899.00</ins> <del>$999.00</del>
-                            </div>
-
-                            <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
-                            </div>
-                        </div>
-                    </div> -->
+                
 
 
             </div>

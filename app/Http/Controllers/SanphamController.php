@@ -184,6 +184,22 @@ class SanphamController extends Controller
         return view('admin/create-qlchitietsanpham', compact('sanpham'));
     }
     public function storechitietsanpham(Request $request){
+    $request->validate ( [
+
+      
+        'soluong' => 'required|integer',
+        // 'ram' => 'required|string',
+        'giaban' => 'required|numeric',
+        // 'ImageUpload' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ],
+
+    [
+        'soluong.required' => 'Số lượng không được bỏ trống.',
+        // 'ram.required' => 'Vui lòng nhập thông tin RAM.',
+        'giaban.required' => 'Giá bán không được bỏ trống.',
+        // 'ImageUpload.image' => 'Hình ảnh phải là một file hình ảnh.',
+    ]);
+
         $chitietsanpham = new ChiTietSanPham();
         $chitietsanpham->id_san_pham = $request->masanpham;
         $chitietsanpham->so_luong = $request->soluong;

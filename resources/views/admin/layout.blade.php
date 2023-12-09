@@ -79,8 +79,8 @@
                         class="app-menu__label">Quản lý khách hàng</span></a></li>
             <li><a class="app-menu__item " href="qlnhanvien"><i class='app-menu__icon bx bx-id-card'></i> <span
                         class="app-menu__label">Quản lý nhân viên</span></a></li>
-            <li><a class="app-menu__item" href="qlnoibo"><i class='app-menu__icon bx bx-run'></i><span
-                        class="app-menu__label">Quản lý nội bộ</span></a></li>
+            <!-- <li><a class="app-menu__item" href="qlnoibo"><i class='app-menu__icon bx bx-run'></i><span
+                        class="app-menu__label">Quản lý nội bộ</span></a></li> -->
             <li><a class="app-menu__item" href="qlbanner"><i class='app-menu__icon bx bx-run'></i><span
                         class="app-menu__label">Quản lý banner</span></a></li>
             <li><a class="app-menu__item" href="homthugopy"><i class='app-menu__icon bx bx-run'></i><span

@@ -14,8 +14,9 @@
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\ContactAdminController;
     use App\Http\Controllers\BannerAdminController;
-  use App\Http\Controllers\ChiTietSanPhamController;
-use App\Http\Controllers\TinKhuyenMaiController;
+    use App\Http\Controllers\ChiTietSanPhamController;
+    use App\Http\Controllers\TinKhuyenMaiController;
+    use App\Http\Controllers\OrderAdminController;
 
 Route::post('/delete-product/{productId}', [OrderController::class, 'deleteProduct'])->name('delete-product');
 
@@ -126,10 +127,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('create-bangkeluong',function(){
         return view('admin/create-bangkeluong');
     });
-    Route::get('create-qldonhang',function(){
-        return view('admin/create-qldonhang');
-
-    });
+   
     Route::get('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvien'])->name('create.qlnhanvien');
     Route::post('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvienpost'])->name('create.qlnhanvien.post');
     Route::get('edit-qlkhachhang{id}',[UserAdminController::class,'edit'])->name('admin-edit-qlkhachhang');
@@ -147,10 +145,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('lichcongtac',function(){
         return view('admin/lichcongtac');
     });
-    Route::get('qldonhang',function(){
-        return view('admin/qldonhang');
-
-    });
+   
     Route::get('qlnhanvien',[EmployeeAdminController::class,'index'])->name('qlnhanvien');
     Route::get('qlnoibo',function(){
         return view('admin/qlnoibo');
@@ -215,5 +210,13 @@ Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqlda
     Route::get('edit-qlbanner{id}',[BannerAdminController::class,'editqlbanner'])->name('edit.qlbanner');
     Route::post('edit-qlbanner',[BannerAdminController::class,'editqlbannerpost'])->name('edit.qlbanner.post');
     Route::get('delete-qlbanner/{id}',[BannerAdminController::class,'deleteqlbanner'])->name('delete.qltintuc');
-    });
+
+    // Quản lý đơn hàng
+    Route::get('qldonhang',[OrderAdminController::class,'index']);
+    Route::get('duyet-qldonhang/{id}',[OrderAdminController::class,'duyet']);
+    Route::get('huy-qldonhang/{id}',[OrderAdminController::class,'huy']);
+    Route::get('delete-qldonhang/{id}',[OrderAdminController::class,'delete']);
+ 
+
 });
+

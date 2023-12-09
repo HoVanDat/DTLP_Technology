@@ -124,6 +124,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
+                    
                     <h3 class="tile-title">Tạo mới chi tiết sản phẩm</h3>
                     <div class="tile-body">
                         <div class="row element-button">
@@ -132,6 +133,21 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
                             </div>
                         </div>
+                        <div class="mt-5">
+                @if($errors->any())
+                <div class="col-12">
+                  @foreach($errors->all() as $error)
+                  <div class="alert alert-danger">{{$error}}</div>
+                  @endforeach
+                </div>
+                @endif
+                @if(session()->has('error'))
+                <div class="alert alert-danger">{{session('error')}}</div>
+                @endif
+                @if(session()->has('success'))
+                <div class="alert alert-success">{{session('success')}}</div>
+                @endif
+              </div>
                         <form class="row" action="{{ route('admin-store-qlchitietsanpham') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group col-md-3">
@@ -268,7 +284,7 @@
                             <!-- giá bán -->
                             <div class="form-group col-md-3">
                                 <label class="control-label">Giá bán</label>
-                                <input class="form-control" type="text" placeholder="" name="giaban" required>
+                                <input class="form-control" type="text" placeholder="" name="giaban">
                             </div>
                             <!-- giá khuyến mãi -->
                             <div class="form-group col-md-12">
@@ -288,7 +304,9 @@
                             </div>
                     </div>
                     <button class="btn btn-save" type="submit">Lưu lại</button>
-                    <a class="btn btn-cancel" href="qlchitietsanpham{{$chitietsanpham->id_san_pham}}">Hủy bỏ</a>
+                    @if(isset($sanpham))
+                    <a class="btn btn-cancel" href="qlchitietsanpham{{$sanpham->id_san_pham}}">Hủy bỏ</a>
+                @endif
                 </div>
                 </form>
     </main>
@@ -313,7 +331,9 @@
                     </div>
                     <BR>
                     <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="qlchitietsanpham{{$chitietsanpham->id_san_pham}}">Hủy bỏ</a>
+                    @if(isset($sanpham))
+                    <a class="btn btn-cancel" data-dismiss="modal" href="qlchitietsanpham{{$sanpham->id_san_pham}}">Hủy bỏ</a>
+                    @endif
                     <BR>
                 </div>
                 <div class="modal-footer">

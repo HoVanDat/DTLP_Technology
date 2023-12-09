@@ -57,10 +57,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($binhluan as $bl)
+                        @php
+                            $i=0;
+                            @endphp
+                            @if(isset($binhluan))
+                            @foreach($binhluan as $bl)
+                            @php
+                            $i++;
+                            @endphp
+                           
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>{{ $bl->id_binh_luan}}</td>
+                                <td>{{ $i}}</td>
                                 <td>{{ $bl->ten_san_pham}}</td>
                                 <td>{{ $bl->ten}}</td>
                                 <td>{{ $bl->noi_dung}}</td>
@@ -85,6 +93,7 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

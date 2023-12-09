@@ -107,7 +107,6 @@
                                     Ẩn
                                     @endif
                                 </td>
-                                <!-- <td>{{$ds->noi_dung}}</td> xuất ra nội dung khoảng 50 chữ -->
                                 <td>{{$ds->created_at}}</td>
 
                                 <td class="table-td-center">
@@ -159,11 +158,11 @@
 <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
-
+$('#sampleTable').DataTable();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
-$('#sampleTable').DataTable();
+
 <script>
 function showDeleteConfirmation(userId, deleteUrl) {
     Swal.fire({

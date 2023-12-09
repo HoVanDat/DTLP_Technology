@@ -250,6 +250,7 @@ button.add_to_cart_buttonss {
                                     <del>{{ number_format($sanpham->gia_khuyen_mai, 0, ',', '.') }} VNĐ</del>
                                 </div>
 
+
                                 <div class="d-block my-3">
                                 <div class="d-block mb5 my-3">
     @if(count($chitietsanpham1)>0)
