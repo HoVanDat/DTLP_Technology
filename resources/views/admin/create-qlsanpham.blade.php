@@ -140,22 +140,24 @@
                         @csrf
                         <div class="form-group col-md-3">
                             <label class="control-label">Tên sản phẩm</label>
-                            <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" name="tensanpham">
+                            <input class="form-control" type="text" placeholder="Nhập tên sản phẩm" name="tensanpham" required>
                         </div>
+                      
                         <div class="form-group col-md-3">
-                            <label for="exampleSelect1" class="control-label">Danh mục</label>
-                            <select class="form-control" id="exampleSelect1" name="danhmuc">
-                                <option>-- Chọn danh mục --</option>
-                                @foreach($danhmuc as $dm)
-                                <option value="{{$dm->id_loai}}">{{$dm->ten_loai}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+    <label for="exampleSelect1" class="control-label">Danh mục</label>
+    <select class="form-control" id="exampleSelect1" name="danhmuc" required>
+        <option value="" disabled selected>-- Chọn danh mục --</option>
+        @foreach($danhmuc as $dm)
+            <option value="{{ $dm->id_loai }}">{{ $dm->ten_loai }}</option>
+        @endforeach
+    </select>
+</div>
+
                         <!-- option ẩn hiện -->
                         <div class="form-group col-md-3">
                             <label for="exampleSelect1" class="control-label">Ẩn/Hiện</label>
-                            <select class="form-control" id="exampleSelect1" name="anhien">
-                                <option>-- Chọn danh mục --</option>
+                            <select class="form-control" id="exampleSelect1" name="anhien" required>
+                                <option value="" disabled selected>-- Chọn danh mục --</option>
                                 <option value="1">Hiện</option>
                                 <option value="0">Ẩn</option>
                             </select>
@@ -169,7 +171,7 @@
                         <div class="form-group col-md-3">
                             <label class="control-label">Giá khuyến mãi </label>
                             <input class="form-control" type="number" placeholder="Nhập giá khuyến mãi"
-                                id="example-text-input" name="giakhuyenmai">
+                                id="example-text-input" name="giakhuyenmai" required>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="control-label">Ảnh sản phẩm</label>
