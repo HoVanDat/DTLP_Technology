@@ -224,7 +224,6 @@ button.add_to_cart_buttonss {
                 <div class="product-content-right">
                     <div class="product-breadcroumb">
                         <a href="">Trang chủ</a>
-                        <a href="">{{$sanpham->loai->ten_loai}}</a>
                         <a href="">{{$sanpham->ten_san_pham}}</a>
                     </div>
                     <div class="row">
@@ -452,11 +451,7 @@ $('.mau_sac').val(mauSac);
 
 
 
-                                <div class="product-inner-category">
-                                    <p>Danh mục: <a href="">{{$sanpham->loai->ten_loai}}</a>. Tags: <a
-                                            href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>. </p>
-                                </div>
-
+                               
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home"

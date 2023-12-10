@@ -65,10 +65,10 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span>
                             Account</h4> -->
-<div class="thetin">
-    <p>Xin chào: <?=session('userInfo.ten');?></p>
-    <p><a href="/dangxuat">Đăng xuất</a></p>
-</div>
+                        <div class="thetin">
+                            <p>Xin chào: <?=session('userInfo.ten');?></p>
+                            <p><a href="/dangxuat">Đăng xuất</a></p>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
@@ -313,47 +313,49 @@
                         </div>
 
                         <div class="pagination">
-    {{ $tin123->withQueryString()->links('pagination::bootstrap-4') }}
-</div>
+                            {{ $tin123->withQueryString()->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                     @if(session('error'))
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Đăng nhập thất bại',
-            text: '{{ session('error') }}',
-        });
-    </script>
-@endif
+                    <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Cập nhật thất bại',
+                        text: '{{ session('
+                        error ') }}',
+                    });
+                    </script>
+                    @endif
 
-@if(session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Đăng nhập thành công',
-            text: '{{ session('success') }}',
-        });
-    </script>
-@endif
+                    @if(session('success'))
+                    <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cập nhật thành công',
+                        text: '{{ session('
+                        success ') }}',
+                    });
+                    </script>
+                    @endif
 
 
 
                     <div id="Tokyo" class="w3-container city" style="display:none">
 
-    <form id="changePasswordForm" action="/change-password" method="post">
-        @csrf
+                        <form id="changePasswordForm" action="/change-password" method="post">
+                            @csrf
 
-        <label for="currentPassword">Mật khẩu hiện tại:</label>
-        <input type="password" id="currentPassword" name="currentPassword" required>
+                            <label for="currentPassword">Mật khẩu hiện tại:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required>
 
-        <label for="newPassword">Mật khẩu mới:</label>
-        <input type="password" id="newPassword" name="newPassword" required>
+                            <label for="newPassword">Mật khẩu mới:</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
 
-        <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required></br>
+                            <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required></br>
 
-        <button type="submit">Đổi Mật Khẩu</button>
-    </form>
+                            <button type="submit">Đổi Mật Khẩu</button>
+                        </form>
                     </div>
 
                     <script>
@@ -388,16 +390,18 @@
     width: 98%;
     border: 1px solid #cccccc;
     border-radius: 20px;
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 #Paris {
     background-color: white;
     padding: 20px;
 }
-div.pagination{
-    margin:0 auto;
+
+div.pagination {
+    margin: 0 auto;
 }
+
 #Paris .donhang .donhang1 {
     display: flex;
     justify-content: space-between;
@@ -460,54 +464,55 @@ span {
 
 
 form#changePasswordForm {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            text-align: center;
-        }
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-align: center;
+}
 
-       form#changePasswordForm label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
+form#changePasswordForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
 
-        #changePasswordForm input {
-            width: 20%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
+#changePasswordForm input {
+    width: 20%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
 
-        #changePasswordForm button {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+#changePasswordForm button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-        #changePasswordForm button:hover {
-            background-color: #45a049;
-        }
-        .thetin {
+#changePasswordForm button:hover {
+    background-color: #45a049;
+}
+
+.thetin {
     position: relative;
-    margin-bottom:40px;
+    margin-bottom: 40px;
 }
 
 .thetin p:first-child {
     position: absolute;
     left: 0;
     top: 0;
-    font-size:20px
+    font-size: 20px
 }
 
 .thetin p:last-child {
