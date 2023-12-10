@@ -137,7 +137,7 @@
                             <!-- Add this to your HTML where you have the dropdown toggle -->
                             <div class="nav-link dropdown-toggle nav-dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
                                 aria-expanded="false">
-                                <img src="img/<?=session('userInfo.hinh');?>" class="nav-avatar rounded-circle"
+                                <img src="{{ session('userInfo.hinh') }}" class="nav-avatar rounded-circle"
                                     alt="Portrait of a Woman" loading="lazy" />
                                 <!-- Add any other content for the dropdown toggle -->
                             </div>
@@ -184,7 +184,6 @@
 
 
     <div class="footer-top-area">
-
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
@@ -223,16 +222,24 @@
                         </ul>
 
                     </div>
-                    <div class="description">
-                        <p>Cảm ơn quý khách hàng đã tin tưởng và lựa chọn chúng tôi. Chúng tôi sẽ không ngừng phấn đấu để đáp ứng và vượt qua mong đợi của quý khách hàng, xây dựng một mối quan hệ lâu dài và mang lại giá trị không ngừng.</p>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-newsletter">
+                        <h2 class="footer-wid-title">Đăng Ký</h2>
+                        <p>Đăng ký nhận bản tin của chúng tôi và nhận các ưu đãi độc quyền mà bạn không tìm thấy ở bất
+                            kỳ đâu khác, ngay trong hộp thư đến của bạn!</p>
+                        <div class="newsletter-form">
+                            <form action="#">
+                                <input type="email" placeholder="email">
+                                <input type="submit" value="Theo dõi">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
- <!-- End footer top area -->
+    </div> <!-- End footer top area -->                                                        
 
     <!-- End footer bottom area -->
 
