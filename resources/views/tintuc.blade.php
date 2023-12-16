@@ -45,6 +45,10 @@ hr {
     border-radius: 10px;
     margin-top:20px;
 }
+.art-img img{
+    width: 300px;
+    height:200px;
+}
 .title-block-common {
     overflow: hidden;
     border-bottom: solid 2px #f17024;
@@ -101,7 +105,7 @@ padding: 0px 0px;
 }
 .nen{
     background-color: white;
-    margin-left:40px;
+    margin-left:0px;
     border-radius: 10px;
 }
 .blog-content .row {
@@ -115,6 +119,16 @@ div.group_sidebar{
 }
 div.group_sidebar{
     box-shadow: 1px solid red;
+}
+
+.title-block-common {
+    overflow: hidden;
+    border-bottom: solid 2px #f17024;
+    height: 50px !important;
+    line-height: 40px;
+    margin-bottom: 5px;
+    width: 100%;
+    margin-left: 0px !important;
 }
 </style>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -139,48 +153,45 @@ div.group_sidebar{
 
 
                                       <div id="khung" class="w3-bar w3-black">
-  <button class="w3-bar-item w3-button" onclick="openCity('London')">Công nghệ</button>
-  <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Giải trí </button>
-  <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">Giáo dục</button>
-  <button class="w3-bar-item w3-button" onclick="openCity('Tokyook')">Du lịch</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('London')">App & Game</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Paris')">Thủ thuật </button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Tokyo')">For Games</button>
+  <button class="w3-bar-item w3-button" onclick="openCity('Tokyook')">Đánh giá tư vấn</button>
 
 </div>
 
 <div id="London" class="w3-container city">
 <div class="nen">
-@if(count($dt)>0)
-@foreach($dt as $dt)
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="/img/{{$dt->hinh}}"
-                    alt="">
+@if(count($tintucs['dt']) > 0)
+    @foreach($tintucs['dt'] as $tin)
+        <div class="news-content row">
+            <div class="col-md-3 text-center col-xs-12 col-sm-12 img-article">
+                <div class="art-img">
+                    <img src="{{ $tin->hinh }}" alt="">
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <h2 class="title-article">
+                    <a href="chi-tiet-tin/{{ $tin->id_tin }}">{{ $tin->tieu_de }}</a>
+                </h2>
+                <div class="body-content">
+                    <p>{{ $tin->tom_tat }}</p>
+                </div>
+                <a class="readmore btn-rb clear-fix"
+                    href="chi-tiet-tin/{{ $tin->id_tin }}" role="button">
+                    Xem tiếp <span class="fa fa-angle-double-right"></span>
+                </a>
             </div>
         </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <h2 class="title-article"><a
-                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
-            <div class="body-content">
-                <p>{{$dt->tom_tat}}</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
-
+        <hr class="line-blog" />
     @endforeach
-
+    <div class="pagination">
+        {{ $tintucs['dt']->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
 @else
-<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
+    <p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
 @endif
+
     <!-- End: Nội dung blog -->
 
 </div>
@@ -198,38 +209,34 @@ function openCity(cityName) {
 
 <div id="Paris" class="w3-container city" style="display:none">
 <div class="nen">
-@if(count($dt1)>0)
-@foreach($dt1 as $dt)
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="/img/{{$dt->hinh}}"
-                    alt="">
+@if(count($tintucs['dt1']) > 0)
+    @foreach($tintucs['dt1'] as $tin)
+        <div class="news-content row">
+            <div class="col-md-3 text-center col-xs-12 col-sm-12 img-article">
+                <div class="art-img">
+                    <img src="{{ $tin->hinh }}" alt="">
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <h2 class="title-article">
+                    <a href="chi-tiet-tin/{{ $tin->id_tin }}">{{ $tin->tieu_de }}</a>
+                </h2>
+                <div class="body-content">
+                    <p>{{ $tin->tom_tat }}</p>
+                </div>
+                <a class="readmore btn-rb clear-fix"
+                    href="chi-tiet-tin/{{ $tin->id_tin }}" role="button">
+                    Xem tiếp <span class="fa fa-angle-double-right"></span>
+                </a>
             </div>
         </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <h2 class="title-article"><a
-                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
-            <div class="body-content">
-                <p>{{$dt->tom_tat}}</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
-
+        <hr class="line-blog" />
     @endforeach
-
+    <div class="pagination">
+        {{ $tintucs['dt1']->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
 @else
-<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
+    <p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
 @endif
     <!-- End: Nội dung blog -->
 
@@ -238,38 +245,34 @@ function openCity(cityName) {
 
 <div id="Tokyo" class="w3-container city" style="display:none">
 <div class="nen">
-@if(count($dt2)>0)
-@foreach($dt2 as $dt)
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="/img/{{$dt->hinh}}"
-                    alt="">
+@if(count($tintucs['dt2']) > 0)
+    @foreach($tintucs['dt2'] as $tin)
+        <div class="news-content row">
+            <div class="col-md-3 text-center col-xs-12 col-sm-12 img-article">
+                <div class="art-img">
+                    <img src="{{ $tin->hinh }}" alt="">
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <h2 class="title-article">
+                    <a href="chi-tiet-tin/{{ $tin->id_tin }}">{{ $tin->tieu_de }}</a>
+                </h2>
+                <div class="body-content">
+                    <p>{{ $tin->tom_tat }}</p>
+                </div>
+                <a class="readmore btn-rb clear-fix"
+                    href="chi-tiet-tin/{{ $tin->id_tin }}" role="button">
+                    Xem tiếp <span class="fa fa-angle-double-right"></span>
+                </a>
             </div>
         </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <h2 class="title-article"><a
-                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
-            <div class="body-content">
-                <p>{{$dt->tom_tat}}</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
-
+        <hr class="line-blog" />
     @endforeach
-
+    <div class="pagination">
+        {{ $tintucs['dt2']->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
 @else
-<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
+    <p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
 @endif
     <!-- End: Nội dung blog -->
 
@@ -277,38 +280,34 @@ function openCity(cityName) {
 </div>
 <div id="Tokyook" class="w3-container city" style="display:none">
 <div class="nen">
-@if(count($dt3)>0)
-@foreach($dt3 as $dt)
-    <div class="news-content row">
-
-        <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-            <div class="art-img">
-                <img src="/img/{{$dt->hinh}}"
-                    alt="">
+@if(count($tintucs['dt3']) > 0)
+    @foreach($tintucs['dt3'] as $tin)
+        <div class="news-content row">
+            <div class="col-md-3 text-center col-xs-12 col-sm-12 img-article">
+                <div class="art-img">
+                    <img src="{{ $tin->hinh }}" alt="">
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <h2 class="title-article">
+                    <a href="chi-tiet-tin/{{ $tin->id_tin }}">{{ $tin->tieu_de }}</a>
+                </h2>
+                <div class="body-content">
+                    <p>{{ $tin->tom_tat }}</p>
+                </div>
+                <a class="readmore btn-rb clear-fix"
+                    href="chi-tiet-tin/{{ $tin->id_tin }}" role="button">
+                    Xem tiếp <span class="fa fa-angle-double-right"></span>
+                </a>
             </div>
         </div>
-
-
-        <div class=" col-md-7 col-sm-12  col-xs-12">
-            <h2 class="title-article"><a
-                    href="chi-tiet-tin/{{$dt->id_tin}}">{{$dt->tieu_de}}</a></h2>
-            <div class="body-content">
-                <p>{{$dt->tom_tat}}</p>
-            </div>
-            <!-- End: Nội dung bài viết -->
-            <a class="readmore btn-rb clear-fix"
-                href="chi-tiet-tin/{{$dt->id_tin}}" role="button">Xem
-                tiếp <span class="fa fa-angle-double-right"></span></a>
-        </div>
-
-
-    </div>
-    <hr class="line-blog" />
-
+        <hr class="line-blog" />
     @endforeach
-
+    <div class="pagination">
+        {{ $tintucs['dt3']->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
 @else
-<p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
+    <p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
 @endif
     <!-- End: Nội dung blog -->
 
@@ -353,8 +352,7 @@ function openCity(cityName) {
         padding-top:10px;
     }
     div#khung{
-        width: 96%;
-        margin-left:40px !important;
+        width: 100%;
         margin-top:20px !important;
         margin:0 auto;
         background-color:white !important;

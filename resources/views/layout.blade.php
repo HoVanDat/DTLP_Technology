@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Ustora Demo</title>
+    <title>DTLP Technology</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <!-- Google Fonts -->
@@ -239,7 +239,7 @@
                 </div>
             </div>
         </div>
-    </div> <!-- End footer top area -->                                                        
+    </div> <!-- End footer top area -->
 
     <!-- End footer bottom area -->
 
@@ -278,5 +278,8 @@
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
     /*Thêm các thuộc tính CSS tùy ý khác */
+}
+.logo h1 a img{
+    width: 150px;
 }
 </style>

@@ -451,7 +451,7 @@ $('.mau_sac').val(mauSac);
 
 
 
-                               
+
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home"
@@ -469,7 +469,15 @@ $('.mau_sac').val(mauSac);
                         <div class="col-6">
                             <h3>Thông tin sản phẩm {{$sanpham->ten_san_pham}}</h3>
                             <img src="/img/{{$sanpham->hinh}}" alt="">
-                            <p>Đang cập nhật</p>
+                            <p>
+    @if(isset($sanpham->mo_ta))
+        {!! $sanpham->mo_ta !!}
+    @else
+        Đang cập nhật
+    @endif
+</p>
+
+
                         </div>
                         <div class="col-6">
                             <div class="tab-content">

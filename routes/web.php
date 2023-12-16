@@ -1,7 +1,6 @@
     <?php
 
 
-
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\SanphamController;
     use App\Http\Controllers\AuthController;
@@ -10,6 +9,7 @@
     use App\Http\Controllers\CategoryAdminController;
     use App\Http\Controllers\UserAdminController;
     use App\Http\Controllers\CommentController;
+    use App\Http\Middleware\CheckRole;
     use App\Http\Controllers\OrderController;
     use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\ContactAdminController;
@@ -32,7 +32,6 @@ Route::post('/delete-product/{productId}', [OrderController::class, 'deleteProdu
 
  Route::post('/xu-ly-ma-giam-gia', [OrderController::class,'xuLyMaGiamGia'])->name('xu-ly-ma-giam-gia');
 
- Route::post('/mua-hang', 'OrderController@muaHang1');
 
  Route::get('/tim-kiem', [SanphamController::class, 'timKiem'])->name('tim-kiem');
 
@@ -69,14 +68,12 @@ Route::get('/khuyenmai',[TinKhuyenMaiController::class,'tinkhuyenmai'])->name('t
 Route::get('/lienhe',[ContactAdminController::class,'lienhe']);
 Route::post('/lienhe',[ContactAdminController::class,'lienhepost'])->name('lienhe.post');
 Route::post('/deletecart',[OrderController::class, 'muahang'])->name('muahang');
-
 Route::get('/muahang/{id}',[OrderController::class, 'muahang'])->name('muahang');
 Route::get('/dangnhap',[AuthController::class,'login'])->name('login');
 Route::post('/dangnhap',[AuthController::class,'loginPost'])->name('login.post');
 Route::get('/dangky',[AuthController::class,'register'])->name('register');
 Route::post('/dangky',[AuthController::class,'registerPost'])->name('register.post');
 Route::get('/dangxuat',[AuthController::class,'logout'])->name('logout');
-
 Route::get('/forget-password',[AuthController::class,'forgetPassword'])->name('forget.password');
 Route::post('/forget-password',[AuthController::class,'forgetPasswordPost']);
 Route::get('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetPassword'])->name('reset.password');
@@ -84,10 +81,9 @@ Route::post('/reset-password/{nguoidung}/{token}',[AuthController::class,'resetP
 Route::get('/chi-tiet-san-pham/{id}',[ChiTietSanPhamController::class,'chitiet'])->name('chitietsanpham');
 Route::post('/add-to-cart123', [OrderController::class, 'addToCart']);
 Route::get('/danh-muc/{id}',[SanphamController::class,'tintuctheoloai'])->name('chitietsanpham');
-
 Route::get('/giohang',function(){
     return view('giohang');
-});
+})->middleware('auth');
 Route::get('/thanhtoan',function(){
     return view('thanhtoan');
 });
@@ -100,7 +96,6 @@ Route::get('/shoplaptop',[SanphamController::class, 'lt']);
 Route::get('/shopdienthoai',[SanphamController::class, 'dt']);
 Route::get('/tintuc',[SanphamController::class, 'tintuc']);
 Route::get('/chi-tiet-tin/{id}',[SanphamController::class, 'cttin']);
-
 Route::get('/shopmaytinhbang',[SanphamController::class, 'mtb']);
 // bình luận
 Route::post('/comments', [CommentController::class, 'store']);
@@ -115,19 +110,20 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('forgot',function(){
         return view('admin/forgot');
     });
-    Route::get('trangchu',function(){
+    Route::get('trangchu', function () {
         return view('admin/home');
     })->name('admin-trang-chu');
+
     Route::get('bangkeluong',function(){
         return view('admin/bangkeluong');
-    });
+    })->middleware('auth');
     Route::get('bcdoanhthu',function(){
         return view('admin/bcdoanhthu');
     });
     Route::get('create-bangkeluong',function(){
         return view('admin/create-bangkeluong');
     });
-   
+
     Route::get('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvien'])->name('create.qlnhanvien');
     Route::post('create-qlnhanvien',[EmployeeAdminController::class,'createqlnhanvienpost'])->name('create.qlnhanvien.post');
     Route::get('edit-qlkhachhang{id}',[UserAdminController::class,'edit'])->name('admin-edit-qlkhachhang');
@@ -145,7 +141,7 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('lichcongtac',function(){
         return view('admin/lichcongtac');
     });
-   
+
     Route::get('qlnhanvien',[EmployeeAdminController::class,'index'])->name('qlnhanvien');
     Route::get('qlnoibo',function(){
         return view('admin/qlnoibo');
@@ -216,7 +212,7 @@ Route::get('create-qldanhmucsanpham',[CategoryAdminController::class,'createqlda
     Route::get('duyet-qldonhang/{id}',[OrderAdminController::class,'duyet']);
     Route::get('huy-qldonhang/{id}',[OrderAdminController::class,'huy']);
     Route::get('delete-qldonhang/{id}',[OrderAdminController::class,'delete']);
- 
+
 
 });
 });

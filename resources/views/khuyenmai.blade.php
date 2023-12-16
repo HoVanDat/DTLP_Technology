@@ -87,7 +87,15 @@ hr {
     border-radius: 10px;
     ;
 }
-
+.title-block-common {
+    overflow: hidden;
+    border-bottom: solid 2px #f17024;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 5px;
+    width: 90%;
+    margin-left: 0px  !important;
+}
 .group_sidebar h3 {
     background-color: #f17024;
     color: white;
@@ -100,6 +108,8 @@ hr {
     font-weight: bold;
 }
 </style>
+<div class="container">
+
 <section id="content" class="clearfix container">
     <div class="row">
         <div id="blog" class="page-content main-content content-pages" data-sticky_parent>
@@ -116,51 +126,37 @@ hr {
                                 <div class="title-block-common mb-2">
                                     <h1>Tin khuyến mãi mới nhất</h1>
                                 </div>
-                                <div class="space2"></div>
 
 
 
-@if(count($baivietmoinhat)>0)
-                                @foreach($baivietmoinhat as $bvmn)
-                                <hr class="line-blog"/>
-                                <div class="news-content row">
-
-                                    <div class="col-md-5 text-center col-xs-12 col-sm-12 img-article">
-                                        <div class="art-img">
-
-                                         <a href="/chi-tiet-tin/{{$bvmn->id_tin}}"><img src="/img/{{$bvmn->hinh}}" alt=""></a>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" col-md-7 col-sm-12  col-xs-12">
-                                        <!-- Begin: Nội dung bài viết -->
-
-                                        <h2 class="title-article"><a href="/chi-tiet-tin/{{$bvmn->id_tin}}">{{$bvmn->tieu_de}}</a></h2>
-                                        <div class="body-content">
-                                            <ul class="info-more">
-                                                <li><i class="fa fa-calendar-o"></i><time pubdate
-                                                        datetime="2017-03-26">{{$bvmn->created_at}}</time></li>
-                                                <li><i class="fa fa-file-text-o"></i><a href="#"> Tin
-                                                        tức </a> </li>
-
-                                            </ul>
-                                            <p>{{$bvmn->tom_tat}}</p>
-                                        </div>
-                                        <!-- End: Nội dung bài viết -->
-                                        <a class="readmore btn-rb clear-fix" href="/chi-tiet-tin/{{$bvmn->id_tin}}"
-                                            role="button">Xem
-                                            tiếp <span class="fa fa-angle-double-right"></span></a>
-                                    </div>
-
-
-                                </div>
-
-                               @endforeach
-
+                                @if(count($tintucs['dt']) > 0)
+    @foreach($tintucs['dt'] as $tin)
+        <div class="news-content row">
+            <div class="col-md-3 text-center col-xs-12 col-sm-12 img-article">
+                <div class="art-img">
+                    <img src="{{ $tin->hinh }}" alt="">
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <h2 class="title-article">
+                    <a href="chi-tiet-tin/{{ $tin->id_tin }}">{{ $tin->tieu_de }}</a>
+                </h2>
+                <div class="body-content">
+                    <p>{{ $tin->tom_tat }}</p>
+                </div>
+                <a class="readmore btn-rb clear-fix"
+                    href="chi-tiet-tin/{{ $tin->id_tin }}" role="button">
+                    Xem tiếp <span class="fa fa-angle-double-right"></span>
+                </a>
+            </div>
+        </div>
+        <hr class="line-blog" />
+    @endforeach
+    <div class="pagination">
+        {{ $tintucs['dt']->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
 @else
-<p style="color:red; text-align:center; margin-top:30px;">Không có tin khuyến mãi nào</p>
-
+    <p style="color:red; text-align:center; margin-top:30px;">Không có tin tức nào</p>
 @endif
                                 <!-- End: Nội dung blog -->
 
@@ -186,6 +182,8 @@ hr {
         </div>
     </div>
 </section>
+
+</div>
 <!-- End brands area -->
  <!-- End product widget area -->
 
@@ -205,6 +203,18 @@ hr {
 .blog-content .col-md-12{
     min-height:400px;
 }
+.art-img img{
+    width: 300px;
+    height:200px;
+    text-align:left !important;
+}
+.col-md-3 {
+padding: 0px 20px !important}
+.art-img{
+    text-align:left !important;
+
+}
+
 </style>
 
 @endsection

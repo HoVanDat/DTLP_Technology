@@ -1,3 +1,15 @@
+<?php
+
+$tin123 = DB::table('nguoidung')->where('vai_tro','0')->get();
+
+
+$tin1234 = DB::table('donhang')->get();
+
+$tin12345 = DB::table('sanpham')->get();
+
+$tin123456 = DB::table('donhang')->limit(4)->get();
+
+?>
 @extends('admin/layout')
 @section('noidung')
 <main class="app-content">
@@ -20,7 +32,7 @@
         <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
           <div class="info">
             <h4>Tổng khách hàng</h4>
-            <p><b>56 khách hàng</b></p>
+            <p><b>{{count($tin123)}} khách hàng</b></p>
             <p class="info-tong">Tổng số khách hàng được quản lý.</p>
           </div>
         </div>
@@ -30,7 +42,7 @@
             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
               <div class="info">
                 <h4>Tổng sản phẩm</h4>
-                <p><b>1850 sản phẩm</b></p>
+                <p><b>{{count($tin12345)}} sản phẩm</b></p>
                 <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
               </div>
             </div>
@@ -40,7 +52,7 @@
             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
               <div class="info">
                 <h4>Tổng đơn hàng</h4>
-                <p><b>247 đơn hàng</b></p>
+                <p><b>{{count($tin1234)}} đơn hàng</b></p>
                 <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
               </div>
             </div>
@@ -70,38 +82,29 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($tin123456 as $dt)
                     <tr>
-                      <td>AL3947</td>
-                      <td>Phạm Thị Ngọc</td>
+                      <td>{{$dt->id_don_hang}}</td>
+                      <td>{{$dt->ten_nguoi_nhan}}</td>
                       <td>
-                        19.770.000 đ
+                      {{ number_format($dt->tong_don_hang) }}đ
                       </td>
-                      <td><span class="badge bg-info">Chờ xử lý</span></td>
-                    </tr>
-                    <tr>
-                      <td>ER3835</td>
-                      <td>Nguyễn Thị Mỹ Yến</td>
                       <td>
-                        16.770.000 đ	
-                      </td>
-                      <td><span class="badge bg-warning">Đang vận chuyển</span></td>
+    @if($dt->trang_thai == 0)
+        <span class="badge bg-info">Chờ xử lý</span>
+    @elseif($dt->trang_thai == 1)
+        <span class="badge bg-info">Đã xác nhận</span>
+    @elseif($dt->trang_thai == 2)
+        <span class="badge bg-info">Đang vận chuyển</span>
+    @elseif($dt->trang_thai == 3)
+        <span class="badge bg-info">Đã giao hàng</span>
+    @elseif($dt->trang_thai == 4)
+        <span class="badge bg-info">Đã hủy</span>
+    @endif
+</td>
+
                     </tr>
-                    <tr>
-                      <td>MD0837</td>
-                      <td>Triệu Thanh Phú</td>
-                      <td>
-                        9.400.000 đ	
-                      </td>
-                      <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                    </tr>
-                    <tr>
-                      <td>MT9835</td>
-                      <td>Đặng Hoàng Phúc	</td>
-                      <td>
-                        40.650.000 đ	
-                      </td>
-                      <td><span class="badge bg-danger">Đã hủy	</span></td>
-                    </tr>
+@endforeach
                   </tbody>
                 </table>
               </div>
@@ -110,50 +113,7 @@
            </div>
             <!-- / col-12 -->
              <!-- col-12 -->
-            <div class="col-md-12">
-                <div class="tile">
-                  <h3 class="tile-title">Khách hàng mới</h3>
-                <div>
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Tên khách hàng</th>
-                        <th>Ngày sinh</th>
-                        <th>Số điện thoại</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>#183</td>
-                        <td>Hột vịt muối</td>
-                        <td>21/7/1992</td>
-                        <td><span class="tag tag-success">0921387221</span></td>
-                      </tr>
-                      <tr>
-                        <td>#219</td>
-                        <td>Bánh tráng trộn</td>
-                        <td>30/4/1975</td>
-                        <td><span class="tag tag-warning">0912376352</span></td>
-                      </tr>
-                      <tr>
-                        <td>#627</td>
-                        <td>Cút rang bơ</td>
-                        <td>12/3/1999</td>
-                        <td><span class="tag tag-primary">01287326654</span></td>
-                      </tr>
-                      <tr>
-                        <td>#175</td>
-                        <td>Hủ tiếu nam vang</td>
-                        <td>4/12/20000</td>
-                        <td><span class="tag tag-danger">0912376763</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
 
-              </div>
-            </div>
              <!-- / col-12 -->
         </div>
       </div>
@@ -268,4 +228,4 @@
       }
     }
   </script>
-  @endsection  
+  @endsection
