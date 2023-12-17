@@ -421,7 +421,7 @@ body {
     <!-- Slider -->
     @if (isset($banner))
     <div class="block-slider block-slider4">
-       
+
             <ul class="" id="bxslider-home4">
                 @foreach($banner as $b)
                 <li>
@@ -436,7 +436,7 @@ body {
                 </li>
                 @endforeach
             </ul>
-        
+
     </div>
 
     @endif
@@ -689,7 +689,7 @@ body {
                     <a href="chi-tiet-tin/{{$tt->id_tin}}">
                         <img data-src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Files/2023/08/14/1542518/galaxy-z-fold-5-bo-sung-111111-140823-085238-200x200.jpg"
                             class=" lazyloaded" alt="Deal to chấn động, điện thoại mới ra mắt năm 2023 giảm đến 9 triệu"
-                            width="270" height="151" src="/img/{{$tt->hinh}}">
+                            width="270" height="151" src="{{$tt->hinh}}">
                         <div class="text-tech">
                             <span>
                                 {{$tt->tieu_de}}

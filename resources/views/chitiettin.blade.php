@@ -1,5 +1,12 @@
 @extends('layout')
 @section('noidung')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
 
 <style>
 /* bình luận */
@@ -623,6 +630,7 @@ element.style {
     margin-top: 0;
 }
 </style>
+
 <div class="post-detail" style="">
     <div class="container">
         <ol class="breadcrumb ">
@@ -706,7 +714,7 @@ element.style {
                                     src="/img/{{$chitiettin->hinh}}" width="500px"></strong>
                         </p>
 
-                        <p style="text-align: justify;">{{$chitiettin->noi_dung}}</p>
+                        <div>{{!! $chitiettin->noi_dung !!}} Xem</div>
 
 
                         <div class="boxpin" data-id="47265">
@@ -980,5 +988,6 @@ window.onload = function() {
     }
 };
 </script>
-
+</body>
+</html>
 @endsection

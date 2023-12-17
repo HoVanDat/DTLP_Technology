@@ -13,35 +13,11 @@
             <div class="tile-body">
               <div class="row element-button">
                 <div class="col-sm-2">
-  
+
                   <a class="btn btn-add btn-sm" href="create-qlnoibo" title="Thêm"><i class="fas fa-plus"></i>
                     Tạo mới</a>
                 </div>
-                <div class="col-sm-2">
-                  <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                      class="fas fa-file-upload"></i> Tải từ file</a>
-                </div>
-  
-                <div class="col-sm-2">
-                  <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                      class="fas fa-print"></i> In dữ liệu</a>
-                </div>
-                <div class="col-sm-2">
-                  <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                      class="fas fa-copy"></i> Sao chép</a>
-                </div>
-  
-                <div class="col-sm-2">
-                  <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                </div>
-                <div class="col-sm-2">
-                  <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                      class="fas fa-file-pdf"></i> Xuất PDF</a>
-                </div>
-                <div class="col-sm-2">
-                  <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                      class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                </div>
+           
               </div>
               <table class="table table-hover table-bordered" id="sampleTable">
                 <thead>
@@ -78,7 +54,7 @@
                   </tr>
                   <tr>
                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>Nguyễn Hoàng Thái Nhật</td>                
+                    <td>Nguyễn Hoàng Thái Nhật</td>
                     <td>07/02/1996</td>
                     <td>Quản kho</td>
                     <td>Tự ý thay đổi thông tin nhân viên và không báo cáo quản lý</td>
@@ -131,14 +107,14 @@
       jQuery(".trash").click(function () {
         swal({
           title: "Cảnh báo",
-         
+
           text: "Bạn có chắc chắn là muốn xóa nhân viên này?",
           buttons: ["Hủy bỏ", "Đồng ý"],
         })
           .then((willDelete) => {
             if (willDelete) {
               swal("Đã xóa thành công.!", {
-                
+
               });
             }
           });

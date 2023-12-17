@@ -29,7 +29,7 @@ class SanphamController extends Controller
         return view('home',['banner'=>$banner,'sp'=>$sp,'sp2'=>$sp2,'sp3'=>$sp3,'sp4'=>$sp4,'sp5'=>$sp5, 'sp6'=>$sp6, 'sp7'=>$sp7]);
     }
     public function dt(){
-        $dt= SanPham::where('id_loai','1')->paginate(9);
+        $dt= SanPham::where('id_loai','1')->paginate(12);
         $dt1 = DB::table('sanpham')
     ->orderBy('hot')
     ->limit(5)
@@ -38,7 +38,7 @@ class SanphamController extends Controller
     }
 
     public function lt(){
-        $dt = SanPham::where('id_loai', '2')->paginate(9); // 10 sản phẩm trên mỗi trang
+        $dt = SanPham::where('id_loai', '2')->paginate(12); // 10 sản phẩm trên mỗi trang
         $dt1 = DB::table('sanpham')
     ->orderBy('hot')
     ->limit(5)
@@ -47,25 +47,28 @@ class SanphamController extends Controller
     }
 
     public function tintuc(){
-        $dt = DB::table('tintuc')
-        ->where('id_danh_muc_tin', '1')
-        ->limit(4) // Giới hạn số lượng bài viết
-        ->get();
-        $dt1 = DB::table('tintuc')
-        ->where('id_danh_muc_tin', '2')
-        ->limit(4) // Giới hạn số lượng bài viết
-        ->get();
-        $dt2 = DB::table('tintuc')
-        ->where('id_danh_muc_tin', '3')
-        ->limit(4) // Giới hạn số lượng bài viết
-        ->get();
-        $dt3 = DB::table('tintuc')
-        ->where('id_danh_muc_tin', '4')
-        ->limit(4) // Giới hạn số lượng bài viết
-        ->get();
-       // Giới hạn số lượng bài viết
-        // Thực hiện truy vấn sau khi gọi get()
-        return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2,'dt3'=>$dt3]);
+            $dt = DB::table('tintuc')
+            ->where('id_danh_muc_tin', '1')
+            ->paginate(4);
+            $dt1 = DB::table('tintuc')
+            ->where('id_danh_muc_tin', '5')
+            ->paginate(4);
+            $dt2 = DB::table('tintuc')
+            ->where('id_danh_muc_tin', '3')
+            ->paginate(4);
+            $dt3 = DB::table('tintuc')
+            ->where('id_danh_muc_tin', '4')
+            ->paginate(4);
+
+            $tintucs = [
+                'dt' => DB::table('tintuc')->where('id_danh_muc_tin', '1')->paginate(4),
+                'dt1' => DB::table('tintuc')->where('id_danh_muc_tin', '5')->paginate(4),
+                'dt2' => DB::table('tintuc')->where('id_danh_muc_tin', '3')->paginate(4),
+                'dt3' => DB::table('tintuc')->where('id_danh_muc_tin', '4')->paginate(4),
+            ];
+        // Giới hạn số lượng bài viết
+            // Thực hiện truy vấn sau khi gọi get()
+            return view('tintuc', ['dt' => $dt,'dt1'=>$dt1, 'dt2'=>$dt2,'dt3'=>$dt3, 'tintucs'=>$tintucs]);
     }
 
 
@@ -98,7 +101,7 @@ class SanphamController extends Controller
         return view('chitiettin',['id'=>$id,'binhluantin'=>$binhluantin,'chitiettin'=>$chitiettin,'tinlienquan'=>$tinlienquan,'danhmuctin'=>$danhmuctin,'randsp' => $randsp,'randspchitiet' => $randspchitiet,'sanpham'=>$sanpham]);
     }
     public function mtb(){
-        $dt= SanPham::where('id_loai','3')->paginate(9);
+        $dt= SanPham::where('id_loai','3')->paginate(12);
         $dt1 = DB::table('sanpham')
     ->orderBy('hot')
     ->limit(5)
@@ -122,7 +125,7 @@ class SanphamController extends Controller
         $sanpham->an_hien = $request->anhien;
         $sanpham->gia = $request->giatien;
         $sanpham->gia_khuyen_mai = $request->giakhuyenmai;
-    
+
         if ($request->hasFile('ImageUpload')) {
             $file = $request->file('ImageUpload');
             $name = $file->getClientOriginalName();
@@ -132,12 +135,12 @@ class SanphamController extends Controller
         } else {
             $sanpham->hinh = 'default_image.jpg'; // Thay thế bằng giá trị mặc định mong muốn
         }
-    
+
         $sanpham->save();
-    
+
         return redirect()->route('admin-qlsanpham');
     }
-    
+
     public function edit($id){
         $sanpham = SanPham::where('id_san_pham',$id)->first();
         $danhmuc = Loai::all();
@@ -190,11 +193,11 @@ class SanphamController extends Controller
     public function storechitietsanpham(Request $request){
     $request->validate ( [
 
-      
+
         'soluong' => 'required|integer',
         // 'ram' => 'required|string',
         'giaban' => 'required|numeric',
-        // 'ImageUpload' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
+        // 'ImageUpload' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
     ],
 
     [

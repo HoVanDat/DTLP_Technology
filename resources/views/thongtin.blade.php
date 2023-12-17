@@ -169,6 +169,7 @@
                         </form>
 
                         <div class="donhang">
+                            @if(count($tin123)>0)
                             @foreach($tin123 as $donhang)
 
                             <div style="padding:20px; margin-top:20px;" class="tong">
@@ -178,9 +179,11 @@
                                 if($donhang->trang_thai == 0){
                                 $trangthai = 'Chờ xác nhận';
                                 } elseif($donhang->trang_thai == 1){
-                                $trangthai = 'Đang vận chuyển';
+                                $trangthai = 'Đã xác nhận';
                                 } elseif($donhang->trang_thai == 2){
-                                $trangthai = 'Đã hoàn thành';
+                                $trangthai = 'Đang vận chuyển';
+                                }elseif($donhang->trang_thai == 3){
+                                $trangthai = 'Đang vận chuyển';
                                 } else{
                                 $trangthai = 'Đã hủy';
                                 }
@@ -309,12 +312,15 @@
                             <hr>
                             @endforeach
 
-
+                            @else
+<p style="color:red; text-align:center">Không có đơn hàng nào</p>
+@endif
                         </div>
 
                         <div class="pagination">
                             {{ $tin123->withQueryString()->links('pagination::bootstrap-4') }}
                         </div>
+
                     </div>
                     @if(session('error'))
                     <script>
