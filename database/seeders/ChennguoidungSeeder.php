@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
 
 
-class chen_nguoi_dung extends Seeder
+class ChennguoidungSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -38,7 +38,7 @@ class chen_nguoi_dung extends Seeder
                 'so_dien_thoai' => $faker->phoneNumber,
                 'vai_tro' => '1',
                 'hinh' => $faker->imageUrl(200, 200), 
-                'trang_thai' => 'trang_thai_moi',
+                'trang_thai' => '1',
                 'ngay_sinh' => $faker->date(),
                 'noi_sinh' => $faker->city,
                 'CCCD' => $faker->randomNumber(8),
@@ -62,7 +62,7 @@ class chen_nguoi_dung extends Seeder
                 'so_dien_thoai' => $faker->phoneNumber,
                 'vai_tro' => '0',
                 'hinh' => $faker->imageUrl(200, 200),               
-                'trang_thai' => 'trang_thai_moi',
+                'trang_thai' => '0',
                 'ngay_sinh' => $faker->date(),
                 'noi_sinh' => $faker->city,
                 'CCCD' => $faker->randomNumber(8),
