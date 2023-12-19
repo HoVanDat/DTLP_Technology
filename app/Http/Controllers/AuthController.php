@@ -19,13 +19,18 @@ class AuthController extends Controller
 
      function thongtin(Request $request){
 
-        $iduser = session('userInfo.iduser');
-        $tin123 = DB::table('donhang')->where('id_nguoi_dung',$iduser)->paginate(2);
-
-
-
+    
+        if (session()->has('userInfo.iduser')) {
+            $iduser = session('userInfo.iduser');
+            $tin123 = DB::table('donhang')->where('id_nguoi_dung', $iduser)->paginate(2);
+        
+ 
  return view('thongtin', ['tin123' => $tin123]);
-
+ } 
+ else{
+    Session::flash('error', 'Hành động của bạn đã thành công!');
+    return redirect()->back();
+ }
     }
      function thongtinpost(Request $request){
         $ten = $request->ten;

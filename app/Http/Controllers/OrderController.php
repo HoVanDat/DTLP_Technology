@@ -14,8 +14,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 class OrderController extends Controller
 {
     function muahang($id, Request $request){
-        $soluong = $request->input('quantity');
-    $idMauSac = $request->input('id_chi_tiet_mausac');
+        $tin1 = DB::table('chitietsanpham')->where('id_san_pham', $id)->first();
+
+        $soluong = $request->input('quantity') ?? 1; // Sử dụng null coalescing để gán giá trị mặc định là 1
+        $idMauSac = $request->input('id_chi_tiet_mausac') ?? $tin1->id_chi_tiet;
     $idRam = $request->input('id_chi_tiet_ram');
     $tin = DB::table('sanpham')->where('id_san_pham', $id)->first();
     $data = ['soluong' => $soluong, 'tin' => $tin, 'idmausac' => $idMauSac];

@@ -323,27 +323,24 @@
 
                     </div>
                     @if(session('error'))
-                    <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Cập nhật thất bại',
-                        text: '{{ session('
-                        error ') }}',
-                    });
-                    </script>
-                    @endif
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: '{{ session('error') }}', // Thay đổi title thành chuỗi bạn muốn hiển thị
+            text: 'Cập nhật thất bại',
+        });
+    </script>
+@endif
 
-                    @if(session('success'))
-                    <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Cập nhật thành công',
-                        text: '{{ session('
-                        success ') }}',
-                    });
-                    </script>
-                    @endif
-
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '{{ session('success') }}',
+            text: 'Cập nhật thành công',
+        });
+    </script>
+@endif
 
 
                     <div id="Tokyo" class="w3-container city" style="display:none">

@@ -8,11 +8,12 @@ if (session()->has('userInfo')) {
     $iduser = 0;
 }
 $tin123 = DB::table('nguoidung')->where('id_nguoi_dung',$iduser)->first();
+if (isset($tin123)) {
 $diachi = $tin123->dia_chi;
 $ten = $tin123->ten;
 $sdt = $tin123->so_dien_thoai;
 $email = $tin123->email;
-
+}
 
 
 ?>
@@ -101,23 +102,31 @@ $email = $tin123->email;
                             <div class="col-md-12">
                                 <label for="kh_ten">Họ tên</label>
                                 <input type="text" class="form-control" name="ten_nguoi_nhan" id="kh_ten"
+                                @if(isset($ten))
                                     value="{{$ten}}" readonly="">
+                                    @endif
                             </div>
 
                             <div class="col-md-12">
                                 <label for="kh_diachi">Địa chỉ</label>
                                 <input type="text" class="form-control" name="dia_chi" id="kh_diachi"
+                                @if(isset($ten))
                                     value="{{$diachi}}" readonly="">
+                                    @endif
                             </div>
                             <div class="col-md-12">
                                 <label for="kh_dienthoai">Điện thoại</label>
                                 <input type="text" class="form-control" name="so_dien_thoai" id="kh_dienthoai"
+                                @if(isset($sdt))
                                     value="{{$sdt}}" readonly="">
+                                    @endif
                             </div>
                             <div class="col-md-12">
                                 <label for="kh_email">Email</label>
                                 <input type="text" class="form-control" name="email" id="kh_email"
+                                @if(isset($email))
                                     value="{{$email}}" readonly="">
+                                    @endif
                             </div>
 
                         </div>
